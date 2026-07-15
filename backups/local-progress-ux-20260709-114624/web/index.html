@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>مخطط المقررات الجامعية</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="siteHeader">
+      <div class="headerInner">
+        <a class="brand" href="#home" aria-label="مخطط المقررات">
+          <span class="brandMark" aria-hidden="true">ج</span>
+          <span>
+            <strong>مخطط المقررات</strong>
+            <small>King Abdulaziz University Planner</small>
+          </span>
+        </a>
+        <button id="menuToggle" class="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav">القائمة</button>
+        <nav id="siteNav" class="siteNav" aria-label="التنقل الرئيسي">
+          <a class="navLink active" href="#home">الرئيسية</a>
+          <a class="navLink" href="#planner">المخطط</a>
+          <a class="navLink" href="#sources">المصادر الرسمية</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="heroSection">
+        <div class="heroInner">
+          <div class="heroCopy">
+            <p class="eyebrow">أداة مساعدة للطلاب</p>
+            <h1>خطط مقرراتك بوضوح قبل التسجيل</h1>
+            <p class="heroText">
+              اختر كليتك وتخصصك، حدد المقررات التي اجتزتها، واعرف المقررات المتاحة أو المحجوبة بسبب المتطلبات السابقة.
+            </p>
+            <div class="heroActions">
+              <a class="primaryLink" href="#planner">ابدأ التخطيط</a>
+              <a class="secondaryLink" href="#sources">راجع المصادر</a>
+            </div>
+          </div>
+          <div class="heroPanel" aria-label="ملخص وظائف المخطط">
+            <div>
+              <span>التقدم</span>
+              <strong id="progressText">Loading...</strong>
+            </div>
+            <div>
+              <span>الكليات</span>
+              <strong>18</strong>
+            </div>
+            <div>
+              <span>البرامج</span>
+              <strong>67</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="featureBand" aria-label="مميزات المخطط">
+        <article class="featureCard">
+          <span class="featureIcon" aria-hidden="true">✓</span>
+          <h2>المقررات المجتازة</h2>
+          <p>احفظ تقدمك حسب التخصص ومعرف الطالب.</p>
+        </article>
+        <article class="featureCard">
+          <span class="featureIcon" aria-hidden="true">↗</span>
+          <h2>المتاح للتسجيل</h2>
+          <p>اعرف المقررات التي يمكن أخذها بناء على المتطلبات.</p>
+        </article>
+        <article class="featureCard">
+          <span class="featureIcon" aria-hidden="true">!</span>
+          <h2>المتطلبات الناقصة</h2>
+          <p>تظهر المقررات المحجوبة مع سبب الحجب.</p>
+        </article>
+      </section>
+
+      <section id="planner" class="plannerShell">
+        <section class="toolbar" aria-label="لوحة التحكم">
+          <div>
+            <p class="eyebrow">جامعة الملك عبدالعزيز</p>
+            <h2 id="plannerTitle">مخطط مقررات المحاسبة</h2>
+          </div>
+          <div class="toolbarActions">
+            <form id="loginForm" class="loginForm">
+              <label class="srOnly" for="usernameInput">الرقم الجامعي</label>
+              <input
+                id="usernameInput"
+                name="studentId"
+                autocomplete="username"
+                inputmode="numeric"
+                maxlength="7"
+                pattern="[0-9]{7}"
+                placeholder="الرقم الجامعي"
+              />
+              <button type="submit">دخول</button>
+            </form>
+            <div id="userPanel" class="userPanel" hidden>
+              <span id="userName"></span>
+              <button id="logoutButton" type="button">خروج</button>
+            </div>
+            <button id="themeToggle" class="secondaryButton" type="button" aria-pressed="false">Dark</button>
+            <button id="exportButton" type="button">تحميل الخطة</button>
+          </div>
+        </section>
+
+        <section class="majorStrip" aria-label="اختيار البرنامج">
+          <div class="selectField">
+            <label for="facultySelect">الكلية</label>
+            <select id="facultySelect"></select>
+          </div>
+          <div class="selectField">
+            <label for="majorSelect">التخصص</label>
+            <select id="majorSelect"></select>
+          </div>
+          <span id="majorStatus" class="majorStatus"></span>
+        </section>
+
+        <section class="layout">
+          <aside class="panel">
+            <div class="panelHead">
+              <h2>المقررات</h2>
+              <button id="clearButton" type="button">مسح</button>
+            </div>
+            <div class="searchBox">
+              <label class="srOnly" for="searchInput">البحث في المقررات</label>
+              <input id="searchInput" type="search" placeholder="ابحث برمز المقرر أو الاسم" />
+            </div>
+            <div class="filterBox">
+              <label for="levelFilter">المستوى</label>
+              <select id="levelFilter">
+                <option value="all">كل المستويات</option>
+              </select>
+            </div>
+            <div id="courseChecklist" class="checklist"></div>
+          </aside>
+
+          <section class="results" aria-label="نتائج الخطة">
+            <div class="metricRow">
+              <div class="metric metricDone"><span>مكتمل</span><strong id="completedCount">0</strong></div>
+              <div class="metric metricAvailable"><span>متاح</span><strong id="availableCount">0</strong></div>
+              <div class="metric metricBlocked"><span>محجوب</span><strong id="blockedCount">0</strong></div>
+              <div class="metric"><span>إجمالي الساعات</span><strong id="officialCredits">--</strong></div>
+              <div class="metric"><span>ساعات منجزة</span><strong id="creditsCompleted">--</strong></div>
+              <div class="metric"><span>ساعات متبقية</span><strong id="creditsRemaining">--</strong></div>
+            </div>
+            <p id="creditNote" class="note"></p>
+            <p id="saveStatus" class="note"></p>
+
+            <section class="listBlock completedBlock">
+              <h2>المقررات المحددة كمجتازة</h2>
+              <div id="completedList" class="courseList compactList"></div>
+            </section>
+
+            <section class="listBlock recommendedBlock">
+              <div class="blockHead">
+                <h2>مقترح للفصل القادم</h2>
+                <button id="addRecommendedButton" type="button">إضافة المقترح</button>
+              </div>
+              <div id="recommendedList" class="courseList"></div>
+            </section>
+
+            <div class="columns">
+              <section class="listBlock">
+                <h2>متاح الآن</h2>
+                <div id="availableList" class="courseList"></div>
+              </section>
+              <section class="listBlock">
+                <h2>محجوب</h2>
+                <div id="blockedList" class="courseList"></div>
+              </section>
+            </div>
+          </section>
+        </section>
+      </section>
+
+      <section id="sources" class="sourceSection">
+        <div>
+          <p class="eyebrow">تنبيه مهم</p>
+          <h2>المصادر الرسمية هي المرجع النهائي</h2>
+          <p>
+            هذا الموقع يساعدك على التخطيط والفهم، لكنه لا يستبدل أنظمة الجامعة أو المرشد الأكاديمي أو الخطة الرسمية المنشورة من الجامعة.
+          </p>
+        </div>
+        <a class="secondaryLink" href="https://kau.edu.sa/en/programs" target="_blank" rel="noreferrer">فتح برامج الجامعة الرسمية</a>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

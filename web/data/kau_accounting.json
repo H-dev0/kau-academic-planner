@@ -1,0 +1,462 @@
+{
+  "university_name": "King Abdulaziz University",
+  "college_name": "Faculty of Economics and Administration",
+  "program_name": "Bachelor of Science in Accounting",
+  "degree_level": "Bachelor's degree",
+  "total_program_credit_hours": 125,
+  "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+  "source_title": "Bachelor of Science in Accounting",
+  "last_checked_date": "2026-07-05",
+  "courses": [
+    {
+      "semester_or_level": "level 1",
+      "course_code": "CPIT 110",
+      "official_course_name": "Programming & Solving Problems",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 1",
+      "course_code": "ELIS 110",
+      "official_course_name": "English Language 1",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 1",
+      "course_code": "ISLS 101",
+      "official_course_name": "Islamic Studies I",
+      "credit_hours": 2,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 1",
+      "course_code": "MATH 100",
+      "official_course_name": "ﻣﻘﺪﻣﺔ ﺭﻳﺎﺿﻴﺎﺕ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 1",
+      "course_code": "STAT 110",
+      "official_course_name": "Statistics 1",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 2",
+      "course_code": "ARAB 101",
+      "official_course_name": "Arabic I",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 2",
+      "course_code": "ECON 107",
+      "official_course_name": "ﻣﺒﺎﺩﻯﺀ ﺍﻻ ﻗﺘﺼﺎﺩ ﺍﻟﺠﺰﺋﻲ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 2",
+      "course_code": "ELIS 120",
+      "official_course_name": "English Language 2",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 2",
+      "course_code": "MATH 110",
+      "official_course_name": "General Mathematics (1)",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 3",
+      "course_code": "ACCT 117",
+      "official_course_name": "ﻣﺒﺎﺩﺉ ﻣﺤﺎﺳﺒﺔ ﻣﺎﻟﻴﺔ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 3",
+      "course_code": "BUS 201",
+      "official_course_name": "ﺍﻟﻤﺤﺎﺩﺛﺔ ﻓﻲ ﻣﺠﺎﻝ ﺍﻷﻋﻤﺎﻝ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 3",
+      "course_code": "BUS 232",
+      "official_course_name": "ﺇﺩﺍﺭﺓ ﺍﻟﻤﻨﻈﻤﺎﺕ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 3",
+      "course_code": "ISLS 201",
+      "official_course_name": "Islamic Studies II",
+      "credit_hours": 2,
+      "prerequisites": [
+        "ISLS 101"
+      ],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 3",
+      "course_code": "MIS 270",
+      "official_course_name": "ﻧﻈﻢ ﺍﻟﻤﻌﻠﻮﻣﺎﺕ ﺍﻹﺩﺍﺭﻳﺔ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 3",
+      "course_code": "MRKT 260",
+      "official_course_name": "ﻣﺒﺎﺩﻯﺀﺍﻟﺘﺴﻮﻳﻖ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 3",
+      "course_code": "STAT 270",
+      "official_course_name": "ﻣﻬﺎﺭﺍﺕ ﺍﻟﺒﺤﺚ ﻭﺇﺣﺼﺎﺀ ﺍﻷﻋﻤﺎﻝ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 4",
+      "course_code": "ACCT 213",
+      "official_course_name": "ﻣﺒﺎﺩﺉ ﻣﺤﺎﺳﺒﺔ ﺇﺩﺍﺭﻳﺔ ﻭﺗﻜﺎﻟﻴﻒ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 4",
+      "course_code": "BUS 202",
+      "official_course_name": "ﺍﻟﻜﺘﺎﺑﺔ ﻓﻲ ﻣﺠﺎﻝ ﺍﻷﻋﻤﺎﻝ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 4",
+      "course_code": "ECON 203",
+      "official_course_name": "ﻣﺒﺎﺩﺉ ﺍﻻﻗﺘﺼﺎﺩ ﺍﻟﻜﻠﻲ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 4",
+      "course_code": "FIN 220",
+      "official_course_name": "ﺃﺳﺎﺳﻴﺎﺕ ﺍﻟﻤﺎﻟﻴﺔ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 4",
+      "course_code": "HRMA 340",
+      "official_course_name": "ﺍﺩﺍﺭﺓ ﺍﻟﻤﻮﺍﺭﺩ ﺍﻟﺒﺸﺮﻳﺔ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 4",
+      "course_code": "MIS 271",
+      "official_course_name": "ﻡ.ﻓﻲ ﺫ.ﺍﻻﺻﻄﻨﺎﻋﻲ ﻭﺕ.ﺍﻷﻋﻤﺎﻝ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 5",
+      "course_code": "ACCT 311",
+      "official_course_name": "I المحاسبة المتوسطة",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 5",
+      "course_code": "ACCT 314",
+      "official_course_name": "-2- محاسبة تكاليف",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 5",
+      "course_code": "ARAB 201",
+      "official_course_name": "Arabic II",
+      "credit_hours": 3,
+      "prerequisites": [
+        "ARAB 101"
+      ],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 5",
+      "course_code": "BUS 300",
+      "official_course_name": "ﺍﺗﺼﺎﻻﺕ ﺍﻷﻋﻤﺎﻝ ﺍﻟﻤﺘﻘﺪﻣﺔ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 5",
+      "course_code": "BUS 336",
+      "official_course_name": "ﺇﺩﺍﺭﺓ ﺍﻟﻌﻤﻠﻴﺎﺕ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 5",
+      "course_code": "HRMA 341",
+      "official_course_name": "ﻣﻬﺎﺭﺍﺕ ﺳﻮﻕ ﺍﻟﻌﻤﻞ ﻟﻸﻋﻤﺎﻝ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 5",
+      "course_code": "ISLS 301",
+      "official_course_name": "Islamic Studies III",
+      "credit_hours": 2,
+      "prerequisites": [
+        "ISLS 201"
+      ],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 6",
+      "course_code": "ACCT 315",
+      "official_course_name": "II المحاسبة المتوسط",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 6",
+      "course_code": "ACCT 320",
+      "official_course_name": "محاسبة الزكاة والضرائب",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 6",
+      "course_code": "ACCT 412",
+      "official_course_name": "I المراجعة",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 6",
+      "course_code": "BLB 306",
+      "official_course_name": "Legal Environment of Business",
+      "credit_hours": 3,
+      "prerequisites": [
+        "BUS 232"
+      ],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 6",
+      "course_code": "ELECTIVE",
+      "official_course_name": "Elective",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 6",
+      "course_code": "FREE",
+      "official_course_name": "Free Course",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 7",
+      "course_code": "ACCT 411",
+      "official_course_name": "المحاسبة المالية المتقدمة",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 7",
+      "course_code": "ACCT 413",
+      "official_course_name": "II المراجعة",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 7",
+      "course_code": "BUS 430",
+      "official_course_name": "ﺍﻹﺩﺍﺭﺓ ﺍﻹﺳﺘﺮﺍﺗﻴﺠﻴﺔ",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 7",
+      "course_code": "ISLS 401",
+      "official_course_name": "Islamic Studies IV",
+      "credit_hours": 2,
+      "prerequisites": [
+        "ISLS 301"
+      ],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 7",
+      "course_code": "ELECTIVE",
+      "official_course_name": "Elective",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 7",
+      "course_code": "FREE",
+      "official_course_name": "Free Course",
+      "credit_hours": 3,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 8",
+      "course_code": "ACCT 490",
+      "official_course_name": "التدريب التعاوني",
+      "credit_hours": 6,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05"
+    },
+    {
+      "semester_or_level": "level 8",
+      "course_code": "ACCT 491",
+      "official_course_name": "مشروع تخرج",
+      "credit_hours": 6,
+      "prerequisites": [],
+      "official_source_url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting",
+      "source_title": "Bachelor of Science in Accounting",
+      "last_checked_date": "2026-07-05",
+      "counts_toward_program_credit_total": false,
+      "credit_total_exclusion_reason": "Alternative to ACCT 490 under the 6-hour level 8 requirement."
+    }
+  ],
+  "credit_overlay_source": "User-provided Accounting credit table image",
+  "credit_overlay_received_date": "2026-07-06",
+  "elective_options": {
+    "ACCT 321": 3,
+    "ACCT 415": 3,
+    "ACCT 420": 3,
+    "ACCT 421": 3
+  }
+}

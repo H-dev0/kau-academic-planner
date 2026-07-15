@@ -1,0 +1,49 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.secret
+*secret*.txt
+*credential*.txt
+*.pem
+*.key
+
+# JavaScript dependencies and caches
+node_modules/
+.npm/
+.cache/
+
+# Python environments and generated files
+.venv/
+venv/
+env/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local application data and generated deployment artifacts
+data/local/*.sqlite
+data/local/*.db
+*.sqlite
+*.db
+*.zip
+*.tar.gz
+
+# Logs, temporary files, and operating-system/editor files
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local Azure and CLI credentials
+.azure/
+.azcopy/
+azure_secret.txt
+*_secret.txt
+*.publishsettings

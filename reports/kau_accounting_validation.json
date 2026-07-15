@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "course_count": 43,
+  "sum_course_credit_hours": 125,
+  "missing_course_credit_hours_count": 0,
+  "duplicate_course_codes": []
+}

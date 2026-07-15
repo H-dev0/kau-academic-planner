@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Course Planner</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="toolbar">
+        <div>
+          <p class="eyebrow">King Abdulaziz University</p>
+          <h1 id="plannerTitle">Accounting Course Planner</h1>
+        </div>
+        <div class="toolbarActions">
+          <form id="loginForm" class="loginForm">
+            <input
+              id="usernameInput"
+              name="studentId"
+              autocomplete="username"
+              inputmode="numeric"
+              maxlength="7"
+              pattern="[0-9]{7}"
+              placeholder="Student ID"
+            />
+            <button type="submit">Login</button>
+          </form>
+          <div id="userPanel" class="userPanel" hidden>
+            <span id="userName"></span>
+            <button id="logoutButton" type="button">Logout</button>
+          </div>
+          <div class="summary" aria-live="polite">
+            <span id="progressText">Loading...</span>
+          </div>
+          <button id="themeToggle" class="secondaryButton" type="button" aria-pressed="false">Dark</button>
+          <button id="exportButton" type="button">Download Progress</button>
+        </div>
+      </section>
+
+      <section class="majorStrip">
+        <div class="selectField">
+          <label for="facultySelect">Faculty</label>
+          <select id="facultySelect"></select>
+        </div>
+        <div class="selectField">
+          <label for="majorSelect">Major</label>
+          <select id="majorSelect"></select>
+        </div>
+        <span id="majorStatus" class="majorStatus"></span>
+      </section>
+
+      <section class="layout">
+        <aside class="panel">
+          <div class="panelHead">
+            <h2>Completed Courses</h2>
+            <button id="clearButton" type="button">Clear</button>
+          </div>
+          <div class="searchBox">
+            <input id="searchInput" type="search" placeholder="Search code or name" />
+          </div>
+          <div class="filterBox">
+            <label for="levelFilter">Level</label>
+            <select id="levelFilter">
+              <option value="all">All levels</option>
+            </select>
+          </div>
+          <div id="courseChecklist" class="checklist"></div>
+        </aside>
+
+        <section class="results">
+          <div class="metricRow">
+            <div class="metric">
+              <span>Completed</span>
+              <strong id="completedCount">0</strong>
+            </div>
+            <div class="metric">
+              <span>Available</span>
+              <strong id="availableCount">0</strong>
+            </div>
+            <div class="metric">
+              <span>Blocked</span>
+              <strong id="blockedCount">0</strong>
+            </div>
+            <div class="metric">
+              <span>Official Total Credits</span>
+              <strong id="officialCredits">--</strong>
+            </div>
+            <div class="metric">
+              <span>Credits Completed</span>
+              <strong id="creditsCompleted">--</strong>
+            </div>
+            <div class="metric">
+              <span>Credits Remaining</span>
+              <strong id="creditsRemaining">--</strong>
+            </div>
+          </div>
+          <p id="creditNote" class="note"></p>
+          <p id="saveStatus" class="note"></p>
+
+          <section class="listBlock completedBlock">
+            <h2>Selected Completed Courses</h2>
+            <div id="completedList" class="courseList compactList"></div>
+          </section>
+
+          <section class="listBlock recommendedBlock">
+            <div class="blockHead">
+              <h2>Recommended Next Semester</h2>
+              <button id="addRecommendedButton" type="button">Add Recommended</button>
+            </div>
+            <div id="recommendedList" class="courseList"></div>
+          </section>
+
+          <div class="columns">
+            <section class="listBlock">
+              <h2>Available Next</h2>
+              <div id="availableList" class="courseList"></div>
+            </section>
+            <section class="listBlock">
+              <h2>Blocked</h2>
+              <div id="blockedList" class="courseList"></div>
+            </section>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

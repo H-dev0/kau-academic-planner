@@ -1,0 +1,62 @@
+{
+  "source": "User-provided Accounting credit table image",
+  "received_date": "2026-07-06",
+  "notes": [
+    "Credits were manually reviewed from the supplied image.",
+    "Levels 1 and 2 credits were supplied by the user separately: all missing level 1 and 2 courses are 3 credits except ISLS 101, which is 2 credits.",
+    "ACCT 490 and ACCT 491 appear under a 6-hour level 8 requirement, so ACCT 491 is treated as an alternative option and not double-counted in the required program-credit total.",
+    "ELECTIVE and FREE placeholders are assigned 3 credits each because the plan contains two elective/free placeholders and the image shows 3-credit elective options."
+  ],
+  "credits": {
+    "CPIT 110": 3,
+    "ELIS 110": 3,
+    "ISLS 101": 2,
+    "MATH 100": 3,
+    "STAT 110": 3,
+    "ARAB 101": 3,
+    "ECON 107": 3,
+    "ELIS 120": 3,
+    "MATH 110": 3,
+    "ISLS 201": 2,
+    "ACCT 117": 3,
+    "MRKT 260": 3,
+    "STAT 270": 3,
+    "BUS 201": 3,
+    "BUS 232": 3,
+    "MIS 270": 3,
+    "HRMA 340": 3,
+    "FIN 220": 3,
+    "BUS 202": 3,
+    "ECON 203": 3,
+    "MIS 271": 3,
+    "ACCT 213": 3,
+    "ARAB 201": 3,
+    "ISLS 301": 2,
+    "BUS 336": 3,
+    "BUS 300": 3,
+    "ACCT 314": 3,
+    "HRMA 341": 3,
+    "ACCT 311": 3,
+    "ACCT 320": 3,
+    "BLB 306": 3,
+    "ACCT 412": 3,
+    "ACCT 315": 3,
+    "ISLS 401": 2,
+    "ACCT 413": 3,
+    "ACCT 411": 3,
+    "BUS 430": 3,
+    "ACCT 490": 6,
+    "ACCT 491": 6,
+    "ELECTIVE": 3,
+    "FREE": 3
+  },
+  "elective_options": {
+    "ACCT 321": 3,
+    "ACCT 415": 3,
+    "ACCT 420": 3,
+    "ACCT 421": 3
+  },
+  "credit_total_exclusions": {
+    "ACCT 491": "Alternative to ACCT 490 under the 6-hour level 8 requirement."
+  }
+}
