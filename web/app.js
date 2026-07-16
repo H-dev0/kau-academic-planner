@@ -8,6 +8,8 @@ const state = {
   level: "all",
   faculty: "",
   major: "",
+  statusFilter: "all",
+  statusView: "available",
   collapsedLevels: new Set(),
 };
 
@@ -44,6 +46,35 @@ const completedList = document.querySelector("#completedList");
 const availableList = document.querySelector("#availableList");
 const blockedList = document.querySelector("#blockedList");
 const optionalList = document.querySelector("#optionalList");
+const plannerShell = document.querySelector("#planner");
+const plannerWorkspace = document.querySelector("#plannerWorkspace");
+const plannerOnboarding = document.querySelector("#plannerOnboarding");
+const plannerOverviewContent = document.querySelector("#plannerOverviewContent");
+const plannerSubtitle = document.querySelector("#plannerSubtitle");
+const plannerHeaderMeta = document.querySelector("#plannerHeaderMeta");
+const plannerFacultyName = document.querySelector("#plannerFacultyName");
+const plannerCourseMeta = document.querySelector("#plannerCourseMeta");
+const plannerCreditMeta = document.querySelector("#plannerCreditMeta");
+const degreeProgressValue = document.querySelector("#degreeProgressValue");
+const degreeProgressBar = document.querySelector("#degreeProgressBar");
+const degreeProgressCourseLabel = document.querySelector("#degreeProgressCourseLabel");
+const totalCourseCount = document.querySelector("#totalCourseCount");
+const courseCatalogSummary = document.querySelector("#courseCatalogSummary");
+const filterResultSummary = document.querySelector("#filterResultSummary");
+const filterClearButton = document.querySelector("#filterClearButton");
+const statusFilters = document.querySelector("#statusFilters");
+const contextTotalCount = document.querySelector("#contextTotalCount");
+const availableTabCount = document.querySelector("#availableTabCount");
+const completedTabCount = document.querySelector("#completedTabCount");
+const blockedTabCount = document.querySelector("#blockedTabCount");
+const optionalTabCount = document.querySelector("#optionalTabCount");
+const filterAllCount = document.querySelector("#filterAllCount");
+const filterCompletedCount = document.querySelector("#filterCompletedCount");
+const filterAvailableCount = document.querySelector("#filterAvailableCount");
+const filterBlockedCount = document.querySelector("#filterBlockedCount");
+const statusTabs = Array.from(document.querySelectorAll(".statusTab"));
+const statusPanels = Array.from(document.querySelectorAll(".statusPanel"));
+const contextViewAllButtons = Array.from(document.querySelectorAll(".contextViewAll"));
 const menuToggle = document.querySelector("#menuToggle");
 const siteNav = document.querySelector("#siteNav");
 const microsoftLogin = document.querySelector("#microsoftLogin");
@@ -524,7 +555,7 @@ function setupLevelFilter() {
     .sort((a, b) => levelNumber({ semester_or_level: a }) - levelNumber({ semester_or_level: b }));
 
   if (!levelFilter) return;
-  levelFilter.innerHTML = '<option value="all">All levels</option>';
+  levelFilter.innerHTML = `<option value="all">${plannerText().allLevels}</option>`;
   for (const level of levels) {
     const option = document.createElement("option");
     option.value = level;
@@ -656,6 +687,270 @@ function groupCoursesByLevel(courses) {
   return groups;
 }
 
+const plannerPresentationText = {
+  ar: {
+    defaultSubtitle: "ابدأ باختيار برنامجك، ثم حدّد المقررات التي اجتزتها لرؤية تقدمك والمواد المتاحة.",
+    selectedSubtitle: "راجع تقدمك، وابحث في مقررات الخطة، وحدّث المواد التي اجتزتها من مساحة عمل واحدة.",
+    catalogSubtitle: "يمكنك استعراض معلومات البرنامج، لكن تتبع المتطلبات يحتاج إلى تحميل الخطة الدراسية.",
+    creditSummaryHelp: "تُحتسب الساعات من المقررات التي حددتها كمجتازة.",
+    creditsUnavailableHelp: "إجمالي الساعات غير متاح في بيانات هذا البرنامج.",
+    unavailable: "غير متاح",
+    course: "مقرر",
+    courses: "مقررات",
+    credit: "ساعة",
+    progress: "نسبة إكمال الخطة",
+    completedCredits: "الساعات المنجزة",
+    totalCredits: "إجمالي الساعات",
+    remainingCredits: "الساعات المتبقية",
+    completedCourses: "المقررات المجتازة",
+    availableNow: "متاح الآن",
+    blocked: "محجوب",
+    totalCourses: "إجمالي المقررات",
+    programKicker: "البرنامج الدراسي",
+    chooseProgram: "اختر الكلية والتخصص",
+    catalogKicker: "كتالوج الخطة",
+    catalogTitle: "المقررات",
+    catalogAll: "جميع المقررات",
+    search: "البحث في المقررات",
+    level: "المستوى",
+    allLevels: "كل المستويات",
+    clearFilters: "مسح التصفية",
+    clearSelected: "مسح المحدد",
+    all: "الكل",
+    completed: "مجتاز",
+    available: "متاح",
+    optional: "اختياري",
+    contextKicker: "ملخص سريع",
+    contextTitle: "حالة المقررات",
+    filterAria: "تصفية المقررات حسب الحالة",
+    tabsAria: "عرض حالة المقررات",
+    details: "التفاصيل",
+    hideDetails: "إخفاء التفاصيل",
+    missing: "المتطلبات الناقصة",
+    status: "الحالة",
+    noFilterResults: "لا توجد مقررات تطابق التصفية الحالية.",
+    emptyHelp: "ستظهر المقررات هنا عندما تصبح هذه القائمة متاحة.",
+    completedEmptyHelp: "حدّد مربع أي مقرر اجتزته لإضافته إلى هذه القائمة.",
+    blockedEmptyHelp: "لا توجد متطلبات ناقصة للمقررات الحالية.",
+    optionalEmptyHelp: "لا توجد مواد اختيارية محملة لهذا التخصص.",
+    onboardingKicker: "ابدأ من هنا",
+    onboardingTitle: "ثلاث خطوات لرؤية خطتك بوضوح",
+    onboardingText: "لن تظهر بطاقات فارغة قبل اختيار البرنامج.",
+    onboardingSteps: ["اختر الكلية", "اختر التخصص", "حدّد المواد المجتازة"],
+    localStrong: "يعمل المخطط محليًا بدون تسجيل دخول.",
+    localText: "تسجيل Microsoft اختياري، والمزامنة بين الأجهزة غير مفعلة حاليًا.",
+    reset: "إعادة التعيين",
+    exported: "تم تصدير التقدم الحالي.",
+    viewAllCatalog: "عرض الكل في الكتالوج",
+  },
+  en: {
+    defaultSubtitle: "Choose your program, then mark completed courses to see your progress and what is available.",
+    selectedSubtitle: "Review progress, search the study plan, and update completed courses from one focused workspace.",
+    catalogSubtitle: "You can review this program, but prerequisite tracking requires a loaded study plan.",
+    creditSummaryHelp: "Credits are calculated from the courses you mark as completed.",
+    creditsUnavailableHelp: "The official credit total is unavailable in this program data.",
+    unavailable: "Unavailable",
+    course: "course",
+    courses: "courses",
+    credit: "credits",
+    progress: "Degree completion",
+    completedCredits: "Credits completed",
+    totalCredits: "Total credits",
+    remainingCredits: "Credits remaining",
+    completedCourses: "Completed courses",
+    availableNow: "Available now",
+    blocked: "Blocked",
+    totalCourses: "Total courses",
+    programKicker: "Study program",
+    chooseProgram: "Choose a Faculty and Major",
+    catalogKicker: "Study plan catalog",
+    catalogTitle: "Courses",
+    catalogAll: "All courses",
+    search: "Search courses",
+    level: "Level",
+    allLevels: "All levels",
+    clearFilters: "Clear filters",
+    clearSelected: "Clear selected",
+    all: "All",
+    completed: "Completed",
+    available: "Available",
+    optional: "Electives",
+    contextKicker: "Quick summary",
+    contextTitle: "Course status",
+    filterAria: "Filter courses by status",
+    tabsAria: "View courses by status",
+    details: "Details",
+    hideDetails: "Hide details",
+    missing: "Missing prerequisites",
+    status: "Status",
+    noFilterResults: "No courses match the current filters.",
+    emptyHelp: "Courses will appear here when this list has results.",
+    completedEmptyHelp: "Select a completed-course checkbox to add it to this list.",
+    blockedEmptyHelp: "There are no missing prerequisites for the current courses.",
+    optionalEmptyHelp: "No elective courses are loaded for this program.",
+    onboardingKicker: "Start here",
+    onboardingTitle: "Three steps to understand your plan",
+    onboardingText: "Empty dashboard cards stay hidden until you choose a program.",
+    onboardingSteps: ["Choose a faculty", "Choose a major", "Mark completed courses"],
+    localStrong: "The planner works locally without signing in.",
+    localText: "Microsoft sign-in is optional, and cross-device sync is not active.",
+    reset: "Reset",
+    exported: "Current progress was exported.",
+    viewAllCatalog: "View all in catalog",
+  },
+};
+
+function plannerText() {
+  return plannerPresentationText[currentLanguageSafe()] || plannerPresentationText.ar;
+}
+
+function updateCountControlLabel(control, label) {
+  if (!control) return;
+  const textNode = Array.from(control.childNodes).find((node) => node.nodeType === Node.TEXT_NODE);
+  if (textNode) textNode.nodeValue = label + " ";
+}
+
+function formatCourseCount(count) {
+  const text = plannerText();
+  return `${count} ${count === 1 ? text.course : text.courses}`;
+}
+
+function displayLevelLabel(level) {
+  const value = String(level || "").trim();
+  const match = value.match(/^level\s*(\d+)$/i);
+  if (!match) return value;
+  const number = Number(match[1]);
+  if (currentLanguageSafe() === "en") return `Level ${number}`;
+  const arabicLevels = {
+    1: "المستوى الأول",
+    2: "المستوى الثاني",
+    3: "المستوى الثالث",
+    4: "المستوى الرابع",
+    5: "المستوى الخامس",
+    6: "المستوى السادس",
+    7: "المستوى السابع",
+    8: "المستوى الثامن",
+    9: "المستوى التاسع",
+    10: "المستوى العاشر",
+  };
+  return arabicLevels[number] || `المستوى ${number}`;
+}
+
+function hasArabicText(value) {
+  return /[\u0600-\u06ff\u0750-\u077f\ufb50-\ufdff\ufe70-\ufeff]/.test(String(value || ""));
+}
+
+function courseNamePresentation(course) {
+  const official = String(course?.official_course_name || "").normalize("NFKC").trim();
+  const hasArabic = hasArabicText(official);
+  const cleanedArabic = hasArabic ? official.replace(/^(?:I{1,4})\s+(?=[\u0600-\u06ff])/i, "").trim() : "";
+  const englishTranslation = hasArabic ? courseNameEnglish(official) : "";
+  if (currentLanguageSafe() === "en") {
+    return {
+      primary: englishTranslation || official,
+      primaryLang: englishTranslation || !hasArabic ? "en" : "ar",
+      secondary: englishTranslation ? cleanedArabic : "",
+      secondaryLang: "ar",
+    };
+  }
+  return {
+    primary: hasArabic ? cleanedArabic : official,
+    primaryLang: hasArabic ? "ar" : "en",
+    secondary: hasArabic ? englishTranslation : "",
+    secondaryLang: "en",
+  };
+}
+
+function appendCourseNames(target, course) {
+  const names = courseNamePresentation(course);
+  const primary = document.createElement("span");
+  primary.className = "name courseNamePrimary";
+  primary.lang = names.primaryLang;
+  primary.textContent = names.primary;
+  target.append(primary);
+  if (names.secondary && names.secondary !== names.primary) {
+    const secondary = document.createElement("span");
+    secondary.className = "courseNameSecondary";
+    secondary.lang = names.secondaryLang;
+    secondary.textContent = names.secondary;
+    target.append(secondary);
+  }
+}
+
+function displayCreditValue(value) {
+  return ["Unknown", "Needs source", "--", ""].includes(String(value)) ? plannerText().unavailable : String(value);
+}
+
+function applyPlannerPresentationLanguage() {
+  const text = plannerText();
+  const set = (selector, value) => {
+    const element = document.querySelector(selector);
+    if (element) element.textContent = value;
+  };
+
+  set(".privacyNoticeIcon", "i");
+  set(".privacyNotice div strong", text.localStrong);
+  set(".privacyNotice div > span", text.localText);
+  set("#plannerOnboarding .eyebrow", text.onboardingKicker);
+  set("#plannerOnboarding strong", text.onboardingTitle);
+  set("#plannerOnboarding > div > span", text.onboardingText);
+  document.querySelectorAll(".onboardingSteps li").forEach((item, index) => {
+    const number = item.querySelector("span");
+    item.replaceChildren(number, text.onboardingSteps[index] || "");
+  });
+
+  set("#degreeProgressLabel", text.progress);
+  set("#creditsDoneLabel", text.completedCredits);
+  set("#creditsTotalLabel", text.totalCredits);
+  set("#creditsLeftLabel", text.remainingCredits);
+  set(".plannerMetrics .metricDone span", text.completedCourses);
+  set(".plannerMetrics .metricAvailable span", text.availableNow);
+  set(".plannerMetrics .metricBlocked span", text.blocked);
+  set(".plannerMetrics .metricTotal span", text.totalCourses);
+  set(".majorStripIntro .eyebrow", text.programKicker);
+  set(".majorStripIntro h3", text.chooseProgram);
+  set(".courseCatalog .panelHead .eyebrow", text.catalogKicker);
+  set("#courseCatalogTitle", text.catalogTitle);
+  set(".searchBox label", text.search);
+  set(".levelFilterField label", text.level);
+  set("#filterClearButton", text.clearFilters);
+  set("#clearButton", text.clearSelected);
+  set(".contextHead .eyebrow", text.contextKicker);
+  set(".contextHead h2", text.contextTitle);
+  set("#availablePanel h3", text.availableNow);
+  set("#completedPanel h3", text.completedCourses);
+  set("#blockedPanel h3", text.blocked);
+  set("#optionalPanel h3", text.optional);
+  set("#resetProgressButton", text.reset);
+
+  if (levelFilter?.options[0]) levelFilter.options[0].textContent = text.allLevels;
+  statusFilters?.setAttribute("aria-label", text.filterAria);
+  document.querySelector(".statusTabs")?.setAttribute("aria-label", text.tabsAria);
+  document.querySelector("#plannerOverview")?.setAttribute("aria-label", text.progress);
+  degreeProgressBar?.setAttribute("aria-label", text.progress);
+
+  const filterLabels = {
+    all: text.all,
+    completed: text.completed,
+    available: text.available,
+    blocked: text.blocked,
+  };
+  statusFilters?.querySelectorAll(".statusFilter").forEach((button) => {
+    updateCountControlLabel(button, filterLabels[button.dataset.status]);
+  });
+
+  const tabLabels = {
+    available: text.available,
+    completed: text.completed,
+    blocked: text.blocked,
+    optional: text.optional,
+  };
+  statusTabs.forEach((button) => updateCountControlLabel(button, tabLabels[button.dataset.view]));
+  contextViewAllButtons.forEach((button) => {
+    button.textContent = text.viewAllCatalog;
+  });
+}
+
 function creditSummary(completed) {
   const totalCredits = state.program.total_program_credit_hours;
   const hasCourseCredits = state.program.courses.some(
@@ -700,7 +995,56 @@ function creditSummary(completed) {
   };
 }
 
-function renderChecklist() {
+function plannerStatusLookup(plan) {
+  const lookup = new Map();
+  plan.completed.forEach((course) => lookup.set(courseCode(course), { status: "completed", missing: [] }));
+  plan.available.forEach((course) => lookup.set(courseCode(course), { status: "available", missing: [] }));
+  plan.blocked.forEach((item) => lookup.set(courseCode(item.course), { status: "blocked", missing: item.missing }));
+  return lookup;
+}
+
+function statusLabel(status) {
+  const text = plannerText();
+  return {
+    completed: text.completed,
+    available: text.available,
+    blocked: text.blocked,
+    neutral: text.status,
+  }[status] || text.status;
+}
+
+function setStatusView(view) {
+  if (!["available", "completed", "blocked", "optional"].includes(view)) return;
+  state.statusView = view;
+  statusTabs.forEach((tab) => {
+    const active = tab.dataset.view === view;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-selected", String(active));
+    tab.tabIndex = active ? 0 : -1;
+  });
+  statusPanels.forEach((panel) => {
+    panel.hidden = panel.id !== `${view}Panel`;
+  });
+}
+
+function setStatusFilter(status, { revealCatalog = false } = {}) {
+  state.statusFilter = ["all", "completed", "available", "blocked"].includes(status) ? status : "all";
+  statusFilters?.querySelectorAll(".statusFilter").forEach((button) => {
+    const active = button.dataset.status === state.statusFilter;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+  renderChecklist(buildPlan());
+  if (revealCatalog) {
+    document.querySelector(".courseCatalog")?.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start",
+    });
+    statusFilters?.querySelector(`[data-status="${state.statusFilter}"]`)?.focus({ preventScroll: true });
+  }
+}
+
+function renderChecklist(plan = buildPlan()) {
   courseChecklist.innerHTML = "";
   if (isNoSelection()) {
     const empty = document.createElement("div");
@@ -743,30 +1087,51 @@ function renderChecklist() {
     courseChecklist.append(empty);
     return;
   }
+  const text = plannerText();
+  const statusLookup = plannerStatusLookup(plan);
+  const courses = visibleCourses().filter((course) => {
+    if (state.statusFilter === "all") return true;
+    return statusLookup.get(courseCode(course))?.status === state.statusFilter;
+  });
+  const resultText = formatCourseCount(courses.length);
+  if (filterResultSummary) filterResultSummary.textContent = resultText;
+  if (courseCatalogSummary) courseCatalogSummary.textContent = resultText;
+
+  if (!courses.length) {
+    const empty = document.createElement("div");
+    empty.className = "plannerFilterEmpty";
+    empty.innerHTML = `<span aria-hidden="true">⌕</span><strong>${text.noFilterResults}</strong>`;
+    courseChecklist.append(empty);
+    return;
+  }
+
   const fragment = document.createDocumentFragment();
 
-  for (const [level, courses] of groupCoursesByLevel(visibleCourses())) {
+  for (const [level, levelCourses] of groupCoursesByLevel(courses)) {
     const tableBlock = document.createElement("section");
     tableBlock.className = "studyPlanTable";
-    const requiredCredits = requiredCreditTotal(courses);
+    const requiredCredits = requiredCreditTotal(levelCourses);
+    const levelCompleted = levelCourses.filter((course) => statusLookup.get(courseCode(course))?.status === "completed").length;
     const collapsed = state.collapsedLevels.has(level);
+    const tableId = `level-${String(level).replace(/[^a-zA-Z0-9]+/g, "-").toLowerCase()}`;
     tableBlock.innerHTML = `
       <div class="studyPlanHeader">
         <div>
-          <strong>${level}</strong>
-          <span>${requiredCredits} ${textFor("requiredCredits")}</span>
+          <strong>${displayLevelLabel(level)}</strong>
+          <span>${formatCourseCount(levelCourses.length)} · ${levelCompleted} ${text.completed} · ${requiredCredits} ${text.credit}</span>
         </div>
-        <button class="levelToggle secondaryButton" type="button" aria-expanded="${!collapsed}">
+        <button class="levelToggle secondaryButton" type="button" aria-expanded="${!collapsed}" aria-controls="${tableId}">
           ${collapsed ? textFor("show") : textFor("hide")}
         </button>
       </div>
-      <table ${collapsed ? "hidden" : ""}>
+      <table id="${tableId}" ${collapsed ? "hidden" : ""}>
         <thead>
           <tr>
             <th class="doneColumn">${textFor("done")}</th>
             <th>${textFor("course")}</th>
-            <th>${textFor("name")}</th>
             <th class="creditColumn">${textFor("credits")}</th>
+            <th class="statusColumn">${text.status}</th>
+            <th class="detailsColumn"><span class="srOnly">${text.details}</span></th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -781,10 +1146,13 @@ function renderChecklist() {
     });
 
     const body = tableBlock.querySelector("tbody");
-    for (const course of courses) {
+    for (const course of levelCourses) {
       const code = courseCode(course);
+      const presentation = statusLookup.get(code) || { status: "neutral", missing: [] };
       const row = document.createElement("tr");
       if (state.selected.has(code)) row.className = "selectedRow";
+      row.classList.add(`courseStatus-${presentation.status}`);
+      row.dataset.courseCode = code;
       const credits = Number.isInteger(course.credit_hours) ? course.credit_hours : "--";
       const optionNote =
         course.counts_toward_program_credit_total === false
@@ -794,24 +1162,74 @@ function renderChecklist() {
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.checked = state.selected.has(code);
-      checkbox.setAttribute("aria-label", `Mark ${course.course_code} completed`);
+      checkbox.setAttribute(
+        "aria-label",
+        currentLanguageSafe() === "en"
+          ? `Mark ${course.course_code} completed`
+          : `تحديد ${course.course_code} كمقرر مجتاز`,
+      );
       checkbox.addEventListener("change", () => setCompleted(code, checkbox.checked));
 
       const doneCell = document.createElement("td");
       doneCell.className = "doneColumn";
-      doneCell.append(checkbox);
+      doneCell.dataset.label = textFor("done");
+      const checkTarget = document.createElement("label");
+      checkTarget.className = "courseCheckTarget";
+      checkTarget.append(checkbox);
+      doneCell.append(checkTarget);
 
-      const codeCell = document.createElement("td");
-      codeCell.innerHTML = `<span class="code">${course.course_code}</span>`;
-
-      const nameCell = document.createElement("td");
-      nameCell.innerHTML = `<span class="name">${displayCourseName(course)}</span>${optionNote}`;
+      const identityCell = document.createElement("td");
+      identityCell.className = "courseIdentityCell";
+      const codeElement = document.createElement("span");
+      codeElement.className = "code";
+      codeElement.lang = "en";
+      codeElement.textContent = course.course_code;
+      identityCell.append(codeElement);
+      appendCourseNames(identityCell, course);
+      if (optionNote) identityCell.insertAdjacentHTML("beforeend", optionNote);
 
       const creditCell = document.createElement("td");
       creditCell.className = "creditColumn";
-      creditCell.textContent = credits;
+      creditCell.dataset.label = textFor("credits");
+      const creditValue = document.createElement("span");
+      creditValue.className = "creditValue";
+      creditValue.textContent = credits;
+      const creditUnit = document.createElement("span");
+      creditUnit.className = "creditUnit";
+      creditUnit.textContent = text.credit;
+      creditCell.append(creditValue, creditUnit);
 
-      row.append(doneCell, codeCell, nameCell, creditCell);
+      const statusCell = document.createElement("td");
+      statusCell.className = "statusColumn";
+      statusCell.dataset.label = text.status;
+      statusCell.innerHTML = `<span class="courseStatusBadge ${presentation.status}">${statusLabel(presentation.status)}</span>`;
+
+      const detailsCell = document.createElement("td");
+      detailsCell.className = "detailsColumn";
+      if (presentation.status === "blocked" && presentation.missing.length) {
+        const detailsId = `course-details-${String(code).replace(/[^a-zA-Z0-9]+/g, "-").toLowerCase()}`;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "courseDetailsToggle";
+        button.textContent = text.details;
+        button.setAttribute("aria-expanded", "false");
+        button.setAttribute("aria-controls", detailsId);
+        const details = document.createElement("div");
+        details.id = detailsId;
+        details.className = "coursePrerequisiteDetail";
+        details.hidden = true;
+        details.textContent = `${text.missing}: ${presentation.missing.join(", ")}`;
+        button.addEventListener("click", () => {
+          const expanded = button.getAttribute("aria-expanded") === "true";
+          button.setAttribute("aria-expanded", String(!expanded));
+          button.textContent = expanded ? text.details : text.hideDetails;
+          details.hidden = expanded;
+        });
+        detailsCell.append(button);
+        identityCell.append(details);
+      }
+
+      row.append(doneCell, identityCell, creditCell, statusCell, detailsCell);
       body.append(row);
     }
 
@@ -842,16 +1260,40 @@ function optionalCourses() {
 function courseItem(course, className, reason = "") {
   const item = document.createElement("article");
   item.className = `courseItem ${className}`;
+  const text = plannerText();
   const credits =
     Number.isInteger(course.credit_hours) && course.credit_hours > 0
       ? `${course.credit_hours} ${textFor("credits")}`
       : textFor("creditsUnavailable");
+  const itemStatus = className === "recommended" ? "available" : className;
   item.innerHTML = `
-    <span class="code">${course.course_code}</span>
-    <span class="name">${displayCourseName(course)}</span>
-    <span class="meta">${course.semester_or_level || ""} - ${credits}</span>
-    ${reason ? `<span class="reason">${reason}</span>` : ""}
+    <div class="contextCourseHead">
+      <span class="code">${course.course_code}</span>
+      <span class="courseStatusBadge ${itemStatus}">${statusLabel(itemStatus)}</span>
+    </div>
   `;
+  item.querySelector(".code")?.setAttribute("lang", "en");
+  appendCourseNames(item, course);
+  const meta = document.createElement("span");
+  meta.className = "meta";
+  meta.textContent = `${displayLevelLabel(course.semester_or_level)} · ${credits}`;
+  item.append(meta);
+  if (reason && className === "blocked") {
+    const details = document.createElement("details");
+    details.className = "contextCourseDetails";
+    const summary = document.createElement("summary");
+    summary.textContent = text.details;
+    const reasonText = document.createElement("span");
+    reasonText.className = "reason";
+    reasonText.textContent = reason;
+    details.append(summary, reasonText);
+    item.append(details);
+  } else if (reason) {
+    const reasonText = document.createElement("span");
+    reasonText.className = "reason";
+    reasonText.textContent = reason;
+    item.append(reasonText);
+  }
   return item;
 }
 
@@ -868,16 +1310,31 @@ function completedCourseItem(course) {
 
 function renderList(target, items, emptyText, kind) {
   target.innerHTML = "";
+  const viewAllButton = target.closest(".statusPanel")?.querySelector(".contextViewAll");
+  if (viewAllButton) viewAllButton.hidden = items.length <= 5;
   if (!items.length) {
+    const text = plannerText();
     const empty = document.createElement("div");
-    empty.className = "empty";
-    empty.textContent = emptyText;
+    empty.className = `compactEmptyState ${kind}`;
+    const icon = document.createElement("span");
+    icon.className = "compactEmptyIcon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = { completed: "✓", available: "↗", blocked: "!", optional: "◇" }[kind] || "·";
+    const title = document.createElement("strong");
+    title.textContent = emptyText;
+    const help = document.createElement("span");
+    help.textContent = {
+      completed: text.completedEmptyHelp,
+      blocked: text.blockedEmptyHelp,
+      optional: text.optionalEmptyHelp,
+    }[kind] || text.emptyHelp;
+    empty.append(icon, title, help);
     target.append(empty);
     return;
   }
 
   const fragment = document.createDocumentFragment();
-  for (const item of items) {
+  for (const item of items.slice(0, 5)) {
     if (kind === "blocked") {
       fragment.append(
         courseItem(item.course, "blocked", `${textFor("missing")}: ${item.missing.join(", ")}`),
@@ -900,7 +1357,9 @@ function render() {
   const total = (state.program.courses || []).length;
   const percent = total ? Math.round((plan.completed.length / total) * 100) : 0;
   const credits = creditSummary(plan.completed);
-  const recommended = recommendedCourses(plan.available);
+  const optionalItems = optionalCourses();
+  const text = plannerText();
+  const hasProgram = !isNoSelection() && !isNoPrograms();
 
   const titleName = state.program?.program_name?.replace(/^Bachelor of Science in /, "") || "اختر التخصص";
   if (isNoSelection()) {
@@ -912,18 +1371,42 @@ function render() {
     if (/[A-Za-z]/.test(titleName) && !/[\u0600-\u06ff]/.test(titleName)) {
       programName.lang = "en";
     }
-    plannerTitle.replaceChildren(
-      programName,
-      " - " + (isCatalogOnly() ? textFor("catalogSuffix") : textFor("plannerSuffix")),
-    );
+    plannerTitle.replaceChildren(programName);
   }
+  plannerShell?.classList.toggle("plannerEmpty", !hasProgram);
+  plannerShell?.classList.toggle("plannerSelected", hasProgram);
+  if (plannerOnboarding) plannerOnboarding.hidden = hasProgram;
+  if (plannerOverviewContent) plannerOverviewContent.hidden = !hasProgram;
+  if (plannerWorkspace) plannerWorkspace.hidden = !hasProgram;
+  if (plannerSubtitle) {
+    plannerSubtitle.textContent = isNoSelection()
+      ? text.defaultSubtitle
+      : isCatalogOnly()
+        ? text.catalogSubtitle
+        : text.selectedSubtitle;
+  }
+  if (plannerHeaderMeta) plannerHeaderMeta.hidden = !hasProgram;
+  if (plannerFacultyName) plannerFacultyName.textContent = currentFacultyName() || "--";
+  if (plannerCourseMeta) plannerCourseMeta.textContent = formatCourseCount(total);
+  if (plannerCreditMeta) plannerCreditMeta.textContent = state.program.total_program_credit_hours
+    ? state.program.total_program_credit_hours + " " + text.credit
+    : text.unavailable;
+
   progressText.textContent = `${percent}%`;
+  if (degreeProgressValue) degreeProgressValue.textContent = `${percent}%`;
+  if (degreeProgressCourseLabel) degreeProgressCourseLabel.textContent = `${plan.completed.length} / ${total} ${text.courses}`;
+  if (degreeProgressBar) {
+    degreeProgressBar.setAttribute("aria-valuenow", String(percent));
+    const fill = degreeProgressBar.querySelector("i");
+    if (fill) fill.style.width = `${percent}%`;
+  }
   completedCount.textContent = plan.completed.length;
   availableCount.textContent = plan.available.length;
   blockedCount.textContent = plan.blocked.length;
-  officialCredits.textContent = state.program.total_program_credit_hours || "--";
-  creditsCompleted.textContent = credits.completedText;
-  creditsRemaining.textContent = credits.remainingText;
+  if (totalCourseCount) totalCourseCount.textContent = total;
+  officialCredits.textContent = displayCreditValue(state.program.total_program_credit_hours);
+  creditsCompleted.textContent = displayCreditValue(credits.completedText);
+  creditsRemaining.textContent = displayCreditValue(credits.remainingText);
   if (homeCreditsCompleted) homeCreditsCompleted.textContent = credits.completedText;
   if (homeCreditsRemaining) homeCreditsRemaining.textContent = credits.remainingText;
   if (homeProgressValue) homeProgressValue.textContent = `${percent}%`;
@@ -936,7 +1419,7 @@ function render() {
   if (homeBlockedCount) homeBlockedCount.textContent = plan.blocked.length;
   creditsCompleted.title = credits.note;
   creditsRemaining.title = credits.note;
-  creditNote.textContent = credits.note || (state.program.total_program_credit_hours ? "" : textFor("levelMissingNote"));
+  creditNote.textContent = credits.note || (state.program.total_program_credit_hours ? text.creditSummaryHelp : text.creditsUnavailableHelp);
   clearButton.disabled = isNoSelection() || isCatalogOnly() || isNoPrograms();
   saveProgressButton.disabled = isNoSelection() || isCatalogOnly() || isNoPrograms();
   resetProgressButton.disabled = isNoSelection() || isCatalogOnly() || isNoPrograms();
@@ -950,7 +1433,17 @@ function render() {
       ? textFor("catalogOnly") + " - " + (state.program.catalog_note || textFor("studyPlanNeeded"))
       : String((state.program.courses || []).length) + " " + textFor("loadedCourses");
 
-  renderChecklist();
+  if (filterAllCount) filterAllCount.textContent = total;
+  if (filterCompletedCount) filterCompletedCount.textContent = plan.completed.length;
+  if (filterAvailableCount) filterAvailableCount.textContent = plan.available.length;
+  if (filterBlockedCount) filterBlockedCount.textContent = plan.blocked.length;
+  if (completedTabCount) completedTabCount.textContent = plan.completed.length;
+  if (availableTabCount) availableTabCount.textContent = plan.available.length;
+  if (blockedTabCount) blockedTabCount.textContent = plan.blocked.length;
+  if (optionalTabCount) optionalTabCount.textContent = optionalItems.length;
+  if (contextTotalCount) contextTotalCount.textContent = formatCourseCount(plan.completed.length + plan.available.length + plan.blocked.length);
+
+  renderChecklist(plan);
   renderList(
     completedList,
     sortByLevelThenCode(plan.completed),
@@ -959,12 +1452,47 @@ function render() {
   );
   renderList(availableList, plan.available, currentLanguageSafe() === "en" ? "No available courses." : "لا توجد مقررات متاحة.", "available");
   renderList(blockedList, plan.blocked, currentLanguageSafe() === "en" ? "No blocked courses." : "لا توجد مقررات محجوبة.", "blocked");
-  if (optionalList) renderList(optionalList, optionalCourses(), textFor("noOptional"), "optional");
+  if (optionalList) renderList(optionalList, optionalItems, textFor("noOptional"), "optional");
+  setStatusView(state.statusView);
 }
 
 searchInput.addEventListener("input", () => {
   state.search = searchInput.value;
   renderChecklist();
+});
+
+statusFilters?.addEventListener("click", (event) => {
+  const button = event.target.closest(".statusFilter");
+  if (!button) return;
+  setStatusFilter(button.dataset.status || "all");
+});
+
+filterClearButton?.addEventListener("click", () => {
+  state.search = "";
+  state.level = "all";
+  searchInput.value = "";
+  if (levelFilter) levelFilter.value = "all";
+  setStatusFilter("all");
+});
+
+contextViewAllButtons.forEach((button) => {
+  button.addEventListener("click", () => setStatusFilter(button.dataset.status, { revealCatalog: true }));
+});
+
+statusTabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => setStatusView(tab.dataset.view));
+  tab.addEventListener("keydown", (event) => {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const direction = document.documentElement.dir === "rtl" ? -1 : 1;
+    let nextIndex = index;
+    if (event.key === "Home") nextIndex = 0;
+    else if (event.key === "End") nextIndex = statusTabs.length - 1;
+    else if (event.key === "ArrowRight") nextIndex = (index + direction + statusTabs.length) % statusTabs.length;
+    else nextIndex = (index - direction + statusTabs.length) % statusTabs.length;
+    statusTabs[nextIndex].focus();
+    setStatusView(statusTabs[nextIndex].dataset.view);
+  });
 });
 
 if (levelFilter) {
@@ -987,9 +1515,16 @@ async function chooseMajor(majorId) {
   state.selected.clear();
   state.search = "";
   state.level = "all";
+  state.statusFilter = "all";
+  state.statusView = "available";
   state.collapsedLevels.clear();
   searchInput.value = "";
   if (levelFilter) levelFilter.value = "all";
+  statusFilters?.querySelectorAll(".statusFilter").forEach((button) => {
+    const active = button.dataset.status === "all";
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
   setupLevelFilter();
   if (!isNoSelection() && !isCatalogOnly() && !isNoPrograms()) {
     await loadProgress();
@@ -1016,6 +1551,7 @@ exportButton.addEventListener("click", () => {
   link.download = "kau-" + state.major + "-progress.json";
   link.click();
   URL.revokeObjectURL(link.href);
+  saveStatus.textContent = plannerText().exported;
 });
 
 themeToggle.addEventListener("click", () => {
@@ -1381,9 +1917,8 @@ applyUiLanguage = function applyUiLanguageExpanded(language) {
   if (featureCards[0]) { featureCards[0].querySelector("h3").textContent = extra.completedFeatureTitle; featureCards[0].querySelector("p").textContent = extra.completedFeatureText; }
   if (featureCards[1]) { featureCards[1].querySelector("h3").textContent = extra.availableFeatureTitle; featureCards[1].querySelector("p").textContent = extra.availableFeatureText; }
   if (featureCards[2]) { featureCards[2].querySelector("h3").textContent = extra.blockedFeatureTitle; featureCards[2].querySelector("p").textContent = extra.blockedFeatureText; }
-  setUiText(".privacyNotice strong", extra.privacyStrong);
-  setUiText(".privacyNotice span", extra.privacyText);
-  setUiText(".privacyNotice small", extra.privacySmall);
+  setUiText(".privacyNotice div strong", extra.privacyStrong);
+  setUiText(".privacyNotice div > span", extra.privacyText);
     setUiText("#sources .eyebrow", extra.sourceKicker);
   setUiText("#sources p:not(.eyebrow)", extra.sourceText);
   if (themeToggle) {
@@ -1403,6 +1938,7 @@ applyUiLanguage = function applyUiLanguageExpanded(language) {
     if (plannerTitle) plannerTitle.textContent = plannerTitle.textContent.replace(" - فهرس البرنامج", " - catalog only").replace(" - مخطط المقررات", " - course planner");
     if (saveStatus) saveStatus.textContent = saveStatus.textContent.replace(/تم استيراد (\d+) مقرر وحفظه على هذا الجهاز\./, "Imported and saved $1 courses on this device.");
   }
+  applyPlannerPresentationLanguage();
   applyTextLanguageHints();
 };
 if (uiLanguageToggle) {

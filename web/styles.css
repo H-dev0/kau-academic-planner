@@ -5625,3 +5625,1649 @@ html[lang="en"] [data-footer-lang="ar"] {
     gap: 20px;
   }
 }
+
+/* Phase 2: planner dashboard. Deliberately scoped so the approved homepage is unchanged. */
+.plannerShell {
+  --planner-radius: 16px;
+  --planner-radius-sm: 11px;
+  --planner-line: color-mix(in srgb, var(--color-border) 88%, transparent);
+  --planner-shadow: 0 1px 2px rgba(19, 33, 27, 0.03), 0 14px 34px rgba(19, 33, 27, 0.055);
+  width: min(calc(100% - (var(--container-padding) * 2)), 1380px);
+  max-width: none;
+  margin: 72px auto 80px;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.plannerShell .plannerHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 32px;
+  padding: 0 2px 22px;
+  border-bottom: 1px solid var(--planner-line);
+}
+
+.plannerShell .plannerHeaderCopy {
+  min-width: 0;
+}
+
+.plannerShell .plannerHeader .eyebrow {
+  margin: 0 0 8px;
+}
+
+.plannerShell .plannerHeader h2 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(27px, 2.3vw, 38px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+}
+
+.plannerShell .plannerSubtitle {
+  max-width: 700px;
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.plannerShell .plannerHeaderMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 13px;
+}
+
+.plannerShell .plannerHeaderMeta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 27px;
+  padding: 4px 9px;
+  border: 1px solid var(--planner-line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--color-surface) 72%, transparent);
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.plannerShell .toolbarActions {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 7px;
+  align-items: center;
+}
+
+.plannerShell .toolbarActions button {
+  min-height: 38px;
+  padding: 7px 12px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  box-shadow: none;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: transform 200ms ease, border-color 200ms ease, background-color 200ms ease, color 200ms ease;
+}
+
+.plannerShell #saveProgressButton {
+  background: var(--color-primary);
+  color: white;
+}
+
+.plannerShell .toolbarActions .secondaryButton {
+  border-color: var(--planner-line);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.plannerShell .toolbarActions .dangerButton {
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-blocked);
+}
+
+.plannerShell .toolbarActions button:not(:disabled):hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--color-primary) 28%, var(--planner-line));
+}
+
+.plannerShell #saveProgressButton:not(:disabled):hover {
+  background: var(--color-primary-hover);
+}
+
+.plannerShell .toolbarActions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.plannerShell .privacyNotice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 39px;
+  margin: 12px 2px 0;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--color-primary-soft) 60%, transparent);
+  color: var(--color-muted);
+}
+
+.plannerShell .privacyNoticeIcon {
+  display: grid;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 26%, transparent);
+  border-radius: 50%;
+  color: var(--color-primary);
+  font: 600 11px/1 Inter, "Segoe UI", Arial, sans-serif;
+}
+
+.plannerShell .privacyNotice div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 7px;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.plannerShell .privacyNotice strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.plannerShell .plannerOverview {
+  margin-top: 22px;
+}
+
+.plannerShell .plannerOnboarding {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.75fr) minmax(0, 1.6fr);
+  align-items: center;
+  gap: 32px;
+  min-height: 132px;
+  padding: 24px 28px;
+  border: 1px solid var(--planner-line);
+  border-radius: var(--planner-radius);
+  background: var(--color-surface);
+  box-shadow: var(--planner-shadow);
+}
+
+.plannerShell .plannerOnboarding .eyebrow {
+  margin: 0 0 5px;
+}
+
+.plannerShell .plannerOnboarding strong {
+  display: block;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.plannerShell .plannerOnboarding > div > span {
+  display: block;
+  margin-top: 5px;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.plannerShell .onboardingSteps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plannerShell .onboardingSteps li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 54px;
+  padding: 10px 12px;
+  border: 1px solid var(--planner-line);
+  border-radius: 11px;
+  background: var(--color-surface-muted);
+  color: var(--color-muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.plannerShell .onboardingSteps li span {
+  display: grid;
+  flex: 0 0 27px;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font: 700 12px/1 Inter, "Segoe UI", Arial, sans-serif;
+}
+
+.plannerShell .plannerOverviewContent {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(360px, 0.75fr);
+  gap: 14px;
+}
+
+.plannerShell .degreeProgressCard,
+.plannerShell .plannerMetrics .metric {
+  border: 1px solid var(--planner-line);
+  border-radius: var(--planner-radius);
+  background: var(--color-surface);
+  box-shadow: var(--planner-shadow);
+}
+
+.plannerShell .degreeProgressCard {
+  padding: 22px 24px 18px;
+}
+
+.plannerShell .degreeProgressHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.plannerShell .degreeProgressHead > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.plannerShell .degreeProgressHead span {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.plannerShell .degreeProgressHead strong {
+  font: 700 clamp(30px, 3.5vw, 45px)/1.15 Inter, "Segoe UI", Arial, sans-serif;
+  letter-spacing: -0.04em;
+}
+
+.plannerShell .degreeProgressCourseLabel {
+  padding: 5px 8px;
+  border-radius: 7px;
+  background: var(--color-surface-muted);
+  font-size: 11px !important;
+  white-space: nowrap;
+}
+
+.plannerShell .degreeProgressBar {
+  height: 8px;
+  margin: 17px 0 18px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--color-divider);
+}
+
+.plannerShell .degreeProgressBar i {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-primary);
+  transition: width 220ms ease;
+}
+
+.plannerShell .degreeCreditSummary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+}
+
+.plannerShell .degreeCreditSummary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  padding: 0 16px;
+  border-inline-start: 1px solid var(--planner-line);
+}
+
+.plannerShell .degreeCreditSummary > div:first-child {
+  padding-inline-start: 0;
+  border-inline-start: 0;
+}
+
+.plannerShell .degreeCreditSummary span {
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.plannerShell .degreeCreditSummary strong {
+  overflow: hidden;
+  font: 700 20px/1.3 Inter, "Segoe UI", Arial, sans-serif;
+  text-overflow: ellipsis;
+}
+
+.plannerShell .degreeProgressCard .note {
+  min-height: 0;
+  margin: 12px 0 0;
+  color: var(--color-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.plannerShell .plannerMetrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.plannerShell .plannerMetrics .metric {
+  display: flex;
+  min-width: 0;
+  min-height: 91px;
+  padding: 15px;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.plannerShell .plannerMetrics .metric span {
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.plannerShell .plannerMetrics .metric strong {
+  font: 700 27px/1 Inter, "Segoe UI", Arial, sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.plannerShell .plannerMetrics .metric::after {
+  content: "";
+  position: absolute;
+}
+
+.plannerShell .majorStrip {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.8fr) minmax(230px, 1fr) minmax(230px, 1fr);
+  align-items: end;
+  gap: 16px;
+  margin-top: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--planner-line);
+  border-radius: var(--planner-radius);
+  background: var(--color-surface);
+  box-shadow: 0 1px 2px rgba(19, 33, 27, 0.025);
+}
+
+.plannerShell .majorStripIntro {
+  align-self: center;
+  min-width: 0;
+}
+
+.plannerShell .majorStripIntro > div {
+  display: block;
+}
+
+.plannerShell .majorStripIntro .eyebrow {
+  margin: 0 0 3px;
+  font-size: 10px;
+}
+
+.plannerShell .majorStripIntro h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.plannerShell .majorStatus {
+  display: block;
+  margin-top: 3px;
+  overflow: hidden;
+  color: var(--color-muted);
+  font-size: 11px;
+  line-height: 1.45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.plannerShell .selectField,
+.plannerShell .searchBox,
+.plannerShell .levelFilterField {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.plannerShell .selectField label,
+.plannerShell .searchBox label,
+.plannerShell .levelFilterField label {
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.plannerShell select,
+.plannerShell input[type="search"] {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 11px;
+  border: 1px solid var(--planner-line);
+  border-radius: 9px;
+  background: var(--color-field);
+  color: var(--color-text);
+  box-shadow: 0 1px 2px rgba(19, 33, 27, 0.025);
+  font-size: 13px;
+}
+
+.plannerShell select:hover,
+.plannerShell input[type="search"]:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 30%, var(--color-border));
+}
+
+.plannerShell .plannerWorkspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(310px, 0.78fr);
+  align-items: start;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.plannerShell .courseCatalog,
+.plannerShell .plannerContext {
+  min-width: 0;
+  border: 1px solid var(--planner-line);
+  border-radius: var(--planner-radius);
+  background: var(--color-surface);
+  box-shadow: var(--planner-shadow);
+}
+
+.plannerShell .courseCatalog {
+  padding: 0;
+  overflow: hidden;
+}
+
+.plannerShell .courseCatalog .panelHead,
+.plannerShell .contextHead {
+  display: flex;
+  min-height: 74px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--planner-line);
+}
+
+.plannerShell .courseCatalog .panelHead .eyebrow,
+.plannerShell .contextHead .eyebrow {
+  margin: 0 0 3px;
+  font-size: 10px;
+}
+
+.plannerShell .courseCatalog .panelHead h2,
+.plannerShell .contextHead h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.plannerShell #courseCatalogSummary,
+.plannerShell .contextHead > span {
+  display: block;
+  margin-top: 2px;
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.plannerShell .dangerTextButton,
+.plannerShell .filterClearButton {
+  border: 0;
+  background: transparent;
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.plannerShell .dangerTextButton:hover {
+  color: var(--color-blocked);
+}
+
+.plannerShell .plannerControlBar {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(155px, 0.42fr) auto;
+  align-items: end;
+  gap: 10px;
+  padding: 14px 18px 10px;
+}
+
+.plannerShell .filterClearButton {
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+}
+
+.plannerShell .filterClearButton:hover {
+  border-color: var(--planner-line);
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+}
+
+.plannerShell .statusFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 2px 18px 10px;
+}
+
+.plannerShell .statusFilter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 31px;
+  padding: 5px 9px;
+  border: 1px solid var(--planner-line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.plannerShell .statusFilter span,
+.plannerShell .statusTab span {
+  min-width: 18px;
+  padding: 1px 5px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--color-muted) 10%, transparent);
+  font: 600 10px/1.6 Inter, "Segoe UI", Arial, sans-serif;
+  text-align: center;
+}
+
+.plannerShell .statusFilter.active {
+  border-color: color-mix(in srgb, var(--color-primary) 30%, var(--planner-line));
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.plannerShell .filterResultSummary {
+  margin: 0;
+  padding: 0 18px 8px;
+  color: var(--color-muted);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.plannerShell .checklist {
+  padding: 0 18px 18px;
+}
+
+.plannerShell .studyPlanTable {
+  margin: 0 0 12px;
+  overflow: hidden;
+  border: 1px solid var(--planner-line);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.plannerShell .studyPlanTable:last-child {
+  margin-bottom: 0;
+}
+
+.plannerShell .studyPlanHeader {
+  display: flex;
+  min-height: 55px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px 10px 15px;
+  border-bottom: 1px solid var(--planner-line);
+  background: color-mix(in srgb, var(--color-surface-muted) 75%, var(--color-surface));
+}
+
+.plannerShell .studyPlanHeader > div {
+  min-width: 0;
+}
+
+.plannerShell .studyPlanHeader strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.plannerShell .studyPlanHeader span {
+  display: block;
+  margin-top: 1px;
+  color: var(--color-muted);
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.plannerShell .levelToggle {
+  min-height: 30px;
+  padding: 4px 9px;
+  border: 1px solid var(--planner-line);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.plannerShell .studyPlanTable table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.plannerShell .studyPlanTable th {
+  height: 33px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--planner-line);
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: 9px;
+  font-weight: 600;
+  text-align: start;
+  text-transform: none;
+}
+
+.plannerShell .studyPlanTable td {
+  height: 62px;
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--planner-line);
+  color: var(--color-text);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.plannerShell .studyPlanTable tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.plannerShell .studyPlanTable tbody tr {
+  transition: background-color 180ms ease;
+}
+
+.plannerShell .studyPlanTable tbody tr:hover {
+  background: color-mix(in srgb, var(--color-primary-soft) 34%, transparent);
+}
+
+.plannerShell .studyPlanTable .doneColumn {
+  width: 48px;
+  text-align: center;
+}
+
+.plannerShell .studyPlanTable .creditColumn {
+  width: 62px;
+  font: 600 12px/1 Inter, "Segoe UI", Arial, sans-serif;
+  text-align: center;
+}
+
+.plannerShell .studyPlanTable .statusColumn {
+  width: 92px;
+}
+
+.plannerShell .studyPlanTable .detailsColumn {
+  width: 67px;
+  text-align: end;
+}
+
+.plannerShell .studyPlanTable input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.plannerShell .courseIdentityCell .code,
+.plannerShell .courseIdentityCell .name,
+.plannerShell .courseIdentityCell .meta {
+  display: block;
+}
+
+.plannerShell .courseIdentityCell .code {
+  margin-bottom: 2px;
+  color: var(--color-primary);
+  font: 600 11px/1.35 Inter, "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0.025em;
+}
+
+.plannerShell .courseIdentityCell .name {
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.plannerShell .courseIdentityCell .meta {
+  margin-top: 2px;
+  color: var(--color-muted);
+  font-size: 9px;
+}
+
+.plannerShell .courseStatusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 24px;
+  padding: 3px 7px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font-size: 9px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.plannerShell .courseStatusBadge::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.plannerShell .courseStatusBadge.completed,
+.plannerShell .courseStatusBadge.available {
+  background: var(--color-done-soft);
+  color: var(--color-done);
+}
+
+.plannerShell .courseStatusBadge.blocked {
+  background: var(--color-blocked-soft);
+  color: var(--color-blocked);
+}
+
+.plannerShell .courseDetailsToggle {
+  padding: 3px 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-primary);
+  font-size: 9px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.plannerShell .coursePrerequisiteDetail {
+  margin-top: 5px;
+  color: var(--color-blocked);
+  font-size: 9px;
+  line-height: 1.55;
+  white-space: normal;
+}
+
+.plannerShell .plannerFilterEmpty,
+.plannerShell .compactEmptyState {
+  display: grid;
+  min-height: 150px;
+  place-content: center;
+  justify-items: center;
+  gap: 5px;
+  padding: 24px;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.plannerShell .plannerFilterEmpty > span,
+.plannerShell .compactEmptyIcon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--color-surface-muted);
+  color: var(--color-primary);
+  font-size: 14px;
+}
+
+.plannerShell .plannerFilterEmpty strong,
+.plannerShell .compactEmptyState strong {
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.plannerShell .compactEmptyState > span:last-child {
+  max-width: 230px;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.plannerShell .plannerContext {
+  position: sticky;
+  top: 82px;
+  overflow: hidden;
+}
+
+.plannerShell .statusTabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3px;
+  margin: 10px;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--color-surface-muted);
+}
+
+.plannerShell .statusTab {
+  display: inline-flex;
+  min-width: 0;
+  min-height: 33px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 5px 6px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--color-muted);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.plannerShell .statusTab.active {
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: 0 1px 3px rgba(19, 33, 27, 0.08);
+}
+
+.plannerShell .statusPanels {
+  min-height: 220px;
+  max-height: 630px;
+  overflow: auto;
+  padding: 0 10px 10px;
+}
+
+.plannerShell .statusPanel,
+.plannerShell .listBlock {
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.plannerShell .courseList {
+  display: grid;
+  gap: 7px;
+}
+
+.plannerShell .courseItem {
+  position: relative;
+  display: block;
+  padding: 10px 11px;
+  border: 1px solid var(--planner-line);
+  border-radius: 10px;
+  background: var(--color-surface);
+  box-shadow: none;
+}
+
+.plannerShell .courseItem::before {
+  content: none !important;
+}
+
+.plannerShell .contextCourseHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.plannerShell .courseItem .code {
+  color: var(--color-primary);
+  font: 600 10px/1.4 Inter, "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.plannerShell .courseItem .name {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.plannerShell .courseItem .meta,
+.plannerShell .courseItem .reason {
+  display: block;
+  margin-top: 3px;
+  color: var(--color-muted);
+  font-size: 9px;
+  line-height: 1.55;
+}
+
+.plannerShell .contextCourseDetails {
+  margin-top: 5px;
+}
+
+.plannerShell .contextCourseDetails summary {
+  color: var(--color-primary);
+  font-size: 9px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.plannerShell .removeButton {
+  position: absolute;
+  inset-block-end: 8px;
+  inset-inline-end: 9px;
+  padding: 2px 5px;
+  border: 0;
+  background: transparent;
+  color: var(--color-blocked);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.plannerShell .plannerFeedback {
+  min-height: 31px;
+  margin: 0;
+  padding: 7px 12px;
+  border-top: 1px solid var(--planner-line);
+  color: var(--color-muted);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+[data-theme="dark"] .plannerShell {
+  --planner-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 16px 38px rgba(0, 0, 0, 0.18);
+}
+
+[data-theme="dark"] .plannerShell .degreeProgressCard,
+[data-theme="dark"] .plannerShell .plannerMetrics .metric,
+[data-theme="dark"] .plannerShell .majorStrip,
+[data-theme="dark"] .plannerShell .courseCatalog,
+[data-theme="dark"] .plannerShell .plannerContext,
+[data-theme="dark"] .plannerShell .plannerOnboarding {
+  box-shadow: var(--planner-shadow);
+}
+
+@media (max-width: 1200px) {
+  .plannerShell .plannerHeader {
+    align-items: start;
+  }
+
+  .plannerShell .toolbarActions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .plannerShell .plannerOverviewContent {
+    grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.7fr);
+  }
+
+  .plannerShell .plannerWorkspace {
+    grid-template-columns: minmax(0, 1.65fr) minmax(285px, 0.75fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .plannerShell {
+    margin-top: 56px;
+  }
+
+  .plannerShell .plannerHeader {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .plannerShell .toolbarActions {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .plannerShell .plannerOverviewContent {
+    grid-template-columns: 1fr;
+  }
+
+  .plannerShell .plannerMetrics {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .plannerShell .plannerMetrics .metric {
+    min-height: 82px;
+  }
+
+  .plannerShell .majorStrip {
+    grid-template-columns: minmax(210px, 0.7fr) repeat(2, minmax(190px, 1fr));
+  }
+
+  .plannerShell .plannerWorkspace {
+    grid-template-columns: 1fr;
+  }
+
+  .plannerShell .plannerContext {
+    position: static;
+  }
+
+  .plannerShell .statusPanels {
+    max-height: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+  .plannerShell {
+    width: min(calc(100% - 32px), 1380px);
+    margin: 44px auto 60px;
+  }
+
+  .plannerShell .plannerHeader {
+    padding-bottom: 18px;
+  }
+
+  .plannerShell .plannerHeader h2 {
+    font-size: 27px;
+  }
+
+  .plannerShell .plannerOnboarding {
+    grid-template-columns: 1fr;
+    gap: 17px;
+    padding: 20px;
+  }
+
+  .plannerShell .onboardingSteps {
+    gap: 7px;
+  }
+
+  .plannerShell .onboardingSteps li {
+    min-height: 68px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+    padding: 9px;
+  }
+
+  .plannerShell .degreeProgressCard {
+    padding: 18px;
+  }
+
+  .plannerShell .plannerMetrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .plannerShell .majorStrip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .plannerShell .majorStripIntro {
+    grid-column: 1 / -1;
+  }
+
+  .plannerShell .plannerControlBar {
+    grid-template-columns: minmax(0, 1fr) minmax(140px, 0.5fr);
+  }
+
+  .plannerShell .filterClearButton {
+    grid-column: 1 / -1;
+    min-height: 32px;
+    justify-self: start;
+  }
+
+  .plannerShell .studyPlanTable thead {
+    display: none;
+  }
+
+  .plannerShell .studyPlanTable table,
+  .plannerShell .studyPlanTable tbody {
+    display: block;
+  }
+
+  .plannerShell .studyPlanTable tr {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    align-items: center;
+    min-height: 74px;
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--planner-line);
+  }
+
+  .plannerShell .studyPlanTable tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .plannerShell .studyPlanTable td {
+    display: block;
+    width: auto !important;
+    height: auto;
+    padding: 0 5px;
+    border: 0 !important;
+  }
+
+  .plannerShell .studyPlanTable .doneColumn {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .plannerShell .studyPlanTable .courseIdentityCell {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    min-width: 0;
+  }
+
+  .plannerShell .studyPlanTable .creditColumn {
+    grid-column: 3;
+    grid-row: 1;
+    text-align: end;
+  }
+
+  .plannerShell .studyPlanTable .statusColumn {
+    grid-column: 3;
+    grid-row: 2;
+    text-align: end;
+  }
+
+  .plannerShell .studyPlanTable .detailsColumn {
+    grid-column: 2;
+    grid-row: 3;
+    padding-inline-start: 5px;
+    text-align: start;
+  }
+}
+
+@media (max-width: 520px) {
+  .plannerShell {
+    width: min(calc(100% - 24px), 1380px);
+    margin-top: 36px;
+  }
+
+  .plannerShell .plannerHeader h2 {
+    font-size: 24px;
+  }
+
+  .plannerShell .plannerSubtitle {
+    font-size: 13px;
+  }
+
+  .plannerShell .toolbarActions {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .plannerShell .toolbarActions button {
+    width: 100%;
+  }
+
+  .plannerShell .privacyNotice {
+    align-items: flex-start;
+  }
+
+  .plannerShell .privacyNotice div {
+    display: block;
+  }
+
+  .plannerShell .privacyNotice div span {
+    display: block;
+  }
+
+  .plannerShell .plannerOnboarding {
+    padding: 17px;
+  }
+
+  .plannerShell .onboardingSteps {
+    grid-template-columns: 1fr;
+  }
+
+  .plannerShell .onboardingSteps li {
+    min-height: 45px;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .plannerShell .degreeProgressHead {
+    align-items: flex-start;
+  }
+
+  .plannerShell .degreeProgressHead strong {
+    font-size: 33px;
+  }
+
+  .plannerShell .degreeCreditSummary {
+    gap: 11px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .plannerShell .degreeCreditSummary > div {
+    padding: 0;
+    border: 0;
+  }
+
+  .plannerShell .degreeCreditSummary > div:last-child {
+    grid-column: 1 / -1;
+    padding-top: 9px;
+    border-top: 1px solid var(--planner-line);
+  }
+
+  .plannerShell .majorStrip,
+  .plannerShell .plannerControlBar {
+    grid-template-columns: 1fr;
+  }
+
+  .plannerShell .majorStripIntro,
+  .plannerShell .filterClearButton {
+    grid-column: auto;
+  }
+
+  .plannerShell .courseCatalog .panelHead,
+  .plannerShell .contextHead {
+    min-height: 68px;
+    padding: 14px;
+  }
+
+  .plannerShell .plannerControlBar {
+    padding: 13px 14px 9px;
+  }
+
+  .plannerShell .statusFilters {
+    padding-inline: 14px;
+  }
+
+  .plannerShell .statusFilter {
+    flex: 1 1 calc(50% - 4px);
+    justify-content: space-between;
+  }
+
+  .plannerShell .filterResultSummary {
+    padding-inline: 14px;
+  }
+
+  .plannerShell .checklist {
+    padding: 0 10px 10px;
+  }
+
+  .plannerShell .studyPlanHeader {
+    padding-inline: 11px;
+  }
+
+  .plannerShell .studyPlanHeader span {
+    max-width: 235px;
+  }
+
+  .plannerShell .statusTabs {
+    overflow-x: auto;
+    grid-template-columns: repeat(4, minmax(78px, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plannerShell .toolbarActions button,
+  .plannerShell .degreeProgressBar i,
+  .plannerShell .statusFilter,
+  .plannerShell .studyPlanTable tbody tr {
+    transition: none;
+  }
+}
+
+/* Phase 2 screenshot refinement: concise context, clearer bilingual hierarchy, denser mobile flow. */
+.plannerShell {
+  margin-top: 54px;
+}
+
+.plannerShell .plannerSubtitle {
+  color: color-mix(in srgb, var(--color-text) 68%, var(--color-muted));
+  font-size: 14.5px;
+}
+
+.plannerShell .degreeProgressCard .note {
+  color: color-mix(in srgb, var(--color-text) 62%, var(--color-muted));
+  font-size: 12px;
+}
+
+.plannerShell .studyPlanHeader span {
+  color: color-mix(in srgb, var(--color-text) 58%, var(--color-muted));
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+
+.plannerShell .courseCheckTarget {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  margin: auto;
+  place-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.plannerShell .courseIdentityCell .courseNamePrimary {
+  color: var(--color-text);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.55;
+  white-space: normal;
+}
+
+.plannerShell .courseNameSecondary {
+  display: block;
+  margin-top: 2px;
+  color: color-mix(in srgb, var(--color-text) 58%, var(--color-muted));
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-size: 10.5px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.plannerShell .creditUnit {
+  display: none;
+  margin-inline-start: 3px;
+  color: var(--color-muted);
+  font-family: "IBM Plex Sans Arabic", "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.plannerShell .coursePrerequisiteDetail {
+  font-size: 10.5px;
+}
+
+.plannerShell .statusPanels {
+  min-height: 0;
+  max-height: none;
+  overflow: visible;
+}
+
+.plannerShell .plannerContext {
+  overflow: visible;
+}
+
+.plannerShell .courseItem .name {
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.plannerShell .courseItem .courseNameSecondary,
+.plannerShell .courseItem .meta,
+.plannerShell .courseItem .reason {
+  color: color-mix(in srgb, var(--color-text) 60%, var(--color-muted));
+  font-size: 10.5px;
+  line-height: 1.55;
+}
+
+.plannerShell .contextCourseDetails summary {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+}
+
+.plannerShell .contextViewAll {
+  width: calc(100% - 20px);
+  min-height: 38px;
+  margin: 0 10px 10px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 24%, var(--planner-line));
+  border-radius: 9px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.plannerShell .contextViewAll:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 44%, var(--planner-line));
+  background: color-mix(in srgb, var(--color-primary-soft) 74%, var(--color-surface));
+}
+
+.plannerShell .statusFilter.active {
+  outline: 0;
+  border-color: color-mix(in srgb, var(--color-primary) 42%, var(--planner-line));
+  background: color-mix(in srgb, var(--color-primary-soft) 88%, var(--color-surface));
+  color: var(--color-primary-strong);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
+.plannerShell .statusFilter:focus-visible,
+.plannerShell .statusTab:focus-visible,
+.plannerShell .contextViewAll:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-surface);
+}
+
+.plannerShell .plannerFilterEmpty,
+.plannerShell .compactEmptyState {
+  min-height: 104px;
+  gap: 4px;
+  padding: 15px;
+}
+
+.plannerShell .compactEmptyState > span:last-child {
+  max-width: 250px;
+  font-size: 10.5px;
+}
+
+@media (min-width: 1025px) {
+  .plannerShell .plannerContext {
+    position: sticky;
+    top: 88px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .plannerShell {
+    margin-top: 44px;
+  }
+
+  .plannerShell .plannerContext {
+    position: static;
+  }
+}
+
+@media (max-width: 520px) {
+  .plannerShell {
+    margin-top: 30px;
+  }
+
+  .plannerShell .plannerHeader {
+    gap: 12px;
+  }
+
+  .plannerShell .toolbarActions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .plannerShell .toolbarActions button {
+    min-height: 38px;
+    padding-block: 6px;
+  }
+
+  .plannerShell #saveProgressButton {
+    grid-column: 1 / -1;
+    min-height: 44px;
+  }
+
+  .plannerShell #exportButton,
+  .plannerShell #importButton {
+    width: 100%;
+  }
+
+  .plannerShell #resetProgressButton {
+    grid-column: 1 / -1;
+    width: auto;
+    min-height: 30px;
+    justify-self: start;
+    padding: 3px 2px;
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .plannerShell .studyPlanTable tr {
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    grid-template-rows: auto auto auto;
+    row-gap: 7px;
+    min-height: 0;
+    padding: 10px 9px;
+  }
+
+  .plannerShell .studyPlanTable td::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  .plannerShell .studyPlanTable .doneColumn {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+    padding: 0;
+  }
+
+  .plannerShell .courseCheckTarget {
+    width: 44px;
+    height: 44px;
+    margin: -5px 0 0;
+  }
+
+  .plannerShell .studyPlanTable input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+  }
+
+  .plannerShell .studyPlanTable .courseIdentityCell {
+    grid-column: 2 / 4;
+    grid-row: 1;
+    min-width: 0;
+    padding: 0 6px;
+  }
+
+  .plannerShell .courseIdentityCell .code {
+    margin: 0 0 4px;
+    font-size: 12px;
+  }
+
+  .plannerShell .courseIdentityCell .courseNamePrimary {
+    overflow: visible;
+    font-size: 13px;
+    line-height: 1.65;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .plannerShell .courseIdentityCell .courseNameSecondary {
+    font-size: 11px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  .plannerShell .studyPlanTable .creditColumn {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    width: auto !important;
+    min-height: 30px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2px;
+    padding: 7px 6px 0;
+    border-top: 1px solid var(--planner-line) !important;
+    text-align: start;
+  }
+
+  .plannerShell .creditUnit {
+    display: inline;
+  }
+
+  .plannerShell .studyPlanTable .statusColumn {
+    grid-column: 3;
+    grid-row: 2;
+    display: flex;
+    width: auto !important;
+    min-height: 30px;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 7px 6px 0;
+    border-top: 1px solid var(--planner-line) !important;
+    text-align: end;
+  }
+
+  .plannerShell .studyPlanTable .detailsColumn {
+    grid-column: 2 / 4;
+    grid-row: 3;
+    width: auto !important;
+    padding: 0 6px;
+  }
+
+  .plannerShell .courseDetailsToggle {
+    min-height: 32px;
+    font-size: 10.5px;
+  }
+
+  .plannerShell .coursePrerequisiteDetail {
+    margin: 2px 0 4px;
+    font-size: 11px;
+    line-height: 1.65;
+  }
+
+  .plannerShell .plannerFilterEmpty,
+  .plannerShell .compactEmptyState {
+    min-height: 92px;
+    padding: 13px;
+  }
+
+  .sourceSection {
+    min-height: 0;
+    gap: 12px;
+    margin: 18px auto 30px;
+    padding: 20px 17px;
+  }
+
+  .sourceIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .sourceSection p:not(.eyebrow) {
+    margin-top: 6px;
+    line-height: 1.7;
+  }
+
+  .sourceSection .secondaryLink {
+    min-height: 44px;
+  }
+
+  .footerInner {
+    min-height: 0;
+    gap: 16px;
+    padding-block: 22px;
+  }
+
+  .footerNav {
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 4px;
+  }
+
+  .footerNav a {
+    min-height: 44px;
+    padding-inline: 10px;
+  }
+}

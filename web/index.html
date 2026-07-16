@@ -169,30 +169,86 @@
         </div>
       </section>
 
-      <section id="planner" class="plannerShell">
-        <section class="toolbar" aria-label="لوحة التحكم">
-          <div>
+      <section id="planner" class="plannerShell plannerEmpty">
+        <header class="toolbar plannerHeader" aria-label="لوحة التحكم">
+          <div class="plannerHeaderCopy">
             <p class="eyebrow">جامعة الملك عبدالعزيز</p>
-            <h2 id="plannerTitle">مخطط مقررات المحاسبة</h2>
+            <h2 id="plannerTitle">اختر الكلية والتخصص</h2>
+            <p id="plannerSubtitle" class="plannerSubtitle">ابدأ باختيار برنامجك، ثم حدّد المقررات التي اجتزتها لرؤية تقدمك والمواد المتاحة.</p>
+            <div id="plannerHeaderMeta" class="plannerHeaderMeta" hidden>
+              <span id="plannerFacultyName"></span>
+              <span id="plannerCourseMeta"></span>
+              <span id="plannerCreditMeta"></span>
+            </div>
           </div>
           <div class="toolbarActions">
             <button id="saveProgressButton" type="button">حفظ التقدم</button>
-            <button id="resetProgressButton" class="secondaryButton dangerButton" type="button">إعادة ضبط التقدم</button>
             <button id="exportButton" class="secondaryButton" type="button">تصدير التقدم</button>
             <button id="importButton" class="secondaryButton" type="button">استيراد التقدم</button>
+            <button id="resetProgressButton" class="secondaryButton dangerButton" type="button">إعادة التعيين</button>
             <input id="importInput" class="srOnly" type="file" accept="application/json,.json" />
+          </div>
+        </header>
+
+        <section class="privacyNotice" aria-label="تنبيه الخصوصية">
+          <span class="privacyNoticeIcon" aria-hidden="true">i</span>
+          <div>
+            <strong>يعمل المخطط محليًا بدون تسجيل دخول.</strong>
+            <span>تسجيل Microsoft اختياري، والمزامنة بين الأجهزة غير مفعلة حاليًا.</span>
           </div>
         </section>
 
-        <section class="privacyNotice" aria-label="تنبيه الخصوصية">
-          <strong>تسجيل الدخول اختياري.</strong>
-          <span>يمكنك استخدام المخطط مباشرة وحفظ التقدم على هذا الجهاز.</span>
-          <small>تسجيل Microsoft لا يتم إجباره، والمزامنة بين الأجهزة غير مفعلة حاليًا.</small>
+        <section id="plannerOverview" class="plannerOverview" aria-label="نظرة عامة على التقدم">
+          <div id="plannerOnboarding" class="plannerOnboarding">
+            <div>
+              <p class="eyebrow">ابدأ من هنا</p>
+              <strong>ثلاث خطوات لرؤية خطتك بوضوح</strong>
+              <span>لن تظهر بطاقات فارغة قبل اختيار البرنامج.</span>
+            </div>
+            <ol class="onboardingSteps">
+              <li><span>1</span>اختر الكلية</li>
+              <li><span>2</span>اختر التخصص</li>
+              <li><span>3</span>حدّد المواد المجتازة</li>
+            </ol>
+          </div>
+
+          <div id="plannerOverviewContent" class="plannerOverviewContent" hidden>
+            <article class="degreeProgressCard">
+              <div class="degreeProgressHead">
+                <div>
+                  <span id="degreeProgressLabel">نسبة إكمال الخطة</span>
+                  <strong id="degreeProgressValue">0%</strong>
+                </div>
+                <span id="degreeProgressCourseLabel" class="degreeProgressCourseLabel">0 من 0 مقررات</span>
+              </div>
+              <div id="degreeProgressBar" class="degreeProgressBar" role="progressbar" aria-label="نسبة إكمال الخطة" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <i></i>
+              </div>
+              <div class="degreeCreditSummary">
+                <div><span id="creditsDoneLabel">الساعات المنجزة</span><strong id="creditsCompleted">0</strong></div>
+                <div><span id="creditsTotalLabel">إجمالي الساعات</span><strong id="officialCredits">غير متاح</strong></div>
+                <div><span id="creditsLeftLabel">الساعات المتبقية</span><strong id="creditsRemaining">غير متاح</strong></div>
+              </div>
+              <p id="creditNote" class="note"></p>
+            </article>
+
+            <div class="plannerMetrics" aria-label="ملخص حالة المقررات">
+              <article class="metric metricDone"><span>المقررات المجتازة</span><strong id="completedCount">0</strong></article>
+              <article class="metric metricAvailable"><span>متاح الآن</span><strong id="availableCount">0</strong></article>
+              <article class="metric metricBlocked"><span>محجوب</span><strong id="blockedCount">0</strong></article>
+              <article class="metric metricTotal"><span>إجمالي المقررات</span><strong id="totalCourseCount">0</strong></article>
+            </div>
+          </div>
         </section>
 
-
-
         <section class="majorStrip" aria-label="اختيار البرنامج">
+          <div class="majorStripIntro">
+            <div>
+              <p class="eyebrow">البرنامج الدراسي</p>
+              <h3>اختر الكلية والتخصص</h3>
+            </div>
+            <span id="majorStatus" class="majorStatus"></span>
+          </div>
           <div class="selectField">
             <label for="facultySelect">الكلية</label>
             <select id="facultySelect"></select>
@@ -201,56 +257,84 @@
             <label for="majorSelect">التخصص</label>
             <select id="majorSelect"></select>
           </div>
-          <span id="majorStatus" class="majorStatus"></span>
         </section>
 
-        <section class="layout">
-          <aside class="panel">
+        <section id="plannerWorkspace" class="layout plannerWorkspace" hidden>
+          <section class="panel courseCatalog" aria-labelledby="courseCatalogTitle">
             <div class="panelHead">
-              <h2>المقررات</h2>
-              <button id="clearButton" type="button">مسح</button>
+              <div>
+                <p class="eyebrow">كتالوج الخطة</p>
+                <h2 id="courseCatalogTitle">المقررات</h2>
+                <span id="courseCatalogSummary">جميع المقررات</span>
+              </div>
+              <button id="clearButton" class="dangerTextButton" type="button">مسح المحدد</button>
             </div>
-            <div class="searchBox">
-              <label class="srOnly" for="searchInput">البحث في المقررات</label>
-              <input id="searchInput" type="search" placeholder="ابحث برمز المقرر أو الاسم" />
+
+            <div class="plannerControlBar">
+              <div class="searchBox">
+                <label for="searchInput">البحث في المقررات</label>
+                <input id="searchInput" type="search" placeholder="ابحث برمز المقرر أو الاسم" />
+              </div>
+              <div class="levelFilterField">
+                <label for="levelFilter">المستوى</label>
+                <select id="levelFilter">
+                  <option value="all">كل المستويات</option>
+                </select>
+              </div>
+              <button id="filterClearButton" class="filterClearButton" type="button">مسح التصفية</button>
             </div>
+
+            <div id="statusFilters" class="statusFilters" role="group" aria-label="تصفية المقررات حسب الحالة">
+              <button class="statusFilter active" type="button" data-status="all" aria-pressed="true">الكل <span id="filterAllCount">0</span></button>
+              <button class="statusFilter" type="button" data-status="completed" aria-pressed="false">مجتاز <span id="filterCompletedCount">0</span></button>
+              <button class="statusFilter" type="button" data-status="available" aria-pressed="false">متاح <span id="filterAvailableCount">0</span></button>
+              <button class="statusFilter" type="button" data-status="blocked" aria-pressed="false">محجوب <span id="filterBlockedCount">0</span></button>
+            </div>
+
+            <p id="filterResultSummary" class="filterResultSummary" aria-live="polite"></p>
             <div id="courseChecklist" class="checklist"></div>
-          </aside>
-
-          <section class="results" aria-label="نتائج الخطة">
-            <div class="metricRow">
-              <div class="metric metricDone"><span>مكتمل</span><strong id="completedCount">0</strong></div>
-              <div class="metric metricAvailable"><span>متاح</span><strong id="availableCount">0</strong></div>
-              <div class="metric metricBlocked"><span>محجوب</span><strong id="blockedCount">0</strong></div>
-              <div class="metric"><span>إجمالي الساعات</span><strong id="officialCredits">--</strong></div>
-              <div class="metric"><span>ساعات منجزة</span><strong id="creditsCompleted">--</strong></div>
-              <div class="metric"><span>ساعات متبقية</span><strong id="creditsRemaining">--</strong></div>
-            </div>
-            <p id="creditNote" class="note"></p>
-            <p id="saveStatus" class="note"></p>
-
-            <section class="listBlock completedBlock">
-              <h2>المقررات المحددة كمجتازة</h2>
-              <div id="completedList" class="courseList compactList"></div>
-            </section>
-
-
-            <div class="columns">
-              <section class="listBlock availableBlock">
-                <h2>متاح الآن</h2>
-                <div id="availableList" class="courseList"></div>
-              </section>
-              <section class="listBlock blockedBlock">
-                <h2>محجوب</h2>
-                <div id="blockedList" class="courseList"></div>
-              </section>
-            </div>
-
-            <section class="listBlock optionalBlock">
-              <h2>المواد الاختيارية</h2>
-              <div id="optionalList" class="courseList compactList"></div>
-            </section>
           </section>
+
+          <aside class="results plannerContext" aria-label="ملخص حالة الخطة">
+            <div class="contextHead">
+              <div>
+                <p class="eyebrow">ملخص سريع</p>
+                <h2>حالة المقررات</h2>
+              </div>
+              <span id="contextTotalCount">0 مقرر</span>
+            </div>
+
+            <div class="statusTabs" role="tablist" aria-label="عرض حالة المقررات">
+              <button id="availableTab" class="statusTab active" type="button" role="tab" aria-selected="true" aria-controls="availablePanel" data-view="available">متاح <span id="availableTabCount">0</span></button>
+              <button id="completedTab" class="statusTab" type="button" role="tab" aria-selected="false" aria-controls="completedPanel" data-view="completed">مجتاز <span id="completedTabCount">0</span></button>
+              <button id="blockedTab" class="statusTab" type="button" role="tab" aria-selected="false" aria-controls="blockedPanel" data-view="blocked">محجوب <span id="blockedTabCount">0</span></button>
+              <button id="optionalTab" class="statusTab" type="button" role="tab" aria-selected="false" aria-controls="optionalPanel" data-view="optional">اختياري <span id="optionalTabCount">0</span></button>
+            </div>
+
+            <div class="statusPanels">
+              <section id="availablePanel" class="listBlock statusPanel availableBlock" role="tabpanel" aria-labelledby="availableTab">
+                <h3 class="srOnly">متاح الآن</h3>
+                <div id="availableList" class="courseList"></div>
+                <button class="contextViewAll" type="button" data-status="available">عرض الكل في الكتالوج</button>
+              </section>
+              <section id="completedPanel" class="listBlock statusPanel completedBlock" role="tabpanel" aria-labelledby="completedTab" hidden>
+                <h3 class="srOnly">المقررات المحددة كمجتازة</h3>
+                <div id="completedList" class="courseList compactList"></div>
+                <button class="contextViewAll" type="button" data-status="completed">عرض الكل في الكتالوج</button>
+              </section>
+              <section id="blockedPanel" class="listBlock statusPanel blockedBlock" role="tabpanel" aria-labelledby="blockedTab" hidden>
+                <h3 class="srOnly">المقررات المحجوبة</h3>
+                <div id="blockedList" class="courseList"></div>
+                <button class="contextViewAll" type="button" data-status="blocked">عرض الكل في الكتالوج</button>
+              </section>
+              <section id="optionalPanel" class="listBlock statusPanel optionalBlock" role="tabpanel" aria-labelledby="optionalTab" hidden>
+                <h3 class="srOnly">المواد الاختيارية</h3>
+                <div id="optionalList" class="courseList compactList"></div>
+              </section>
+            </div>
+
+            <p id="saveStatus" class="plannerFeedback" role="status" aria-live="polite"></p>
+          </aside>
         </section>
       </section>
 
