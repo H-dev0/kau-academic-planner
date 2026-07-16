@@ -1,0 +1,824 @@
+{
+  "generated_at": "2026-07-16T13:44:43Z",
+  "official_central_total": 212,
+  "official_faculty_option_total": 34,
+  "processed_faculty_option_total": 34,
+  "filter_audit": {
+    "CM": {
+      "official_count": 8,
+      "paths": [
+        "/programs/academic-masters-program-in-communication-and-media",
+        "/programs/bachelor-of-journalism-and-digital-media-program",
+        "/programs/bachelor-of-marketing-communication-program",
+        "/programs/bachelor-of-public-relations-program",
+        "/programs/bachelor-of-visual-and-audio-production-program",
+        "/programs/doctor-of-philosophy-phd-in-communication-and-media",
+        "/programs/executive-master-in-digital-media",
+        "/programs/professional-master-in-public-relations"
+      ],
+      "pages_checked": 1
+    },
+    "AH": {
+      "official_count": 28,
+      "paths": [
+        "/programs/associate-diploma-in-tourism-guidance",
+        "/programs/bachelor-in-french-language-translation",
+        "/programs/bachelor-of-arabic-language",
+        "/programs/bachelor-of-information-science",
+        "/programs/bachelor-of-sharia",
+        "/programs/chinese-language",
+        "/programs/counseling-psychology",
+        "/programs/geography-and-geographic-information-systems",
+        "/programs/literary-in-english-language",
+        "/programs/master-in-applied-linguistics",
+        "/programs/master-in-islamic-creed",
+        "/programs/master-of-arabic-language",
+        "/programs/master-of-fiqh-principles",
+        "/programs/master-of-geography",
+        "/programs/master-of-history",
+        "/programs/master-of-information-management",
+        "/programs/master-of-quran-sunnah",
+        "/programs/master-of-sharia-islamic-studies",
+        "/programs/phd-in-arabic-language",
+        "/programs/phd-in-history",
+        "/programs/phd-in-islamic-creed",
+        "/programs/phd-in-psychology",
+        "/programs/phd-in-sociology",
+        "/programs/phd-of-fiqh",
+        "/programs/phd-of-fiqh-principles",
+        "/programs/phd-of-quran-sunnah",
+        "/programs/phd-of-sharia-islamic-studies",
+        "/programs/psychology"
+      ],
+      "pages_checked": 2
+    },
+    "RB": {
+      "official_count": 3,
+      "paths": [
+        "/programs/human-resource-management",
+        "/programs/law",
+        "/programs/markting"
+      ],
+      "pages_checked": 1
+    },
+    "EA": {
+      "official_count": 30,
+      "paths": [
+        "/programs/bachelor-of-health-services-and-hospital-administration-ba-hsa",
+        "/programs/bachelor-of-public-administration",
+        "/programs/bachelor-of-science-in-accounting",
+        "/programs/bachelor-of-science-in-business-administration",
+        "/programs/bachelor-of-science-in-finance",
+        "/programs/bachelor-of-science-in-human-resource-management",
+        "/programs/bachelor-of-science-in-management-information-systems",
+        "/programs/bachelors-degree-in-marketing",
+        "/programs/bachelors-of-economics",
+        "/programs/business-economics",
+        "/programs/doctor-of-philosophy-in-business-administration",
+        "/programs/doctor-of-philosophy-in-health-administration",
+        "/programs/executive-master-in-human-resource-management",
+        "/programs/executive-master-in-internal-auditing",
+        "/programs/executive-master-in-public-policy",
+        "/programs/executive-master-of-business-administration",
+        "/programs/executive-master-of-health-administration-emha",
+        "/programs/executive-master-of-science-msc-in-strategic-marketing",
+        "/programs/information-systems-management-and-digitalization",
+        "/programs/master-of-applied-finance-and-investment",
+        "/programs/master-of-business-administration-mba",
+        "/programs/master-of-professional-accounting",
+        "/programs/master-of-public-administration-mpa",
+        "/programs/master-of-science-in-accounting",
+        "/programs/master-of-science-in-health-services-and-hospital-administration-ms-hsha",
+        "/programs/masters-in-academic-economics",
+        "/programs/phd-in-accounting",
+        "/programs/phd-in-economics",
+        "/programs/political-science",
+        "/programs/the-executive-master-of-public-administration"
+      ],
+      "pages_checked": 2
+    },
+    "ED": {
+      "official_count": 0,
+      "paths": [],
+      "pages_checked": 1
+    },
+    "AL": {
+      "official_count": 8,
+      "paths": [
+        "/programs/associate-diploma-in-applications-development",
+        "/programs/associate-diploma-in-graphical-design",
+        "/programs/general-associate-diploma-in-digital-transformation",
+        "/programs/general-intermediate-diploma-in-applied-computing-and-network-technologies",
+        "/programs/general-intermediate-diploma-in-law",
+        "/programs/intermediate-diploma-in-cybersecurity",
+        "/programs/intermediate-diploma-in-cybersecurity-distance",
+        "/programs/intermediate-diploma-in-data-science"
+      ],
+      "pages_checked": 1
+    },
+    "NR": {
+      "official_count": 3,
+      "paths": [
+        "/programs/master-of-nursing-science",
+        "/programs/master-of-nursing-science-in-critical-care-nursing",
+        "/programs/master-of-nursing-science-public-health-nursing-community-health-nursing"
+      ],
+      "pages_checked": 1
+    },
+    "IT": {
+      "official_count": 12,
+      "paths": [
+        "/programs/bachelor-of-science-in-computer-science",
+        "/programs/bachelor-of-science-in-cybersecurity",
+        "/programs/bachelor-of-science-in-information-systems",
+        "/programs/bachelor-of-science-in-information-technology",
+        "/programs/doctor-of-philosophy-in-computer-information-systems",
+        "/programs/doctor-of-philosophy-in-computer-science",
+        "/programs/doctor-of-philosophy-in-information-technology",
+        "/programs/executive-master-in-cybersecurity",
+        "/programs/master-in-information-technology",
+        "/programs/master-of-computer-information-systems",
+        "/programs/master-of-science-in-computer-science",
+        "/programs/professional-master-in-artificial-intelligence"
+      ],
+      "pages_checked": 1
+    },
+    "RI": {
+      "official_count": 0,
+      "paths": [],
+      "pages_checked": 1
+    },
+    "LA": {
+      "official_count": 5,
+      "paths": [
+        "/programs/academic-general-master-of-public-law",
+        "/programs/bachelors-degree-in-law",
+        "/programs/higher-diploma-in-administrative-law",
+        "/programs/master-of-private-law",
+        "/programs/masters-in-law-and-professional-practice"
+      ],
+      "pages_checked": 1
+    },
+    "MS": {
+      "official_count": 5,
+      "paths": [
+        "/programs/bachelor-of-supply-chains-maritime-business",
+        "/programs/bachelor-of-the-marine-surveying",
+        "/programs/marine-engineering",
+        "/programs/masters-degree-in-hydrographic-surveying",
+        "/programs/nautical-science"
+      ],
+      "pages_checked": 1
+    },
+    "PR": {
+      "official_count": 0,
+      "paths": [],
+      "pages_checked": 1
+    },
+    "TU": {
+      "official_count": 6,
+      "paths": [
+        "/programs/associate-diploma-in-culinary-arts",
+        "/programs/bachelor-event-management",
+        "/programs/bachelor-of-hospitality-management",
+        "/programs/bachelor-of-travel-and-tourism-management",
+        "/programs/executive-master-in-event-management",
+        "/programs/master-of-hajj-and-umrah-services-management"
+      ],
+      "pages_checked": 1
+    },
+    "PH": {
+      "official_count": 0,
+      "paths": [],
+      "pages_checked": 1
+    },
+    "MD": {
+      "official_count": 1,
+      "paths": [
+        "/programs/bachelors-degree-in-medicine-and-surgery"
+      ],
+      "pages_checked": 1
+    },
+    "RM": {
+      "official_count": 1,
+      "paths": [
+        "/programs/bachelor-of-medicine-and-surgery-mbbs"
+      ],
+      "pages_checked": 1
+    },
+    "SC": {
+      "official_count": 4,
+      "paths": [
+        "/programs/bachelors-program-of-biochemistry",
+        "/programs/doctor-of-philosophy-in-statistics",
+        "/programs/master-in-biochemistry",
+        "/programs/phd-in-biochemistry"
+      ],
+      "pages_checked": 1
+    },
+    "FE": {
+      "official_count": 14,
+      "paths": [
+        "/programs/bachelor-of-science-in-arid-land-agricultural-general-program",
+        "/programs/bachelor-of-science-in-arid-land-agricultural-renewable-natural-resources",
+        "/programs/bachelor-of-science-in-environment",
+        "/programs/bachelor-of-science-in-hydrology-and-water-resources-management",
+        "/programs/bachelor-of-science-in-meteorology",
+        "/programs/doctor-of-philosophy-in-hydrology-and-water-resources-management",
+        "/programs/doctor-of-philosophy-in-meteorology",
+        "/programs/executive-master-in-environmental-health-and-safety",
+        "/programs/master-in-arid-land-agriculture",
+        "/programs/master-of-science-in-environmental-science",
+        "/programs/master-of-science-in-hydrology-and-water-resources-management",
+        "/programs/master-of-science-in-meteorology",
+        "/programs/phds-degree-in-arid-land-agriculture",
+        "/programs/phds-degree-in-environmental-science"
+      ],
+      "pages_checked": 1
+    },
+    "AM": {
+      "official_count": 7,
+      "paths": [
+        "/programs/bachelor-of-clinical-nutrition",
+        "/programs/clinical-psychohlogy",
+        "/programs/master-of-medical-laboratry-technology",
+        "/programs/master-of-science-in-clinical-nutrition",
+        "/programs/master-of-science-in-radiologic-sciences",
+        "/programs/medical-laboratory-sciences",
+        "/programs/radiologic-sciences"
+      ],
+      "pages_checked": 1
+    },
+    "RA": {
+      "official_count": 2,
+      "paths": [
+        "/programs/bachelor-of-medical-laboratories-science",
+        "/programs/bachelor-of-science-in-nursing"
+      ],
+      "pages_checked": 1
+    },
+    "RS": {
+      "official_count": 1,
+      "paths": [
+        "/programs/english"
+      ],
+      "pages_checked": 1
+    },
+    "AP": {
+      "official_count": 4,
+      "paths": [
+        "/programs/bachelor-of-architecture",
+        "/programs/bachelor-of-landscape-architecture",
+        "/programs/master-of-architecture-department",
+        "/programs/master-of-landscape-architecture-department"
+      ],
+      "pages_checked": 1
+    },
+    "EN": {
+      "official_count": 17,
+      "paths": [
+        "/programs/bachelor-of-science-in-chemical-engineering",
+        "/programs/bachelor-of-science-in-nuclear-engineering",
+        "/programs/bachelor-of-science-in-nuclear-engineering-medical-physics",
+        "/programs/bachelor-of-science-in-nuclear-engineering-radiation-protection",
+        "/programs/civil-engineering-bachelor-of-science",
+        "/programs/electrical-engineering-biomedical-bachelor-of-science",
+        "/programs/electrical-engineering-computer-bachelor-of-science",
+        "/programs/electrical-engineering-electronics-and-communications-bachelor-of-science",
+        "/programs/electrical-engineering-power-and-machines-bachelor-of-science",
+        "/programs/industrial-engineering-bachelor-of-science",
+        "/programs/master-of-science-in-engineering-management",
+        "/programs/master-of-science-in-industrial-engineering",
+        "/programs/master-of-science-in-nuclear-engineering",
+        "/programs/mechanical-engineering-aeronautical-bachelor-of-science",
+        "/programs/mechanical-engineering-production-and-mechanical-systems-design-bachelor-of-science",
+        "/programs/mechanical-engineering-thermal-engineering-and-desalination-technology-bachelor-of-science",
+        "/programs/mining-engineering-bachelor-of-science"
+      ],
+      "pages_checked": 2
+    },
+    "RE": {
+      "official_count": 6,
+      "paths": [
+        "/programs/architectural-engineering",
+        "/programs/chemical-and-materials-engineering",
+        "/programs/civil-and-environmental-engineering",
+        "/programs/electrical-engineering",
+        "/programs/industrial-engineering",
+        "/programs/mechanical-engineering"
+      ],
+      "pages_checked": 1
+    },
+    "EV": {
+      "official_count": 0,
+      "paths": [],
+      "pages_checked": 1
+    },
+    "DN": {
+      "official_count": 6,
+      "paths": [
+        "/programs/doctor-of-philosophy-in-pediatric-dentistry",
+        "/programs/master-of-science-in-dental-public-health",
+        "/programs/master-of-science-in-endodontics",
+        "/programs/master-of-science-in-pediatric-dentistry",
+        "/programs/masters-of-science-in-prosthodontics",
+        "/programs/msc-in-orthodontics"
+      ],
+      "pages_checked": 1
+    },
+    "ER": {
+      "official_count": 11,
+      "paths": [
+        "/programs/associate-diploma-in-crisis-and-disaster-management",
+        "/programs/bachelor-mineral-resources-and-rocks",
+        "/programs/bachelor-of-general-geology-structural-geology-and-remot-sensing",
+        "/programs/bachelor-of-petroleum-geology-and-sedimentology",
+        "/programs/bachelor-of-science-in-engineering-and-environmental-geology",
+        "/programs/executive-masters-in-crisis-and-disaster-management",
+        "/programs/geo-exploration-techniques",
+        "/programs/geophysics",
+        "/programs/hydrogeology-bsc",
+        "/programs/master-of-science-in-engineering-and-environmental-geology",
+        "/programs/masters-in-geophysics-by-coursework-and-research-project"
+      ],
+      "pages_checked": 1
+    },
+    "HD": {
+      "official_count": 12,
+      "paths": [
+        "/programs/bacheior-interior-design-and-furniture",
+        "/programs/bachelor-fashion-and-textile-technology",
+        "/programs/bachelor-of-fashion-industry-for-individuals-with-severe-hearing-disabilities",
+        "/programs/department-of-early-childhood-guide",
+        "/programs/doctor-of-philosophy-phd-in-fashion-and-textiles",
+        "/programs/early-childhood-education",
+        "/programs/family-science",
+        "/programs/food-and-nutrition",
+        "/programs/master-of-science-in-family-sciences-msc-in-family-sciences",
+        "/programs/master-of-science-in-fashion-and-textile-msc-in-fashion-and-textile",
+        "/programs/master-of-science-in-spatial-design-msc-in-spatial-design",
+        "/programs/master-of-science-msc-in-food-and-nutritional-sciences"
+      ],
+      "pages_checked": 1
+    },
+    "MR": {
+      "official_count": 7,
+      "paths": [
+        "/programs/masters-in-marine-chemistry",
+        "/programs/masters-in-marine-geology",
+        "/programs/masters-in-marine-physics",
+        "/programs/phd-in-marine-biology",
+        "/programs/phd-in-marine-chemistry",
+        "/programs/phd-in-marine-geology",
+        "/programs/phd-in-marine-physics"
+      ],
+      "pages_checked": 1
+    },
+    "RH": {
+      "official_count": 6,
+      "paths": [
+        "/programs/department-of-occupational-therapy",
+        "/programs/department-of-physical-therapy-graduate-program",
+        "/programs/department-of-prosthetics-and-orthotics",
+        "/programs/physical-therapy-department",
+        "/programs/respiratory-therapy-department",
+        "/programs/speech-language-pathology-and-audiology"
+      ],
+      "pages_checked": 1
+    },
+    "IE": {
+      "official_count": 1,
+      "paths": [
+        "/programs/the-master-of-science-in-islamic-finance"
+      ],
+      "pages_checked": 1
+    },
+    "PK": {
+      "official_count": 1,
+      "paths": [
+        "/programs/executive-master-of-science-in-moderation-and-intellectual-security"
+      ],
+      "pages_checked": 1
+    },
+    "EI": {
+      "official_count": 1,
+      "paths": [
+        "/programs/master-of-teaching-english-to-speakers-of-other-languages-ma-tesol"
+      ],
+      "pages_checked": 1
+    },
+    "AI": {
+      "official_count": 2,
+      "paths": [
+        "/programs/arabic-language-diploma-for-non-native-speakers",
+        "/programs/masters-in-arabic-for-non-native-speakers"
+      ],
+      "pages_checked": 1
+    }
+  },
+  "unresolved_faculties": {
+    "PR": {
+      "status": "verified_non_degree_unit",
+      "checked_at": "2026-07-16T13:44:43Z",
+      "pages_checked": [
+        "https://kau.edu.sa/en/programs?faculty_code=PR",
+        "https://kau.edu.sa/ar/programs?faculty_code=PR"
+      ],
+      "note_en": "The official filter returns no programs; Preparatory Year is retained as a non-degree unit.",
+      "note_ar": "لا يعرض المرشح الرسمي برامج، والسنة التحضيرية محفوظة كوحدة غير مانحة لدرجة مستقلة."
+    },
+    "EV": {
+      "status": "confirmed_legacy_alias",
+      "checked_at": "2026-07-16T13:44:43Z",
+      "pages_checked": [
+        "https://kau.edu.sa/en/programs?faculty_code=EV",
+        "https://kau.edu.sa/ar/programs?faculty_code=EV",
+        "https://kau.edu.sa/faculty/en/architecture-planning"
+      ],
+      "note_en": "The official dropdown retains this former faculty name; KAU confirms it was renamed Faculty of Architecture and Planning in 2020, so programs remain under AP rather than this legacy EV filter.",
+      "note_ar": "تحتفظ القائمة الرسمية بهذا الاسم السابق؛ وتؤكد الجامعة تغيير الاسم إلى كلية العمارة والتخطيط عام 2020، لذلك تبقى البرامج تحت AP لا مرشح EV القديم."
+    }
+  },
+  "pages_checked": [
+    {
+      "url": "https://kau.edu.sa/en/programs",
+      "cache": "data/raw/kau/catalog/en/central/en-programs.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=2",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-2.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=3",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-3.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=4",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-4.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=5",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-5.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=6",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-6.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=7",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-7.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=8",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-8.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=9",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-9.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=10",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-10.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=11",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-11.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=12",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-12.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=13",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-13.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=14",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-14.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?page=15",
+      "cache": "data/raw/kau/catalog/en/central/en-programs-page-15.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=2",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-2.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=3",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-3.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=4",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-4.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=5",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-5.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=6",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-6.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=7",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-7.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=8",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-8.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=9",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-9.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=10",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-10.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=11",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-11.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=12",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-12.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=13",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-13.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=14",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-14.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/ar/programs?page=15",
+      "cache": "data/raw/kau/catalog/ar/central/ar-programs-page-15.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=CM",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-CM.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=AH",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-AH.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=AH&page=2",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-AH-page-2.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=RB",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-RB.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=EA",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-EA.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=EA&page=2",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-EA-page-2.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=ED",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-ED.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=AL",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-AL.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=NR",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-NR.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=IT",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-IT.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=RI",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-RI.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=LA",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-LA.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=MS",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-MS.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=PR",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-PR.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=TU",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-TU.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=PH",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-PH.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=MD",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-MD.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=RM",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-RM.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=SC",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-SC.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=FE",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-FE.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=AM",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-AM.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=RA",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-RA.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=RS",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-RS.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=AP",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-AP.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=EN",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-EN.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=EN&page=2",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-EN-page-2.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=RE",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-RE.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=EV",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-EV.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=DN",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-DN.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=ER",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-ER.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=HD",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-HD.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=MR",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-MR.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=RH",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-RH.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=IE",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-IE.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=PK",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-PK.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=EI",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-EI.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/programs?faculty_code=AI",
+      "cache": "data/raw/kau/catalog/en/faculties/en-programs-faculty-code-AI.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/faculty/ar/computing-it-rabigh",
+      "cache": "data/raw/kau/catalog/ar/supplemental/faculty-ar-computing-it-rabigh.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/faculty/en/computing-it-rabigh",
+      "cache": "data/raw/kau/catalog/en/supplemental/faculty-en-computing-it-rabigh.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/faculty/ar/education/page/department-of-special-education",
+      "cache": "data/raw/kau/catalog/ar/supplemental/faculty-ar-education-page-department-of-special-education.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/faculty/en/education/page/department-of-special-education",
+      "cache": "data/raw/kau/catalog/en/supplemental/faculty-en-education-page-department-of-special-education.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/faculty/ar/education/page/department-of%20psychology",
+      "cache": "data/raw/kau/catalog/ar/supplemental/faculty-ar-education-page-department-of-20psychology.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/faculty/en/education/page/department-of%20psychology",
+      "cache": "data/raw/kau/catalog/en/supplemental/faculty-en-education-page-department-of-20psychology.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/en/student-achievement/80e897dc-bcf4-444c-9f14-cfc67c008b03",
+      "cache": "data/raw/kau/catalog/en/supplemental/en-student-achievement-80e897dc-bcf4-444c-9f14-cfc67c008b03.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/faculty/ar/pharmacy",
+      "cache": "data/raw/kau/catalog/ar/supplemental/faculty-ar-pharmacy.html",
+      "status": "cached"
+    },
+    {
+      "url": "https://kau.edu.sa/faculty/en/pharmacy",
+      "cache": "data/raw/kau/catalog/en/supplemental/faculty-en-pharmacy.html",
+      "status": "cached"
+    }
+  ]
+}

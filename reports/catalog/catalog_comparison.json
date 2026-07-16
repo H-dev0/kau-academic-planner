@@ -1,0 +1,1679 @@
+{
+  "generated_at": "2026-07-16T13:44:43Z",
+  "faculties_before": 34,
+  "faculties_after": 34,
+  "programs_before": 67,
+  "programs_after": 223,
+  "new_faculties": [],
+  "new_programs": [
+    {
+      "id": "catalog-bachelor-of-journalism-and-digital-media-program",
+      "faculty_id": "CM",
+      "name_ar": "برنامج بكالوريوس الصحافة والإعلام الرقمي",
+      "name_en": "Bachelor of Journalism and Digital Media Program",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-journalism-and-digital-media-program",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-of-journalism-and-digital-media-program"
+    },
+    {
+      "id": "catalog-bachelor-of-marketing-communication-program",
+      "faculty_id": "CM",
+      "name_ar": "برنامج بكالوريوس الاتصال التسويقي",
+      "name_en": "Bachelor of Marketing Communication Program",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-marketing-communication-program",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-of-marketing-communication-program"
+    },
+    {
+      "id": "catalog-bachelor-of-public-relations-program",
+      "faculty_id": "CM",
+      "name_ar": "برنامج بكالوريوس العلاقات العامة",
+      "name_en": "Bachelor of Public Relations Program",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-public-relations-program",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-of-public-relations-program"
+    },
+    {
+      "id": "catalog-bachelor-of-visual-and-audio-production-program",
+      "faculty_id": "CM",
+      "name_ar": "برنامج بكالوريوس الإنتاج المرئي والمسموع",
+      "name_en": "Bachelor of Visual and Audio Production Program",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-visual-and-audio-production-program",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-of-visual-and-audio-production-program"
+    },
+    {
+      "id": "catalog-doctor-of-philosophy-phd-in-communication-and-media",
+      "faculty_id": "CM",
+      "name_ar": "برنامج دكتوراه الفلسفة في الاتصال والإعلام",
+      "name_en": "Doctor of Philosophy (PhD) in Communication and Media",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/doctor-of-philosophy-phd-in-communication-and-media",
+      "source_url_en": "https://kau.edu.sa/en/programs/doctor-of-philosophy-phd-in-communication-and-media"
+    },
+    {
+      "id": "catalog-executive-master-in-digital-media",
+      "faculty_id": "CM",
+      "name_ar": "برنامج الماجستيرالتنفيذي في الإعلام الرقمي",
+      "name_en": "Executive Master in Digital Media",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/executive-master-in-digital-media",
+      "source_url_en": "https://kau.edu.sa/en/programs/executive-master-in-digital-media"
+    },
+    {
+      "id": "catalog-professional-master-in-public-relations",
+      "faculty_id": "CM",
+      "name_ar": "برنامج الماجستيرالمهني في العلاقات العامة",
+      "name_en": "Professional Master in Public Relations",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/professional-master-in-public-relations",
+      "source_url_en": "https://kau.edu.sa/en/programs/professional-master-in-public-relations"
+    },
+    {
+      "id": "catalog-academic-masters-program-in-communication-and-media",
+      "faculty_id": "CM",
+      "name_ar": "الماجستير الأكاديمي في الاتصال والإعلام",
+      "name_en": "Academic Master's Program in Communication and Media",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/academic-masters-program-in-communication-and-media",
+      "source_url_en": "https://kau.edu.sa/en/programs/academic-masters-program-in-communication-and-media"
+    },
+    {
+      "id": "catalog-bachelor-in-french-language-translation",
+      "faculty_id": "AH",
+      "name_ar": "البكالوريوس في اللغة الفرنسية والترجمة",
+      "name_en": "Bachelor in French Language & Translation",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-in-french-language-translation",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-in-french-language-translation"
+    },
+    {
+      "id": "catalog-chinese-language",
+      "faculty_id": "AH",
+      "name_ar": "البكالوريوس في اللغة الصينية",
+      "name_en": "Bachelor of Chinese Language",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/chinese-language",
+      "source_url_en": "https://kau.edu.sa/en/programs/chinese-language"
+    },
+    {
+      "id": "catalog-counseling-psychology",
+      "faculty_id": "AH",
+      "name_ar": "البكالوريوس في علم النفس الإرشادي",
+      "name_en": "Bachelor of Counseling Psychology",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/counseling-psychology",
+      "source_url_en": "https://kau.edu.sa/en/programs/counseling-psychology"
+    },
+    {
+      "id": "catalog-geography-and-geographic-information-systems",
+      "faculty_id": "AH",
+      "name_ar": "البكالوريوس في الجغرافيا ونظم المعلومات الجغرافية",
+      "name_en": "Bachelor of Geography and Geographic Information Systems",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/geography-and-geographic-information-systems",
+      "source_url_en": "https://kau.edu.sa/en/programs/geography-and-geographic-information-systems"
+    },
+    {
+      "id": "catalog-bachelor-of-sharia",
+      "faculty_id": "AH",
+      "name_ar": "البكالوريوس في الشريعة",
+      "name_en": "Bachelor of Sharia",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-sharia",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-of-sharia"
+    },
+    {
+      "id": "catalog-associate-diploma-in-tourism-guidance",
+      "faculty_id": "AH",
+      "name_ar": "الدبلوم المشارك في الإرشاد السياحي",
+      "name_en": "Associate Diploma in Tourism Guidance",
+      "degree_level": "diploma",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/associate-diploma-in-tourism-guidance",
+      "source_url_en": "https://kau.edu.sa/en/programs/associate-diploma-in-tourism-guidance"
+    },
+    {
+      "id": "catalog-phd-in-arabic-language",
+      "faculty_id": "AH",
+      "name_ar": "الدكتوراه في اللغة العربية",
+      "name_en": "PHD in Arabic Language",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-in-arabic-language",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-in-arabic-language"
+    },
+    {
+      "id": "catalog-phd-in-history",
+      "faculty_id": "AH",
+      "name_ar": "الدكتوراه في التاريخ",
+      "name_en": "PHD in History",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-in-history",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-in-history"
+    },
+    {
+      "id": "catalog-phd-in-islamic-creed",
+      "faculty_id": "AH",
+      "name_ar": "الدكتوراه في العقيدة",
+      "name_en": "PHD in Islamic Creed (Aqidah)",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-in-islamic-creed",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-in-islamic-creed"
+    },
+    {
+      "id": "catalog-phd-of-sharia-islamic-studies",
+      "faculty_id": "AH",
+      "name_ar": "الدكتوراه في الدراسات القضائية",
+      "name_en": "PhD in Judicial Studies",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-of-sharia-islamic-studies",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-of-sharia-islamic-studies"
+    },
+    {
+      "id": "catalog-phd-in-psychology",
+      "faculty_id": "AH",
+      "name_ar": "الدكتوراه في علم النفس",
+      "name_en": "PHD in Psychology",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-in-psychology",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-in-psychology"
+    },
+    {
+      "id": "catalog-phd-in-sociology",
+      "faculty_id": "AH",
+      "name_ar": "الدكتوراه في علم الاجتماع والخدمة الاجتماعية",
+      "name_en": "PHD in Sociology",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-in-sociology",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-in-sociology"
+    },
+    {
+      "id": "catalog-phd-of-quran-sunnah",
+      "faculty_id": "AH",
+      "name_ar": "دكتوراه الفلسفة في الكتاب والسنة",
+      "name_en": "PhD in the Qur'an and Sunnah Sciences",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-of-quran-sunnah",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-of-quran-sunnah"
+    },
+    {
+      "id": "catalog-phd-of-fiqh-principles",
+      "faculty_id": "AH",
+      "name_ar": "الدكتوراه في أصول الفقه",
+      "name_en": "PhD in Usul al-Fiqh (Principles of Islamic Jurisprudence)",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-of-fiqh-principles",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-of-fiqh-principles"
+    },
+    {
+      "id": "catalog-literary-in-english-language",
+      "faculty_id": "AH",
+      "name_ar": "البكالوريوس في اللغة الانجليزية",
+      "name_en": "Bachelor in English Language",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/literary-in-english-language",
+      "source_url_en": "https://kau.edu.sa/en/programs/literary-in-english-language"
+    },
+    {
+      "id": "catalog-master-in-applied-linguistics",
+      "faculty_id": "AH",
+      "name_ar": "الماجستير في اللغويات التطبيقية",
+      "name_en": "Master in Applied Linguistics",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-in-applied-linguistics",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-in-applied-linguistics"
+    },
+    {
+      "id": "catalog-master-of-arabic-language",
+      "faculty_id": "AH",
+      "name_ar": "الماجستير في اللغة العربية",
+      "name_en": "Master of Arabic Language",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-arabic-language",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-arabic-language"
+    },
+    {
+      "id": "catalog-master-of-geography",
+      "faculty_id": "AH",
+      "name_ar": "الماجستير في الجغرافيا",
+      "name_en": "Master of Geography",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-geography",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-geography"
+    },
+    {
+      "id": "catalog-master-of-history",
+      "faculty_id": "AH",
+      "name_ar": "الماجستير في التاريخ",
+      "name_en": "Master of History",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-history",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-history"
+    },
+    {
+      "id": "catalog-master-of-information-management",
+      "faculty_id": "AH",
+      "name_ar": "الماجستير في إدارة المعلومات",
+      "name_en": "Master of Information Management",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-information-management",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-information-management"
+    },
+    {
+      "id": "catalog-psychology",
+      "faculty_id": "AH",
+      "name_ar": "الماجستير في علم النفس",
+      "name_en": "Master of Psychology",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/psychology",
+      "source_url_en": "https://kau.edu.sa/en/programs/psychology"
+    },
+    {
+      "id": "catalog-master-of-sharia-islamic-studies",
+      "faculty_id": "AH",
+      "name_ar": "الماجستير في الدراسات القضائية",
+      "name_en": "Master of Sharia & Islamic Studies",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-sharia-islamic-studies",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-sharia-islamic-studies"
+    },
+    {
+      "id": "catalog-master-of-fiqh-principles",
+      "faculty_id": "AH",
+      "name_ar": "الماجستير في الفقه وأصوله",
+      "name_en": "Master's Program in Fiqh and Usul al-Fiqh",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-fiqh-principles",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-fiqh-principles"
+    },
+    {
+      "id": "catalog-master-in-islamic-creed",
+      "faculty_id": "AH",
+      "name_ar": "الماجستير في العقيدة",
+      "name_en": "Master's Program in Islamic Creed (Aqidah)",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-in-islamic-creed",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-in-islamic-creed"
+    },
+    {
+      "id": "catalog-master-of-quran-sunnah",
+      "faculty_id": "AH",
+      "name_ar": "الماجستير في الكتاب والسنة",
+      "name_en": "Master's Program in the Qur'an and Sunnah Sciences",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-quran-sunnah",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-quran-sunnah"
+    },
+    {
+      "id": "catalog-phd-of-fiqh",
+      "faculty_id": "AH",
+      "name_ar": "دكتوراه الفلسفة في الفقه",
+      "name_en": "PhD in Islamic Jurisprudence (Fiqh)",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-of-fiqh",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-of-fiqh"
+    },
+    {
+      "id": "catalog-human-resource-management",
+      "faculty_id": "RB",
+      "name_ar": "بكالوريوس إدارة الموارد البشرية",
+      "name_en": "HUMAN RESOURCE MANAGEMENT",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/human-resource-management",
+      "source_url_en": "https://kau.edu.sa/en/programs/human-resource-management"
+    },
+    {
+      "id": "catalog-law",
+      "faculty_id": "RB",
+      "name_ar": "بكالوريوس القانون",
+      "name_en": "LAW",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/law",
+      "source_url_en": "https://kau.edu.sa/en/programs/law"
+    },
+    {
+      "id": "catalog-markting",
+      "faculty_id": "RB",
+      "name_ar": "بكالوريوس  التسويق",
+      "name_en": "MARKTING",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/markting",
+      "source_url_en": "https://kau.edu.sa/en/programs/markting"
+    },
+    {
+      "id": "catalog-political-science",
+      "faculty_id": "EA",
+      "name_ar": "بكالوريوس العلوم السياسية",
+      "name_en": "Political Science",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/political-science",
+      "source_url_en": "https://kau.edu.sa/en/programs/political-science"
+    },
+    {
+      "id": "catalog-doctor-of-philosophy-in-business-administration",
+      "faculty_id": "EA",
+      "name_ar": "دكتوراه الفلسفة في ادارة الاعمال",
+      "name_en": "Doctor of Philosophy in Business Administration",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/doctor-of-philosophy-in-business-administration",
+      "source_url_en": "https://kau.edu.sa/en/programs/doctor-of-philosophy-in-business-administration"
+    },
+    {
+      "id": "catalog-doctor-of-philosophy-in-health-administration",
+      "faculty_id": "EA",
+      "name_ar": "دكتوراه الفلسفة في الإدارة الصحية",
+      "name_en": "Doctor of Philosophy in Health Administration",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/doctor-of-philosophy-in-health-administration",
+      "source_url_en": "https://kau.edu.sa/en/programs/doctor-of-philosophy-in-health-administration"
+    },
+    {
+      "id": "catalog-phd-in-accounting",
+      "faculty_id": "EA",
+      "name_ar": "دكتوراة الفلسفة في المحاسبة",
+      "name_en": "Ph.D. in Accounting",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-in-accounting",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-in-accounting"
+    },
+    {
+      "id": "catalog-phd-in-economics",
+      "faculty_id": "EA",
+      "name_ar": "دكتوراه الفلسفة في الاقتصاد",
+      "name_en": "Ph.D. in Economics",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-in-economics",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-in-economics"
+    },
+    {
+      "id": "catalog-business-economics",
+      "faculty_id": "EA",
+      "name_ar": "ماجستير ‏اقتصاديات الأعمال التنفيذي",
+      "name_en": "Business Economics",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/business-economics",
+      "source_url_en": "https://kau.edu.sa/en/programs/business-economics"
+    },
+    {
+      "id": "catalog-executive-master-in-human-resource-management",
+      "faculty_id": "EA",
+      "name_ar": "الماجستير التنفيذي في إدارة الموارد البشرية",
+      "name_en": "Executive Master in Human Resource Management",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/executive-master-in-human-resource-management",
+      "source_url_en": "https://kau.edu.sa/en/programs/executive-master-in-human-resource-management"
+    },
+    {
+      "id": "catalog-executive-master-in-internal-auditing",
+      "faculty_id": "EA",
+      "name_ar": "الماجستير التنفيذي في المراجعة الداخلية",
+      "name_en": "Executive Master in Internal Auditing",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/executive-master-in-internal-auditing",
+      "source_url_en": "https://kau.edu.sa/en/programs/executive-master-in-internal-auditing"
+    },
+    {
+      "id": "catalog-executive-master-in-public-policy",
+      "faculty_id": "EA",
+      "name_ar": "ماجستير السياسة العامة التنفيذي",
+      "name_en": "Executive Master in Public Policy",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/executive-master-in-public-policy",
+      "source_url_en": "https://kau.edu.sa/en/programs/executive-master-in-public-policy"
+    },
+    {
+      "id": "catalog-executive-master-of-business-administration",
+      "faculty_id": "EA",
+      "name_ar": "ماجستير ادارة الأعمال التنفيذي",
+      "name_en": "Executive Master of Business Administration",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/executive-master-of-business-administration",
+      "source_url_en": "https://kau.edu.sa/en/programs/executive-master-of-business-administration"
+    },
+    {
+      "id": "catalog-executive-master-of-health-administration-emha",
+      "faculty_id": "EA",
+      "name_ar": "الماجستير التنفيذي في الإدارة الصحية",
+      "name_en": "Executive Master of Health Administration (EMHA)",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/executive-master-of-health-administration-emha",
+      "source_url_en": "https://kau.edu.sa/en/programs/executive-master-of-health-administration-emha"
+    },
+    {
+      "id": "catalog-executive-master-of-science-msc-in-strategic-marketing",
+      "faculty_id": "EA",
+      "name_ar": "ماجستير العلوم التنفيذي في التسويق الاستراتيجي",
+      "name_en": "Executive Master of Science (MSc) in Strategic Marketing",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/executive-master-of-science-msc-in-strategic-marketing",
+      "source_url_en": "https://kau.edu.sa/en/programs/executive-master-of-science-msc-in-strategic-marketing"
+    },
+    {
+      "id": "catalog-information-systems-management-and-digitalization",
+      "faculty_id": "EA",
+      "name_ar": "ماجستير إدارة نظم المعلومات والرقمنة التنفيذي",
+      "name_en": "Information Systems Management and Digitalization",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/information-systems-management-and-digitalization",
+      "source_url_en": "https://kau.edu.sa/en/programs/information-systems-management-and-digitalization"
+    },
+    {
+      "id": "catalog-master-of-applied-finance-and-investment",
+      "faculty_id": "EA",
+      "name_ar": "ماجستير التمويل والاستثمار التطبيقي",
+      "name_en": "Master of Applied Finance and Investment",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-applied-finance-and-investment",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-applied-finance-and-investment"
+    },
+    {
+      "id": "catalog-master-of-professional-accounting",
+      "faculty_id": "EA",
+      "name_ar": "الماجستير في المحاسبة المهنية",
+      "name_en": "Master Of Professional Accounting",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-professional-accounting",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-professional-accounting"
+    },
+    {
+      "id": "catalog-the-executive-master-of-public-administration",
+      "faculty_id": "EA",
+      "name_ar": "ماجستير الإدارة العامة التنفيذي",
+      "name_en": "The Executive Master of Public Administration",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/the-executive-master-of-public-administration",
+      "source_url_en": "https://kau.edu.sa/en/programs/the-executive-master-of-public-administration"
+    },
+    {
+      "id": "catalog-master-of-business-administration-mba",
+      "faculty_id": "EA",
+      "name_ar": "ماجستير ادارة الأعمال الأكاديمي",
+      "name_en": "Master of Business Administration (MBA)",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-business-administration-mba",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-business-administration-mba"
+    },
+    {
+      "id": "catalog-master-of-public-administration-mpa",
+      "faculty_id": "EA",
+      "name_ar": "ماجستير الإدارة العامة الأكاديمي",
+      "name_en": "Master of Public Administration (MPA)",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-public-administration-mpa",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-public-administration-mpa"
+    },
+    {
+      "id": "catalog-master-of-science-in-accounting",
+      "faculty_id": "EA",
+      "name_ar": "درجة الماجستير في العلوم  في المحاسبة",
+      "name_en": "Master of Science in Accounting",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-accounting",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-accounting"
+    },
+    {
+      "id": "catalog-master-of-science-in-health-services-and-hospital-administration-ms-hsha",
+      "faculty_id": "EA",
+      "name_ar": "ماجستير العلوم في إدارة الخدمات الصحية والمستشفيات",
+      "name_en": "Master of Science in Health Services and Hospital Administration (MS-HSHA)",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-health-services-and-hospital-administration-ms-hsha",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-health-services-and-hospital-administration-ms-hsha"
+    },
+    {
+      "id": "catalog-masters-in-academic-economics",
+      "faculty_id": "EA",
+      "name_ar": "ماجستير الاقتصاد الاكاديمي",
+      "name_en": "Master's in Academic Economics",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/masters-in-academic-economics",
+      "source_url_en": "https://kau.edu.sa/en/programs/masters-in-academic-economics"
+    },
+    {
+      "id": "ed-doctorate-psychological-educational-counseling",
+      "faculty_id": "ED",
+      "name_ar": "دكتوراه الإرشاد النفسي والتربوي",
+      "name_en": "PhD in Psychological and Educational Counseling",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/faculty/ar/education/page/department-of%20psychology",
+      "source_url_en": "https://kau.edu.sa/faculty/en/education/page/department-of%20psychology"
+    },
+    {
+      "id": "ed-professional-master-special-education",
+      "faculty_id": "ED",
+      "name_ar": "الماجستير المهني في التربية الخاصة",
+      "name_en": "Professional Master's Program in Special Education",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/faculty/ar/education/page/department-of-special-education",
+      "source_url_en": "https://kau.edu.sa/faculty/en/education/page/department-of-special-education"
+    },
+    {
+      "id": "ed-master-educational-guidance-counseling",
+      "faculty_id": "ED",
+      "name_ar": "ماجستير التوجيه والإرشاد التربوي",
+      "name_en": "Master's Program in Educational Guidance and Counseling",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/faculty/ar/education/page/department-of%20psychology",
+      "source_url_en": "https://kau.edu.sa/faculty/en/education/page/department-of%20psychology"
+    },
+    {
+      "id": "ed-master-special-education",
+      "faculty_id": "ED",
+      "name_ar": "ماجستير التربية الخاصة",
+      "name_en": "Master's Program in Special Education",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/faculty/ar/education/page/department-of-special-education",
+      "source_url_en": "https://kau.edu.sa/faculty/en/education/page/department-of-special-education"
+    },
+    {
+      "id": "catalog-associate-diploma-in-applications-development",
+      "faculty_id": "AL",
+      "name_ar": "الدبلوم المشارك في تطوير التطبيقات",
+      "name_en": "Associate Diploma in Applications Development",
+      "degree_level": "intermediate_diploma",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/associate-diploma-in-applications-development",
+      "source_url_en": "https://kau.edu.sa/en/programs/associate-diploma-in-applications-development"
+    },
+    {
+      "id": "catalog-associate-diploma-in-graphical-design",
+      "faculty_id": "AL",
+      "name_ar": "الدبلوم المشارك في التصميم الرقمي",
+      "name_en": "Associate Diploma in Graphical Design",
+      "degree_level": "intermediate_diploma",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/associate-diploma-in-graphical-design",
+      "source_url_en": "https://kau.edu.sa/en/programs/associate-diploma-in-graphical-design"
+    },
+    {
+      "id": "catalog-general-associate-diploma-in-digital-transformation",
+      "faculty_id": "AL",
+      "name_ar": "الدبلوم المشارك في التحول الرقمي",
+      "name_en": "General Associate Diploma in  Digital Transformation",
+      "degree_level": "intermediate_diploma",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/general-associate-diploma-in-digital-transformation",
+      "source_url_en": "https://kau.edu.sa/en/programs/general-associate-diploma-in-digital-transformation"
+    },
+    {
+      "id": "catalog-general-intermediate-diploma-in-applied-computing-and-network-technologies",
+      "faculty_id": "AL",
+      "name_ar": "الدبلوم المتوسط في الحوسبة التطبيقية وتقنيات الشبكات",
+      "name_en": "General Intermediate Diploma In Applied Computing and Network Technologies",
+      "degree_level": "intermediate_diploma",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/general-intermediate-diploma-in-applied-computing-and-network-technologies",
+      "source_url_en": "https://kau.edu.sa/en/programs/general-intermediate-diploma-in-applied-computing-and-network-technologies"
+    },
+    {
+      "id": "catalog-general-intermediate-diploma-in-law",
+      "faculty_id": "AL",
+      "name_ar": "الدبلوم المتوسط في القانون",
+      "name_en": "General Intermediate Diploma in Law",
+      "degree_level": "intermediate_diploma",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/general-intermediate-diploma-in-law",
+      "source_url_en": "https://kau.edu.sa/en/programs/general-intermediate-diploma-in-law"
+    },
+    {
+      "id": "catalog-intermediate-diploma-in-cybersecurity",
+      "faculty_id": "AL",
+      "name_ar": "الدبلوم المتوسط في الأمن السيبراني",
+      "name_en": "Intermediate Diploma in Cybersecurity",
+      "degree_level": "intermediate_diploma",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/intermediate-diploma-in-cybersecurity",
+      "source_url_en": "https://kau.edu.sa/en/programs/intermediate-diploma-in-cybersecurity"
+    },
+    {
+      "id": "catalog-intermediate-diploma-in-cybersecurity-distance",
+      "faculty_id": "AL",
+      "name_ar": "(عن بعد)الدبلوم المتوسط في الأمن السيبراني",
+      "name_en": "Intermediate Diploma in Cybersecurity (Distance)",
+      "degree_level": "intermediate_diploma",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/intermediate-diploma-in-cybersecurity-distance",
+      "source_url_en": "https://kau.edu.sa/en/programs/intermediate-diploma-in-cybersecurity-distance"
+    },
+    {
+      "id": "catalog-intermediate-diploma-in-data-science",
+      "faculty_id": "AL",
+      "name_ar": "الدبلوم المتوسط في علم البيانات",
+      "name_en": "Intermediate Diploma in Data Science",
+      "degree_level": "intermediate_diploma",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/intermediate-diploma-in-data-science",
+      "source_url_en": "https://kau.edu.sa/en/programs/intermediate-diploma-in-data-science"
+    },
+    {
+      "id": "catalog-master-of-nursing-science-public-health-nursing-community-health-nursing",
+      "faculty_id": "NR",
+      "name_ar": "ماجستيرعلوم التمريض في  تمريض صحة المجتمع",
+      "name_en": "Master of Nursing Science in Community Health Nursing",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-nursing-science-public-health-nursing-community-health-nursing",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-nursing-science-public-health-nursing-community-health-nursing"
+    },
+    {
+      "id": "catalog-master-of-nursing-science-in-critical-care-nursing",
+      "faculty_id": "NR",
+      "name_ar": "ماجستير علوم التمريض في تمريض العناية الحرجة",
+      "name_en": "Master of Nursing Science in Critical Care Nursing",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-nursing-science-in-critical-care-nursing",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-nursing-science-in-critical-care-nursing"
+    },
+    {
+      "id": "catalog-master-of-nursing-science",
+      "faculty_id": "NR",
+      "name_ar": "برنامج الماجستير في علوم التمريض",
+      "name_en": "Master of Science Nursing Program (MSN)",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-nursing-science",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-nursing-science"
+    },
+    {
+      "id": "catalog-bachelor-of-science-in-computer-science",
+      "faculty_id": "IT",
+      "name_ar": "بكالوريوس العلوم في علوم الحاسبات",
+      "name_en": "Bachelor of Science in Computer Science",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-science-in-computer-science",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-of-science-in-computer-science"
+    },
+    {
+      "id": "catalog-bachelor-of-science-in-cybersecurity",
+      "faculty_id": "IT",
+      "name_ar": "بكالوريوس العلوم في الامن السيبراني",
+      "name_en": "Bachelor of Science in Cybersecurity",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-science-in-cybersecurity",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-of-science-in-cybersecurity"
+    },
+    {
+      "id": "catalog-doctor-of-philosophy-in-computer-information-systems",
+      "faculty_id": "IT",
+      "name_ar": "الدكتوراه في نظم المعلومات",
+      "name_en": "Doctor of Philosophy in Computer Information Systems",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/doctor-of-philosophy-in-computer-information-systems",
+      "source_url_en": "https://kau.edu.sa/en/programs/doctor-of-philosophy-in-computer-information-systems"
+    },
+    {
+      "id": "catalog-doctor-of-philosophy-in-computer-science",
+      "faculty_id": "IT",
+      "name_ar": "الدكتوراه في علوم الحاسبات",
+      "name_en": "Doctor of Philosophy in Computer Science",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/doctor-of-philosophy-in-computer-science",
+      "source_url_en": "https://kau.edu.sa/en/programs/doctor-of-philosophy-in-computer-science"
+    },
+    {
+      "id": "catalog-doctor-of-philosophy-in-information-technology",
+      "faculty_id": "IT",
+      "name_ar": "الدكتوراه في تقنية المعلومات",
+      "name_en": "Doctor of Philosophy in Information Technology",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/doctor-of-philosophy-in-information-technology",
+      "source_url_en": "https://kau.edu.sa/en/programs/doctor-of-philosophy-in-information-technology"
+    },
+    {
+      "id": "catalog-executive-master-in-cybersecurity",
+      "faculty_id": "IT",
+      "name_ar": "الماجستير التنفيذي في الأمن السيبراني",
+      "name_en": "Executive Master of Science in Cybersecurity",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/executive-master-in-cybersecurity",
+      "source_url_en": "https://kau.edu.sa/en/programs/executive-master-in-cybersecurity"
+    },
+    {
+      "id": "catalog-professional-master-in-artificial-intelligence",
+      "faculty_id": "IT",
+      "name_ar": "الماجستير المهني في الذكاء الاصطناعي",
+      "name_en": "Professional Master of Science in Artificial Intelligence",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/professional-master-in-artificial-intelligence",
+      "source_url_en": "https://kau.edu.sa/en/programs/professional-master-in-artificial-intelligence"
+    },
+    {
+      "id": "catalog-master-of-science-in-computer-science",
+      "faculty_id": "IT",
+      "name_ar": "ماجستير العلوم في علوم الحاسبات",
+      "name_en": "Master of Science in Computer Science",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-computer-science",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-computer-science"
+    },
+    {
+      "id": "catalog-master-of-computer-information-systems",
+      "faculty_id": "IT",
+      "name_ar": "ماجستير العلوم في نظم المعلومات الحاسوبية",
+      "name_en": "Master of Science in Information Systems",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-computer-information-systems",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-computer-information-systems"
+    },
+    {
+      "id": "catalog-master-in-information-technology",
+      "faculty_id": "IT",
+      "name_ar": "ماجستير العلوم في تقنية المعلومات",
+      "name_en": "Master of Science in Information Technology",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-in-information-technology",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-in-information-technology"
+    },
+    {
+      "id": "ri-bachelor-computer-science",
+      "faculty_id": "RI",
+      "name_ar": "بكالوريوس علوم الحاسبات",
+      "name_en": "Bachelor of Computer Science",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/faculty/ar/computing-it-rabigh",
+      "source_url_en": "https://kau.edu.sa/faculty/en/computing-it-rabigh"
+    },
+    {
+      "id": "ri-bachelor-information-systems",
+      "faculty_id": "RI",
+      "name_ar": "بكالوريوس نظم المعلومات",
+      "name_en": "Bachelor of Information Systems",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/faculty/ar/computing-it-rabigh",
+      "source_url_en": "https://kau.edu.sa/faculty/en/computing-it-rabigh"
+    },
+    {
+      "id": "ri-bachelor-information-technology",
+      "faculty_id": "RI",
+      "name_ar": "بكالوريوس تقنية المعلومات",
+      "name_en": "Bachelor of Information Technology",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/faculty/ar/computing-it-rabigh",
+      "source_url_en": "https://kau.edu.sa/faculty/en/computing-it-rabigh"
+    },
+    {
+      "id": "catalog-higher-diploma-in-administrative-law",
+      "faculty_id": "LA",
+      "name_ar": "الدبلوم العالي في القانون الإداري",
+      "name_en": "Higher Diploma in Administrative Law",
+      "degree_level": "diploma",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/higher-diploma-in-administrative-law",
+      "source_url_en": "https://kau.edu.sa/en/programs/higher-diploma-in-administrative-law"
+    },
+    {
+      "id": "catalog-masters-in-law-and-professional-practice",
+      "faculty_id": "LA",
+      "name_ar": "ماجستير القانون والممارسة المهنية",
+      "name_en": "Master's in law and professional Practice",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/masters-in-law-and-professional-practice",
+      "source_url_en": "https://kau.edu.sa/en/programs/masters-in-law-and-professional-practice"
+    },
+    {
+      "id": "catalog-master-of-private-law",
+      "faculty_id": "LA",
+      "name_ar": "برنامج الماجستير في القانون الخاص",
+      "name_en": "Academic General Master of Private Law",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-private-law",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-private-law"
+    },
+    {
+      "id": "catalog-academic-general-master-of-public-law",
+      "faculty_id": "LA",
+      "name_ar": "برنامج الماجستير في القانون العام",
+      "name_en": "Academic General Master of Public Law",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/academic-general-master-of-public-law",
+      "source_url_en": "https://kau.edu.sa/en/programs/academic-general-master-of-public-law"
+    },
+    {
+      "id": "catalog-nautical-science",
+      "faculty_id": "MS",
+      "name_ar": "بكالوريوس الملاحة البحرية",
+      "name_en": "Bachelor of Nautical Science",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/nautical-science",
+      "source_url_en": "https://kau.edu.sa/en/programs/nautical-science"
+    },
+    {
+      "id": "catalog-masters-degree-in-hydrographic-surveying",
+      "faculty_id": "MS",
+      "name_ar": "ماجستير المساحة البحرية",
+      "name_en": "Master's Degree in Hydrographic Surveying",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/masters-degree-in-hydrographic-surveying",
+      "source_url_en": "https://kau.edu.sa/en/programs/masters-degree-in-hydrographic-surveying"
+    },
+    {
+      "id": "catalog-bachelor-event-management",
+      "faculty_id": "TU",
+      "name_ar": "بكالوريوس إدارة الفعاليات والمناسبات",
+      "name_en": "Bachelor Event Management",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-event-management",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-event-management"
+    },
+    {
+      "id": "catalog-executive-master-in-event-management",
+      "faculty_id": "TU",
+      "name_ar": "ماجستير إدارة الفعاليات التنفيذي",
+      "name_en": "Executive Master in Event Management",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/executive-master-in-event-management",
+      "source_url_en": "https://kau.edu.sa/en/programs/executive-master-in-event-management"
+    },
+    {
+      "id": "catalog-master-of-hajj-and-umrah-services-management",
+      "faculty_id": "TU",
+      "name_ar": "ماجستير إدارة خدمات الحج والعمرة",
+      "name_en": "Master of Hajj and Umrah Services Management",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-hajj-and-umrah-services-management",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-hajj-and-umrah-services-management"
+    },
+    {
+      "id": "catalog-associate-diploma-in-culinary-arts",
+      "faculty_id": "TU",
+      "name_ar": "الدبلوم المشارك في فنون الطهي",
+      "name_en": "Associate Diploma in Culinary Arts",
+      "degree_level": "intermediate_diploma",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/associate-diploma-in-culinary-arts",
+      "source_url_en": "https://kau.edu.sa/en/programs/associate-diploma-in-culinary-arts"
+    },
+    {
+      "id": "ph-master-molecular-drug-discovery-development",
+      "faculty_id": "PH",
+      "name_ar": "ماجستير العلوم في الاكتشاف والتطوير الجزيئي للأدوية",
+      "name_en": "MSc in Molecular Drug Discovery and Development",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/faculty/ar/pharmacy",
+      "source_url_en": "https://kau.edu.sa/faculty/en/pharmacy"
+    },
+    {
+      "id": "ph-master-pharmaceutics",
+      "faculty_id": "PH",
+      "name_ar": "ماجستير العلوم في الصيدلانيات",
+      "name_en": "MSc in Pharmaceutics",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/faculty/ar/pharmacy",
+      "source_url_en": "https://kau.edu.sa/faculty/en/pharmacy"
+    },
+    {
+      "id": "ph-master-pharmacology-toxicology",
+      "faculty_id": "PH",
+      "name_ar": "ماجستير العلوم في علم الأدوية والسموم",
+      "name_en": "MSc in Pharmacology and Toxicology",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/faculty/ar/pharmacy",
+      "source_url_en": "https://kau.edu.sa/faculty/en/pharmacy"
+    },
+    {
+      "id": "ph-doctor-of-pharmacy",
+      "faculty_id": "PH",
+      "name_ar": "دكتور صيدلي",
+      "name_en": "Doctor of Pharmacy (PharmD)",
+      "degree_level": "other",
+      "source_url_ar": "https://admission.kau.edu.sa/Default-166-AR",
+      "source_url_en": "https://kau.edu.sa/en/student-achievement/80e897dc-bcf4-444c-9f14-cfc67c008b03"
+    },
+    {
+      "id": "catalog-doctor-of-philosophy-in-statistics",
+      "faculty_id": "SC",
+      "name_ar": "دكتوراه الفلسفه في الإحصاء",
+      "name_en": "Doctor of Philosophy in Statistics",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/doctor-of-philosophy-in-statistics",
+      "source_url_en": "https://kau.edu.sa/en/programs/doctor-of-philosophy-in-statistics"
+    },
+    {
+      "id": "catalog-phd-in-biochemistry",
+      "faculty_id": "SC",
+      "name_ar": "دكتوراه في الكيمياء الحيوية",
+      "name_en": "PHD in Biochemistry",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-in-biochemistry",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-in-biochemistry"
+    },
+    {
+      "id": "catalog-master-in-biochemistry",
+      "faculty_id": "SC",
+      "name_ar": "ماجستير في الكيمياء الحيوية",
+      "name_en": "Master in Biochemistry",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-in-biochemistry",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-in-biochemistry"
+    },
+    {
+      "id": "catalog-bachelor-of-science-in-hydrology-and-water-resources-management",
+      "faculty_id": "FE",
+      "name_ar": "البكالوريوس في علوم وإدارة موارد المياه",
+      "name_en": "Bachelor of Science in Hydrology and Water Resources Management",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-science-in-hydrology-and-water-resources-management",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-of-science-in-hydrology-and-water-resources-management"
+    },
+    {
+      "id": "catalog-bachelor-of-science-in-meteorology",
+      "faculty_id": "FE",
+      "name_ar": "بكالوريوس العلوم في الأرصاد",
+      "name_en": "Bachelor of Science in Meteorology",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-science-in-meteorology",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-of-science-in-meteorology"
+    },
+    {
+      "id": "catalog-doctor-of-philosophy-in-hydrology-and-water-resources-management",
+      "faculty_id": "FE",
+      "name_ar": "دكتوراه الفلسفة في علوم وإدارة موارد المياه",
+      "name_en": "Doctor of Philosophy in Hydrology and Water Resources Management",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/doctor-of-philosophy-in-hydrology-and-water-resources-management",
+      "source_url_en": "https://kau.edu.sa/en/programs/doctor-of-philosophy-in-hydrology-and-water-resources-management"
+    },
+    {
+      "id": "catalog-doctor-of-philosophy-in-meteorology",
+      "faculty_id": "FE",
+      "name_ar": "دكتوراه الفلسفة في الأرصاد",
+      "name_en": "Doctor of Philosophy in Meteorology",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/doctor-of-philosophy-in-meteorology",
+      "source_url_en": "https://kau.edu.sa/en/programs/doctor-of-philosophy-in-meteorology"
+    },
+    {
+      "id": "catalog-phds-degree-in-arid-land-agriculture",
+      "faculty_id": "FE",
+      "name_ar": "دكتوراه في (زراعة المناطق الجافة)",
+      "name_en": "Ph.D.’s Degree in (Arid land Agriculture)",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phds-degree-in-arid-land-agriculture",
+      "source_url_en": "https://kau.edu.sa/en/programs/phds-degree-in-arid-land-agriculture"
+    },
+    {
+      "id": "catalog-phds-degree-in-environmental-science",
+      "faculty_id": "FE",
+      "name_ar": "الدكتوراه في العلوم البيئية",
+      "name_en": "Ph.D.’s Degree in Environmental Science",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phds-degree-in-environmental-science",
+      "source_url_en": "https://kau.edu.sa/en/programs/phds-degree-in-environmental-science"
+    },
+    {
+      "id": "catalog-executive-master-in-environmental-health-and-safety",
+      "faculty_id": "FE",
+      "name_ar": "الماجستير التنفيذي في الصحة والسلامة البيئية",
+      "name_en": "Executive Master in Environmental Health and Safety",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/executive-master-in-environmental-health-and-safety",
+      "source_url_en": "https://kau.edu.sa/en/programs/executive-master-in-environmental-health-and-safety"
+    },
+    {
+      "id": "catalog-master-in-arid-land-agriculture",
+      "faculty_id": "FE",
+      "name_ar": "ماجستير في زراعة المناطق الجافة",
+      "name_en": "Master in (Arid Land Agriculture)",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-in-arid-land-agriculture",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-in-arid-land-agriculture"
+    },
+    {
+      "id": "catalog-master-of-science-in-environmental-science",
+      "faculty_id": "FE",
+      "name_ar": "ماجستير العلوم في علوم البيئة",
+      "name_en": "Master of Science in Environmental Science",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-environmental-science",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-environmental-science"
+    },
+    {
+      "id": "catalog-master-of-science-in-hydrology-and-water-resources-management",
+      "faculty_id": "FE",
+      "name_ar": "الماجستير في علوم وإدارة موارد المياه",
+      "name_en": "Master of Science in Hydrology and Water Resources Management.",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-hydrology-and-water-resources-management",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-hydrology-and-water-resources-management"
+    },
+    {
+      "id": "catalog-master-of-science-in-meteorology",
+      "faculty_id": "FE",
+      "name_ar": "ماجستير العلوم في الأرصاد",
+      "name_en": "Master of Science in Meteorology",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-meteorology",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-meteorology"
+    },
+    {
+      "id": "catalog-master-of-medical-laboratry-technology",
+      "faculty_id": "AM",
+      "name_ar": "ماجستير تقنية المختبرات الطبية",
+      "name_en": "Master of Medical Laboratry Technology",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-medical-laboratry-technology",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-medical-laboratry-technology"
+    },
+    {
+      "id": "catalog-master-of-science-in-clinical-nutrition",
+      "faculty_id": "AM",
+      "name_ar": "ماجستير العلوم في التغذية العلاجية",
+      "name_en": "Master of Science in Clinical Nutrition",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-clinical-nutrition",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-clinical-nutrition"
+    },
+    {
+      "id": "catalog-master-of-science-in-radiologic-sciences",
+      "faculty_id": "AM",
+      "name_ar": "ماجستير العلوم في علوم الأشعة",
+      "name_en": "Master of Science in Radiologic Sciences",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-radiologic-sciences",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-radiologic-sciences"
+    },
+    {
+      "id": "catalog-bachelor-of-medical-laboratories-science",
+      "faculty_id": "RA",
+      "name_ar": "بكالوريوس علوم المختبرات الطبية",
+      "name_en": "Bachelor of Medical Laboratories Science",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-medical-laboratories-science",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-of-medical-laboratories-science"
+    },
+    {
+      "id": "catalog-english",
+      "faculty_id": "RS",
+      "name_ar": "بكالوريوس الآداب في اللغة الإنجليزية",
+      "name_en": "Bachelor of Arts in English Language",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/english",
+      "source_url_en": "https://kau.edu.sa/en/programs/english"
+    },
+    {
+      "id": "catalog-master-of-architecture-department",
+      "faculty_id": "AP",
+      "name_ar": "ماجستير العمارة",
+      "name_en": "Master of Architecture Department",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-architecture-department",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-architecture-department"
+    },
+    {
+      "id": "catalog-master-of-landscape-architecture-department",
+      "faculty_id": "AP",
+      "name_ar": "ماجستير عمارة البيئة",
+      "name_en": "Master of Landscape Architecture",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-landscape-architecture-department",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-landscape-architecture-department"
+    },
+    {
+      "id": "catalog-master-of-science-in-engineering-management",
+      "faculty_id": "EN",
+      "name_ar": "ماجستير العلوم في الإدارة الهندسية",
+      "name_en": "Master of Science in Engineering Management",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-engineering-management",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-engineering-management"
+    },
+    {
+      "id": "catalog-master-of-science-in-industrial-engineering",
+      "faculty_id": "EN",
+      "name_ar": "ماجستير في الهندسة الصناعية",
+      "name_en": "Master of Science in Industrial Engineering",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-industrial-engineering",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-industrial-engineering"
+    },
+    {
+      "id": "catalog-master-of-science-in-nuclear-engineering",
+      "faculty_id": "EN",
+      "name_ar": "ماجستير العلوم في الهندسة النووية",
+      "name_en": "Master of Science in Nuclear Engineering",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-nuclear-engineering",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-nuclear-engineering"
+    },
+    {
+      "id": "catalog-doctor-of-philosophy-in-pediatric-dentistry",
+      "faculty_id": "DN",
+      "name_ar": "دكتوراة الفلسفة في طب أسنان الأطفال",
+      "name_en": "Doctor of Philosophy in Pediatric Dentistry",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/doctor-of-philosophy-in-pediatric-dentistry",
+      "source_url_en": "https://kau.edu.sa/en/programs/doctor-of-philosophy-in-pediatric-dentistry"
+    },
+    {
+      "id": "catalog-master-of-science-in-dental-public-health",
+      "faculty_id": "DN",
+      "name_ar": "ماجستير العلوم في الصحة العامة للأسنان",
+      "name_en": "Master of Science in Dental Public Health",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-dental-public-health",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-dental-public-health"
+    },
+    {
+      "id": "catalog-master-of-science-in-endodontics",
+      "faculty_id": "DN",
+      "name_ar": "ماجستير العلوم في علاج الجذور ولب الأسنان",
+      "name_en": "Master of Science in Endodontics",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-endodontics",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-endodontics"
+    },
+    {
+      "id": "catalog-msc-in-orthodontics",
+      "faculty_id": "DN",
+      "name_ar": "ماجستير العلوم في تقويم الأسنان",
+      "name_en": "Master of Science in Orthodontics",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/msc-in-orthodontics",
+      "source_url_en": "https://kau.edu.sa/en/programs/msc-in-orthodontics"
+    },
+    {
+      "id": "catalog-master-of-science-in-pediatric-dentistry",
+      "faculty_id": "DN",
+      "name_ar": "ماجستير العلوم في طب أسنان الأطفال",
+      "name_en": "Master of Science in Pediatric Dentistry",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-pediatric-dentistry",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-pediatric-dentistry"
+    },
+    {
+      "id": "catalog-masters-of-science-in-prosthodontics",
+      "faculty_id": "DN",
+      "name_ar": "ماجستير العلوم في الاستعاضة السنية",
+      "name_en": "Masters of Science in Prosthodontics",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/masters-of-science-in-prosthodontics",
+      "source_url_en": "https://kau.edu.sa/en/programs/masters-of-science-in-prosthodontics"
+    },
+    {
+      "id": "catalog-executive-masters-in-crisis-and-disaster-management",
+      "faculty_id": "ER",
+      "name_ar": "الماجستير التنفيذي في ادارة الأزمات والكوارث",
+      "name_en": "Executive Master's in Crisis and Disaster Management",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/executive-masters-in-crisis-and-disaster-management",
+      "source_url_en": "https://kau.edu.sa/en/programs/executive-masters-in-crisis-and-disaster-management"
+    },
+    {
+      "id": "catalog-associate-diploma-in-crisis-and-disaster-management",
+      "faculty_id": "ER",
+      "name_ar": "الدبلوم المشارك في ادارة الأزمات والكوارث",
+      "name_en": "Associate Diploma in Crisis and Disaster Management",
+      "degree_level": "intermediate_diploma",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/associate-diploma-in-crisis-and-disaster-management",
+      "source_url_en": "https://kau.edu.sa/en/programs/associate-diploma-in-crisis-and-disaster-management"
+    },
+    {
+      "id": "catalog-master-of-science-in-engineering-and-environmental-geology",
+      "faculty_id": "ER",
+      "name_ar": "برنامج الماجستير في الجيولوجيا الهندسية والبيئية",
+      "name_en": "Master of Science in Engineering and Environmental Geology",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-engineering-and-environmental-geology",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-engineering-and-environmental-geology"
+    },
+    {
+      "id": "catalog-masters-in-geophysics-by-coursework-and-research-project",
+      "faculty_id": "ER",
+      "name_ar": "ماجستير الجيوفيزياء بالمقررات الدراسية و المشروع البحثي",
+      "name_en": "Master's in Geophysics by coursework and research project",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/masters-in-geophysics-by-coursework-and-research-project",
+      "source_url_en": "https://kau.edu.sa/en/programs/masters-in-geophysics-by-coursework-and-research-project"
+    },
+    {
+      "id": "catalog-bachelor-fashion-and-textile-technology",
+      "faculty_id": "HD",
+      "name_ar": "بكالوريوس تكنولوجيا الأزياء والنسيج",
+      "name_en": "Bachelor Fashion and Textile Technology",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-fashion-and-textile-technology",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-fashion-and-textile-technology"
+    },
+    {
+      "id": "catalog-food-and-nutrition",
+      "faculty_id": "HD",
+      "name_ar": "بكالوريوس الغذاء والتغذية",
+      "name_en": "Bachelor Food and Nutrition",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/food-and-nutrition",
+      "source_url_en": "https://kau.edu.sa/en/programs/food-and-nutrition"
+    },
+    {
+      "id": "catalog-bachelor-of-fashion-industry-for-individuals-with-severe-hearing-disabilities",
+      "faculty_id": "HD",
+      "name_ar": "بكالوريوس صناعة الأزياء لذوى الإعاقة السمعية الشديدة",
+      "name_en": "Bachelor of Fashion Industry for Individuals with Severe Hearing Disabilities",
+      "degree_level": "bachelor",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-fashion-industry-for-individuals-with-severe-hearing-disabilities",
+      "source_url_en": "https://kau.edu.sa/en/programs/bachelor-of-fashion-industry-for-individuals-with-severe-hearing-disabilities"
+    },
+    {
+      "id": "catalog-doctor-of-philosophy-phd-in-fashion-and-textiles",
+      "faculty_id": "HD",
+      "name_ar": "دكتوراه الفلسفة في الأزياء والنسيج",
+      "name_en": "Doctor of Philosophy (PhD) in Fashion and Textiles",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/doctor-of-philosophy-phd-in-fashion-and-textiles",
+      "source_url_en": "https://kau.edu.sa/en/programs/doctor-of-philosophy-phd-in-fashion-and-textiles"
+    },
+    {
+      "id": "catalog-early-childhood-education",
+      "faculty_id": "HD",
+      "name_ar": "برنامج الماجستير في التربية/ الطفولة المبكرة",
+      "name_en": "Early Childhood Education",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/early-childhood-education",
+      "source_url_en": "https://kau.edu.sa/en/programs/early-childhood-education"
+    },
+    {
+      "id": "catalog-master-of-science-msc-in-food-and-nutritional-sciences",
+      "faculty_id": "HD",
+      "name_ar": "ماجستير علوم الغذاء والتغذية",
+      "name_en": "Master of Science (M.Sc.) in Food and Nutritional Sciences",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-msc-in-food-and-nutritional-sciences",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-msc-in-food-and-nutritional-sciences"
+    },
+    {
+      "id": "catalog-master-of-science-in-family-sciences-msc-in-family-sciences",
+      "faculty_id": "HD",
+      "name_ar": "ماجستيرالعلوم في العلوم الاسرية",
+      "name_en": "Master of Science in Family Sciences (M.Sc. in Family Sciences)",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-family-sciences-msc-in-family-sciences",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-family-sciences-msc-in-family-sciences"
+    },
+    {
+      "id": "catalog-master-of-science-in-fashion-and-textile-msc-in-fashion-and-textile",
+      "faculty_id": "HD",
+      "name_ar": "ماجستير الأزياء والنسيج",
+      "name_en": "Master of Science in Fashion and Textile (M.Sc. in Fashion and Textile)",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-fashion-and-textile-msc-in-fashion-and-textile",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-fashion-and-textile-msc-in-fashion-and-textile"
+    },
+    {
+      "id": "catalog-master-of-science-in-spatial-design-msc-in-spatial-design",
+      "faculty_id": "HD",
+      "name_ar": "ماجستيرالعلوم في( التصميم الداخلي - التصميم الفراغي)",
+      "name_en": "Master of Science in Spatial Design (M.Sc. in Spatial Design)",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-science-in-spatial-design-msc-in-spatial-design",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-science-in-spatial-design-msc-in-spatial-design"
+    },
+    {
+      "id": "catalog-phd-in-marine-biology",
+      "faculty_id": "MR",
+      "name_ar": "الدكتوراه في الأحياء البحرية",
+      "name_en": "PhD in Marine Biology",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-in-marine-biology",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-in-marine-biology"
+    },
+    {
+      "id": "catalog-phd-in-marine-chemistry",
+      "faculty_id": "MR",
+      "name_ar": "الدكتوراه في الكيمياء البحرية",
+      "name_en": "PhD in Marine Chemistry",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-in-marine-chemistry",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-in-marine-chemistry"
+    },
+    {
+      "id": "catalog-phd-in-marine-geology",
+      "faculty_id": "MR",
+      "name_ar": "الدكتوراه في الجيولوجيا البحرية",
+      "name_en": "PhD in Marine Geology",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-in-marine-geology",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-in-marine-geology"
+    },
+    {
+      "id": "catalog-phd-in-marine-physics",
+      "faculty_id": "MR",
+      "name_ar": "الدكتوراه في الفيزياء البحرية",
+      "name_en": "PhD in Marine Physics",
+      "degree_level": "doctorate",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/phd-in-marine-physics",
+      "source_url_en": "https://kau.edu.sa/en/programs/phd-in-marine-physics"
+    },
+    {
+      "id": "catalog-masters-in-marine-chemistry",
+      "faculty_id": "MR",
+      "name_ar": "الماجستير في الكيمياء البحرية",
+      "name_en": "Master's in Marine Chemistry",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/masters-in-marine-chemistry",
+      "source_url_en": "https://kau.edu.sa/en/programs/masters-in-marine-chemistry"
+    },
+    {
+      "id": "catalog-masters-in-marine-geology",
+      "faculty_id": "MR",
+      "name_ar": "الماجستير في الجيولوجيا البحرية",
+      "name_en": "Master's in Marine Geology",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/masters-in-marine-geology",
+      "source_url_en": "https://kau.edu.sa/en/programs/masters-in-marine-geology"
+    },
+    {
+      "id": "catalog-masters-in-marine-physics",
+      "faculty_id": "MR",
+      "name_ar": "الماجستير في الفيزياء البحرية",
+      "name_en": "Master's in Marine Physics",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/masters-in-marine-physics",
+      "source_url_en": "https://kau.edu.sa/en/programs/masters-in-marine-physics"
+    },
+    {
+      "id": "catalog-department-of-physical-therapy-graduate-program",
+      "faculty_id": "RH",
+      "name_ar": "ماجستير العلاج الطبيعي برنامج الدراسات العليا",
+      "name_en": "Master's Degree of Physical Therapy Graduate Program",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/department-of-physical-therapy-graduate-program",
+      "source_url_en": "https://kau.edu.sa/en/programs/department-of-physical-therapy-graduate-program"
+    },
+    {
+      "id": "catalog-the-master-of-science-in-islamic-finance",
+      "faculty_id": "IE",
+      "name_ar": "برنامج ماجستير العلوم في التمويل الإسلامي",
+      "name_en": "The Master of Science in Islamic Finance",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/the-master-of-science-in-islamic-finance",
+      "source_url_en": "https://kau.edu.sa/en/programs/the-master-of-science-in-islamic-finance"
+    },
+    {
+      "id": "catalog-executive-master-of-science-in-moderation-and-intellectual-security",
+      "faculty_id": "PK",
+      "name_ar": "برنامج الماجستير التنفيذي في الاعتدال والأمن الفكري",
+      "name_en": "Executive Master of Science in Moderation and Intellectual Security",
+      "degree_level": "executive_master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/executive-master-of-science-in-moderation-and-intellectual-security",
+      "source_url_en": "https://kau.edu.sa/en/programs/executive-master-of-science-in-moderation-and-intellectual-security"
+    },
+    {
+      "id": "catalog-master-of-teaching-english-to-speakers-of-other-languages-ma-tesol",
+      "faculty_id": "EI",
+      "name_ar": "برنامج ماجستير تدريس اللغة الإنجليزية للناطقين بغيرها (MA TESOL)",
+      "name_en": "Master of Teaching English to Speakers of Other Languages  (MA TESOL)",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/master-of-teaching-english-to-speakers-of-other-languages-ma-tesol",
+      "source_url_en": "https://kau.edu.sa/en/programs/master-of-teaching-english-to-speakers-of-other-languages-ma-tesol"
+    },
+    {
+      "id": "catalog-arabic-language-diploma-for-non-native-speakers",
+      "faculty_id": "AI",
+      "name_ar": "دبلوم اللغة العربية للناطقين بغيرها",
+      "name_en": "Arabic Language Diploma for Non-Native Speakers",
+      "degree_level": "diploma",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/arabic-language-diploma-for-non-native-speakers",
+      "source_url_en": "https://kau.edu.sa/en/programs/arabic-language-diploma-for-non-native-speakers"
+    },
+    {
+      "id": "catalog-masters-in-arabic-for-non-native-speakers",
+      "faculty_id": "AI",
+      "name_ar": "ماجستير اللغة العربية للناطقين بغيرها",
+      "name_en": "Master's in Arabic for Non-Native Speakers",
+      "degree_level": "master",
+      "source_url_ar": "https://kau.edu.sa/ar/programs/masters-in-arabic-for-non-native-speakers",
+      "source_url_en": "https://kau.edu.sa/en/programs/masters-in-arabic-for-non-native-speakers"
+    }
+  ],
+  "removed_programs": [],
+  "renamed_faculties": [
+    {
+      "id": "AH",
+      "before": "Arts and Humanities",
+      "after_ar": "الآداب و العلوم الإنسانية",
+      "after_en": "Arts and Humanities"
+    },
+    {
+      "id": "PH",
+      "before": "pharmacy",
+      "after_ar": "الصيدلة",
+      "after_en": "pharmacy"
+    },
+    {
+      "id": "AP",
+      "before": "ARCHITECTURE AND PLANNING",
+      "after_ar": "العمارة والتخطيط",
+      "after_en": "ARCHITECTURE AND PLANNING"
+    },
+    {
+      "id": "HD",
+      "before": "HUMAN SCIENCES AND DESIGN",
+      "after_ar": "علوم الإنسان والتصاميم",
+      "after_en": "HUMAN SCIENCES AND DESIGN"
+    },
+    {
+      "id": "RI",
+      "before": "computing&inform.techn.-rabigh",
+      "after_ar": "الحاسبات وتقنية المعلومات-رابغ",
+      "after_en": "computing&inform.techn.-rabigh"
+    },
+    {
+      "id": "RB",
+      "before": "business-rabigh",
+      "after_ar": "الاعمال - رابغ",
+      "after_en": "business-rabigh"
+    },
+    {
+      "id": "IE",
+      "before": "Institute of Islamic Economics",
+      "after_ar": "معهد الاقتصاد الإسلامي",
+      "after_en": "Institute of Islamic Economics"
+    },
+    {
+      "id": "FE",
+      "before": "ENVIRONMENTAL SCIENCES",
+      "after_ar": "العلوم البيئية",
+      "after_en": "ENVIRONMENTAL SCIENCES"
+    },
+    {
+      "id": "AM",
+      "before": "Applied Medica.Sciences",
+      "after_ar": "العلوم الطبية التطبيقية",
+      "after_en": "Applied Medica.Sciences"
+    },
+    {
+      "id": "EI",
+      "before": "English Language Institute",
+      "after_ar": "معهد اللغة الإنجليزية",
+      "after_en": "English Language Institute"
+    },
+    {
+      "id": "RH",
+      "before": "Med. Rehabilitation Sciences",
+      "after_ar": "علوم التأهيل الطبي",
+      "after_en": "Med. Rehabilitation Sciences"
+    },
+    {
+      "id": "AL",
+      "before": "APPLIED",
+      "after_ar": "التطبيقية",
+      "after_en": "APPLIED"
+    },
+    {
+      "id": "RE",
+      "before": "engineering-rabigh",
+      "after_ar": "الهندسة - رابغ",
+      "after_en": "engineering-rabigh"
+    },
+    {
+      "id": "ED",
+      "before": "education",
+      "after_ar": "التربية",
+      "after_en": "education"
+    },
+    {
+      "id": "EV",
+      "before": "تصاميم البيئة",
+      "after_ar": "تصاميم البيئة",
+      "after_en": "Faculty of Environmental Design"
+    },
+    {
+      "id": "AI",
+      "before": "معهد اللغة العربية للناطقين بغيرها",
+      "after_ar": "معهد اللغة العربية للناطقين بغيرها",
+      "after_en": "Arabic Language Institute for Non-Native Speakers"
+    },
+    {
+      "id": "DN",
+      "before": "dentistry",
+      "after_ar": "طب الأسنان",
+      "after_en": "dentistry"
+    },
+    {
+      "id": "RA",
+      "before": "Applied Medica.Sciences-rabigh",
+      "after_ar": "العلوم الطبية التطبيقية- رابغ",
+      "after_en": "Applied Medica.Sciences-rabigh"
+    },
+    {
+      "id": "RS",
+      "before": "science&arts-rabigh",
+      "after_ar": "العلوم و الآداب - رابغ",
+      "after_en": "science&arts-rabigh"
+    },
+    {
+      "id": "ER",
+      "before": "علوم الارض",
+      "after_ar": "علوم الارض",
+      "after_en": "Faculty of Earth Sciences"
+    },
+    {
+      "id": "IT",
+      "before": "computing & information tech.",
+      "after_ar": "الحاسبات وتقنية المعلومات",
+      "after_en": "computing & information tech."
+    },
+    {
+      "id": "MS",
+      "before": "maritime studies",
+      "after_ar": "الدراسات البحرية",
+      "after_en": "maritime studies"
+    },
+    {
+      "id": "EN",
+      "before": "ENGINEERING",
+      "after_ar": "الهندسة",
+      "after_en": "ENGINEERING"
+    },
+    {
+      "id": "CM",
+      "before": "communications&media",
+      "after_ar": "الاتصال والإعلام",
+      "after_en": "communications&media"
+    },
+    {
+      "id": "TU",
+      "before": "tourism",
+      "after_ar": "السياحة",
+      "after_en": "tourism"
+    },
+    {
+      "id": "PR",
+      "before": "السنة التحضيرية",
+      "after_ar": "السنة التحضيرية",
+      "after_en": "Preparatory Year Program"
+    },
+    {
+      "id": "MR",
+      "before": "marine sciences",
+      "after_ar": "علوم البحار",
+      "after_en": "marine sciences"
+    },
+    {
+      "id": "NR",
+      "before": "nursing",
+      "after_ar": "التمريض",
+      "after_en": "nursing"
+    },
+    {
+      "id": "PK",
+      "before": "PNC KHALED AL-FAISAL FOR MOD.",
+      "after_ar": "معهد الأميرخالدالفيصل للإعتدال",
+      "after_en": "PNC KHALED AL-FAISAL FOR MOD."
+    },
+    {
+      "id": "RM",
+      "before": "medicine - rabigh",
+      "after_ar": "الطب- رابغ",
+      "after_en": "medicine - rabigh"
+    },
+    {
+      "id": "SC",
+      "before": "science",
+      "after_ar": "العلوم",
+      "after_en": "science"
+    },
+    {
+      "id": "EA",
+      "before": "economics and administration",
+      "after_ar": "الاقتصاد والادارة",
+      "after_en": "economics and administration"
+    },
+    {
+      "id": "MD",
+      "before": "medicine",
+      "after_ar": "الطب",
+      "after_en": "medicine"
+    },
+    {
+      "id": "LA",
+      "before": "LAW",
+      "after_ar": "الحقوق",
+      "after_en": "LAW"
+    }
+  ],
+  "renamed_programs": [
+    {
+      "id": "catalog-tourism-travel-and-tourism-management",
+      "before": "Travel and Tourism Management",
+      "after_ar": "بكالوريوس إدارة السفر والسياحة",
+      "after_en": "Bachelor of Travel and Tourism Management"
+    }
+  ],
+  "programs_with_arabic_names_added": 223,
+  "programs_with_english_names_added": 223,
+  "planner_supported_programs": 52,
+  "catalog_only_programs": 171,
+  "unresolved_faculties": [
+    "PR",
+    "EV"
+  ],
+  "top_ten_faculties_by_new_programs": [
+    [
+      "AH",
+      26
+    ],
+    [
+      "EA",
+      21
+    ],
+    [
+      "FE",
+      11
+    ],
+    [
+      "IT",
+      10
+    ],
+    [
+      "HD",
+      9
+    ],
+    [
+      "CM",
+      8
+    ],
+    [
+      "AL",
+      8
+    ],
+    [
+      "MR",
+      7
+    ],
+    [
+      "DN",
+      6
+    ],
+    [
+      "ED",
+      4
+    ]
+  ]
+}

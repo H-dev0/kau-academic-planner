@@ -47,3 +47,8 @@ Thumbs.db
 azure_secret.txt
 *_secret.txt
 *.publishsettings
+
+# Catalog refresh artifacts kept local
+data/raw/kau/catalog/
+data/backups/catalog/
+reports/catalog/catalog_candidate.json

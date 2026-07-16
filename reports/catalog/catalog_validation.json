@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-07-16T13:44:43Z",
+  "ok": true,
+  "errors": [],
+  "warnings": [
+    "audited zero-program faculties: ['PR', 'EV']"
+  ],
+  "checks": {
+    "duplicate_faculty_ids": [],
+    "duplicate_faculty_slugs": [],
+    "duplicate_program_ids": [],
+    "duplicate_program_slugs_within_faculty": [],
+    "missing_arabic_faculty_names": [],
+    "missing_english_faculty_names": [],
+    "missing_arabic_program_names": [],
+    "missing_english_program_names": [],
+    "arabic_faculty_names_without_arabic": [],
+    "english_faculty_names_with_arabic": [],
+    "arabic_program_names_without_arabic": [],
+    "english_program_names_with_arabic": [],
+    "missing_degree_levels": [],
+    "missing_source_urls": [],
+    "planner_without_data": [],
+    "planner_data_key_missing": [],
+    "existing_planner_datasets_missing": [],
+    "unmatched_existing_programs": [],
+    "faculties_with_zero_programs": [
+      "PR",
+      "EV"
+    ],
+    "course_data_changed": []
+  }
+}

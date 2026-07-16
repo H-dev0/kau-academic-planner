@@ -564,14 +564,56 @@ function setupLevelFilter() {
   }
 }
 
+function localizedCatalogValue(item, arabicField, englishField) {
+  const english = currentLanguageSafe() === "en";
+  const preferred = item?.[english ? englishField : arabicField];
+  if (preferred) return preferred;
+  const fallback = item?.[english ? arabicField : englishField] || item?.name || item?.program_name || "";
+  if (!fallback) return "";
+  return english ? `${fallback} (Arabic)` : `${fallback} (بالإنجليزية)`;
+}
+
+function localizedFacultyName(faculty) {
+  return localizedCatalogValue(faculty, "name_ar", "name_en") || faculty?.id || "";
+}
+
+function localizedProgramName(program) {
+  return localizedCatalogValue(program, "name_ar", "name_en") || program?.program_name || program?.id || "";
+}
+
+function localizedDegreeLevel(program) {
+  return localizedCatalogValue(program, "degree_level_ar", "degree_level_en") || program?.degree_level || "";
+}
+
+function localizedCatalogNote(program) {
+  return localizedCatalogValue(program, "catalog_note_ar", "catalog_note_en") || textFor("studyPlanNeeded");
+}
+
+function localizedSourceUrl(program) {
+  return currentLanguageSafe() === "en"
+    ? (program?.source_url_en || program?.official_source_url)
+    : (program?.source_url_ar || program?.official_source_url);
+}
+
+function shortProgramName(value) {
+  return String(value || "")
+    .replace(/^Bachelor of Science in /i, "")
+    .replace(/^Bachelor(?:’s|'s)? Degree in /i, "")
+    .replace(/^Bachelor of /i, "")
+    .replace(/^بكالوريوس(?: العلوم)? في /, "")
+    .trim();
+}
+
 function setupFacultySelect() {
   const faculties = new Map();
-  for (const faculty of state.faculties) {
-    faculties.set(faculty.id, faculty.name || faculty.id);
-  }
+  for (const faculty of state.faculties) faculties.set(faculty.id, faculty);
   if (!faculties.size) {
     for (const program of state.programs.values()) {
-      if (program.faculty_id) faculties.set(program.faculty_id, program.faculty_name || program.college_name || program.faculty_id);
+      if (program.faculty_id) faculties.set(program.faculty_id, {
+        id: program.faculty_id,
+        name_ar: program.faculty_name_ar,
+        name_en: program.faculty_name_en || program.faculty_name || program.college_name,
+      });
     }
   }
   facultySelect.innerHTML = "";
@@ -579,18 +621,23 @@ function setupFacultySelect() {
   placeholder.value = "";
   placeholder.textContent = textFor("chooseFaculty");
   facultySelect.append(placeholder);
-  for (const [id, name] of faculties) {
+  for (const [id, faculty] of faculties) {
     const option = document.createElement("option");
     option.value = id;
-    option.textContent = name;
+    option.textContent = localizedFacultyName(faculty);
     facultySelect.append(option);
   }
   if (state.faculty && !faculties.has(state.faculty)) state.faculty = "";
   facultySelect.value = state.faculty;
 }
 
+function currentFacultyRecord() {
+  return state.faculties.find((item) => item.id === state.faculty);
+}
+
 function currentFacultyName() {
-  return state.faculties.find((faculty) => faculty.id === state.faculty)?.name || state.faculty;
+  const faculty = currentFacultyRecord();
+  return faculty ? localizedFacultyName(faculty) : state.faculty;
 }
 
 function setupMajorSelect() {
@@ -619,11 +666,11 @@ function setupMajorSelect() {
   for (const program of programs) {
     const option = document.createElement("option");
     option.value = program.id;
-    const shortName = program.program_name
-      .replace(/^Bachelor of Science in /, "")
-      .replace(/^Bachelor(?:’s|'s)? Degree in /, "")
-      .replace(/^Bachelor of /, "");
-    option.textContent = program.catalog_status === "catalog-only" ? `${shortName} (${textFor("studyPlanNeeded")})` : shortName;
+    const shortName = shortProgramName(localizedProgramName(program));
+    const degree = localizedDegreeLevel(program);
+    const baseLabel = degree ? shortName + " — " + degree : shortName;
+    const unavailableLabel = currentLanguageSafe() === "en" ? "Plan not added" : "الخطة غير مضافة";
+    option.textContent = program.catalog_status === "catalog-only" ? baseLabel + " — " + unavailableLabel : baseLabel;
     majorSelect.append(option);
   }
   if (state.major && !programs.some((program) => program.id === state.major)) state.major = "";
@@ -643,6 +690,7 @@ function isNoPrograms() {
 }
 
 function noProgramsProgram() {
+  const faculty = currentFacultyRecord() || {};
   return {
     id: "no-programs",
     faculty_id: state.faculty,
@@ -651,6 +699,11 @@ function noProgramsProgram() {
     degree_level: "Bachelor",
     catalog_status: "no-programs",
     catalog_note: textFor("noPrograms"),
+    catalog_note_ar: faculty.audit_note_ar,
+    catalog_note_en: faculty.audit_note_en,
+    source_url_ar: faculty.source_url_ar,
+    source_url_en: faculty.source_url_en,
+    official_source_url: faculty.source_url_en || faculty.source_url_ar,
     courses: [],
   };
 }
@@ -1063,7 +1116,7 @@ function renderChecklist(plan = buildPlan()) {
     const title = document.createElement("strong");
     title.textContent = textFor("noPrograms");
     const note = document.createElement("span");
-    note.textContent = textFor("noProgramsHint");
+    note.textContent = localizedCatalogNote(state.program);
     empty.append(title, note);
     courseChecklist.append(empty);
     return;
@@ -1071,22 +1124,30 @@ function renderChecklist(plan = buildPlan()) {
   if (isCatalogOnly()) {
     const empty = document.createElement("div");
     empty.className = "majorEmpty";
+    const english = currentLanguageSafe() === "en";
     const title = document.createElement("strong");
-    title.textContent = "الخطة الدراسية غير محملة بعد.";
+    title.textContent = english ? "Study plan not currently available" : "الخطة غير متاحة حاليًا";
     const note = document.createElement("span");
-    note.textContent = "هذا البرنامج موجود في فهرس الجامعة، لكن جدول الخطة غير متوفر داخل الأداة بعد. أرسل الخطة الدراسية أو الساعات لتفعيل التتبع الكامل.";
-    empty.append(title, note);
-    if (state.program.official_source_url) {
+    note.textContent = english
+      ? "This program exists in the official university catalog, but its detailed study plan has not been added to the planner yet."
+      : "هذا البرنامج موجود في كتالوج الجامعة الرسمي، لكن الخطة التفصيلية لم تُضف إلى المخطط بعد.";
+    const details = document.createElement("span");
+    details.className = "meta";
+    details.textContent = currentFacultyName() + " · " + localizedDegreeLevel(state.program);
+    empty.append(title, note, details);
+    const sourceUrl = localizedSourceUrl(state.program);
+    if (sourceUrl) {
       const link = document.createElement("a");
-      link.href = state.program.official_source_url;
+      link.href = sourceUrl;
       link.target = "_blank";
       link.rel = "noreferrer";
-      link.textContent = currentLanguageSafe() === "en" ? "Official source" : "المصدر الرسمي";
+      link.textContent = english ? "Open official program page" : "فتح صفحة البرنامج الرسمية";
       empty.append(link);
     }
     courseChecklist.append(empty);
     return;
   }
+
   const text = plannerText();
   const statusLookup = plannerStatusLookup(plan);
   const courses = visibleCourses().filter((course) => {
@@ -1361,7 +1422,7 @@ function render() {
   const text = plannerText();
   const hasProgram = !isNoSelection() && !isNoPrograms();
 
-  const titleName = state.program?.program_name?.replace(/^Bachelor of Science in /, "") || "اختر التخصص";
+  const titleName = shortProgramName(localizedProgramName(state.program)) || textFor("chooseMajor");
   if (isNoSelection()) {
     plannerTitle.textContent = textFor("chooseFacultyAndMajor");
   } else {
@@ -1376,8 +1437,24 @@ function render() {
   plannerShell?.classList.toggle("plannerEmpty", !hasProgram);
   plannerShell?.classList.toggle("plannerSelected", hasProgram);
   if (plannerOnboarding) plannerOnboarding.hidden = hasProgram;
-  if (plannerOverviewContent) plannerOverviewContent.hidden = !hasProgram;
-  if (plannerWorkspace) plannerWorkspace.hidden = !hasProgram;
+  if (plannerOverviewContent) plannerOverviewContent.hidden = !hasProgram || isCatalogOnly();
+  if (plannerWorkspace) {
+    plannerWorkspace.hidden = !hasProgram;
+    plannerWorkspace.style.gridTemplateColumns = isCatalogOnly() ? "minmax(0, 1fr)" : "";
+  }
+  const catalogOnly = isCatalogOnly();
+  const plannerOverview = document.querySelector("#plannerOverview");
+  const plannerControlBar = document.querySelector(".plannerControlBar");
+  const plannerContext = document.querySelector(".plannerContext");
+  if (plannerOverview) plannerOverview.hidden = catalogOnly;
+  if (plannerControlBar) plannerControlBar.hidden = catalogOnly;
+  if (plannerContext) plannerContext.hidden = catalogOnly;
+  if (statusFilters) statusFilters.hidden = catalogOnly;
+  if (filterClearButton) filterClearButton.hidden = catalogOnly;
+  if (filterResultSummary) filterResultSummary.hidden = catalogOnly;
+  if (courseCatalogSummary) courseCatalogSummary.hidden = catalogOnly;
+  if (clearButton) clearButton.hidden = catalogOnly;
+
   if (plannerSubtitle) {
     plannerSubtitle.textContent = isNoSelection()
       ? text.defaultSubtitle
@@ -1387,10 +1464,12 @@ function render() {
   }
   if (plannerHeaderMeta) plannerHeaderMeta.hidden = !hasProgram;
   if (plannerFacultyName) plannerFacultyName.textContent = currentFacultyName() || "--";
-  if (plannerCourseMeta) plannerCourseMeta.textContent = formatCourseCount(total);
-  if (plannerCreditMeta) plannerCreditMeta.textContent = state.program.total_program_credit_hours
-    ? state.program.total_program_credit_hours + " " + text.credit
-    : text.unavailable;
+  if (plannerCourseMeta) plannerCourseMeta.textContent = isCatalogOnly() ? (currentLanguageSafe() === "en" ? "Plan not added" : "الخطة غير مضافة") : formatCourseCount(total);
+  if (plannerCreditMeta) plannerCreditMeta.textContent = isCatalogOnly()
+    ? localizedDegreeLevel(state.program)
+    : state.program.total_program_credit_hours
+      ? state.program.total_program_credit_hours + " " + text.credit
+      : text.unavailable;
 
   progressText.textContent = `${percent}%`;
   if (degreeProgressValue) degreeProgressValue.textContent = `${percent}%`;
@@ -1423,14 +1502,14 @@ function render() {
   clearButton.disabled = isNoSelection() || isCatalogOnly() || isNoPrograms();
   saveProgressButton.disabled = isNoSelection() || isCatalogOnly() || isNoPrograms();
   resetProgressButton.disabled = isNoSelection() || isCatalogOnly() || isNoPrograms();
-  exportButton.disabled = isNoSelection() || isNoPrograms();
+  exportButton.disabled = isNoSelection() || isCatalogOnly() || isNoPrograms();
   importButton.disabled = isNoSelection() || isCatalogOnly() || isNoPrograms();
   majorStatus.textContent = isNoSelection()
     ? textFor("chooseFacultyAndMajor")
     : isNoPrograms()
       ? textFor("noPrograms")
       : isCatalogOnly()
-      ? textFor("catalogOnly") + " - " + (state.program.catalog_note || textFor("studyPlanNeeded"))
+      ? textFor("catalogOnly") + " - " + localizedCatalogNote(state.program)
       : String((state.program.courses || []).length) + " " + textFor("loadedCourses");
 
   if (filterAllCount) filterAllCount.textContent = total;
