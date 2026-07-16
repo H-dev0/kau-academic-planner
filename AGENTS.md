@@ -4,13 +4,21 @@ This project extracts and validates official university program data. Work must 
 
 ## Safety Rules
 
-- Do not change external accounts, cloud resources, repositories, credentials, permissions, billing, or deployments.
 - Do not use sudo, install system-wide software, change Windows or WSL settings, open ports, or change firewall/network settings without explicit approval.
 - Do not delete, move, overwrite user data, change file permissions, modify Git history, or remove dependencies without explicit approval.
 - Do not expose secrets, cookies, tokens, private URLs, or personal information.
 - Do not bypass authentication, CAPTCHA, robots.txt, rate limits, access restrictions, or website protections.
 - Do not perform aggressive scraping. Prefer official structured sources and saved local snapshots.
 - Ask before using browser automation against live university sites.
+
+## Repository and deployment safety
+
+- Do not commit, push, merge, deploy, or modify cloud resources unless the user explicitly requests that exact action in the current conversation.
+- Before any commit, push, merge, or deployment, verify the branch, Git status, intended files, target repository, and target cloud resource.
+- Stop and report any unexpected file, conflict, test failure, authentication issue, or target mismatch.
+- Never modify secrets, authentication settings, environment variables, subscriptions, resource groups, domains, or production configuration without separate explicit approval.
+- Deployment of an approved build to an explicitly named existing Azure App Service is allowed after the user explicitly approves it.
+- Do not delete branches, deployment history, backups, cloud resources, or repositories without explicit approval.
 
 ## Development Rules
 
