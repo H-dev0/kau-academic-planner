@@ -32,6 +32,12 @@ const blockedCount = document.querySelector("#blockedCount");
 const officialCredits = document.querySelector("#officialCredits");
 const creditsCompleted = document.querySelector("#creditsCompleted");
 const creditsRemaining = document.querySelector("#creditsRemaining");
+const homeCreditsCompleted = document.querySelector("#homeCreditsCompleted");
+const homeCreditsRemaining = document.querySelector("#homeCreditsRemaining");
+const homeProgressValue = document.querySelector("#homeProgressValue");
+const homeProgressBar = document.querySelector("#homeProgressBar");
+const homeAvailableCount = document.querySelector("#homeAvailableCount");
+const homeBlockedCount = document.querySelector("#homeBlockedCount");
 const creditNote = document.querySelector("#creditNote");
 const saveStatus = document.querySelector("#saveStatus");
 const completedList = document.querySelector("#completedList");
@@ -373,9 +379,14 @@ function withCommonFoundation(program) {
 
 function applyTheme(theme) {
   const dark = theme === "dark";
+  const english = currentLanguageSafe() === "en";
+  const label = dark ? (english ? "Light" : "فاتح") : (english ? "Dark" : "داكن");
   document.documentElement.dataset.theme = dark ? "dark" : "light";
-  themeToggle.textContent = dark ? "الوضع الفاتح" : "الوضع الداكن";
+  const labelTarget = themeToggle.querySelector("span");
+  if (labelTarget) labelTarget.textContent = label;
+  else themeToggle.textContent = label;
   themeToggle.setAttribute("aria-pressed", String(dark));
+  themeToggle.setAttribute("aria-label", dark ? (english ? "Use light theme" : "استخدام المظهر الفاتح") : (english ? "Use dark theme" : "استخدام المظهر الداكن"));
 }
 
 function loadTheme() {
@@ -892,18 +903,37 @@ function render() {
   const recommended = recommendedCourses(plan.available);
 
   const titleName = state.program?.program_name?.replace(/^Bachelor of Science in /, "") || "اختر التخصص";
-  plannerTitle.textContent = isNoSelection()
-    ? "اختر الكلية والتخصص"
-    : isCatalogOnly()
-      ? titleName + " - " + textFor("catalogSuffix")
-      : titleName + " - " + textFor("plannerSuffix");
-  progressText.textContent = `${percent}% complete`;
+  if (isNoSelection()) {
+    plannerTitle.textContent = textFor("chooseFacultyAndMajor");
+  } else {
+    const programName = document.createElement("span");
+    programName.className = "programName";
+    programName.textContent = titleName;
+    if (/[A-Za-z]/.test(titleName) && !/[\u0600-\u06ff]/.test(titleName)) {
+      programName.lang = "en";
+    }
+    plannerTitle.replaceChildren(
+      programName,
+      " - " + (isCatalogOnly() ? textFor("catalogSuffix") : textFor("plannerSuffix")),
+    );
+  }
+  progressText.textContent = `${percent}%`;
   completedCount.textContent = plan.completed.length;
   availableCount.textContent = plan.available.length;
   blockedCount.textContent = plan.blocked.length;
   officialCredits.textContent = state.program.total_program_credit_hours || "--";
   creditsCompleted.textContent = credits.completedText;
   creditsRemaining.textContent = credits.remainingText;
+  if (homeCreditsCompleted) homeCreditsCompleted.textContent = credits.completedText;
+  if (homeCreditsRemaining) homeCreditsRemaining.textContent = credits.remainingText;
+  if (homeProgressValue) homeProgressValue.textContent = `${percent}%`;
+  if (homeProgressBar) {
+    homeProgressBar.setAttribute("aria-valuenow", String(percent));
+    const fill = homeProgressBar.querySelector("i");
+    if (fill) fill.style.width = `${percent}%`;
+  }
+  if (homeAvailableCount) homeAvailableCount.textContent = plan.available.length;
+  if (homeBlockedCount) homeBlockedCount.textContent = plan.blocked.length;
   creditsCompleted.title = credits.note;
   creditsRemaining.title = credits.note;
   creditNote.textContent = credits.note || (state.program.total_program_credit_hours ? "" : textFor("levelMissingNote"));
@@ -1134,27 +1164,40 @@ if (menuToggle && siteNav) {
   });
 }
 
+function syncActiveNavigation() {
+  if (!siteNav) return;
+  const activeHash = ["#home", "#planner", "#sources"].includes(window.location.hash) ? window.location.hash : "#home";
+  siteNav.querySelectorAll(".navLink").forEach((link) => {
+    const active = link.getAttribute("href") === activeHash;
+    link.classList.toggle("active", active);
+    if (active) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
+}
+window.addEventListener("hashchange", syncActiveNavigation);
+syncActiveNavigation();
+
 // Lightweight language switcher. It only changes visible labels; planner data stays unchanged.
 const uiLanguageStorageKey = "kau-planner-ui-language";
 const uiLanguageToggle = document.querySelector("#languageToggle");
 const uiText = {
   ar: {
-    button: "English", dir: "rtl", pageTitle: "مخطط المقررات الجامعية", brand: "مخطط المقررات", brandSmall: "مخطط جامعة الملك عبدالعزيز", brandAria: "مخطط المقررات", navAria: "التنقل الرئيسي", home: "الرئيسية", planner: "المخطط", sources: "المصادر الرسمية",
-    heroKicker: "أداة مساعدة للطلاب", heroTitle: "خطط مقرراتك بوضوح قبل التسجيل", heroText: "اختر كليتك وتخصصك، حدد المقررات التي اجتزتها، واعرف المقررات المتاحة أو المحجوبة بسبب المتطلبات السابقة.",
-    start: "ابدأ التخطيط", review: "راجع المصادر", progress: "التقدم", faculties: "الكليات", programs: "البرامج",
+    button: "EN", menu: "القائمة", dir: "rtl", pageTitle: "مخطط المقررات الجامعية", brand: "مخطط المقررات", brandSmall: "King Abdulaziz University Planner", brandAria: "مخطط المقررات", navAria: "التنقل الرئيسي", home: "الرئيسية", planner: "المخطط الدراسي", sources: "المصادر الرسمية",
+    heroKicker: "مخطط أكاديمي للطلاب", heroTitleFirst: "خطّط لمسيرتك الجامعية", heroTitleSecond: "بكل وضوح وثقة", heroText: "اختر تخصصك، حدّد المواد التي أنجزتها، وتعرّف على المواد المتاحة والمتطلبات المتبقية حتى التخرج.",
+    start: "ابدأ التخطيط", review: "استكشف التخصصات", progress: "التقدم", faculties: "الكليات", programs: "البرامج",
     save: "حفظ التقدم", reset: "إعادة ضبط التقدم", export: "تصدير التقدم", import: "استيراد التقدم", faculty: "الكلية", major: "التخصص",
     courses: "المقررات", clear: "مسح", search: "ابحث برمز المقرر أو الاسم", completed: "مكتمل", available: "متاح", blocked: "محجوب",
     totalCredits: "إجمالي الساعات", doneCredits: "ساعات منجزة", leftCredits: "ساعات متبقية", selected: "المقررات المحددة كمجتازة",
-     availableNow: "متاح الآن", blockedNow: "محجوب", sourceTitle: "المصادر الرسمية هي المرجع النهائي", sourceButton: "فتح برامج الجامعة الرسمية", optionalNow: "المواد الاختيارية", logoutButton: "تسجيل الخروج", accessKicker: "تسجيل اختياري", accessTitle: "اختياري: سجل الدخول بحساب Microsoft", accessText: "يمكنك استخدام المخطط بدون تسجيل. تسجيل Microsoft اختياري للتعريف بحسابك الجامعي عند تفعيل المزامنة لاحقًا.", accessButton: "تسجيل الدخول بحساب Microsoft"
+    availableNow: "متاح الآن", blockedNow: "محجوب", sourceTitle: "المصادر الرسمية هي المرجع النهائي", sourceButton: "فتح برامج الجامعة الرسمية", optionalNow: "المواد الاختيارية", logoutButton: "تسجيل الخروج", accessKicker: "تسجيل اختياري", accessTitle: "اختياري: سجل الدخول بحساب Microsoft", accessText: "يمكنك استخدام المخطط بدون تسجيل. تسجيل Microsoft اختياري للتعريف بحسابك الجامعي عند تفعيل المزامنة لاحقًا.", accessButton: "تسجيل الدخول", homeSummaryAria: "ملخص التقدم الدراسي", homeCreditsDone: "الساعات المنجزة", homeCreditsLeft: "الساعات المتبقية", homeProgress: "نسبة الإنجاز", homeAvailable: "المواد المتاحة", homeBlocked: "المواد المقفلة", creditUnit: "ساعة", courseUnit: "مادة", heroPlan: "الخطة الدراسية", featuresKicker: "تخطيط أبسط، وقرارات أوضح", featuresTitle: "كل ما تحتاجه لرؤية خطتك بوضوح"
   },
   en: {
-    button: "العربية", dir: "ltr", pageTitle: "University Course Planner", brand: "Course Planner", brandSmall: "King Abdulaziz University Planner", brandAria: "Course Planner", navAria: "Main navigation", home: "Home", planner: "Planner", sources: "Official sources",
-    heroKicker: "Student planning tool", heroTitle: "Plan your courses clearly before registration", heroText: "Choose your faculty and major, mark completed courses, and see which courses are available or blocked by prerequisites.",
-    start: "Start planning", review: "Review sources", progress: "Progress", faculties: "Faculties", programs: "Programs",
+    button: "ع", menu: "Menu", dir: "ltr", pageTitle: "University Course Planner", brand: "Course Planner", brandSmall: "King Abdulaziz University Planner", brandAria: "Course Planner", navAria: "Main navigation", home: "Home", planner: "Study planner", sources: "Official sources",
+    heroKicker: "Academic planning for students", heroTitleFirst: "Plan your university journey", heroTitleSecond: "with clarity and confidence", heroText: "Choose your major, mark completed courses, and understand what is available and what remains before graduation.",
+    start: "Start planning", review: "Explore majors", progress: "Progress", faculties: "Faculties", programs: "Programs",
     save: "Save progress", reset: "Reset progress", export: "Export progress", import: "Import progress", faculty: "Faculty", major: "Major",
     courses: "Courses", clear: "Clear", search: "Search by course code or name", completed: "Completed", available: "Available", blocked: "Blocked",
     totalCredits: "Total credits", doneCredits: "Credits done", leftCredits: "Credits left", selected: "Courses marked as completed",
-     availableNow: "Available now", blockedNow: "Blocked", sourceTitle: "Official sources are the final authority", sourceButton: "Open official university programs", optionalNow: "Optional subjects", logoutButton: "Sign out", accessKicker: "Optional sign-in", accessTitle: "Optional: sign in with Microsoft", accessText: "You can use the planner without signing in. Microsoft sign-in is optional for identifying your university account if sync is enabled later.", accessButton: "Sign in with Microsoft"
+    availableNow: "Available now", blockedNow: "Blocked", sourceTitle: "Official sources are the final authority", sourceButton: "Open official university programs", optionalNow: "Optional subjects", logoutButton: "Sign out", accessKicker: "Optional sign-in", accessTitle: "Optional: sign in with Microsoft", accessText: "You can use the planner without signing in. Microsoft sign-in is optional for identifying your university account if sync is enabled later.", accessButton: "Sign in", homeSummaryAria: "Study progress summary", homeCreditsDone: "Credits completed", homeCreditsLeft: "Credits remaining", homeProgress: "Completion", homeAvailable: "Available courses", homeBlocked: "Locked courses", creditUnit: "credits", courseUnit: "courses", heroPlan: "Study plan", featuresKicker: "Simpler planning, clearer decisions", featuresTitle: "Everything you need to understand your plan"
   }
 };
 function setUiText(selector, value) {
@@ -1175,18 +1218,43 @@ function applyUiLanguage(language) {
   document.title = text.pageTitle;
   document.querySelector(".brand")?.setAttribute("aria-label", text.brandAria);
   document.querySelector(".siteNav")?.setAttribute("aria-label", text.navAria);
-  if (uiLanguageToggle) uiLanguageToggle.textContent = text.button;
-  setUiText("#menuToggle", text.menu);
+  document.querySelector(".homeSummary")?.setAttribute("aria-label", text.homeSummaryAria);
+  if (uiLanguageToggle) {
+    uiLanguageToggle.textContent = text.button;
+    uiLanguageToggle.setAttribute("aria-label", language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية");
+  }
+  menuToggle?.setAttribute("aria-label", text.menu);
+  microsoftLoginButton?.setAttribute("aria-label", text.accessButton);
+  microsoftLogoutButton?.setAttribute("aria-label", text.logoutButton);
+  setUiText("#menuToggle span", text.menu);
   setUiText(".brand strong", text.brand);
   setUiText(".brand small", text.brandSmall);
   setUiText(".siteNav a:nth-child(1)", text.home);
   setUiText(".siteNav a:nth-child(2)", text.planner);
   setUiText(".siteNav a:nth-child(3)", text.sources);
   setUiText(".heroCopy .eyebrow", text.heroKicker);
-  setUiText(".heroCopy h1", text.heroTitle);
+  const heroTitle = document.querySelector(".heroCopy h1");
+  if (heroTitle) {
+    const accentLine = document.createElement("em");
+    accentLine.textContent = text.heroTitleSecond;
+    heroTitle.replaceChildren(text.heroTitleFirst, document.createElement("br"), accentLine);
+  }
   setUiText(".heroText", text.heroText);
   setUiText(".heroActions a:nth-child(1)", text.start);
   setUiText(".heroActions a:nth-child(2)", text.review);
+  setUiText("#heroPlanLabel", text.heroPlan);
+  setUiText("#homeCreditsDoneLabel", text.homeCreditsDone);
+  setUiText("#homeCreditsLeftLabel", text.homeCreditsLeft);
+  setUiText("#homeProgressLabel", text.homeProgress);
+  setUiText("#homeAvailableLabel", text.homeAvailable);
+  setUiText("#homeBlockedLabel", text.homeBlocked);
+  setUiText("#homeCreditsDoneUnit", text.creditUnit);
+  setUiText("#homeCreditsLeftUnit", text.creditUnit);
+  setUiText("#homeAvailableUnit", text.courseUnit);
+  setUiText("#homeBlockedUnit", text.courseUnit);
+  setUiText(".featureSection .sectionIntro .eyebrow", text.featuresKicker);
+  setUiText("#featuresTitle", text.featuresTitle);
+  homeProgressBar?.setAttribute("aria-label", text.homeProgress);
   document.querySelectorAll(".heroPanel span").forEach((el, i) => { el.textContent = [text.progress, text.faculties, text.programs][i] || el.textContent; });
   setUiText("#saveProgressButton", text.save); setUiText("#resetProgressButton", text.reset); setUiText("#exportButton", text.export); setUiText("#importButton", text.import);
   setUiText("label[for=facultySelect]", text.faculty); setUiText("label[for=majorSelect]", text.major); setUiText(".panelHead h2", text.courses); setUiText("#clearButton", text.clear);
@@ -1201,7 +1269,7 @@ function applyUiLanguage(language) {
   setUiText("#microsoftLogin .eyebrow", text.accessKicker);
   setUiText("#microsoftLogin h2", text.accessTitle);
   setUiText("#microsoftLogin .accessCopy p:not(.eyebrow)", text.accessText);
-  setUiText("#microsoftLoginButton", text.accessButton);
+  setUiText("#microsoftLoginButton span", text.accessButton);
   setUiText("#microsoftLogoutButton", text.logoutButton);
   applyMicrosoftLoginState();
 }
@@ -1224,37 +1292,37 @@ applyUiLanguage(currentUiLanguage());
 const uiTextExtra = {
   ar: {
     toolbarKicker: "جامعة الملك عبدالعزيز",
-    completedFeatureTitle: "المقررات المجتازة",
-    completedFeatureText: "احفظ تقدمك على جهازك الحالي بدون حساب أو رقم جامعي.",
-    availableFeatureTitle: "المتاح للتسجيل",
-    availableFeatureText: "اعرف المقررات التي يمكن أخذها بناء على المتطلبات.",
-    blockedFeatureTitle: "المتطلبات الناقصة",
-    blockedFeatureText: "تظهر المقررات المحجوبة مع سبب الحجب.",
+    completedFeatureTitle: "تابع تقدمك الدراسي",
+    completedFeatureText: "راقب الساعات المنجزة والمتبقية ونسبة التقدم في الخطة.",
+    availableFeatureTitle: "اعرف موادك المتاحة",
+    availableFeatureText: "يوضّح لك النظام المواد التي يمكنك تسجيلها بناءً على المتطلبات السابقة.",
+    blockedFeatureTitle: "بياناتك محفوظة على جهازك",
+    blockedFeatureText: "يمكنك استخدام المخطط محليًا دون الحاجة إلى تسجيل الدخول.",
     privacyStrong: "تسجيل الدخول اختياري.",
     privacyText: "يمكنك استخدام المخطط مباشرة وحفظ التقدم على هذا الجهاز.",
     privacySmall: "تسجيل Microsoft لا يتم إجباره، والمزامنة بين الأجهزة غير مفعلة حاليًا.",
     optionalButton: "تسجيل الدخول اختياري لمزامنة التقدم",
     optionalText: "تسجيل Microsoft اختياري لمزامنة التقدم لاحقًا. هذه الميزة غير مفعلة الآن.",
-    sourceKicker: "تنبيه مهم",
-    sourceText: "هذا الموقع يساعدك على التخطيط والفهم، لكنه لا يستبدل أنظمة الجامعة أو المرشد الأكاديمي أو الخطة الرسمية المنشورة من الجامعة.",
+    sourceKicker: "مشروع طلابي مستقل",
+    sourceText: "هذا مشروع طلابي مستقل، والمصادر الرسمية لجامعة الملك عبدالعزيز هي المرجع النهائي للخطط واللوائح الأكاديمية.",
     themeDark: "الوضع الداكن",
     themeLight: "الوضع الفاتح"
   },
   en: {
     toolbarKicker: "King Abdulaziz University",
-    completedFeatureTitle: "Completed courses",
-    completedFeatureText: "Save your progress on this device without an account or student ID.",
-    availableFeatureTitle: "Available for registration",
-    availableFeatureText: "See which courses you can take based on prerequisites.",
-    blockedFeatureTitle: "Missing prerequisites",
-    blockedFeatureText: "Blocked courses show the reason they are blocked.",
+    completedFeatureTitle: "Track your study progress",
+    completedFeatureText: "Monitor completed and remaining credits and your overall plan progress.",
+    availableFeatureTitle: "Know what is available",
+    availableFeatureText: "See which courses you can register for based on their prerequisites.",
+    blockedFeatureTitle: "Your data stays on your device",
+    blockedFeatureText: "Use the planner locally without needing to sign in.",
     privacyStrong: "Login is optional.",
     privacyText: "You can use the planner directly and save progress on this device.",
     privacySmall: "Microsoft sign-in is not required, and cross-device sync is not enabled yet.",
     optionalButton: "Optional login for progress sync",
     optionalText: "This feature is not enabled yet.",
-    sourceKicker: "Important note",
-    sourceText: "This website helps with planning and understanding, but it does not replace university systems, academic advising, or the official published study plan.",
+    sourceKicker: "Independent student project",
+    sourceText: "This is an independent student project. Official King Abdulaziz University sources remain the final authority for academic plans and regulations.",
     themeDark: "Dark",
     themeLight: "Light"
   }
@@ -1288,21 +1356,44 @@ function replaceExactVisibleText(map) {
     if (map.has(value)) node.nodeValue = node.nodeValue.replace(value, map.get(value));
   }
 }
+function applyTextLanguageHints() {
+  document.querySelectorAll(".brand small, .code").forEach((element) => {
+    element.lang = "en";
+  });
+  document.querySelectorAll(
+    "#plannerTitle, #facultySelect option, #majorSelect option, .name, .meta, .reason, .majorStatus, .studyPlanHeader strong, .studyPlanHeader span",
+  ).forEach((element) => {
+    if (element.classList.contains("programName")) return;
+    const value = element.textContent || "";
+    const hasArabic = /[\u0600-\u06ff]/.test(value);
+    const hasEnglish = /[A-Za-z]/.test(value);
+    if (hasArabic) element.lang = "ar";
+    else if (hasEnglish) element.lang = "en";
+    else element.removeAttribute("lang");
+  });
+}
 const applyUiLanguageBase = applyUiLanguage;
 applyUiLanguage = function applyUiLanguageExpanded(language) {
   applyUiLanguageBase(language);
   const extra = uiTextExtra[language] || uiTextExtra.ar;
   setUiText(".toolbar .eyebrow", extra.toolbarKicker);
   const featureCards = document.querySelectorAll(".featureCard");
-  if (featureCards[0]) { featureCards[0].querySelector("h2").textContent = extra.completedFeatureTitle; featureCards[0].querySelector("p").textContent = extra.completedFeatureText; }
-  if (featureCards[1]) { featureCards[1].querySelector("h2").textContent = extra.availableFeatureTitle; featureCards[1].querySelector("p").textContent = extra.availableFeatureText; }
-  if (featureCards[2]) { featureCards[2].querySelector("h2").textContent = extra.blockedFeatureTitle; featureCards[2].querySelector("p").textContent = extra.blockedFeatureText; }
+  if (featureCards[0]) { featureCards[0].querySelector("h3").textContent = extra.completedFeatureTitle; featureCards[0].querySelector("p").textContent = extra.completedFeatureText; }
+  if (featureCards[1]) { featureCards[1].querySelector("h3").textContent = extra.availableFeatureTitle; featureCards[1].querySelector("p").textContent = extra.availableFeatureText; }
+  if (featureCards[2]) { featureCards[2].querySelector("h3").textContent = extra.blockedFeatureTitle; featureCards[2].querySelector("p").textContent = extra.blockedFeatureText; }
   setUiText(".privacyNotice strong", extra.privacyStrong);
   setUiText(".privacyNotice span", extra.privacyText);
   setUiText(".privacyNotice small", extra.privacySmall);
     setUiText("#sources .eyebrow", extra.sourceKicker);
   setUiText("#sources p:not(.eyebrow)", extra.sourceText);
-  if (themeToggle) themeToggle.textContent = document.documentElement.dataset.theme === "dark" ? extra.themeLight : extra.themeDark;
+  if (themeToggle) {
+    const target = themeToggle.querySelector("span");
+    if (target) target.textContent = document.documentElement.dataset.theme === "dark" ? extra.themeLight : extra.themeDark;
+    const dark = document.documentElement.dataset.theme === "dark";
+    themeToggle.setAttribute("aria-label", dark
+      ? (language === "en" ? "Use light theme" : "استخدام المظهر الفاتح")
+      : (language === "en" ? "Use dark theme" : "استخدام المظهر الداكن"));
+  }
   document.body.dataset.lang = language;
   refreshSelectLanguageText();
   replaceExactVisibleText(language === "en" ? uiExactEnglish : uiExactArabic);
@@ -1312,6 +1403,7 @@ applyUiLanguage = function applyUiLanguageExpanded(language) {
     if (plannerTitle) plannerTitle.textContent = plannerTitle.textContent.replace(" - فهرس البرنامج", " - catalog only").replace(" - مخطط المقررات", " - course planner");
     if (saveStatus) saveStatus.textContent = saveStatus.textContent.replace(/تم استيراد (\d+) مقرر وحفظه على هذا الجهاز\./, "Imported and saved $1 courses on this device.");
   }
+  applyTextLanguageHints();
 };
 if (uiLanguageToggle) {
   uiLanguageToggle.addEventListener("click", () => {

@@ -25,17 +25,31 @@
               <small>King Abdulaziz University Planner</small>
             </span>
           </a>
-          <button id="menuToggle" class="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav">القائمة</button>
-        </div>
-        <div class="headerActions">
-          <button id="languageToggle" class="languageToggle secondaryButton" type="button">English</button>
-          <button id="themeToggle" class="secondaryButton" type="button" aria-pressed="false">Dark</button>
         </div>
         <nav id="siteNav" class="siteNav" aria-label="التنقل الرئيسي">
-          <a class="navLink active" href="#home">الرئيسية</a>
+          <a class="navLink active" href="#home" aria-current="page">الرئيسية</a>
           <a class="navLink" href="#planner">المخطط</a>
           <a class="navLink" href="#sources">المصادر الرسمية</a>
         </nav>
+        <div class="headerActions">
+          <div id="microsoftLogin" class="accountArea">
+            <p id="microsoftLoginStatus" class="srOnly" aria-live="polite">جار التحقق من حالة تسجيل الدخول...</p>
+            <a id="microsoftLoginButton" class="accountButton" href="/.auth/login/aad?post_login_redirect_uri=/" hidden>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0" /></svg>
+              <span>تسجيل الدخول</span>
+            </a>
+            <button id="microsoftLogoutButton" class="accountButton" type="button" hidden>تسجيل الخروج</button>
+          </div>
+          <button id="languageToggle" class="headerControl languageToggle" type="button" aria-label="تغيير اللغة">EN</button>
+          <button id="themeToggle" class="headerControl themeControl" type="button" aria-pressed="false" aria-label="تبديل المظهر">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 15.5A8 8 0 0 1 8.5 5 8 8 0 1 0 19 15.5Z" /></svg>
+            <span>داكن</span>
+          </button>
+          <button id="menuToggle" class="headerControl menuToggle" type="button" aria-expanded="false" aria-controls="siteNav">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+            <span>القائمة</span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -43,63 +57,115 @@
       <section id="home" class="heroSection">
         <div class="heroInner">
           <div class="heroCopy">
-            <p class="eyebrow">أداة مساعدة للطلاب</p>
-            <h1>خطط مقرراتك بوضوح قبل التسجيل</h1>
+            <p class="eyebrow">مخطط أكاديمي للطلاب</p>
+            <h1>خطّط لمسيرتك الجامعية<br /><em>بكل وضوح وثقة</em></h1>
             <p class="heroText">
-              اختر كليتك وتخصصك، حدد المقررات التي اجتزتها، واعرف المقررات المتاحة أو المحجوبة بسبب المتطلبات السابقة.
+              اختر تخصصك، حدّد المواد التي أنجزتها، وتعرّف على المواد المتاحة والمتطلبات المتبقية حتى التخرج.
             </p>
             <div class="heroActions">
-              <a class="primaryLink" href="#planner">ابدأ التخطيط</a>
-              <a class="secondaryLink" href="#sources">راجع المصادر</a>
+              <a class="primaryLink" href="#planner">ابدأ التخطيط <span aria-hidden="true">←</span></a>
+              <a class="secondaryLink" href="#planner">استكشف التخصصات</a>
             </div>
           </div>
-          <div class="heroPanel" aria-label="ملخص وظائف المخطط">
-            <div>
-              <span>التقدم</span>
-              <strong id="progressText">Loading...</strong>
+          <div class="planningVisual" aria-hidden="true">
+            <div class="visualBadge">
+              <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6" /></svg>
+              <span id="progressText">0%</span>
             </div>
-            <div>
-              <span>الكليات</span>
-              <strong>34</strong>
+            <div class="visualLaptop">
+              <div class="visualScreen">
+                <div class="visualWindowDots"><i></i><i></i><i></i></div>
+                <div class="visualTitle" id="heroPlanLabel">الخطة الدراسية</div>
+                <div class="visualCourse"><span></span><i></i></div>
+                <div class="visualCourse"><span></span><i></i></div>
+                <div class="visualCourse short"><span></span><i></i></div>
+              </div>
+              <div class="visualBase"></div>
             </div>
-            <div>
-              <span>البرامج</span>
-              <strong>67</strong>
+            <div class="visualBooks">
+              <i></i><i></i><i></i>
+              <svg viewBox="0 0 64 40"><path d="M4 20 32 6l28 14-28 14L4 20Zm12 7v8m32-8v8M58 21v12" /></svg>
+            </div>
+            <div class="visualPlant">
+              <svg class="visualPlantArt" viewBox="0 0 120 170">
+                <ellipse class="plantGroundShadow" cx="60" cy="164" rx="31" ry="5" />
+                <g class="plantStems">
+                  <path d="M60 133C61 105 55 66 61 26" />
+                  <path d="M60 47C49 42 37 33 28 23M59 59C73 53 84 43 94 34" />
+                  <path d="M58 77C45 71 34 64 22 55M59 88C74 80 88 71 101 61" />
+                  <path d="M59 103C47 99 35 91 23 82M60 113C74 105 86 96 98 87" />
+                  <path d="M60 125C50 121 41 114 31 106M61 128C74 120 83 113 92 105" />
+                </g>
+                <g class="plantLeaves">
+                  <path class="plantLeaf plantLeafOne" d="M29 25C18 28 8 23 7 13C16 7 28 8 34 17C35 21 33 23 29 25Z" />
+                  <path class="plantLeaf plantLeafTwo" d="M91 36C96 24 108 18 116 23C116 34 109 43 99 45C95 44 93 41 91 36Z" />
+                  <path class="plantLeaf plantLeafThree" d="M25 59C14 66 3 60 2 50C10 42 22 41 30 49C32 53 29 57 25 59Z" />
+                  <path class="plantLeaf plantLeafFour" d="M98 66C105 53 116 52 119 59C118 71 111 78 102 78C98 76 96 72 98 66Z" />
+                  <path class="plantLeaf plantLeafFive" d="M26 86C14 91 5 86 6 76C15 69 26 71 33 79C33 83 30 85 26 86Z" />
+                  <path class="plantLeaf plantLeafSix" d="M94 91C101 80 112 79 117 86C115 97 107 103 98 102C94 99 92 95 94 91Z" />
+                  <path class="plantLeaf plantLeafSeven" d="M34 111C24 116 15 112 14 103C21 96 31 97 39 103C40 107 38 109 34 111Z" />
+                  <path class="plantLeaf plantLeafEight" d="M88 111C93 102 102 99 109 104C109 113 104 120 95 121C91 119 89 116 88 111Z" />
+                </g>
+                <g class="plantVeins">
+                  <path d="M32 18L15 14M94 35L111 27M29 51L10 51M101 65L115 60" />
+                  <path d="M31 80L12 77M97 91L112 86M37 105L20 103M91 109L105 105" />
+                </g>
+                <g class="plantPot">
+                  <path class="plantPotBody" d="M32 130C34 148 39 159 60 161C81 159 86 148 88 130Z" />
+                  <ellipse class="plantPotRim" cx="60" cy="130" rx="28" ry="6" />
+                  <ellipse class="plantPotInner" cx="60" cy="129" rx="23" ry="3" />
+                  <path class="plantPotHighlight" d="M41 136C42 145 45 151 50 154" />
+                </g>
+              </svg>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="featureBand" aria-label="مميزات المخطط">
-        <article class="featureCard">
-          <span class="featureIcon" aria-hidden="true">✓</span>
-          <h2>المقررات المجتازة</h2>
-          <p>احفظ تقدمك على جهازك الحالي بدون حساب أو رقم جامعي.</p>
+      <section class="homeSummary" aria-label="ملخص التقدم الدراسي">
+        <article class="summaryCard summaryCreditsDone">
+          <div class="summaryIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8.5 12 5l8 3.5-8 3.5-8-3.5Zm3 3v4.5c3 2 7 2 10 0v-4.5M20 9v6" /></svg></div>
+          <div><span id="homeCreditsDoneLabel">الساعات المنجزة</span><strong id="homeCreditsCompleted">--</strong><small id="homeCreditsDoneUnit">ساعة</small></div>
         </article>
-        <article class="featureCard">
-          <span class="featureIcon" aria-hidden="true">↗</span>
-          <h2>المتاح للتسجيل</h2>
-          <p>اعرف المقررات التي يمكن أخذها بناء على المتطلبات.</p>
+        <article class="summaryCard summaryCreditsLeft">
+          <div class="summaryIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 7v5l3 2m6-2a9 9 0 1 1-3-6.7" /></svg></div>
+          <div><span id="homeCreditsLeftLabel">الساعات المتبقية</span><strong id="homeCreditsRemaining">--</strong><small id="homeCreditsLeftUnit">ساعة</small></div>
         </article>
-        <article class="featureCard">
-          <span class="featureIcon" aria-hidden="true">!</span>
-          <h2>المتطلبات الناقصة</h2>
-          <p>تظهر المقررات المحجوبة مع سبب الحجب.</p>
+        <article class="summaryCard summaryProgress">
+          <div><span id="homeProgressLabel">نسبة الإنجاز</span><strong id="homeProgressValue">0%</strong></div>
+          <div id="homeProgressBar" class="summaryProgressBar" role="progressbar" aria-label="نسبة الإنجاز" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>
+        </article>
+        <article class="summaryCard summaryAvailable">
+          <div class="summaryIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Zm4 9 2 2 4-4" /></svg></div>
+          <div><span id="homeAvailableLabel">المواد المتاحة</span><strong id="homeAvailableCount">0</strong><small id="homeAvailableUnit">مادة</small></div>
+        </article>
+        <article class="summaryCard summaryBlocked">
+          <div class="summaryIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10V7a5 5 0 0 1 10 0v3m-11 0h12v10H6V10Zm6 4v2" /></svg></div>
+          <div><span id="homeBlockedLabel">المواد المقفلة</span><strong id="homeBlockedCount">0</strong><small id="homeBlockedUnit">مادة</small></div>
         </article>
       </section>
 
-      <section id="microsoftLogin" class="accessSection" aria-label="تسجيل دخول اختياري بحساب Microsoft">
-        <div class="accessCopy">
-          <p class="eyebrow">تسجيل اختياري</p>
-          <h2>اختياري: سجل الدخول بحساب Microsoft</h2>
-          <p>يمكنك استخدام المخطط بدون تسجيل. تسجيل Microsoft اختياري للتعريف بحسابك الجامعي عند تفعيل المزامنة لاحقًا.</p>
+      <section class="featureSection" aria-labelledby="featuresTitle">
+        <div class="sectionIntro">
+          <p class="eyebrow">تخطيط أبسط، وقرارات أوضح</p>
+          <h2 id="featuresTitle">كل ما تحتاجه لرؤية خطتك بوضوح</h2>
         </div>
-        <div id="microsoftLoginPanel" class="microsoftLoginPanel">
-          <p id="microsoftLoginStatus" class="loginMessage">جار التحقق من حالة تسجيل الدخول...</p>
-          <div class="microsoftLoginActions">
-            <a id="microsoftLoginButton" class="primaryLink" href="/.auth/login/aad?post_login_redirect_uri=/" hidden>تسجيل الدخول بحساب Microsoft</a>
-            <button id="microsoftLogoutButton" class="secondaryButton" type="button" hidden>تسجيل الخروج</button>
-          </div>
+        <div class="featureBand">
+          <article class="featureCard">
+            <span class="featureIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h4l2 3 4-8 2 5h2" /></svg></span>
+            <h3>تابع تقدمك الدراسي</h3>
+            <p>راقب الساعات المنجزة والمتبقية ونسبة التقدم في الخطة.</p>
+          </article>
+          <article class="featureCard">
+            <span class="featureIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8.5 12 5l8 3.5-8 3.5-8-3.5Zm3 3v4.5c3 2 7 2 10 0v-4.5" /></svg></span>
+            <h3>اعرف موادك المتاحة</h3>
+            <p>يوضّح لك النظام المواد التي يمكنك تسجيلها بناءً على المتطلبات السابقة.</p>
+          </article>
+          <article class="featureCard">
+            <span class="featureIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 10V7a5 5 0 0 1 10 0v3m-11 0h12v10H6V10Zm6 4v2" /></svg></span>
+            <h3>بياناتك محفوظة على جهازك</h3>
+            <p>يمكنك استخدام المخطط محليًا دون الحاجة إلى تسجيل الدخول.</p>
+          </article>
         </div>
       </section>
 
@@ -189,16 +255,63 @@
       </section>
 
       <section id="sources" class="sourceSection">
-        <div>
-          <p class="eyebrow">تنبيه مهم</p>
+        <div class="sourceIcon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 8v5m0 4h.01M4.5 20h15a2 2 0 0 0 1.7-3L13.7 4a2 2 0 0 0-3.4 0L2.8 17a2 2 0 0 0 1.7 3Z" /></svg>
+        </div>
+        <div class="sourceCopy">
+          <p class="eyebrow">مشروع طلابي مستقل</p>
           <h2>المصادر الرسمية هي المرجع النهائي</h2>
-          <p>
-            هذا الموقع يساعدك على التخطيط والفهم، لكنه لا يستبدل أنظمة الجامعة أو المرشد الأكاديمي أو الخطة الرسمية المنشورة من الجامعة.
-          </p>
+          <p>هذا مشروع طلابي مستقل، والمصادر الرسمية لجامعة الملك عبدالعزيز هي المرجع النهائي للخطط واللوائح الأكاديمية.</p>
         </div>
         <a class="secondaryLink" href="https://kau.edu.sa/en/programs" target="_blank" rel="noreferrer">فتح برامج الجامعة الرسمية</a>
       </section>
     </main>
+
+    <footer class="siteFooter">
+      <div class="footerInner">
+        <a class="footerIdentity" href="#home">
+          <span class="footerMark" aria-hidden="true">
+            <svg class="footerBrandIcon" viewBox="0 0 48 48" focusable="false">
+              <path class="brandIconSheet" d="M10 11.5C10 8.5 12.5 6 15.5 6H31l7 7v23.5c0 3-2.5 5.5-5.5 5.5h-17C12.5 42 10 39.5 10 36.5v-25Z" />
+              <path class="brandIconFold" d="M31 6v7h7" />
+              <path class="brandIconLine" d="M17 17h10M17 23h14M17 29h7" />
+              <path class="brandIconCheck" d="M26 32.5l3.2 3.2L36 27.8" />
+              <path class="brandIconSpark" d="M15 9.5l1.3 2.3 2.4 1.2-2.4 1.2-1.3 2.3-1.3-2.3-2.4-1.2L15 9.5Z" />
+            </svg>
+          </span>
+          <span>
+            <strong>
+              <span data-footer-lang="ar">مخطط المقررات</span>
+              <span data-footer-lang="en">Course Planner</span>
+            </strong>
+            <small>King Abdulaziz University Planner</small>
+          </span>
+        </a>
+
+        <nav class="footerNav" aria-label="Footer navigation">
+          <a href="#home">
+            <span data-footer-lang="ar">الرئيسية</span>
+            <span data-footer-lang="en">Home</span>
+          </a>
+          <a href="#planner">
+            <span data-footer-lang="ar">المخطط الأكاديمي</span>
+            <span data-footer-lang="en">Academic planner</span>
+          </a>
+          <a href="#sources">
+            <span data-footer-lang="ar">المصادر الرسمية</span>
+            <span data-footer-lang="en">Official sources</span>
+          </a>
+        </nav>
+
+        <div class="footerMeta">
+          <p>
+            <span data-footer-lang="ar">أداة طلابية مستقلة للتخطيط الأكاديمي الواضح.</span>
+            <span data-footer-lang="en">An independent student tool for clearer academic planning.</span>
+          </p>
+          <span>© 2026 KAU Academic Planner</span>
+        </div>
+      </div>
+    </footer>
 
     <script src="app.js"></script>
   </body>
