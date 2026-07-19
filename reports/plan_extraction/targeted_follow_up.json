@@ -1,0 +1,232 @@
+{
+  "generated_at": "2026-07-18T13:18:11Z",
+  "mode": "targeted_official_follow_up",
+  "programs_checked": 14,
+  "programs": [
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-electrical-engineering-power-and-machines",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة الكهربائية (قوى و آلات)",
+      "program_name_en": "Bachelor of Science in Electrical Engineering (Power and Machines)",
+      "faculty_id": "EN",
+      "degree_level": "bachelor",
+      "official_urls_checked": [
+        "https://kau.edu.sa/ar/programs/electrical-engineering-power-and-machines-bachelor-of-science",
+        "https://kau.edu.sa/en/programs/electrical-engineering-power-and-machines-bachelor-of-science",
+        "https://kau.edu.sa/faculty/ar/engineering/programs",
+        "https://kau.edu.sa/faculty/en/engineering/programs"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "no_plan_found",
+      "verification_notes": "The alternate current program detail page and both faculty indexes were checked. The page advertises a Study Plan control but publishes neither level/course rows nor a linked document."
+    },
+    {
+      "program_id": "ri-bachelor-computer-science",
+      "program_name_ar": "بكالوريوس علوم الحاسبات",
+      "program_name_en": "Bachelor of Computer Science",
+      "faculty_id": "RI",
+      "degree_level": "bachelor",
+      "official_urls_checked": [
+        "https://kau.edu.sa/faculty/ar/computing-it-rabigh",
+        "https://kau.edu.sa/faculty/en/computing-it-rabigh",
+        "https://kau.edu.sa/faculty/ar/computing-it-rabigh/programs",
+        "https://kau.edu.sa/faculty/en/computing-it-rabigh/programs"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "no_plan_found",
+      "verification_notes": "The bilingual faculty home and programs index were checked; they confirm the program but expose no structured plan table or official plan document."
+    },
+    {
+      "program_id": "ri-bachelor-information-systems",
+      "program_name_ar": "بكالوريوس نظم المعلومات",
+      "program_name_en": "Bachelor of Information Systems",
+      "faculty_id": "RI",
+      "degree_level": "bachelor",
+      "official_urls_checked": [
+        "https://kau.edu.sa/faculty/ar/computing-it-rabigh",
+        "https://kau.edu.sa/faculty/en/computing-it-rabigh",
+        "https://kau.edu.sa/faculty/ar/computing-it-rabigh/programs",
+        "https://kau.edu.sa/faculty/en/computing-it-rabigh/programs"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "no_plan_found",
+      "verification_notes": "The bilingual faculty home and programs index were checked; they confirm the program but expose no structured plan table or official plan document."
+    },
+    {
+      "program_id": "ri-bachelor-information-technology",
+      "program_name_ar": "بكالوريوس تقنية المعلومات",
+      "program_name_en": "Bachelor of Information Technology",
+      "faculty_id": "RI",
+      "degree_level": "bachelor",
+      "official_urls_checked": [
+        "https://kau.edu.sa/faculty/ar/computing-it-rabigh",
+        "https://kau.edu.sa/faculty/en/computing-it-rabigh",
+        "https://kau.edu.sa/faculty/ar/computing-it-rabigh/programs",
+        "https://kau.edu.sa/faculty/en/computing-it-rabigh/programs"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "no_plan_found",
+      "verification_notes": "The bilingual faculty home and programs index were checked; they confirm the program but expose no structured plan table or official plan document."
+    },
+    {
+      "program_id": "ed-doctorate-psychological-educational-counseling",
+      "program_name_ar": "دكتوراه الإرشاد النفسي والتربوي",
+      "program_name_en": "PhD in Psychological and Educational Counseling",
+      "faculty_id": "ED",
+      "degree_level": "doctorate",
+      "official_urls_checked": [
+        "https://kau.edu.sa/faculty/ar/education/page/department-of%20psychology",
+        "https://kau.edu.sa/faculty/en/education/page/department-of%20psychology",
+        "https://kau.edu.sa/faculty/ar/education/programs",
+        "https://kau.edu.sa/faculty/en/education/programs"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "no_plan_found",
+      "verification_notes": "The official bilingual department source pages and faculty programs index were checked. They confirm the program but provide no levels with coded, credit-bearing course rows."
+    },
+    {
+      "program_id": "ed-professional-master-special-education",
+      "program_name_ar": "الماجستير المهني في التربية الخاصة",
+      "program_name_en": "Professional Master's Program in Special Education",
+      "faculty_id": "ED",
+      "degree_level": "executive_master",
+      "official_urls_checked": [
+        "https://kau.edu.sa/faculty/ar/education/page/department-of-special-education",
+        "https://kau.edu.sa/faculty/en/education/page/department-of-special-education",
+        "https://kau.edu.sa/faculty/ar/education/programs",
+        "https://kau.edu.sa/faculty/en/education/programs"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "no_plan_found",
+      "verification_notes": "The official bilingual department source pages and faculty programs index were checked. They confirm the program but provide no levels with coded, credit-bearing course rows."
+    },
+    {
+      "program_id": "catalog-executive-masters-in-crisis-and-disaster-management",
+      "program_name_ar": "الماجستير التنفيذي في ادارة الأزمات والكوارث",
+      "program_name_en": "Executive Master's in Crisis and Disaster Management",
+      "faculty_id": "ER",
+      "degree_level": "executive_master",
+      "official_urls_checked": [
+        "https://kau.edu.sa/ar/programs/executive-masters-in-crisis-and-disaster-management",
+        "https://kau.edu.sa/en/programs/executive-masters-in-crisis-and-disaster-management",
+        "https://kau.edu.sa/web/static/4d96a047-45aa-4147-98c3-9602b2fd73d5"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "requires_manual_review",
+      "verification_notes": "An official 1447 AH KAU PDF contains four semesters, eight coded required/research courses, fourteen coded elective options, credit hours, and required/elective labels. Manual review is required to map six semester elective placeholders to the option pool and verify the PDF pagination/rendering anomaly."
+    },
+    {
+      "program_id": "ed-master-educational-guidance-counseling",
+      "program_name_ar": "ماجستير التوجيه والإرشاد التربوي",
+      "program_name_en": "Master's Program in Educational Guidance and Counseling",
+      "faculty_id": "ED",
+      "degree_level": "master",
+      "official_urls_checked": [
+        "https://kau.edu.sa/faculty/ar/education/page/department-of%20psychology",
+        "https://kau.edu.sa/faculty/en/education/page/department-of%20psychology",
+        "https://kau.edu.sa/faculty/ar/education/programs",
+        "https://kau.edu.sa/faculty/en/education/programs"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "no_plan_found",
+      "verification_notes": "The official bilingual department source pages and faculty programs index were checked. They confirm the program but provide no levels with coded, credit-bearing course rows."
+    },
+    {
+      "program_id": "ed-master-special-education",
+      "program_name_ar": "ماجستير التربية الخاصة",
+      "program_name_en": "Master's Program in Special Education",
+      "faculty_id": "ED",
+      "degree_level": "master",
+      "official_urls_checked": [
+        "https://kau.edu.sa/faculty/ar/education/page/department-of-special-education",
+        "https://kau.edu.sa/faculty/en/education/page/department-of-special-education",
+        "https://kau.edu.sa/faculty/ar/education/programs",
+        "https://kau.edu.sa/faculty/en/education/programs"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "no_plan_found",
+      "verification_notes": "The official bilingual department source pages and faculty programs index were checked. They confirm the program but provide no levels with coded, credit-bearing course rows."
+    },
+    {
+      "program_id": "ph-master-molecular-drug-discovery-development",
+      "program_name_ar": "ماجستير العلوم في الاكتشاف والتطوير الجزيئي للأدوية",
+      "program_name_en": "MSc in Molecular Drug Discovery and Development",
+      "faculty_id": "PH",
+      "degree_level": "master",
+      "official_urls_checked": [
+        "https://kau.edu.sa/faculty/ar/pharmacy",
+        "https://kau.edu.sa/faculty/en/pharmacy",
+        "https://kau.edu.sa/faculty/ar/pharmacy/programs",
+        "https://kau.edu.sa/faculty/en/pharmacy/programs"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "no_plan_found",
+      "verification_notes": "The bilingual pharmacy faculty/program pages and current official admission-exam announcement were checked. They confirm the program but do not publish a usable study plan."
+    },
+    {
+      "program_id": "ph-master-pharmaceutics",
+      "program_name_ar": "ماجستير العلوم في الصيدلانيات",
+      "program_name_en": "MSc in Pharmaceutics",
+      "faculty_id": "PH",
+      "degree_level": "master",
+      "official_urls_checked": [
+        "https://kau.edu.sa/faculty/ar/pharmacy",
+        "https://kau.edu.sa/faculty/en/pharmacy",
+        "https://kau.edu.sa/faculty/ar/pharmacy/programs",
+        "https://kau.edu.sa/faculty/en/pharmacy/programs"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "no_plan_found",
+      "verification_notes": "The bilingual pharmacy faculty/program pages and current official admission-exam announcement were checked. They confirm the program but do not publish a usable study plan."
+    },
+    {
+      "program_id": "ph-master-pharmacology-toxicology",
+      "program_name_ar": "ماجستير العلوم في علم الأدوية والسموم",
+      "program_name_en": "MSc in Pharmacology and Toxicology",
+      "faculty_id": "PH",
+      "degree_level": "master",
+      "official_urls_checked": [
+        "https://kau.edu.sa/faculty/ar/pharmacy",
+        "https://kau.edu.sa/faculty/en/pharmacy",
+        "https://kau.edu.sa/faculty/ar/pharmacy/programs",
+        "https://kau.edu.sa/faculty/en/pharmacy/programs"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "no_plan_found",
+      "verification_notes": "The bilingual pharmacy faculty/program pages and current official admission-exam announcement were checked. They confirm the program but do not publish a usable study plan."
+    },
+    {
+      "program_id": "catalog-department-of-physical-therapy-graduate-program",
+      "program_name_ar": "ماجستير العلاج الطبيعي برنامج الدراسات العليا",
+      "program_name_en": "Master's Degree of Physical Therapy Graduate Program",
+      "faculty_id": "RH",
+      "degree_level": "master",
+      "official_urls_checked": [
+        "https://kau.edu.sa/ar/programs/department-of-physical-therapy-graduate-program",
+        "https://kau.edu.sa/en/programs/department-of-physical-therapy-graduate-program",
+        "https://kau.edu.sa/faculty/ar/medical-rehabilitation/programs",
+        "https://kau.edu.sa/faculty/en/medical-rehabilitation/programs"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "no_plan_found",
+      "verification_notes": "The bilingual program detail and faculty program index were checked. They publish description, duration, and degree metadata but no coded course rows with credit hours."
+    },
+    {
+      "program_id": "ph-doctor-of-pharmacy",
+      "program_name_ar": "دكتور صيدلي",
+      "program_name_en": "Doctor of Pharmacy (PharmD)",
+      "faculty_id": "PH",
+      "degree_level": "other",
+      "official_urls_checked": [
+        "https://admission.kau.edu.sa/Default-166-AR",
+        "https://kau.edu.sa/en/student-achievement/80e897dc-bcf4-444c-9f14-cfc67c008b03",
+        "https://kau.edu.sa/ar/faculty/pharmacy",
+        "https://kau.edu.sa/en/faculty/pharmacy",
+        "https://kau.edu.sa/faculty/ar/pharmacy/programs",
+        "https://kau.edu.sa/faculty/en/pharmacy/programs"
+      ],
+      "accessed_at": "2026-07-18",
+      "outcome": "broken_source",
+      "verification_notes": "The English achievement page and bilingual pharmacy pages publish no usable plan. The catalog Arabic admission host could not be resolved during the audit, so this remains a broken-source/manual discovery item."
+    }
+  ]
+}
