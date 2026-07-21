@@ -2524,11 +2524,11 @@
       "faculty_name": "economics and administration",
       "program_code": "Master of Business Economics",
       "official_source_url": "https://kau.edu.sa/en/programs/business-economics",
-      "planner_available": false,
-      "planner_data_key": null,
-      "catalog_status": "catalog-only",
-      "catalog_note_ar": "الخطة غير متاحة حاليًا.",
-      "catalog_note_en": "The detailed study plan has not been added yet."
+      "planner_available": true,
+      "planner_data_key": "catalog-business-economics",
+      "catalog_status": "active",
+      "catalog_note_ar": "الخطة الدراسية متاحة في المخطط.",
+      "catalog_note_en": "The detailed study plan is available."
     },
     {
       "id": "catalog-executive-master-in-human-resource-management",
@@ -19771,11 +19771,11 @@
       "faculty_name": "marine sciences",
       "program_code": "MS-MC-TG-MR",
       "official_source_url": "https://kau.edu.sa/en/programs/masters-in-marine-chemistry",
-      "planner_available": false,
-      "planner_data_key": null,
-      "catalog_status": "catalog-only",
-      "catalog_note_ar": "الخطة غير متاحة حاليًا.",
-      "catalog_note_en": "The detailed study plan has not been added yet."
+      "planner_available": true,
+      "planner_data_key": "catalog-masters-in-marine-chemistry",
+      "catalog_status": "active",
+      "catalog_note_ar": "الخطة الدراسية متاحة في المخطط.",
+      "catalog_note_en": "The detailed study plan is available."
     },
     {
       "id": "catalog-masters-in-marine-geology",
@@ -19837,11 +19837,11 @@
       "faculty_name": "marine sciences",
       "program_code": "MS-MP-TG-MR",
       "official_source_url": "https://kau.edu.sa/en/programs/masters-in-marine-physics",
-      "planner_available": false,
-      "planner_data_key": null,
-      "catalog_status": "catalog-only",
-      "catalog_note_ar": "الخطة غير متاحة حاليًا.",
-      "catalog_note_en": "The detailed study plan has not been added yet."
+      "planner_available": true,
+      "planner_data_key": "catalog-masters-in-marine-physics",
+      "catalog_status": "active",
+      "catalog_note_ar": "الخطة الدراسية متاحة في المخطط.",
+      "catalog_note_en": "The detailed study plan is available."
     },
     {
       "faculty_id": "RH",

@@ -100,13 +100,20 @@ function programId(program) {
   return program.id || normalize(program.program_name).toLowerCase() || "accounting";
 }
 
+function requiresCommonFoundation(program) {
+  return (
+    program?.faculty_id === "EA"
+    && program?.degree_level === "Bachelor's degree"
+  );
+}
+
 function withCommonFoundation(program) {
   const updated = JSON.parse(JSON.stringify(program || {}));
   if (updated.catalog_status === "catalog-only") {
     updated.courses = [];
     return updated;
   }
-  if (updated.faculty_id && updated.faculty_id !== "EA") {
+  if (!requiresCommonFoundation(updated)) {
     updated.courses = Array.isArray(updated.courses) ? updated.courses : [];
     return updated;
   }

@@ -63,6 +63,37 @@ PILOTS = {
         "no_prerequisites": True,
         "special_course": ("MG 699", "Master's Thesis", 10),
     },
+    "catalog-business-economics": {
+        "count": 10, "credits": 24,
+        "levels": {"Levels 1", "Levels 2", "Levels 3", "Levels 4"},
+        "available": 10, "blocked": 0, "completed": [],
+        "unlocked": set(), "blocked_example": None,
+        "no_prerequisites": True,
+        "special_course": ("ECNE 698", "Research Project", 1),
+    },
+    "catalog-masters-in-marine-chemistry": {
+        "count": 10, "credits": 37,
+        "levels": {"Level 1", "Level 2", "Level 3", "Level 4"},
+        "available": 10, "blocked": 0, "completed": [],
+        "unlocked": set(), "blocked_example": None,
+        "no_prerequisites": True,
+        "special_course": ("MC 699", "M.Sc. Thesis", 10),
+    },
+    "catalog-masters-in-marine-physics": {
+        "count": 9, "credits": 34,
+        "levels": {"Level 1", "Level 2", "Level 3", "Level 4"},
+        "available": 9, "blocked": 0, "completed": [],
+        "unlocked": set(), "blocked_example": None,
+        "no_prerequisites": True,
+        "special_course": ("MP 699", "M.Sc. Thesis", 10),
+    },
+}
+
+
+BATCH_2 = {
+    "catalog-business-economics",
+    "catalog-masters-in-marine-chemistry",
+    "catalog-masters-in-marine-physics",
 }
 
 
@@ -107,15 +138,15 @@ class PilotImportDataTests(unittest.TestCase):
             for p in load("reports/plan_extraction/ready_candidate_reconciliation.json")["programs"]
         }
 
-    def test_exactly_six_verified_candidates_are_promoted(self) -> None:
+    def test_exactly_nine_verified_candidates_are_promoted(self) -> None:
         candidate_ids = set(self.audit)
         promoted = {p["id"] for p in self.catalog if p.get("planner_available")} & candidate_ids
         self.assertEqual(promoted, set(PILOTS))
         self.assertTrue(all(self.audit[p]["new_classification"] == "VERIFIED_IMPORT_READY" for p in PILOTS))
 
     def test_catalog_counts_and_selected_statuses(self) -> None:
-        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 58)
-        self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 165)
+        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 61)
+        self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 162)
         by_id = {p["id"]: p for p in self.catalog}
         for program_id in PILOTS:
             self.assertTrue(by_id[program_id]["planner_available"])
@@ -160,7 +191,7 @@ class PilotImportDataTests(unittest.TestCase):
                     self.assertTrue(all(not c["prerequisites"] for c in courses))
                     self.assertTrue(all(not c["corequisites"] for c in courses))
 
-    def test_all_six_pilots_display_their_calculated_credits(self) -> None:
+    def test_all_nine_pilots_display_their_calculated_credits(self) -> None:
         for program_id, expected in PILOTS.items():
             with self.subTest(program_id=program_id):
                 program = self.data[program_id]
@@ -170,7 +201,7 @@ class PilotImportDataTests(unittest.TestCase):
                 self.assertTrue(display["calculated"])
                 self.assertIsNone(program["total_program_credit_hours"])
 
-    def test_all_six_pilot_progress_metrics_check_and_uncheck(self) -> None:
+    def test_all_nine_pilot_progress_metrics_check_and_uncheck(self) -> None:
         for program_id, expected in PILOTS.items():
             with self.subTest(program_id=program_id):
                 program = self.data[program_id]
@@ -193,7 +224,9 @@ class PilotImportDataTests(unittest.TestCase):
                 )
                 self.assertEqual(checked["remainingCourseCount"], expected["count"] - 1)
                 self.assertEqual(unchecked, initial)
-                self.assertNotIn("NaN", json.dumps([initial, checked, unchecked]))
+                rendered = json.dumps([initial, checked, unchecked])
+                self.assertNotIn("NaN", rendered)
+                self.assertNotIn("null", rendered.lower())
 
     def test_engineering_and_marine_examples(self) -> None:
         examples = {
@@ -232,6 +265,20 @@ class PilotImportDataTests(unittest.TestCase):
                 available = {c["course_code"] for c in after["available_courses"]}
                 self.assertTrue(expected["unlocked"] <= available)
 
+    def test_batch_two_course_code_reuse_is_consistent(self) -> None:
+        all_courses: dict[str, list[tuple[str, str, int]]] = {}
+        for program in self.data.values():
+            for course in program["courses"]:
+                all_courses.setdefault(normalize(course["course_code"]), []).append((
+                    course.get("course_name_ar"),
+                    course.get("course_name_en"),
+                    course.get("credit_hours"),
+                ))
+        for program_id in BATCH_2:
+            for course in self.data[program_id]["courses"]:
+                signatures = all_courses[normalize(course["course_code"])]
+                self.assertTrue(all(signature == signatures[0] for signature in signatures))
+
     def test_special_courses_and_marine_credit_narrative(self) -> None:
         for program_id, expected in PILOTS.items():
             if "special_course" not in expected:
@@ -250,7 +297,7 @@ class PilotImportDataTests(unittest.TestCase):
         ]
         self.assertTrue(any("ما لا يقل عن (34) وحدة دراسية معتمدة" in text for text in descriptions))
 
-    def test_only_six_catalog_entries_differ_from_head(self) -> None:
+    def test_only_three_catalog_entries_differ_from_head(self) -> None:
         original = json.loads(subprocess.check_output(
             ["git", "show", "HEAD:web/data/faculty_catalog.json"],
             cwd=ROOT, text=True,
@@ -263,7 +310,19 @@ class PilotImportDataTests(unittest.TestCase):
             for program_id in current_by_id
             if current_by_id[program_id] != original_by_id[program_id]
         }
-        self.assertEqual(changed, set(PILOTS))
+        self.assertEqual(changed, BATCH_2)
+
+    def test_exactly_three_planner_records_were_added(self) -> None:
+        original = json.loads(subprocess.check_output(
+            ["git", "show", "HEAD:web/data/additional_programs.json"],
+            cwd=ROOT, text=True,
+        ))
+        original_by_id = {p["id"]: p for p in original["programs"]}
+        current_by_id = self.data
+        self.assertEqual(set(current_by_id) - set(original_by_id), BATCH_2)
+        self.assertEqual(set(original_by_id) - set(current_by_id), set())
+        for program_id, original_program in original_by_id.items():
+            self.assertEqual(current_by_id[program_id], original_program)
 
 
 class PilotImportApiTests(unittest.TestCase):
@@ -317,7 +376,60 @@ class PilotImportApiTests(unittest.TestCase):
                 raise AssertionError(f"POST {path} returned HTTP {response.status}")
             return json.loads(response.read().decode())
 
-    def test_existing_api_loads_and_plans_all_six_programs(self) -> None:
+    def test_ea_foundation_is_limited_to_undergraduate_plans(self) -> None:
+        foundation_codes = {
+            "CPIT 110", "ELIS 110", "ISLS 101", "MATH 100", "STAT 110",
+            "ARAB 101", "ECON 107", "ELIS 120", "MATH 110",
+        }
+        raw_programs = {
+            p["id"]: p for p in load("web/data/additional_programs.json")["programs"]
+        }
+        for program_id in ("finance", "marketing"):
+            with self.subTest(program_id=program_id):
+                program = self.get(f"/api/program?major={program_id}")
+                raw_codes = {c["course_code"] for c in raw_programs[program_id]["courses"]}
+                api_codes = {c["course_code"] for c in program["courses"]}
+                self.assertEqual(len(raw_programs[program_id]["courses"]), 34)
+                self.assertEqual(len(program["courses"]), 43)
+                self.assertEqual(api_codes - raw_codes, foundation_codes)
+                plan = self.post(
+                    f"/api/plan?major={program_id}", {"completed_codes": []}
+                )
+                self.assertEqual(len(plan["available_courses"]), 43)
+                self.assertEqual(len(plan["blocked_courses"]), 0)
+
+        accounting = self.get("/api/program?major=accounting")
+        accounting_plan = self.post(
+            "/api/plan?major=accounting", {"completed_codes": []}
+        )
+        self.assertEqual(len(accounting["courses"]), 43)
+        self.assertEqual(accounting["total_program_credit_hours"], 125)
+        self.assertEqual(len(accounting_plan["available_courses"]), 38)
+        self.assertEqual(len(accounting_plan["blocked_courses"]), 5)
+
+        public_policy = self.get(
+            "/api/program?major=catalog-executive-master-in-public-policy"
+        )
+        self.assertEqual(len(public_policy["courses"]), 13)
+        self.assertIsNone(public_policy["total_program_credit_hours"])
+        self.assertTrue(
+            foundation_codes.isdisjoint(c["course_code"] for c in public_policy["courses"])
+        )
+
+        business_economics = self.get(
+            "/api/program?major=catalog-business-economics"
+        )
+        self.assertEqual(len(business_economics["courses"]), 10)
+        self.assertEqual(business_economics["calculated_plan_credit_hours"], 24)
+        self.assertIsNone(business_economics["total_program_credit_hours"])
+        self.assertEqual(displayed_credits(business_economics)["value"], "24")
+        self.assertTrue(
+            foundation_codes.isdisjoint(
+                c["course_code"] for c in business_economics["courses"]
+            )
+        )
+
+    def test_existing_api_loads_and_plans_all_nine_programs(self) -> None:
         summaries = {p["id"]: p for p in self.get("/api/programs")["programs"]}
         for program_id, expected in PILOTS.items():
             with self.subTest(program_id=program_id):

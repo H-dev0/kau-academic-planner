@@ -1,24 +1,24 @@
-# Pilot verified-plan import validation
+# Verified planner import validation
 
 Date: 2026-07-21
 
 ## Scope and Git state
 
 - Project: `/home/hamed/projects/kau-program-scraper`
-- Branch: `pilot-verified-plan-import`
-- Base/HEAD commit: `e2f62c478a288b76854f63e5c89239e4ed2016c4`
-- Pre-edit backup: `/tmp/kau-program-scraper-backup-20260720-7f1c9a`
-  - `tracked.patch`
-  - `pilot_import_validation.md`
-  - `test_pilot_import.py`
-- Before finalization, the pilot changes were uncommitted and local.
-- No browser automation was used. No merge, pull request, deployment, Azure operation, production write, or change to planner/authentication/API/localStorage logic was performed.
+- Branch: `verified-plan-import-batch-2`
+- Base/HEAD commit: `9606e2acf1ad4f50a1650dda2b5af985e3582684`
+- Pre-batch bundle: `/tmp/kau-program-scraper-batch2-preedit-9606e2a.bundle`
+- Pre-server-fix working diff: `/tmp/kau-program-scraper-batch2-before-server-fix.patch`
+- Batch 2 remains uncommitted and local.
+- No browser automation or live university request was used for batch 2.
+- No authentication, localStorage, Azure, deployment, or unrelated API behavior changed.
+- Nothing was committed, pushed, merged, submitted as a pull request, or deployed.
 
-## Active pilot programs
+## Active verified imports
 
-Exactly six verified pilot programs are active:
+Exactly nine reconciled programs are planner-supported:
 
-| Program | Program ID | Courses | Levels/semesters | Calculated credits | Published prerequisites |
+| Program | Program ID | Courses | Levels/semesters | Calculated credits | Published prerequisite references |
 |---|---|---:|---:|---:|---:|
 | Associate Diploma in Applications Development | `catalog-associate-diploma-in-applications-development` | 10 | 2 | 31 | 6 |
 | Executive Master in Public Policy | `catalog-executive-master-in-public-policy` | 13 | 4 | 39 | 10 |
@@ -26,127 +26,143 @@ Exactly six verified pilot programs are active:
 | Executive Master of Health Administration (EMHA) | `catalog-executive-master-of-health-administration-emha` | 15 | 4 | 45 | 0 |
 | Master of Science in Engineering Management | `catalog-master-of-science-in-engineering-management` | 14 | 4 | 42 | 0 |
 | Master's in Marine Geology | `catalog-masters-in-marine-geology` | 9 | 4 | 34 | 0 |
+| Business Economics | `catalog-business-economics` | 10 | 4 | 24 | 0 |
+| Master's in Marine Chemistry | `catalog-masters-in-marine-chemistry` | 10 | 4 | 37 | 0 |
+| Master's in Marine Physics | `catalog-masters-in-marine-physics` | 9 | 4 | 34 | 0 |
 
-The three earlier uncommitted imports were preserved semantically unchanged.
+The six programs committed in batch 1 remain semantically unchanged.
 
-## Newly imported verified programs
+## Batch 2 local source evidence
 
-### Executive Master of Health Administration (EMHA)
+All batch-2 data was copied from `ready_candidate_reconciliation.json`, which classifies each selected record as `VERIFIED_IMPORT_READY`. The saved bilingual source evidence contains these content hashes:
 
-- Exact bilingual program and course names, course codes, levels, credits, and bilingual source URLs were copied from `ready_candidate_reconciliation.json`.
-- 15 courses across four levels total 45 calculated plan credits.
-- No prerequisite or corequisite information was published; all lists remain empty.
-- `HSAE 698`, Applied Research Project, remains an explicit 3-credit row in level 3.
-- The structured official source does not provide an official program-credit total, so `total_program_credit_hours` is `null`.
+| Program | Arabic evidence SHA-256 | English evidence SHA-256 |
+|---|---|---|
+| Business Economics | `f3c95c5b40de323c5d7f5f3667f4ca50d860ad8519eb10c9db2cc275dbd9040b` | `ecfe648930fdf293340e8f16f5e5afa46afa714fd83f72dd0e205cc7483c61c5` |
+| Master's in Marine Chemistry | `7efe243ed3ca9438a93b4e4b822f1f9e2745e537cd6253177aa5c31edce7dbea` | `6b9ec18bd3bde410ed6df8c9934c2263160d961beab9646428414b04eb47f03b` |
+| Master's in Marine Physics | `dbbf93f2dbf4d7b9d5e1b52b8418f30db234c5a1509b156be57fc2ea39e33141` | `57582ff38c67d069542253a0a399fc6f905f345c17ccbb1c6d50b1368d537f16` |
 
-### Master of Science in Engineering Management
+No course, code, translation, credit, level, requisite, or academic rule was inferred.
 
-- Exact bilingual program and course names, course codes, semester labels, credits, and bilingual source URLs were copied from `ready_candidate_reconciliation.json`.
-- 14 courses across four semesters total 42 calculated plan credits.
-- No prerequisite or corequisite information was published; all lists remain empty.
-- `IEEM 698`, Research Project, remains an explicit 3-credit row in the third semester.
-- The structured official source does not provide an official program-credit total, so `total_program_credit_hours` is `null`.
+## Batch 2 program handling
 
-### Master's in Marine Geology
+### Business Economics
 
-- Exact bilingual program and course names, course codes, levels, credits, and bilingual source URLs were copied from `ready_candidate_reconciliation.json`.
-- 9 courses across four levels total 34 calculated plan credits.
-- No prerequisite or corequisite information was published; all lists remain empty.
-- `MG 699`, Master's Thesis, remains an explicit 10-credit row in level 4.
-- `total_program_credit_hours` remains `null` because the structured plan did not publish a machine-readable official total.
-- The official Arabic narrative confirms the student must complete “ما لا يقل عن (34) وحدة دراسية معتمدة” (at least 34 approved credit units), including 10 units for the master's thesis. This narrative corroborates the 34-credit visible-row calculation without converting the structured official-total field from `null`.
+- Arabic name: `ماجستير ‏اقتصاديات الأعمال التنفيذي`
+- English name: `Business Economics`
+- 10 exact bilingual course rows across `Levels 1` through `Levels 4`.
+- Visible rows independently total 24 calculated credits.
+- `official_total_credits` and `total_program_credit_hours` remain `null`.
+- No prerequisites or corequisites are published.
+- `ECNE 698`, Research Project, remains an explicit 1-credit row in `Levels 4`.
 
-## Files changed
+### Master's in Marine Chemistry
 
-The pilot import files remain changed, with these focused presentation files added or updated by the null-display fix:
+- Arabic name: `الماجستير في الكيمياء البحرية`
+- English name: `Master's in Marine Chemistry`
+- 10 exact bilingual course rows across four levels, totaling 37 calculated credits.
+- The official structured total remains `null`.
+- No prerequisites or corequisites are published.
+- `MC 699`, M.Sc. Thesis, remains an explicit 10-credit row in `Level 4`.
 
-- `web/data/additional_programs.json`
-  - Preserves the existing three pilot records and appends exactly the three newly requested records.
-- `web/data/faculty_catalog.json`
-  - Promotes exactly the six pilot entries relative to `HEAD`; the three earlier promotions remain intact and only the three newly requested entries were added in this pass.
-- `tests/test_pilot_import.py`
-  - Extends data-integrity, exact-source, catalog-diff, special-course, planner, and local HTTP/API coverage to all six pilots.
-- `reports/plan_extraction/pilot_import_validation.md`
-  - Records this validation.
-- `web/credit-display.js`
-  - Selects the official or calculated display value and its bilingual presentation label without changing program data.
-- `web/app.js`
-  - Uses the presentation result in the total-credit metric and header metadata.
-- `web/index.html`
-  - Loads the presentation helper before the existing application script.
-- `tests/test_credit_display.py`
-  - Covers official totals, null totals, fallback behavior, bilingual labels, and suppression of visible `null`.
+### Master's in Marine Physics
 
-## Semantic integrity and final counts
+- Arabic name: `الماجستير في الفيزياء البحرية`
+- English name: `Master's in Marine Physics`
+- 9 exact bilingual course rows across four levels, totaling 34 calculated credits.
+- The official structured total remains `null`.
+- No prerequisites or corequisites are published.
+- `MP 699`, M.Sc. Thesis, remains an explicit 10-credit row in `Level 4`.
 
-- Additional planner records: 7 in `HEAD`, 13 now; the six additions are exactly the six pilot IDs.
-- All seven pre-existing planner records are semantically unchanged.
-- Catalog entries changed relative to `HEAD`: exactly the six pilot IDs.
-- Every non-pilot catalog entry remains semantically unchanged.
-- Planner-supported catalog entries: 58.
-- Catalog-only entries: 165.
-- Every imported code, bilingual name, credit value, and level/semester label matches the local verified reconciliation record.
-- All normalized course identities are unique within each pilot.
-- Every recorded prerequisite/corequisite resolves within its plan.
-- No other program was imported.
+## EA common-foundation regression fix
+
+The original `withCommonFoundation` rule treated every Economics and Administration planner record as foundation-eligible unless it belonged to another faculty. It then used exact `level 1`/`level 2` labels to decide whether to prepend nine undergraduate courses and could synthesize a total from the resulting level map.
+
+Business Economics is an EA executive master's program whose official labels are `Levels 1` through `Levels 4`. The old rule therefore changed its API result from 10 to 19 courses and from a null official total to 50.
+
+The server now uses the stable planner award metadata and requires both:
+
+- `faculty_id === "EA"`; and
+- `degree_level === "Bachelor's degree"`.
+
+It does not use program-name matching, course count, total-credit nullability, or level labels to determine eligibility. Business Economics now remains 10 courses, 24 calculated credits, and a null official total through the API.
+
+Regression evidence:
+
+- Accounting remains 43 courses, official total 125, and 38 available/5 blocked with no completed courses.
+- Finance remains 43 courses, official total 125, and 43 available/0 blocked; its 34 raw rows still receive exactly the same nine foundation courses.
+- Marketing also remains 43 courses and receives exactly the same nine foundation courses.
+- Executive Master in Public Policy remains 13 courses and now retains its null official total without undergraduate foundation processing.
+- The other eight imported pilot/batch programs retain their expected API course counts.
+
+## Changed-file scope
+
+Only these files differ from batch-2 `HEAD`:
+
+- `web/data/additional_programs.json`: adds exactly the three batch-2 planner records.
+- `web/data/faculty_catalog.json`: promotes exactly the three matching catalog records.
+- `tests/test_pilot_import.py`: validates all nine imports, exact batch-2 diffs, data fidelity, metrics, API behavior, and EA foundation regressions.
+- `server.js`: narrows foundation eligibility to EA bachelor's-degree planner records.
+- `reports/plan_extraction/pilot_import_validation.md`: records this validation.
+
+No existing planner record, unrelated catalog record, prerequisite, authentication path, localStorage key, Azure setting, or deployment file changed.
+
+## Semantic integrity and counts
+
+- Planner records before/after batch 2: 13 → 16.
+- Exactly three new planner records were added.
+- All 13 pre-existing planner records, including the previous six imports, are semantically unchanged.
+- Exactly three catalog entries changed relative to batch-2 `HEAD`.
+- Total catalog programs: 223.
+- Planner-supported: 58 → 61.
+- Catalog-only / “Plan not added”: 165 → 162.
+- Every batch-2 bilingual name, code, credit, level label, and source URL matches the local reconciliation evidence.
+- Normalized identities are unique within each program.
+- Shared `MS 600` identities are consistent across the marine programs.
+- No requisite is unresolved, and the three batch-2 programs have no prerequisites or corequisites.
+- No visible imported-program metric serializes as `null` or `NaN`.
 
 ## Automated validation
 
-- `PYTHONPATH=src python3 -m unittest tests.test_pilot_import -v`: PASS — 7 tests.
-- `PYTHONPATH=src python3 -m unittest discover -s tests -v`: PASS — 43 tests.
+- `PYTHONPATH=src python3 -m unittest tests.test_pilot_import -v`: PASS — 13 tests.
+- `PYTHONPATH=src python3 -m unittest discover -s tests -v`: PASS — 46 tests.
 - `python3 -m compileall -q src tests`: PASS.
 - `node --check server.js`: PASS.
 - `node --check web/app.js`: PASS.
 - `git diff --check`: PASS.
 - Repository JSON validation: PASS for all 16 JSON files.
-- Semantic comparison against `HEAD`: PASS for exact six planner additions, exact six catalog changes, unchanged base planner records, and final 58/165 counts.
-
-## Null official-total presentation review
-
-- Manual UI review found that Master of Science in Engineering Management and Master's in Marine Geology displayed the literal `null` for the total-credit metric even though their calculated visible-course totals are 42 and 34 respectively.
-- Root cause: the metric rendered `total_program_credit_hours` directly through string conversion. Unlike the nearby header fallback, that conversion did not treat JavaScript `null` as unavailable.
-- Fix: presentation now preserves valid numeric official totals and, only when the official total is null, displays the existing `calculated_plan_credit_hours` value with “Calculated credits” in English or “الساعات المحتسبة” in Arabic. If neither value is available, it displays the localized unavailable text and never `null`.
-- This is display-only. No planner calculation or academic data changed. `total_program_credit_hours` remains `null` for both affected programs; 42 and 34 remain explicitly calculated totals, not invented official totals.
-
-## Remaining-progress metric review
-
-- Manual review found that checking courses in Master of Science in Engineering Management and Master's in Marine Geology did not reduce the remaining-credit metric, despite the total-credit display correctly showing 42 and 34.
-- Root cause: the remaining-credit calculation still read nullable `total_program_credit_hours` directly. It did not use the calculated fallback already used by the total-credit presentation.
-- Fix: planner metrics now share one effective total. A valid numeric official total remains authoritative; otherwise the effective total is the sum of the program's credit-bearing course rows. Remaining credits are the effective total minus completed course credits, clamped to zero.
-- Completed credits, remaining credits, course-based completion percentage, completed-course count, and remaining-course count are derived together on every render. The existing course-based percentage behavior is preserved for Accounting and all previously supported programs.
-- Validation covers all six pilots, including Engineering Management transitions 42 → 39 → 42 for a 3-credit course and Marine Geology transitions 34 → 24 → 34 for the 10-credit thesis. No metric result displays `null` or `NaN`.
-- No academic data, official total, planner prerequisites, API, authentication behavior, or localStorage key changed.
-
-## Final manual browser validation
-
-- All six imported programs can be selected in the planner.
-- None of the six programs displays “Plan not added.”
-- The calculated-credit fallback works for programs whose official structured total remains `null`; Engineering Management displays 42 calculated credits and Marine Geology displays 34 calculated credits.
-- Remaining credits decrease when courses are checked and return to the prior value when those courses are unchecked.
-- No visible credit metric displays `null` or `NaN` in the tested states.
-- Final manual browser review passed for the tested selection, credit-display, and check/uncheck behavior.
 
 ## Local HTTP/API smoke results
 
-The focused suite started the existing Node server on a dynamically selected localhost port and required HTTP 200 plus valid JSON responses.
+A temporary Node server used a dynamically selected localhost port and was stopped afterward.
 
-- `GET /api/programs`: HTTP 200; all six pilot summaries report planner availability and the expected course counts.
-- For each of the six pilot IDs:
-  - `GET /api/program?major=<program-id>`: HTTP 200 with the expected complete course plan.
-  - `POST /api/plan?major=<program-id>` with no completed courses: HTTP 200 with expected available/blocked counts.
-  - `POST /api/plan?major=<program-id>` with the program's focused completion scenario: HTTP 200 with expected unlock behavior.
-- The test teardown terminated the local server. A subsequent process check found no `node server.js` process.
+- Homepage: HTTP 200.
+- All nine imported programs returned HTTP 200 from `GET /api/program?major=<id>`.
+- All nine returned successful plans from `POST /api/plan?major=<id>`.
+- Business Economics: 10 courses and 24 calculated credits.
+- Master's in Marine Chemistry: 10 courses and 37 calculated credits.
+- Master's in Marine Physics: 9 courses and 34 calculated credits.
+- Accounting: 43 courses, total 125, 38 available, 5 blocked.
+- Finance: 43 courses, total 125, 43 available, 0 blocked.
+- No planner request failed.
+
+## Browser and visual-review status
+
+Automated data, API, and planner validation passed for batch 2. Codex Desktop Browser testing was attempted twice, but both attempts failed during setup before a browser tab launched with:
+
+`windows sandbox failed: helper_unknown_error: setup refresh had errors`
+
+No visual UI testing is claimed as passed for batch 2. Visual review remains deferred until the final combined pre-merge review.
 
 ## Blockers
 
-None. The dedicated patch helper could not initialize its Windows filesystem sandbox for this WSL workspace; after two failed no-write attempts, the same unified diffs were applied through local `git apply`. This did not alter scope or validation.
+None. The initial Business Economics API blocker was resolved by the approved award-type gate. The dedicated patch helper could not initialize its Windows filesystem sandbox for this WSL workspace; after failed no-write attempts, equivalent unified diffs were applied through local `git apply`.
 
 ## Final status
 
-- Exactly six pilot programs are active.
-- Exactly six catalog entries differ from the original catalog.
-- Counts are 58 planner-supported and 165 catalog-only.
-- All required checks pass.
-- No server remains running.
-- Final manual browser review passed for the tested behavior.
-- Nothing was merged, submitted as a pull request, or deployed.
+- Exactly nine verified imports are planner-supported.
+- Exactly three planner records and three catalog entries were added/promoted in batch 2.
+- Counts are 223 total, 61 planner-supported, and 162 catalog-only.
+- All required automated and HTTP validations pass.
+- Browser testing was attempted twice and failed before browser launch; visual review remains pending for the final combined pre-merge review.
+- Nothing was committed, pushed, merged, submitted as a pull request, or deployed.
