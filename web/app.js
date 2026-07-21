@@ -1005,7 +1005,8 @@ function applyPlannerPresentationLanguage() {
 }
 
 function creditSummary(completed) {
-  const totalCredits = state.program.total_program_credit_hours;
+  const metrics = creditDisplay.plannerProgressMetrics(state.program, completed);
+  const totalCredits = metrics.effectiveTotalCredits;
   const hasCourseCredits = state.program.courses.some(
     (course) => Number.isInteger(course.credit_hours) && course.credit_hours > 0,
   );
@@ -1023,10 +1024,6 @@ function creditSummary(completed) {
     (course) => Number.isInteger(course.credit_hours) && course.credit_hours > 0,
   );
   const missingCompletedCredits = completed.length - completedWithCredits.length;
-  const completedCredits = completedWithCredits.reduce(
-    (sum, course) => sum + course.credit_hours,
-    0,
-  );
 
   if (missingCompletedCredits > 0 || completed.length === 0) {
     return {
@@ -1040,9 +1037,9 @@ function creditSummary(completed) {
   }
 
   return {
-    completedText: String(completedCredits),
-    remainingText: Number.isInteger(totalCredits)
-      ? String(Math.max(totalCredits - completedCredits, 0))
+    completedText: String(metrics.completedCredits),
+    remainingText: Number.isFinite(metrics.remainingCredits)
+      ? String(metrics.remainingCredits)
       : "Unknown",
     note: "",
   };
@@ -1416,10 +1413,12 @@ function renderList(target, items, emptyText, kind) {
 function render() {
   const plan = buildPlan();
   const total = (state.program.courses || []).length;
-  const percent = total ? Math.round((plan.completed.length / total) * 100) : 0;
+  const progressMetrics = creditDisplay.plannerProgressMetrics(state.program, plan.completed);
+  const percent = progressMetrics.completionPercentage;
   const credits = creditSummary(plan.completed);
   const optionalItems = optionalCourses();
   const text = plannerText();
+  const totalCreditDisplay = creditDisplay.programCreditDisplay(state.program, currentLanguageSafe());
   const hasProgram = !isNoSelection() && !isNoPrograms();
 
   const titleName = shortProgramName(localizedProgramName(state.program)) || textFor("chooseMajor");
@@ -1467,9 +1466,9 @@ function render() {
   if (plannerCourseMeta) plannerCourseMeta.textContent = isCatalogOnly() ? (currentLanguageSafe() === "en" ? "Plan not added" : "الخطة غير مضافة") : formatCourseCount(total);
   if (plannerCreditMeta) plannerCreditMeta.textContent = isCatalogOnly()
     ? localizedDegreeLevel(state.program)
-    : state.program.total_program_credit_hours
-      ? state.program.total_program_credit_hours + " " + text.credit
-      : text.unavailable;
+    : totalCreditDisplay.value === text.unavailable
+      ? text.unavailable
+      : totalCreditDisplay.value + " " + text.credit;
 
   progressText.textContent = `${percent}%`;
   if (degreeProgressValue) degreeProgressValue.textContent = `${percent}%`;
@@ -1483,7 +1482,9 @@ function render() {
   availableCount.textContent = plan.available.length;
   blockedCount.textContent = plan.blocked.length;
   if (totalCourseCount) totalCourseCount.textContent = total;
-  officialCredits.textContent = displayCreditValue(state.program.total_program_credit_hours);
+  officialCredits.textContent = totalCreditDisplay.value;
+  const totalCreditLabel = document.querySelector("#creditsTotalLabel");
+  if (totalCreditLabel) totalCreditLabel.textContent = totalCreditDisplay.label;
   creditsCompleted.textContent = displayCreditValue(credits.completedText);
   creditsRemaining.textContent = displayCreditValue(credits.remainingText);
   if (homeCreditsCompleted) homeCreditsCompleted.textContent = credits.completedText;
