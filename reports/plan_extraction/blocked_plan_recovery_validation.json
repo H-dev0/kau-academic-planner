@@ -1,0 +1,112 @@
+{
+  "generated_at": "2026-07-22",
+  "mode": "verified_official_kau_evidence_only",
+  "branch": "blocked-plan-recovery-batch",
+  "starting_counts": {
+    "total_programs": 223,
+    "planner_supported": 72,
+    "catalog_only": 151
+  },
+  "final_counts": {
+    "total_programs": 223,
+    "planner_supported": 72,
+    "catalog_only": 151
+  },
+  "summary": {
+    "attempted": 8,
+    "imported": 0,
+    "skipped": 8,
+    "planner_elective_group_support_required": 4
+  },
+  "raw_source_directory": "data/raw/kau/plan_audit/blocked_plan_recovery_2026-07-22",
+  "raw_sources_are_git_ignored": true,
+  "sources": [
+    {"program_id":"catalog-executive-master-in-digital-media","language":"ar","title":"برنامج الماجستيرالتنفيذي في الإعلام الرقمي","url":"https://kau.edu.sa/ar/programs/executive-master-in-digital-media","retrieved_at":"2026-07-22","capture":"executive-master-in-digital-media-ar.html","sha256":"aa0068da3e157bd6ff83b820194d958802baadbdb74f8404a315c63ad7d59b72"},
+    {"program_id":"catalog-executive-master-in-digital-media","language":"en","title":"Executive Master in Digital Media","url":"https://kau.edu.sa/en/programs/executive-master-in-digital-media","retrieved_at":"2026-07-22","capture":"executive-master-in-digital-media-en.html","sha256":"0271fd1aa505feac87d402c332895979f418f091fdb82506ee03db05ab6bc840"},
+    {"program_id":"catalog-general-intermediate-diploma-in-law","language":"ar","title":"الدبلوم المتوسط في القانون","url":"https://kau.edu.sa/ar/programs/general-intermediate-diploma-in-law","retrieved_at":"2026-07-22","capture":"general-intermediate-diploma-in-law-ar.html","sha256":"497ea9eebfea024195b7b0c7c173af27ee9607c9ab5817c89b321e7ec348533e"},
+    {"program_id":"catalog-general-intermediate-diploma-in-law","language":"en","title":"General Intermediate Diploma in Law","url":"https://kau.edu.sa/en/programs/general-intermediate-diploma-in-law","retrieved_at":"2026-07-22","capture":"general-intermediate-diploma-in-law-en.html","sha256":"4ea47a6dc02f8b4fb5f643345e31405fad3b9449d182db352a6fab1efedefd04"},
+    {"program_id":"catalog-bachelor-of-science-in-cybersecurity","language":"ar","title":"بكالوريوس العلوم في الامن السيبراني","url":"https://kau.edu.sa/ar/programs/bachelor-of-science-in-cybersecurity","retrieved_at":"2026-07-22","capture":"bachelor-of-science-in-cybersecurity-ar.html","sha256":"ac7b395a1ad658301db200b27e3805b5aab9014331ee2d515bbcbfca49302067"},
+    {"program_id":"catalog-bachelor-of-science-in-cybersecurity","language":"en","title":"Bachelor of Science in Cybersecurity","url":"https://kau.edu.sa/en/programs/bachelor-of-science-in-cybersecurity","retrieved_at":"2026-07-22","capture":"bachelor-of-science-in-cybersecurity-en.html","sha256":"79fb7737f537428f86aec558a034cb7baff379efba361e76a158fe9042638245"},
+    {"program_id":"catalog-academic-general-master-of-public-law","language":"ar","title":"برنامج الماجستير في القانون العام","url":"https://kau.edu.sa/ar/programs/academic-general-master-of-public-law","retrieved_at":"2026-07-22","capture":"academic-general-master-of-public-law-ar.html","sha256":"9b16c206d322f8306fc2f2a36e2a0679c7e44993a0291c1bedd5ea22e6fc59e7"},
+    {"program_id":"catalog-academic-general-master-of-public-law","language":"en","title":"Academic General Master of Public Law","url":"https://kau.edu.sa/en/programs/academic-general-master-of-public-law","retrieved_at":"2026-07-22","capture":"academic-general-master-of-public-law-en.html","sha256":"0824b13eeacbe769553de5cedbb2d2e3f6d06e405e4d5e543d136030feb2fd02"},
+    {"program_id":"catalog-executive-master-in-internal-auditing","language":"ar","title":"الماجستير التنفيذي في المراجعة الداخلية","url":"https://kau.edu.sa/ar/programs/executive-master-in-internal-auditing","retrieved_at":"2026-07-22","capture":"executive-master-in-internal-auditing-ar.html","sha256":"945c2c8328f11dac8a54197607c64cc8386e5ff07f8a0251fa70907e5e0e2c5c"},
+    {"program_id":"catalog-executive-master-in-internal-auditing","language":"en","title":"Executive Master in Internal Auditing","url":"https://kau.edu.sa/en/programs/executive-master-in-internal-auditing","retrieved_at":"2026-07-22","capture":"executive-master-in-internal-auditing-en.html","sha256":"247d74a8f8cfa69c99b87f16e342abf4c2f7d93ff2c52d5bf1d522014d13efc9"},
+    {"program_id":"catalog-master-of-computer-information-systems","language":"ar","title":"ماجستير العلوم في نظم المعلومات","url":"https://kau.edu.sa/ar/programs/master-of-computer-information-systems","retrieved_at":"2026-07-22","capture":"master-of-computer-information-systems-ar.html","sha256":"6cb32370428685ae7871fd3cc65128366aecca2cd246b7f3de738819938b7fb6"},
+    {"program_id":"catalog-master-of-computer-information-systems","language":"en","title":"Master of Science in Information Systems","url":"https://kau.edu.sa/en/programs/master-of-computer-information-systems","retrieved_at":"2026-07-22","capture":"master-of-computer-information-systems-en.html","sha256":"d84aa426b16b9b7511021b9747b869edcc31fe0b48e33cdbd8543d119ef31a70"},
+    {"program_id":"catalog-professional-master-in-artificial-intelligence","language":"ar","title":"الماجستير المهني في الذكاء الاصطناعي","url":"https://kau.edu.sa/ar/programs/professional-master-in-artificial-intelligence","retrieved_at":"2026-07-22","capture":"professional-master-in-artificial-intelligence-ar.html","sha256":"70adb6a88764b90a463e9a19bd4d44f4aae22376b80ac7b701342bf5128ecf2c"},
+    {"program_id":"catalog-professional-master-in-artificial-intelligence","language":"en","title":"Professional Master of Science in Artificial Intelligence","url":"https://kau.edu.sa/en/programs/professional-master-in-artificial-intelligence","retrieved_at":"2026-07-22","capture":"professional-master-in-artificial-intelligence-en.html","sha256":"b28759af989489ba551dae8d405d1022eb08d0da171f5d58c3ff8c3ca5f505fc"}
+  ],
+  "programs": [
+    {
+      "program_id": "catalog-general-intermediate-diploma-in-applied-computing-and-network-technologies",
+      "program_name_en": "General Intermediate Diploma In Applied Computing and Network Technologies",
+      "decision": "skipped",
+      "official_evidence": "Existing bilingual reconciliation contains level and course-description occurrences for ACNT 110 and ACNT 230.",
+      "blocker": "Complete signatures conflict: ACNT 110 is Operating Systems/نظم التشغيل in the level plan but Programming Fundamentals/أساسيات البرمجة in course descriptions; ACNT 230 is Windows Server/خادم ويندوز in the level plan but Routing and Switching/التوجيه والتبديل in course descriptions. They cannot be collapsed.",
+      "requires_future_elective_group_support": false
+    },
+    {
+      "program_id": "catalog-executive-master-in-digital-media",
+      "program_name_en": "Executive Master in Digital Media",
+      "decision": "skipped",
+      "official_evidence": "The official bilingual program pages place JCOM 651 Research Methods in Digital Media at level 2 for 3 credits, while level-4 JCOM 698 Research Project explicitly lists COM 651 as its prerequisite.",
+      "blocker": "No authoritative COM 651 course entry was found. Treating the explicit COM 651 prerequisite as JCOM 651 would require correcting official academic data by inference.",
+      "requires_future_elective_group_support": false
+    },
+    {
+      "program_id": "catalog-general-intermediate-diploma-in-law",
+      "program_name_en": "General Intermediate Diploma in Law",
+      "decision": "skipped",
+      "official_evidence": "Official bilingual program pages confirm the four-level plan, but do not provide authoritative course entries for LAGD 260 or LAPD 150.",
+      "blocker": "LAGD 261 and LAPD 250 have unresolved prerequisite references in the reconciled plan; exact title, credits, placement, and requisite metadata for LAGD 260 and LAPD 150 remain unavailable.",
+      "requires_future_elective_group_support": false
+    },
+    {
+      "program_id": "catalog-bachelor-of-science-in-cybersecurity",
+      "program_name_en": "Bachelor of Science in Cybersecurity",
+      "decision": "skipped",
+      "official_evidence": "The official level table references CS 121 from SEC 342, CS 351 from CS 341, and IT 211 plus IT 203 from IT 361.",
+      "blocker": "The official program page contains no authoritative course records or placements for CS 121, CS 351, IT 203, or IT 211; shared-code titles therefore cannot be reconciled without inference.",
+      "requires_future_elective_group_support": false
+    },
+    {
+      "program_id": "catalog-academic-general-master-of-public-law",
+      "program_name_en": "Academic General Master of Public Law",
+      "decision": "skipped",
+      "official_evidence": "The official page states 5 mandatory courses (15 credits), 2 internal electives (6 credits), and 1 external elective (3 credits), and lists the eight optional course identities.",
+      "blocker": "The eight options are not assigned to explicit semesters, and the current planner schema cannot represent separate internal/external elective pools and selection counts without counting every option as required.",
+      "requires_future_elective_group_support": true
+    },
+    {
+      "program_id": "catalog-executive-master-in-internal-auditing",
+      "program_name_en": "Executive Master in Internal Auditing",
+      "decision": "skipped",
+      "official_evidence": "The official page places one generic ELECTIVE row in level 3 and separately lists ACCT 617, ACCT 623, ACCT 624, and ACCT 628 as elective options.",
+      "blocker": "The page does not explicitly state the required selection count or individually assign options to level 3; the current planner schema cannot encode the pool without treating all four options as required.",
+      "requires_future_elective_group_support": true
+    },
+    {
+      "program_id": "catalog-master-of-computer-information-systems",
+      "program_name_en": "Master of Science in Information Systems",
+      "decision": "skipped",
+      "official_evidence": "The official bilingual pages list three elective options separately from the four-level course plan.",
+      "blocker": "No explicit required selection count or semester placement for the options is provided, and the current planner schema cannot represent the elective pool accurately.",
+      "requires_future_elective_group_support": true
+    },
+    {
+      "program_id": "catalog-professional-master-in-artificial-intelligence",
+      "program_name_en": "Professional Master of Science in Artificial Intelligence",
+      "decision": "skipped",
+      "official_evidence": "The official pages list EMAI 621, 642, 643, 644, 651, 652, 653, 660, and 661 in a non-level elective pool.",
+      "blocker": "No explicit selection count or semester placement is provided; the current planner schema cannot represent the pool. The English official record also reports EMAI 661 as 30 credits, so its exact credit value cannot be safely normalized.",
+      "requires_future_elective_group_support": true
+    }
+  ],
+  "protected_catalog_only_programs_confirmed": [
+    "catalog-arabic-language-diploma-for-non-native-speakers",
+    "catalog-doctor-of-philosophy-in-computer-science",
+    "catalog-masters-in-arabic-for-non-native-speakers",
+    "catalog-phds-degree-in-environmental-science"
+  ],
+  "production_data_modified": false
+}

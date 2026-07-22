@@ -17,6 +17,7 @@ from kau_programs.validation import validate_program
 
 
 ROOT = Path(__file__).resolve().parents[1]
+IMPORT_BASE_REF = "HEAD^"
 PILOTS = {
     "catalog-associate-diploma-in-applications-development": {
         "count": 10, "credits": 31,
@@ -206,6 +207,26 @@ CURRENT_IMPORT = {
 CLEANUP_IMPORTS = {
     "catalog-executive-master-of-science-in-moderation-and-intellectual-security": 17,
     "catalog-master-of-science-in-hydrology-and-water-resources-management": 4,
+}
+
+
+BLOCKED_PLAN_RECOVERY_SCOPE = {
+    "catalog-general-intermediate-diploma-in-applied-computing-and-network-technologies",
+    "catalog-executive-master-in-digital-media",
+    "catalog-general-intermediate-diploma-in-law",
+    "catalog-bachelor-of-science-in-cybersecurity",
+    "catalog-academic-general-master-of-public-law",
+    "catalog-executive-master-in-internal-auditing",
+    "catalog-master-of-computer-information-systems",
+    "catalog-professional-master-in-artificial-intelligence",
+}
+
+
+REQUIRED_CATALOG_ONLY_PROGRAMS = {
+    "catalog-arabic-language-diploma-for-non-native-speakers",
+    "catalog-doctor-of-philosophy-in-computer-science",
+    "catalog-masters-in-arabic-for-non-native-speakers",
+    "catalog-phds-degree-in-environmental-science",
 }
 
 
@@ -450,7 +471,7 @@ class PilotImportDataTests(unittest.TestCase):
 
     def test_only_current_import_catalog_entries_differ_from_head(self) -> None:
         original = json.loads(subprocess.check_output(
-            ["git", "show", "HEAD:web/data/faculty_catalog.json"],
+            ["git", "show", f"{IMPORT_BASE_REF}:web/data/faculty_catalog.json"],
             cwd=ROOT, text=True,
         ))
         original_by_id = {p["id"]: p for p in original["programs"]}
@@ -471,9 +492,28 @@ class PilotImportDataTests(unittest.TestCase):
         self.assertIsNone(by_id[program_id]["planner_data_key"])
         self.assertEqual(by_id[program_id]["catalog_status"], "catalog-only")
 
+    def test_blocked_recovery_candidates_remain_catalog_only_when_evidence_fails(self) -> None:
+        by_id = {program["id"]: program for program in self.catalog}
+        self.assertEqual(len(BLOCKED_PLAN_RECOVERY_SCOPE), 8)
+        for program_id in BLOCKED_PLAN_RECOVERY_SCOPE:
+            with self.subTest(program_id=program_id):
+                self.assertNotIn(program_id, self.data)
+                self.assertFalse(by_id[program_id]["planner_available"])
+                self.assertIsNone(by_id[program_id]["planner_data_key"])
+                self.assertEqual(by_id[program_id]["catalog_status"], "catalog-only")
+
+    def test_explicitly_retained_programs_remain_catalog_only(self) -> None:
+        by_id = {program["id"]: program for program in self.catalog}
+        for program_id in REQUIRED_CATALOG_ONLY_PROGRAMS:
+            with self.subTest(program_id=program_id):
+                self.assertNotIn(program_id, self.data)
+                self.assertFalse(by_id[program_id]["planner_available"])
+                self.assertIsNone(by_id[program_id]["planner_data_key"])
+                self.assertEqual(by_id[program_id]["catalog_status"], "catalog-only")
+
     def test_exactly_current_import_planner_records_were_added(self) -> None:
         original = json.loads(subprocess.check_output(
-            ["git", "show", "HEAD:web/data/additional_programs.json"],
+            ["git", "show", f"{IMPORT_BASE_REF}:web/data/additional_programs.json"],
             cwd=ROOT, text=True,
         ))
         original_by_id = {p["id"]: p for p in original["programs"]}
