@@ -17,7 +17,7 @@ from kau_programs.validation import validate_program
 
 
 ROOT = Path(__file__).resolve().parents[1]
-IMPORT_BASE_REF = "HEAD^"
+IMPORT_BASE_REF = "1f33afb^"
 PILOTS = {
     "catalog-associate-diploma-in-applications-development": {
         "count": 10, "credits": 31,

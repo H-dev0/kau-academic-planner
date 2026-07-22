@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict
 
 from .schema import Program
+from .planner import normalize_course_code
 
 
 REQUIRED_PROGRAM_FIELDS = (
@@ -25,6 +26,7 @@ REQUIRED_COURSE_FIELDS = (
 )
 
 PLACEHOLDER_COURSE_CODES = {"ELECTIVE", "FREE"}
+ELECTIVE_CLASSIFICATIONS = {"general", "internal", "external"}
 
 
 def validate_program(program: Program) -> dict:
@@ -65,6 +67,71 @@ def validate_program(program: Program) -> dict:
     duplicate_codes = sorted(code for code, count in course_codes.items() if count > 1)
     for code in duplicate_codes:
         errors.append(f"duplicate course code: {code}")
+
+    if program.elective_groups and program.planner_schema_version != 2:
+        errors.append("elective_groups require planner_schema_version 2")
+
+    group_ids: set[str] = set()
+    elective_memberships: dict[str, str] = {}
+    known_codes = {
+        normalize_course_code(course.course_code): course
+        for course in program.courses
+        if course.course_code
+    }
+    for index, group in enumerate(program.elective_groups, start=1):
+        prefix = f"elective group {index}"
+        if not group.id or not isinstance(group.id, str):
+            errors.append(f"{prefix} missing id")
+        elif group.id in group_ids:
+            errors.append(f"duplicate elective group id: {group.id}")
+        else:
+            group_ids.add(group.id)
+        if not group.name_ar:
+            errors.append(f"{prefix} missing name_ar")
+        if not group.name_en:
+            errors.append(f"{prefix} missing name_en")
+        if group.classification not in ELECTIVE_CLASSIFICATIONS:
+            errors.append(f"{prefix} has invalid classification: {group.classification}")
+        if not isinstance(group.required, bool):
+            errors.append(f"{prefix} required must be boolean")
+        if not group.option_course_codes:
+            errors.append(f"{prefix} has no option_course_codes")
+
+        count = group.required_course_count
+        credits = group.required_credit_hours
+        maximum = group.maximum_course_count
+        if count is not None and (not isinstance(count, int) or count < 1):
+            errors.append(f"{prefix} has invalid required_course_count")
+        if credits is not None and (not isinstance(credits, int) or credits < 1):
+            errors.append(f"{prefix} has invalid required_credit_hours")
+        if maximum is not None and (not isinstance(maximum, int) or maximum < 1):
+            errors.append(f"{prefix} has invalid maximum_course_count")
+        if group.required and count is None and credits is None:
+            errors.append(f"{prefix} required group needs a count or credit constraint")
+        if not group.required and maximum is None:
+            errors.append(f"{prefix} optional group needs maximum_course_count")
+        if count is not None and maximum is not None and maximum < count:
+            errors.append(f"{prefix} maximum_course_count is lower than required_course_count")
+        if maximum is not None and maximum > len(group.option_course_codes):
+            errors.append(f"{prefix} maximum_course_count exceeds available options")
+
+        seen_options: set[str] = set()
+        for raw_code in group.option_course_codes:
+            normalized = normalize_course_code(raw_code)
+            if normalized in seen_options:
+                errors.append(f"{prefix} contains duplicate option course code: {raw_code}")
+                continue
+            seen_options.add(normalized)
+            if normalized not in known_codes:
+                errors.append(f"{prefix} references unknown course code: {raw_code}")
+            previous = elective_memberships.get(normalized)
+            if previous is not None:
+                errors.append(
+                    f"course {raw_code} belongs to multiple elective groups: "
+                    f"{previous}, {group.id}"
+                )
+            else:
+                elective_memberships[normalized] = group.id
 
     if program.total_program_credit_hours is None:
         warnings.append("total_program_credit_hours is missing")

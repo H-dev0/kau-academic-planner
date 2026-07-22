@@ -4,6 +4,7 @@ const state = {
   faculties: [],
   user: null,
   selected: new Set(),
+  electiveSelections: {},
   search: "",
   level: "all",
   faculty: "",
@@ -463,7 +464,13 @@ function buildPlan() {
     else available.push(course);
   }
 
-  return { completed, available, blocked };
+  const plan = { completed, available, blocked };
+  if (Array.isArray(state.program?.elective_groups) && state.program.elective_groups.length) {
+    Object.assign(plan, electiveGroups.electivePlan(
+      state.program, completedCodes(), state.electiveSelections,
+    ));
+  }
+  return plan;
 }
 
 function completedCodes() {
@@ -476,7 +483,7 @@ function localProgressKey(major = state.major) {
 
 function localProgressPayload() {
   return {
-    version: 1,
+    ...electiveGroups.progressPayload(completedCodes(), state.electiveSelections),
     saved_at: new Date().toISOString(),
     major: state.major,
     faculty: state.faculty,
@@ -504,7 +511,7 @@ function setCompleted(code, checked) {
 function serializablePlan() {
   const plan = buildPlan();
   return {
-    version: 1,
+    ...electiveGroups.progressPayload(completedCodes(), state.electiveSelections),
     exported_at: new Date().toISOString(),
     storage: "browser-local",
     program: {
@@ -516,7 +523,6 @@ function serializablePlan() {
       official_source_url: state.program.official_source_url,
       last_checked_date: state.program.last_checked_date,
     },
-    completed_codes: completedCodes(),
     completed_courses: sortByLevelThenCode(plan.completed).map((course) => course.course_code),
     recommended_next: recommendedCourses(plan.available).map((course) => ({
       course_code: course.course_code,
@@ -1005,7 +1011,7 @@ function applyPlannerPresentationLanguage() {
 }
 
 function creditSummary(completed) {
-  const metrics = creditDisplay.plannerProgressMetrics(state.program, completed);
+  const metrics = creditDisplay.plannerProgressMetrics(state.program, completed, state.electiveSelections);
   const totalCredits = metrics.effectiveTotalCredits;
   const hasCourseCredits = state.program.courses.some(
     (course) => Number.isInteger(course.credit_hours) && course.credit_hours > 0,
@@ -1315,6 +1321,95 @@ function optionalCourses() {
   }).sort((a, b) => String(a.course_code || "").localeCompare(String(b.course_code || "")));
 }
 
+function setElectiveSelection(group, code, checked) {
+  const previous = state.electiveSelections;
+  const next = { ...previous };
+  const current = [...(next[group.id] || [])];
+  if (group.maximum_course_count === 1) {
+    next[group.id] = checked ? [code] : [];
+  } else if (checked && !current.includes(code)) {
+    next[group.id] = [...current, code];
+  } else if (!checked) {
+    next[group.id] = current.filter((item) => item !== code);
+  }
+  const validated = electiveGroups.normalizedSelections(state.program, next);
+  if (validated.errors.length) {
+    saveStatus.textContent = validated.errors.join("; ");
+    return;
+  }
+  state.electiveSelections = validated.selections;
+  render();
+  saveProgress();
+}
+
+function renderElectiveGroups(plan) {
+  const target = document.querySelector("#electiveGroups");
+  if (!target) return;
+  target.replaceChildren();
+  const groups = state.program?.elective_groups || [];
+  target.hidden = !groups.length;
+  if (!groups.length) return;
+  const english = currentLanguageSafe() === "en";
+  const statusById = new Map((plan.elective_group_statuses || []).map((status) => [status.id, status]));
+  const courseByCode = new Map((state.program.courses || []).map((course) => [courseCode(course), course]));
+  const availability = plannerStatusLookup(plan);
+  for (const group of groups) {
+    const status = statusById.get(group.id);
+    const fieldset = document.createElement("fieldset");
+    fieldset.className = "electiveGroup";
+    const legend = document.createElement("legend");
+    legend.textContent = english ? group.name_en : group.name_ar;
+    const summary = document.createElement("p");
+    summary.className = "electiveGroupSummary";
+    const countText = group.required_course_count == null ? "" : `${status.selected_count} / ${group.required_course_count}`;
+    const creditText = group.required_credit_hours == null ? "" : `${status.applied_completed_credits} / ${group.required_credit_hours} ${english ? "credits" : "ساعات"}`;
+    const labels = [
+      group.required ? (english ? "Required" : "مطلوب") : (english ? "Optional" : "اختياري"),
+      group.classification === "internal" ? (english ? "Internal" : "داخلي") : group.classification === "external" ? (english ? "External" : "خارجي") : (english ? "General" : "عام"),
+      countText, creditText,
+    ].filter(Boolean);
+    summary.textContent = labels.join(" · ");
+    fieldset.append(legend, summary);
+    for (const rawCode of group.option_course_codes || []) {
+      const code = normalize(rawCode);
+      const course = courseByCode.get(code);
+      if (!course) continue;
+      const row = document.createElement("div");
+      row.className = "electiveOptionRow";
+      const chooseLabel = document.createElement("label");
+      chooseLabel.className = "electiveSelectControl";
+      const choose = document.createElement("input");
+      choose.type = group.maximum_course_count === 1 ? "radio" : "checkbox";
+      choose.name = `elective-${group.id}`;
+      choose.checked = (state.electiveSelections[group.id] || []).includes(code);
+      choose.addEventListener("change", () => setElectiveSelection(group, code, choose.checked));
+      chooseLabel.append(choose, document.createTextNode(english ? " Select" : " اختيار"));
+      const identity = document.createElement("div");
+      identity.className = "electiveOptionIdentity";
+      const courseState = availability.get(code) || { status: "available", missing: [] };
+      identity.innerHTML = `<strong lang="en">${course.course_code}</strong><span>${english ? (course.course_name_en || course.official_course_name) : (course.course_name_ar || course.official_course_name)}</span><small>${statusLabel(courseState.status)}${courseState.missing.length ? ` · ${courseState.missing.join(", ")}` : ""}</small>`;
+      const completeLabel = document.createElement("label");
+      completeLabel.className = "electiveCompleteControl";
+      const complete = document.createElement("input");
+      complete.type = "checkbox";
+      complete.checked = state.selected.has(code);
+      complete.addEventListener("change", () => setCompleted(code, complete.checked));
+      completeLabel.append(complete, document.createTextNode(english ? " Completed" : " مجتاز"));
+      row.append(chooseLabel, identity, completeLabel);
+      fieldset.append(row);
+    }
+    if (status && !status.complete && group.required) {
+      const message = document.createElement("p");
+      message.className = "electiveValidationMessage";
+      message.textContent = english
+        ? `Incomplete: ${status.remaining_required_count ?? 0} course(s) and ${status.remaining_elective_credits ?? 0} credits remain.`
+        : `غير مكتمل: متبقٍ ${status.remaining_required_count ?? 0} مقرر و${status.remaining_elective_credits ?? 0} ساعة.`;
+      fieldset.append(message);
+    }
+    target.append(fieldset);
+  }
+}
+
 function courseItem(course, className, reason = "") {
   const item = document.createElement("article");
   item.className = `courseItem ${className}`;
@@ -1413,7 +1508,7 @@ function renderList(target, items, emptyText, kind) {
 function render() {
   const plan = buildPlan();
   const total = (state.program.courses || []).length;
-  const progressMetrics = creditDisplay.plannerProgressMetrics(state.program, plan.completed);
+  const progressMetrics = creditDisplay.plannerProgressMetrics(state.program, plan.completed, state.electiveSelections);
   const percent = progressMetrics.completionPercentage;
   const credits = creditSummary(plan.completed);
   const optionalItems = optionalCourses();
@@ -1524,6 +1619,7 @@ function render() {
   if (contextTotalCount) contextTotalCount.textContent = formatCourseCount(plan.completed.length + plan.available.length + plan.blocked.length);
 
   renderChecklist(plan);
+  renderElectiveGroups(plan);
   renderList(
     completedList,
     sortByLevelThenCode(plan.completed),
@@ -1593,6 +1689,7 @@ async function chooseMajor(majorId) {
   state.major = majorId;
   state.program = majorId ? state.programs.get(state.major) : noSelectionProgram();
   state.selected.clear();
+  state.electiveSelections = {};
   state.search = "";
   state.level = "all";
   state.statusFilter = "all";
@@ -1647,6 +1744,7 @@ saveProgressButton.addEventListener("click", () => {
 resetProgressButton.addEventListener("click", () => {
   localStorage.removeItem(localProgressKey());
   state.selected.clear();
+  state.electiveSelections = {};
   render();
   saveStatus.textContent = textFor("progressReset");
 });
@@ -1665,8 +1763,11 @@ importInput.addEventListener("change", async () => {
       : Array.isArray(payload.completed)
         ? payload.completed
         : [];
-    const validCodes = new Set((state.program.courses || []).map(courseCode));
-    state.selected = new Set(importedCodes.map(normalize).filter((code) => validCodes.has(code)));
+    const candidate = { ...payload, completed_codes: importedCodes };
+    const validated = electiveGroups.validateProgressPayload(state.program, candidate, true);
+    if (!validated.ok) throw new Error(validated.errors.join("; "));
+    state.selected = new Set(validated.state.completed_codes);
+    state.electiveSelections = validated.state.elective_selections;
     await saveProgress(true);
     render();
     saveStatus.textContent = textFor("importSuccess").replace("{count}", state.selected.size);
@@ -1683,12 +1784,17 @@ async function loadProgress() {
     const raw = localStorage.getItem(localProgressKey());
     if (!raw) {
       state.selected = new Set();
+      state.electiveSelections = {};
       return;
     }
     const progress = JSON.parse(raw);
-    state.selected = new Set((progress.completed_codes || []).map(normalize));
+    const validated = electiveGroups.validateProgressPayload(state.program, progress, true);
+    if (!validated.ok) throw new Error(validated.errors.join("; "));
+    state.selected = new Set(validated.state.completed_codes);
+    state.electiveSelections = validated.state.elective_selections;
   } catch {
     state.selected = new Set();
+    state.electiveSelections = {};
     saveStatus.textContent = textFor("progressReadFailed");
   }
 }

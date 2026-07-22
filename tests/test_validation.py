@@ -4,9 +4,37 @@ import unittest
 
 from kau_programs.schema import Program
 from kau_programs.validation import validate_program
+from tests.elective_fixtures import fixture_copy
 
 
 class ValidationTests(unittest.TestCase):
+    def test_valid_elective_group_variants(self) -> None:
+        report = validate_program(Program.from_dict(fixture_copy()))
+        self.assertTrue(report["ok"], report["errors"])
+
+    def test_duplicate_group_ids_fail(self) -> None:
+        raw = fixture_copy()
+        raw["elective_groups"][1]["id"] = raw["elective_groups"][0]["id"]
+        report = validate_program(Program.from_dict(raw))
+        self.assertIn("duplicate elective group id: choose-one", report["errors"])
+
+    def test_unknown_option_and_duplicate_required_membership_fail(self) -> None:
+        raw = fixture_copy()
+        raw["elective_groups"][0]["option_course_codes"].append("SYN 999")
+        raw["elective_groups"][1]["option_course_codes"].append("SYN 101")
+        report = validate_program(Program.from_dict(raw))
+        self.assertTrue(any("unknown course code: SYN 999" in error for error in report["errors"]))
+        self.assertTrue(any("multiple elective groups" in error for error in report["errors"]))
+
+    def test_invalid_constraints_and_classification_fail(self) -> None:
+        cases = []
+        raw = fixture_copy(); raw["elective_groups"][0]["classification"] = "department"; cases.append(raw)
+        raw = fixture_copy(); raw["elective_groups"][0]["required_course_count"] = 2; raw["elective_groups"][0]["maximum_course_count"] = 1; cases.append(raw)
+        raw = fixture_copy(); raw["elective_groups"][0]["required_course_count"] = None; raw["elective_groups"][0]["required_credit_hours"] = None; cases.append(raw)
+        raw = fixture_copy(); raw["elective_groups"][-1]["maximum_course_count"] = None; cases.append(raw)
+        for candidate in cases:
+            with self.subTest(candidate=candidate["elective_groups"]):
+                self.assertFalse(validate_program(Program.from_dict(candidate))["ok"])
     def test_valid_minimal_program(self) -> None:
         program = Program.from_dict(
             {

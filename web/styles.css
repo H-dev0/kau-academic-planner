@@ -109,6 +109,51 @@ body.menuOpen { overflow: hidden; }
 a { color: inherit; }
 button, input, select { font: inherit; }
 [hidden] { display: none !important; }
+
+.electiveGroups {
+  display: grid;
+  gap: var(--space-4);
+  margin-block-end: var(--space-5);
+}
+.electiveGroup {
+  min-width: 0;
+  margin: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+.electiveGroup legend { padding-inline: var(--space-2); font-weight: 900; }
+.electiveGroupSummary { margin: 0 0 var(--space-3); color: var(--color-muted); }
+.electiveOptionRow {
+  display: grid;
+  grid-template-columns: minmax(110px, auto) minmax(0, 1fr) minmax(120px, auto);
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-3);
+  border-top: 1px solid var(--color-divider);
+}
+.electiveSelectControl,
+.electiveCompleteControl { display: flex; gap: var(--space-2); align-items: center; font-weight: 700; }
+.electiveSelectControl input,
+.electiveCompleteControl input { width: 18px; height: 18px; accent-color: var(--color-primary); }
+.electiveOptionIdentity { display: grid; gap: 2px; min-width: 0; }
+.electiveOptionIdentity span,
+.electiveOptionIdentity small { color: var(--color-muted); }
+.electiveValidationMessage {
+  margin: var(--space-3) 0 0;
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-warn-soft);
+  color: var(--color-warn);
+}
+
+@media (max-width: 700px) {
+  .electiveOptionRow { grid-template-columns: 1fr; align-items: start; }
+  .electiveSelectControl,
+  .electiveCompleteControl { min-height: 40px; }
+}
 :focus-visible { outline: 3px solid rgba(181, 139, 53, 0.85); outline-offset: 3px; }
 
 .srOnly {

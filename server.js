@@ -3,6 +3,7 @@ const fs = require("fs");
 const http = require("http");
 const path = require("path");
 const url = require("url");
+const electiveGroups = require("./web/elective-groups.js");
 
 const root = __dirname;
 const webDir = path.join(root, "web");
@@ -211,7 +212,7 @@ function sortByLevelThenCode(courses) {
   });
 }
 
-function planCourses(program, completedCodes) {
+function planCourses(program, completedCodes, electiveSelections = {}) {
   const selected = new Set(completedCodes.map(normalize));
   const completed = [];
   const available = [];
@@ -235,7 +236,7 @@ function planCourses(program, completedCodes) {
   }
 
   const totalCourses = (program.courses || []).filter((course) => course.course_code).length;
-  return {
+  const result = {
     program_name: program.program_name,
     total_courses: totalCourses,
     completed_count: completed.length,
@@ -244,6 +245,10 @@ function planCourses(program, completedCodes) {
     available_courses: sortByLevelThenCode(available),
     blocked_courses: blocked,
   };
+  if (Array.isArray(program.elective_groups) && program.elective_groups.length) {
+    Object.assign(result, electiveGroups.electivePlan(program, completedCodes, electiveSelections));
+  }
+  return result;
 }
 
 function parseCookies(header) {
@@ -424,7 +429,12 @@ const server = http.createServer(async (req, res) => {
 
     if (req.method === "POST" && pathname === "/api/plan") {
       const payload = await readBody(req);
-      sendJson(res, 200, planCourses(program, Array.isArray(payload.completed_codes) ? payload.completed_codes : []));
+      const result = planCourses(
+        program,
+        Array.isArray(payload.completed_codes) ? payload.completed_codes : [],
+        payload.elective_selections || {},
+      );
+      sendJson(res, result.validation_errors?.length ? 400 : 200, result);
       return;
     }
 
@@ -436,6 +446,10 @@ const server = http.createServer(async (req, res) => {
 });
 
 const port = process.env.PORT || 8766;
-server.listen(port, () => {
-  console.log(`KAU planner listening on ${port}`);
-});
+if (require.main === module) {
+  server.listen(port, () => {
+    console.log(`KAU planner listening on ${port}`);
+  });
+}
+
+module.exports = { planCourses, server };

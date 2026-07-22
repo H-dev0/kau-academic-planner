@@ -5,6 +5,8 @@ import subprocess
 import unittest
 from pathlib import Path
 
+from tests.elective_fixtures import fixture_copy
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -25,11 +27,24 @@ def render(program: dict, language: str) -> dict:
     return call_helper("programCreditDisplay", program, language)
 
 
-def metrics(program: dict, completed: list[dict]) -> dict:
-    return call_helper("plannerProgressMetrics", program, completed)
+def metrics(program: dict, completed: list[dict], selections: dict | None = None) -> dict:
+    return call_helper("plannerProgressMetrics", program, completed, selections or {})
 
 
 class CreditDisplayTests(unittest.TestCase):
+    def test_elective_metrics_do_not_count_unselected_or_incomplete_options(self) -> None:
+        program = fixture_copy()
+        by_code = {course["course_code"]: course for course in program["courses"]}
+        incomplete = metrics(program, [], {"choose-one": ["SYN 101"]})
+        self.assertEqual(incomplete["completedCredits"], 0)
+        self.assertFalse(incomplete["graduationComplete"])
+        unselected = metrics(program, [by_code["SYN 101"]], {})
+        self.assertEqual(unselected["completedCredits"], 0)
+        selected = metrics(
+            program, [by_code["SYN 101"]], {"choose-one": ["SYN 101"]},
+        )
+        self.assertEqual(selected["completedCredits"], 3)
+        self.assertGreaterEqual(selected["remainingCredits"], 0)
     def test_numeric_official_total_is_preserved_in_both_languages(self) -> None:
         program = {"total_program_credit_hours": 125, "calculated_plan_credit_hours": 999}
         self.assertEqual(render(program, "en"), {
