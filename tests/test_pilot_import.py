@@ -141,15 +141,71 @@ PILOTS = {
         "blocked_example": ("ACE 102", ["ACE 101"]),
         "special_courses": [("ACIT 291", "Practical Training", 3)],
     },
+    "catalog-master-of-science-in-environmental-science": {
+        "count": 34, "credits": 100,
+        "levels": {"Compulsory courses", "Elective Courses"},
+        "available": 34, "blocked": 0, "completed": [],
+        "unlocked": set(), "blocked_example": None,
+        "no_prerequisites": True,
+    },
+    "catalog-master-of-science-in-meteorology": {
+        "count": 22, "credits": 67,
+        "levels": {"Compulsory courses", "Elective Courses"},
+        "available": 22, "blocked": 0, "completed": [],
+        "unlocked": set(), "blocked_example": None,
+        "no_prerequisites": True,
+        "special_courses": [("MET 699", "Master Thesis", 8)],
+    },
+    "catalog-master-of-science-in-nuclear-engineering": {
+        "count": 16, "credits": 52,
+        "levels": {
+            "First Level", "Second Level", "Third Level", "Fourth Level", "Electives",
+        },
+        "available": 16, "blocked": 0, "completed": [],
+        "unlocked": set(), "blocked_example": None,
+        "no_prerequisites": True,
+        "special_courses": [("NE 699", "Master Thesis", 8)],
+    },
+    "catalog-masters-in-geophysics-by-coursework-and-research-project": {
+        "count": 26, "credits": 70,
+        "levels": {"Compulsory", "Elective"},
+        "available": 26, "blocked": 0, "completed": [],
+        "unlocked": set(), "blocked_example": None,
+        "no_prerequisites": True,
+        "special_courses": [("EGP 698", "M.Sc. Research Project", 4)],
+    },
+    "catalog-executive-master-of-science-in-moderation-and-intellectual-security": {
+        "count": 18, "credits": 54,
+        "levels": {"Level 1", "Level 2", "Level 3", "Level 4"},
+        "available": 18, "blocked": 0, "completed": [],
+        "unlocked": set(), "blocked_example": None,
+        "no_prerequisites": True,
+        "special_courses": [("MODE 698", "Research Project", 3)],
+    },
+    "catalog-master-of-science-in-hydrology-and-water-resources-management": {
+        "count": 28, "credits": 81,
+        "levels": {"Compulsory Courses", "Elective Courses"},
+        "available": 28, "blocked": 0, "completed": [],
+        "unlocked": set(), "blocked_example": None,
+        "no_prerequisites": True,
+        "special_courses": [("HWR 699", "M. S. thesis", 8)],
+    },
 }
 
 
 CURRENT_IMPORT = {
-    "catalog-doctor-of-philosophy-in-meteorology",
-    "catalog-executive-master-in-human-resource-management",
-    "catalog-general-associate-diploma-in-digital-transformation",
-    "catalog-intermediate-diploma-in-cybersecurity-distance",
-    "catalog-intermediate-diploma-in-data-science",
+    "catalog-master-of-science-in-environmental-science",
+    "catalog-master-of-science-in-meteorology",
+    "catalog-master-of-science-in-nuclear-engineering",
+    "catalog-masters-in-geophysics-by-coursework-and-research-project",
+    "catalog-executive-master-of-science-in-moderation-and-intellectual-security",
+    "catalog-master-of-science-in-hydrology-and-water-resources-management",
+}
+
+
+CLEANUP_IMPORTS = {
+    "catalog-executive-master-of-science-in-moderation-and-intellectual-security": 17,
+    "catalog-master-of-science-in-hydrology-and-water-resources-management": 4,
 }
 
 
@@ -194,15 +250,20 @@ class PilotImportDataTests(unittest.TestCase):
             for p in load("reports/plan_extraction/ready_candidate_reconciliation.json")["programs"]
         }
 
-    def test_exactly_fourteen_verified_candidates_are_promoted(self) -> None:
+    def test_exactly_twenty_safe_candidates_are_promoted(self) -> None:
         candidate_ids = set(self.audit)
         promoted = {p["id"] for p in self.catalog if p.get("planner_available")} & candidate_ids
         self.assertEqual(promoted, set(PILOTS))
-        self.assertTrue(all(self.audit[p]["new_classification"] == "VERIFIED_IMPORT_READY" for p in PILOTS))
+        self.assertTrue(all(
+            self.audit[p]["new_classification"] in {
+                "VERIFIED_IMPORT_READY", "READY_AFTER_MECHANICAL_CLEANUP",
+            }
+            for p in PILOTS
+        ))
 
     def test_catalog_counts_and_selected_statuses(self) -> None:
-        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 66)
-        self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 157)
+        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 72)
+        self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 151)
         by_id = {p["id"]: p for p in self.catalog}
         for program_id in PILOTS:
             self.assertTrue(by_id[program_id]["planner_available"])
@@ -247,7 +308,7 @@ class PilotImportDataTests(unittest.TestCase):
                     self.assertTrue(all(not c["prerequisites"] for c in courses))
                     self.assertTrue(all(not c["corequisites"] for c in courses))
 
-    def test_all_fourteen_pilots_display_their_calculated_credits(self) -> None:
+    def test_all_twenty_pilots_display_their_calculated_credits(self) -> None:
         for program_id, expected in PILOTS.items():
             with self.subTest(program_id=program_id):
                 program = self.data[program_id]
@@ -257,7 +318,7 @@ class PilotImportDataTests(unittest.TestCase):
                 self.assertTrue(display["calculated"])
                 self.assertIsNone(program["total_program_credit_hours"])
 
-    def test_all_fourteen_pilot_progress_metrics_check_and_uncheck(self) -> None:
+    def test_all_twenty_pilot_progress_metrics_check_and_uncheck(self) -> None:
         for program_id, expected in PILOTS.items():
             with self.subTest(program_id=program_id):
                 program = self.data[program_id]
@@ -335,6 +396,34 @@ class PilotImportDataTests(unittest.TestCase):
                 signatures = all_courses[normalize(course["course_code"])]
                 self.assertTrue(all(signature == signatures[0] for signature in signatures))
 
+    def test_cleanup_only_imports_apply_only_documented_code_spacing(self) -> None:
+        for program_id, expected_count in CLEANUP_IMPORTS.items():
+            with self.subTest(program_id=program_id):
+                source = self.audit[program_id]
+                imported = self.data[program_id]
+                changed = [
+                    course for course in source["courses"]
+                    if course["course_code"] != course["canonical_course_code"]
+                ]
+                expected_messages = {
+                    (
+                        f"Normalize course code '{course['course_code']}' "
+                        f"to '{course['canonical_course_code']}'."
+                    )
+                    for course in changed
+                }
+                self.assertEqual(len(changed), expected_count)
+                self.assertEqual(set(source["mechanical_cleanup"]), expected_messages)
+                self.assertTrue(all(
+                    normalize(course["course_code"])
+                    == normalize(course["canonical_course_code"])
+                    for course in changed
+                ))
+                self.assertEqual(
+                    [course["course_code"] for course in imported["courses"]],
+                    [course["canonical_course_code"] for course in source["courses"]],
+                )
+
     def test_special_courses_and_marine_credit_narrative(self) -> None:
         for program_id, expected in PILOTS.items():
             special_courses = expected.get("special_courses")
@@ -373,6 +462,14 @@ class PilotImportDataTests(unittest.TestCase):
             if current_by_id[program_id] != original_by_id[program_id]
         }
         self.assertEqual(changed, CURRENT_IMPORT)
+
+    def test_environmental_science_phd_remains_catalog_only(self) -> None:
+        program_id = "catalog-phds-degree-in-environmental-science"
+        by_id = {program["id"]: program for program in self.catalog}
+        self.assertNotIn(program_id, self.data)
+        self.assertFalse(by_id[program_id]["planner_available"])
+        self.assertIsNone(by_id[program_id]["planner_data_key"])
+        self.assertEqual(by_id[program_id]["catalog_status"], "catalog-only")
 
     def test_exactly_current_import_planner_records_were_added(self) -> None:
         original = json.loads(subprocess.check_output(
@@ -491,7 +588,7 @@ class PilotImportApiTests(unittest.TestCase):
             )
         )
 
-    def test_existing_api_loads_and_plans_all_fourteen_programs(self) -> None:
+    def test_existing_api_loads_and_plans_all_twenty_programs(self) -> None:
         summaries = {p["id"]: p for p in self.get("/api/programs")["programs"]}
         for program_id, expected in PILOTS.items():
             with self.subTest(program_id=program_id):
