@@ -2557,11 +2557,11 @@
       "faculty_name": "economics and administration",
       "program_code": "EHRM",
       "official_source_url": "https://kau.edu.sa/en/programs/executive-master-in-human-resource-management",
-      "planner_available": false,
-      "planner_data_key": null,
-      "catalog_status": "catalog-only",
-      "catalog_note_ar": "الخطة غير متاحة حاليًا.",
-      "catalog_note_en": "The detailed study plan has not been added yet."
+      "planner_available": true,
+      "planner_data_key": "catalog-executive-master-in-human-resource-management",
+      "catalog_status": "active",
+      "catalog_note_ar": "الخطة الدراسية متاحة في المخطط.",
+      "catalog_note_en": "The detailed study plan is available."
     },
     {
       "id": "catalog-executive-master-in-internal-auditing",
@@ -3242,11 +3242,11 @@
       "faculty_name": "APPLIED",
       "program_code": "GA-DT-AL",
       "official_source_url": "https://kau.edu.sa/en/programs/general-associate-diploma-in-digital-transformation",
-      "planner_available": false,
-      "planner_data_key": null,
-      "catalog_status": "catalog-only",
-      "catalog_note_ar": "الخطة غير متاحة حاليًا.",
-      "catalog_note_en": "The detailed study plan has not been added yet."
+      "planner_available": true,
+      "planner_data_key": "catalog-general-associate-diploma-in-digital-transformation",
+      "catalog_status": "active",
+      "catalog_note_ar": "الخطة الدراسية متاحة في المخطط.",
+      "catalog_note_en": "The detailed study plan is available."
     },
     {
       "id": "catalog-general-intermediate-diploma-in-applied-computing-and-network-technologies",
@@ -3374,11 +3374,11 @@
       "faculty_name": "APPLIED",
       "program_code": "GI-CYB-AL D",
       "official_source_url": "https://kau.edu.sa/en/programs/intermediate-diploma-in-cybersecurity-distance",
-      "planner_available": false,
-      "planner_data_key": null,
-      "catalog_status": "catalog-only",
-      "catalog_note_ar": "الخطة غير متاحة حاليًا.",
-      "catalog_note_en": "The detailed study plan has not been added yet."
+      "planner_available": true,
+      "planner_data_key": "catalog-intermediate-diploma-in-cybersecurity-distance",
+      "catalog_status": "active",
+      "catalog_note_ar": "الخطة الدراسية متاحة في المخطط.",
+      "catalog_note_en": "The detailed study plan is available."
     },
     {
       "id": "catalog-intermediate-diploma-in-data-science",
@@ -3407,11 +3407,11 @@
       "faculty_name": "APPLIED",
       "program_code": "GI-DS-AL",
       "official_source_url": "https://kau.edu.sa/en/programs/intermediate-diploma-in-data-science",
-      "planner_available": false,
-      "planner_data_key": null,
-      "catalog_status": "catalog-only",
-      "catalog_note_ar": "الخطة غير متاحة حاليًا.",
-      "catalog_note_en": "The detailed study plan has not been added yet."
+      "planner_available": true,
+      "planner_data_key": "catalog-intermediate-diploma-in-data-science",
+      "catalog_status": "active",
+      "catalog_note_ar": "الخطة الدراسية متاحة في المخطط.",
+      "catalog_note_en": "The detailed study plan is available."
     },
     {
       "id": "catalog-master-of-nursing-science-public-health-nursing-community-health-nursing",
@@ -10118,11 +10118,11 @@
       "faculty_name": "ENVIRONMENTAL SCIENCES",
       "program_code": "MET PhD",
       "official_source_url": "https://kau.edu.sa/en/programs/doctor-of-philosophy-in-meteorology",
-      "planner_available": false,
-      "planner_data_key": null,
-      "catalog_status": "catalog-only",
-      "catalog_note_ar": "الخطة غير متاحة حاليًا.",
-      "catalog_note_en": "The detailed study plan has not been added yet."
+      "planner_available": true,
+      "planner_data_key": "catalog-doctor-of-philosophy-in-meteorology",
+      "catalog_status": "active",
+      "catalog_note_ar": "الخطة الدراسية متاحة في المخطط.",
+      "catalog_note_en": "The detailed study plan is available."
     },
     {
       "id": "catalog-phds-degree-in-arid-land-agriculture",

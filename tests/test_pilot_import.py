@@ -87,13 +87,69 @@ PILOTS = {
         "no_prerequisites": True,
         "special_course": ("MP 699", "M.Sc. Thesis", 10),
     },
+    "catalog-doctor-of-philosophy-in-meteorology": {
+        "count": 26, "credits": 84,
+        "levels": {"Compulsory courses", "Elective Courses"},
+        "available": 26, "blocked": 0, "completed": [],
+        "unlocked": set(), "blocked_example": None,
+        "no_prerequisites": True,
+        "special_courses": [("MET 799", "PhD Thesis", 12)],
+    },
+    "catalog-executive-master-in-human-resource-management": {
+        "count": 11, "credits": 33,
+        "levels": {"level 1", "level 2", "level 3", "level 4"},
+        "available": 8, "blocked": 3, "completed": ["EHRM 601"],
+        "unlocked": {"EHRM 607", "EHRM 694"},
+        "blocked_example": ("EHRM 694", ["EHRM 601"]),
+        "special_courses": [("EHRM 698", "Research Project", 3)],
+    },
+    "catalog-general-associate-diploma-in-digital-transformation": {
+        "count": 10, "credits": 31,
+        "levels": {
+            "Semester/Level 1 (Total Credit Hours 16 hrs)",
+            "Semester/Level 2 (Total Credit Hours 15 hrs)",
+        },
+        "available": 7, "blocked": 3, "completed": ["ACIT 181"],
+        "unlocked": {"ACIT 182"},
+        "blocked_example": ("ACIT 182", ["ACIT 181"]),
+        "special_courses": [("ACIT 195", "Practical Training", 3)],
+    },
+    "catalog-intermediate-diploma-in-cybersecurity-distance": {
+        "count": 20, "credits": 62,
+        "levels": {
+            "1st Semester/Level", "2nd Semester/Level",
+            "3rd Semester/Level", "4th Semester/Level",
+        },
+        "available": 18, "blocked": 2, "completed": ["ACE 101"],
+        "unlocked": {"ACE 102"},
+        "blocked_example": ("ACE 102", ["ACE 101"]),
+        "special_courses": [
+            ("CYB 190", "Practical Training 1", 3),
+            ("CYB 290", "Practical Training", 3),
+        ],
+    },
+    "catalog-intermediate-diploma-in-data-science": {
+        "count": 20, "credits": 62,
+        "levels": {
+            "Semester/Level 1 (Total Credit Hours 16 hrs)",
+            "Semester/Level 2 (Total Credit Hours 16 hrs)",
+            "Semester/Level 3 (Total Credit Hours 15 hrs)",
+            "Semester/Level 4 (Total Credit Hours 15 hrs)",
+        },
+        "available": 19, "blocked": 1, "completed": ["ACE 101"],
+        "unlocked": {"ACE 102"},
+        "blocked_example": ("ACE 102", ["ACE 101"]),
+        "special_courses": [("ACIT 291", "Practical Training", 3)],
+    },
 }
 
 
-BATCH_2 = {
-    "catalog-business-economics",
-    "catalog-masters-in-marine-chemistry",
-    "catalog-masters-in-marine-physics",
+CURRENT_IMPORT = {
+    "catalog-doctor-of-philosophy-in-meteorology",
+    "catalog-executive-master-in-human-resource-management",
+    "catalog-general-associate-diploma-in-digital-transformation",
+    "catalog-intermediate-diploma-in-cybersecurity-distance",
+    "catalog-intermediate-diploma-in-data-science",
 }
 
 
@@ -138,15 +194,15 @@ class PilotImportDataTests(unittest.TestCase):
             for p in load("reports/plan_extraction/ready_candidate_reconciliation.json")["programs"]
         }
 
-    def test_exactly_nine_verified_candidates_are_promoted(self) -> None:
+    def test_exactly_fourteen_verified_candidates_are_promoted(self) -> None:
         candidate_ids = set(self.audit)
         promoted = {p["id"] for p in self.catalog if p.get("planner_available")} & candidate_ids
         self.assertEqual(promoted, set(PILOTS))
         self.assertTrue(all(self.audit[p]["new_classification"] == "VERIFIED_IMPORT_READY" for p in PILOTS))
 
     def test_catalog_counts_and_selected_statuses(self) -> None:
-        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 61)
-        self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 162)
+        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 66)
+        self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 157)
         by_id = {p["id"]: p for p in self.catalog}
         for program_id in PILOTS:
             self.assertTrue(by_id[program_id]["planner_available"])
@@ -191,7 +247,7 @@ class PilotImportDataTests(unittest.TestCase):
                     self.assertTrue(all(not c["prerequisites"] for c in courses))
                     self.assertTrue(all(not c["corequisites"] for c in courses))
 
-    def test_all_nine_pilots_display_their_calculated_credits(self) -> None:
+    def test_all_fourteen_pilots_display_their_calculated_credits(self) -> None:
         for program_id, expected in PILOTS.items():
             with self.subTest(program_id=program_id):
                 program = self.data[program_id]
@@ -201,7 +257,7 @@ class PilotImportDataTests(unittest.TestCase):
                 self.assertTrue(display["calculated"])
                 self.assertIsNone(program["total_program_credit_hours"])
 
-    def test_all_nine_pilot_progress_metrics_check_and_uncheck(self) -> None:
+    def test_all_fourteen_pilot_progress_metrics_check_and_uncheck(self) -> None:
         for program_id, expected in PILOTS.items():
             with self.subTest(program_id=program_id):
                 program = self.data[program_id]
@@ -265,7 +321,7 @@ class PilotImportDataTests(unittest.TestCase):
                 available = {c["course_code"] for c in after["available_courses"]}
                 self.assertTrue(expected["unlocked"] <= available)
 
-    def test_batch_two_course_code_reuse_is_consistent(self) -> None:
+    def test_current_import_course_code_reuse_is_consistent(self) -> None:
         all_courses: dict[str, list[tuple[str, str, int]]] = {}
         for program in self.data.values():
             for course in program["courses"]:
@@ -274,20 +330,26 @@ class PilotImportDataTests(unittest.TestCase):
                     course.get("course_name_en"),
                     course.get("credit_hours"),
                 ))
-        for program_id in BATCH_2:
+        for program_id in CURRENT_IMPORT:
             for course in self.data[program_id]["courses"]:
                 signatures = all_courses[normalize(course["course_code"])]
                 self.assertTrue(all(signature == signatures[0] for signature in signatures))
 
     def test_special_courses_and_marine_credit_narrative(self) -> None:
         for program_id, expected in PILOTS.items():
-            if "special_course" not in expected:
+            special_courses = expected.get("special_courses")
+            if special_courses is None and "special_course" in expected:
+                special_courses = [expected["special_course"]]
+            if not special_courses:
                 continue
             with self.subTest(program_id=program_id):
-                code, name_en, credits = expected["special_course"]
-                course = next(c for c in self.data[program_id]["courses"] if c["course_code"] == code)
-                self.assertEqual(course["course_name_en"], name_en)
-                self.assertEqual(course["credit_hours"], credits)
+                for code, name_en, credits in special_courses:
+                    course = next(
+                        c for c in self.data[program_id]["courses"]
+                        if c["course_code"] == code
+                    )
+                    self.assertEqual(course["course_name_en"], name_en)
+                    self.assertEqual(course["credit_hours"], credits)
 
         marine_id = "catalog-masters-in-marine-geology"
         self.assertIsNone(self.data[marine_id]["total_program_credit_hours"])
@@ -297,7 +359,7 @@ class PilotImportDataTests(unittest.TestCase):
         ]
         self.assertTrue(any("ما لا يقل عن (34) وحدة دراسية معتمدة" in text for text in descriptions))
 
-    def test_only_three_catalog_entries_differ_from_head(self) -> None:
+    def test_only_current_import_catalog_entries_differ_from_head(self) -> None:
         original = json.loads(subprocess.check_output(
             ["git", "show", "HEAD:web/data/faculty_catalog.json"],
             cwd=ROOT, text=True,
@@ -310,16 +372,16 @@ class PilotImportDataTests(unittest.TestCase):
             for program_id in current_by_id
             if current_by_id[program_id] != original_by_id[program_id]
         }
-        self.assertEqual(changed, BATCH_2)
+        self.assertEqual(changed, CURRENT_IMPORT)
 
-    def test_exactly_three_planner_records_were_added(self) -> None:
+    def test_exactly_current_import_planner_records_were_added(self) -> None:
         original = json.loads(subprocess.check_output(
             ["git", "show", "HEAD:web/data/additional_programs.json"],
             cwd=ROOT, text=True,
         ))
         original_by_id = {p["id"]: p for p in original["programs"]}
         current_by_id = self.data
-        self.assertEqual(set(current_by_id) - set(original_by_id), BATCH_2)
+        self.assertEqual(set(current_by_id) - set(original_by_id), CURRENT_IMPORT)
         self.assertEqual(set(original_by_id) - set(current_by_id), set())
         for program_id, original_program in original_by_id.items():
             self.assertEqual(current_by_id[program_id], original_program)
@@ -429,7 +491,7 @@ class PilotImportApiTests(unittest.TestCase):
             )
         )
 
-    def test_existing_api_loads_and_plans_all_nine_programs(self) -> None:
+    def test_existing_api_loads_and_plans_all_fourteen_programs(self) -> None:
         summaries = {p["id"]: p for p in self.get("/api/programs")["programs"]}
         for program_id, expected in PILOTS.items():
             with self.subTest(program_id=program_id):
