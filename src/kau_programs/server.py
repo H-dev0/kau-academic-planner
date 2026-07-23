@@ -81,7 +81,11 @@ class PlannerHandler(SimpleHTTPRequestHandler):
         elif self.path == "/api/plan":
             payload = self._read_json()
             completed_codes = list(payload.get("completed_codes") or [])
-            self._json(plan_courses(self.server.program, completed_codes))
+            elective_selections = payload.get("elective_selections") or {}
+            result = plan_courses(
+                self.server.program, completed_codes, elective_selections
+            )
+            self._json(result, status=400 if result.get("validation_errors") else 200)
         elif self.path == "/api/progress":
             user = self._require_user()
             if user:

@@ -11,6 +11,7 @@ class Course:
     official_course_name: str | None
     credit_hours: int | None
     prerequisites: list[str] = field(default_factory=list)
+    corequisites: list[str] = field(default_factory=list)
     official_source_url: str | None = None
     source_title: str | None = None
     last_checked_date: str | None = None
@@ -25,6 +26,7 @@ class Course:
             official_course_name=data.get("official_course_name"),
             credit_hours=data.get("credit_hours"),
             prerequisites=list(data.get("prerequisites") or []),
+            corequisites=list(data.get("corequisites") or []),
             official_source_url=data.get("official_source_url"),
             source_title=data.get("source_title"),
             last_checked_date=data.get("last_checked_date"),
@@ -32,6 +34,35 @@ class Course:
                 "counts_toward_program_credit_total"
             ),
             credit_total_exclusion_reason=data.get("credit_total_exclusion_reason"),
+        )
+
+
+@dataclass(frozen=True)
+class ElectiveGroup:
+    id: str
+    name_ar: str
+    name_en: str
+    option_course_codes: list[str]
+    required: bool
+    required_course_count: int | None
+    required_credit_hours: int | None
+    maximum_course_count: int | None
+    semester_or_level: str | None
+    classification: str
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> "ElectiveGroup":
+        return cls(
+            id=data.get("id"),
+            name_ar=data.get("name_ar"),
+            name_en=data.get("name_en"),
+            option_course_codes=list(data.get("option_course_codes") or []),
+            required=data.get("required"),
+            required_course_count=data.get("required_course_count"),
+            required_credit_hours=data.get("required_credit_hours"),
+            maximum_course_count=data.get("maximum_course_count"),
+            semester_or_level=data.get("semester_or_level"),
+            classification=data.get("classification"),
         )
 
 
@@ -46,6 +77,8 @@ class Program:
     source_title: str | None
     last_checked_date: str | None
     courses: list[Course]
+    planner_schema_version: int | None = None
+    elective_groups: list[ElectiveGroup] = field(default_factory=list)
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "Program":
@@ -59,4 +92,8 @@ class Program:
             source_title=data.get("source_title"),
             last_checked_date=data.get("last_checked_date"),
             courses=[Course.from_dict(item) for item in data.get("courses", [])],
+            planner_schema_version=data.get("planner_schema_version"),
+            elective_groups=[
+                ElectiveGroup.from_dict(item) for item in data.get("elective_groups", [])
+            ],
         )

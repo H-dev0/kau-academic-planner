@@ -50,5 +50,6 @@ azure_secret.txt
 
 # Catalog refresh artifacts kept local
 data/raw/kau/catalog/
+data/raw/kau/plan_audit/
 data/backups/catalog/
 reports/catalog/catalog_candidate.json
