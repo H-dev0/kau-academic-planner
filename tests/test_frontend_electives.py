@@ -41,6 +41,10 @@ class FrontendElectiveStaticTests(unittest.TestCase):
         self.assertIn("var(--color-border)", self.css)
         self.assertNotIn("#fff; /* elective", self.css)
 
+    def test_total_courses_metric_still_uses_all_course_records(self) -> None:
+        self.assertIn("if (totalCourseCount) totalCourseCount.textContent = total;", self.app)
+        self.assertIn('id="totalCourseCount"', self.html)
+
 
 if __name__ == "__main__":
     unittest.main()

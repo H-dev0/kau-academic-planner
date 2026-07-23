@@ -77,6 +77,22 @@
     };
   }
 
+  function courseCompletionDisplay(program, metrics, completedCourseCount, totalCourseCount, language) {
+    const english = language === "en";
+    const hasElectiveGroups = Array.isArray(program?.elective_groups) && program.elective_groups.length;
+    if (!hasElectiveGroups) {
+      return `${completedCourseCount} / ${totalCourseCount} ${english ? "courses" : "مقررات"}`;
+    }
+    if (Number.isInteger(metrics?.completedCourseCount)
+        && Number.isInteger(metrics?.remainingCourseCount)) {
+      const requiredCourseCount = metrics.completedCourseCount + metrics.remainingCourseCount;
+      return `${metrics.completedCourseCount} / ${requiredCourseCount} ${english ? "courses" : "مقررات"}`;
+    }
+    return english
+      ? `${completedCourseCount} completed courses`
+      : `${completedCourseCount} مقررات مكتملة`;
+  }
+
   function programCreditDisplay(program, language) {
     const text = labels[language === "en" ? "en" : "ar"];
     const effective = Array.isArray(program?.elective_groups) && program.elective_groups.length
@@ -93,5 +109,5 @@
     return { value: text.unavailable, label: text.official, calculated: false };
   }
 
-  return { effectiveCreditTotal, plannerProgressMetrics, programCreditDisplay };
+  return { effectiveCreditTotal, plannerProgressMetrics, courseCompletionDisplay, programCreditDisplay };
 });

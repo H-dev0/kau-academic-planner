@@ -1567,7 +1567,9 @@ function render() {
 
   progressText.textContent = `${percent}%`;
   if (degreeProgressValue) degreeProgressValue.textContent = `${percent}%`;
-  if (degreeProgressCourseLabel) degreeProgressCourseLabel.textContent = `${plan.completed.length} / ${total} ${text.courses}`;
+  if (degreeProgressCourseLabel) degreeProgressCourseLabel.textContent = creditDisplay.courseCompletionDisplay(
+    state.program, progressMetrics, plan.completed.length, total, currentLanguageSafe(),
+  );
   if (degreeProgressBar) {
     degreeProgressBar.setAttribute("aria-valuenow", String(percent));
     const fill = degreeProgressBar.querySelector("i");

@@ -31,7 +31,70 @@ def metrics(program: dict, completed: list[dict], selections: dict | None = None
     return call_helper("plannerProgressMetrics", program, completed, selections or {})
 
 
+def course_display(
+    program: dict, progress: dict, completed_count: int, total_count: int, language: str
+) -> str:
+    return call_helper(
+        "courseCompletionDisplay", program, progress, completed_count, total_count, language
+    )
+
+
 class CreditDisplayTests(unittest.TestCase):
+    def test_elective_course_ratio_uses_only_required_counts(self) -> None:
+        program = fixture_copy()
+        program["elective_groups"] = [
+            group for group in program["elective_groups"] if group["id"] != "credit-based"
+        ]
+        program["courses"] = [
+            course for course in program["courses"]
+            if course["course_code"] not in {"SYN 301", "SYN 302", "SYN 303"}
+        ]
+        by_code = {course["course_code"]: course for course in program["courses"]}
+        completed_codes = ["SYN 100", "SYN 101", "SYN 201", "SYN 202"]
+        progress = metrics(
+            program,
+            [by_code[code] for code in completed_codes],
+            {"choose-one": ["SYN 101"], "choose-two": ["SYN 201", "SYN 202"]},
+        )
+
+        self.assertEqual(progress["completedCourseCount"], 4)
+        self.assertEqual(progress["remainingCourseCount"], 3)
+        self.assertEqual(course_display(program, progress, 4, len(program["courses"]), "en"), "4 / 7 courses")
+        self.assertEqual(course_display(program, progress, 4, len(program["courses"]), "ar"), "4 / 7 مقررات")
+        self.assertLess(7, len(program["courses"]))
+
+    def test_credit_based_group_uses_bilingual_completed_only_label(self) -> None:
+        program = fixture_copy()
+        progress = metrics(program, program["courses"][:8])
+
+        self.assertIsNone(progress["completedCourseCount"])
+        self.assertIsNone(progress["remainingCourseCount"])
+        self.assertEqual(course_display(program, progress, 8, 17, "en"), "8 completed courses")
+        self.assertEqual(course_display(program, progress, 8, 17, "ar"), "8 مقررات مكتملة")
+
+    def test_optional_and_unselected_options_do_not_expand_required_denominator(self) -> None:
+        program = fixture_copy()
+        program["elective_groups"] = [
+            group for group in program["elective_groups"] if group["id"] != "credit-based"
+        ]
+        program["courses"] = [
+            course for course in program["courses"]
+            if course["course_code"] not in {"SYN 301", "SYN 302", "SYN 303"}
+        ]
+        progress = metrics(program, [])
+
+        required_total = progress["completedCourseCount"] + progress["remainingCourseCount"]
+        self.assertEqual(required_total, 7)
+        self.assertEqual(len(program["courses"]), 14)
+        optional = next(group for group in program["elective_groups"] if group["id"] == "optional")
+        self.assertFalse(optional["required"])
+
+    def test_legacy_course_ratio_is_unchanged(self) -> None:
+        program = {"courses": [{"course_code": "A"}, {"course_code": "B"}]}
+        progress = metrics(program, [program["courses"][0]])
+        self.assertEqual(course_display(program, progress, 1, 2, "en"), "1 / 2 courses")
+        self.assertEqual(course_display(program, progress, 1, 2, "ar"), "1 / 2 مقررات")
+
     def test_elective_metrics_do_not_count_unselected_or_incomplete_options(self) -> None:
         program = fixture_copy()
         by_code = {course["course_code"]: course for course in program["courses"]}
