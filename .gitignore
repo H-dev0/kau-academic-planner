@@ -27,6 +27,7 @@ __pycache__/
 # Local application data and generated deployment artifacts
 data/local/*.sqlite
 data/local/*.db
+build/deployment/
 *.sqlite
 *.db
 *.zip
