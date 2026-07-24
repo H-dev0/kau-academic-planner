@@ -647,5 +647,76 @@ class PilotImportApiTests(unittest.TestCase):
                 self.assertTrue(expected["unlocked"] <= available)
 
 
+BACHELOR_RECOVERY_WAVE_1_SCOPE = {
+    "catalog-bachelor-of-science-in-cybersecurity",
+    "catalog-bachelor-of-medical-laboratories-science",
+    "catalog-bachelor-of-journalism-and-digital-media-program",
+    "catalog-bachelor-of-marketing-communication-program",
+    "catalog-bachelor-of-public-relations-program",
+    "catalog-bachelor-of-visual-and-audio-production-program",
+    "catalog-bachelor-of-science-in-computer-science",
+    "catalog-political-science",
+    "catalog-engineering-bachelor-of-science-in-civil-engineering",
+    "catalog-engineering-bachelor-of-science-in-electrical-engineering-computer",
+    "catalog-engineering-bachelor-of-science-in-electrical-engineering-biomedical",
+    "catalog-engineering-bachelor-of-science-in-electrical-engineering-electronics-and-communic",
+    "catalog-engineering-bachelor-of-science-in-mechanical-engineering-aeronautical",
+    "catalog-engineering-bachelor-of-science-in-mechanical-engineering-thermal-engineering-and-",
+    "catalog-engineering-bachelor-of-science-in-mining-engineering",
+    "catalog-applied-medica-sciences-bachelor-of-radiologic-sciences",
+    "catalog-applied-medica-sciences-bachelor-of-medical-laboratory-sciences",
+    "catalog-architecture-and-planning-bachelor-of-landscape-architecture",
+    "catalog-bachelor-of-science-in-meteorology",
+    "catalog-bachelor-of-science-in-hydrology-and-water-resources-management",
+    "catalog-geography-and-geographic-information-systems",
+    "catalog-counseling-psychology",
+    "catalog-chinese-language",
+    "catalog-bachelor-in-french-language-translation",
+    "catalog-human-resource-management",
+}
+
+
+class BachelorRecoveryWave1Tests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.report = load("reports/plan_extraction/bachelor_recovery_wave_1.json")
+        cls.catalog = {p["id"]: p for p in load("web/data/faculty_catalog.json")["programs"]}
+        cls.planner = {p["id"]: p for p in load("web/data/additional_programs.json")["programs"]}
+
+    def test_scope_decisions_and_source_hashes(self) -> None:
+        programs = {item["program_id"]: item for item in self.report["programs"]}
+        self.assertEqual(self.report["summary"]["considered"], 25)
+        self.assertEqual(set(self.report["scope_program_ids"]), BACHELOR_RECOVERY_WAVE_1_SCOPE)
+        self.assertEqual(set(programs), BACHELOR_RECOVERY_WAVE_1_SCOPE)
+        self.assertEqual(sum(self.report["summary"]["classification_counts"].values()), 25)
+        self.assertTrue(all(item["classification"] != "A. IMPORT_READY" for item in programs.values()))
+        for item in programs.values():
+            with self.subTest(program_id=item["program_id"]):
+                for language in ("ar", "en"):
+                    evidence = item["official_source_evidence"][language]
+                    self.assertEqual(evidence["status"], "fetched")
+                    self.assertRegex(evidence["content_sha256"], r"^[0-9a-f]{64}$")
+                    self.assertIn("kau.edu.sa", evidence["url"])
+
+    def test_all_skipped_programs_remain_catalog_only_and_unchanged(self) -> None:
+        original = json.loads(subprocess.check_output(
+            ["git", "show", "e44ad53:web/data/faculty_catalog.json"], cwd=ROOT, text=True,
+        ))
+        original_by_id = {p["id"]: p for p in original["programs"]}
+        for program_id in BACHELOR_RECOVERY_WAVE_1_SCOPE:
+            with self.subTest(program_id=program_id):
+                self.assertEqual(self.catalog[program_id], original_by_id[program_id])
+                self.assertNotIn(program_id, self.planner)
+                self.assertFalse(self.catalog[program_id]["planner_available"])
+                self.assertIsNone(self.catalog[program_id]["planner_data_key"])
+                self.assertEqual(self.catalog[program_id]["catalog_status"], "catalog-only")
+
+    def test_no_unresolved_record_was_promoted(self) -> None:
+        for item in self.report["programs"]:
+            if item["missing_dependencies"] or item["placeholder_or_colliding_codes"] or item["structural_ambiguities"]:
+                self.assertNotEqual(item["classification"], "A. IMPORT_READY")
+                self.assertNotIn(item["program_id"], self.planner)
+
+
 if __name__ == "__main__":
     unittest.main()
