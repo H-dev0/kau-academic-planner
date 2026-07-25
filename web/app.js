@@ -1764,8 +1764,8 @@ function render() {
   if (filterResultSummary) filterResultSummary.hidden = catalogOnly;
   if (courseCatalogSummary) courseCatalogSummary.hidden = catalogOnly;
   if (clearButton) clearButton.hidden = catalogOnly;
-  if (toolbarActions) toolbarActions.hidden = officialView;
-  if (privacyNotice) privacyNotice.hidden = officialView;
+  if (toolbarActions) toolbarActions.hidden = catalogOnly;
+  if (privacyNotice) privacyNotice.hidden = catalogOnly;
   renderLegacyProgressNotice();
   renderOfficialPlanView();
 

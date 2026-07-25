@@ -77,6 +77,8 @@ class OfficialPlanViewDataTests(unittest.TestCase):
         self.assertIn("المخطط التفاعلي متاح", app)
         self.assertIn("فهرس البرنامج فقط", app)
         self.assertIn('if (!isNoSelection() && !isCatalogOnly() && !isNoPrograms()) await loadProgress();', app)
+        self.assertIn("if (toolbarActions) toolbarActions.hidden = catalogOnly;", app)
+        self.assertIn("if (privacyNotice) privacyNotice.hidden = catalogOnly;", app)
         self.assertIn('id="officialPlanView"', html)
         self.assertIn("@media (max-width: 760px)", css)
         self.assertIn('[data-theme="dark"]', css)
