@@ -1,0 +1,3132 @@
+{
+  "generated_at": "2026-07-25T18:15:19Z",
+  "mode": "bachelor priority faculties coverage wave",
+  "branch": "bachelor-priority-faculties-wave",
+  "base_commit": "72c0b65081df76e32b3450a683a31301428dc1eb",
+  "scope": {
+    "degree_level": "bachelor",
+    "faculty_ids_in_priority_order": [
+      "EA",
+      "AH",
+      "SC",
+      "IT",
+      "EN"
+    ],
+    "faculties": [
+      {
+        "id": "EA",
+        "name_ar": "الاقتصاد والادارة",
+        "name_en": "economics and administration"
+      },
+      {
+        "id": "AH",
+        "name_ar": "الآداب و العلوم الإنسانية",
+        "name_en": "Arts and Humanities"
+      },
+      {
+        "id": "SC",
+        "name_ar": "العلوم",
+        "name_en": "science"
+      },
+      {
+        "id": "IT",
+        "name_ar": "الحاسبات وتقنية المعلومات",
+        "name_en": "computing & information tech."
+      },
+      {
+        "id": "EN",
+        "name_ar": "الهندسة",
+        "name_en": "ENGINEERING"
+      }
+    ],
+    "program_count": 36,
+    "rabigh_faculties_included": false
+  },
+  "inventory_complete_before_academic_changes": true,
+  "summary": {
+    "inventory_programs": 36,
+    "classification_counts": {
+      "B. OFFICIAL_PLAN_VIEW_READY": 8,
+      "C. NEEDS_DETERMINISTIC_DISPLAY_NORMALIZATION": 1,
+      "E. UNRESOLVED_ACADEMIC_RULES": 1,
+      "F. ALREADY_SUPPORTED": 26
+    },
+    "programs_added_as_FULL_PLANNER": 0,
+    "programs_added_as_OFFICIAL_PLAN_VIEW": 8,
+    "programs_skipped": 2,
+    "planner_data_modified": false,
+    "runtime_files_modified": false,
+    "before_coverage": {
+      "total": 223,
+      "FULL_PLANNER": 72,
+      "OFFICIAL_PLAN_VIEW": 15,
+      "CATALOG_ONLY": 136
+    },
+    "after_coverage": {
+      "total": 223,
+      "FULL_PLANNER": 72,
+      "OFFICIAL_PLAN_VIEW": 23,
+      "CATALOG_ONLY": 128
+    }
+  },
+  "programs_added_as_FULL_PLANNER": [],
+  "programs_added_as_OFFICIAL_PLAN_VIEW": [
+    "catalog-engineering-bachelor-of-science-in-civil-engineering",
+    "catalog-engineering-bachelor-of-science-in-electrical-engineering-biomedical",
+    "catalog-engineering-bachelor-of-science-in-electrical-engineering-computer",
+    "catalog-engineering-bachelor-of-science-in-electrical-engineering-electronics-and-communic",
+    "catalog-engineering-bachelor-of-science-in-electrical-engineering-power-and-machines",
+    "catalog-engineering-bachelor-of-science-in-mechanical-engineering-aeronautical",
+    "catalog-engineering-bachelor-of-science-in-mechanical-engineering-thermal-engineering-and-",
+    "catalog-engineering-bachelor-of-science-in-mining-engineering"
+  ],
+  "skipped": [
+    {
+      "program_id": "catalog-geography-and-geographic-information-systems",
+      "classification": "C. NEEDS_DETERMINISTIC_DISPLAY_NORMALIZATION",
+      "blocker": "The current bilingual source exposes 94 level-like row occurrences plus 109 direct requirement/description rows, but four visible semester slots are empty and 72 courses are nested under a separate Required Courses level-like section. Exact-signature consolidation yields 92 identities / 266 visible credits, inconsistent with the committed 64-row / 183-credit expectation; unsafe deduplication was not attempted."
+    },
+    {
+      "program_id": "catalog-bachelor-of-sharia",
+      "classification": "E. UNRESOLVED_ACADEMIC_RULES",
+      "blocker": "The official narrative states 72 courses / 166 credits, while the structured payload exposes 18 level-like sections, 206 scheduled row occurrences, and 81 direct rows. The named eight-level schedule contains 71 rows / 128 credits and exact-signature consolidation yields 73 identities / 134 credits; elective-choice and zero-credit discrepancies require academic confirmation."
+    }
+  ],
+  "remaining_CATALOG_ONLY_by_faculty": {
+    "AH": [
+      {
+        "program_id": "catalog-geography-and-geographic-information-systems",
+        "program_name_en": "Bachelor of Geography and Geographic Information Systems",
+        "classification": "C. NEEDS_DETERMINISTIC_DISPLAY_NORMALIZATION"
+      },
+      {
+        "program_id": "catalog-bachelor-of-sharia",
+        "program_name_en": "Bachelor of Sharia",
+        "classification": "E. UNRESOLVED_ACADEMIC_RULES"
+      }
+    ]
+  },
+  "programs": [
+    {
+      "program_id": "catalog-economics-and-administration-bachelor-of-health-services-and-hospital-administrati",
+      "program_name_ar": "بكالوريوس إدارة الخدمات الصحية والمستشفيات",
+      "program_name_en": "Bachelor of Health Services and Hospital Administration (BA-HSA)",
+      "faculty_id": "EA",
+      "faculty_name_ar": "الاقتصاد والادارة",
+      "faculty_name_en": "economics and administration",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "catalog-economics-and-administration-bachelor-of-health-services-and-hospital-administrati",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-health-services-and-hospital-administration-ba-hsa",
+        "https://kau.edu.sa/en/programs/bachelor-of-health-services-and-hospital-administration-ba-hsa"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-economics-and-administration-bachelor-of-health-services-and-hospital-administrati/ar.html",
+          "size_bytes": 197244,
+          "sha256": "d99414c9b32113192e43c5782114687ffef47a1a1227f880c77dfbb47e608762",
+          "retrieved_at": "2026-07-25T18:01:56Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-economics-and-administration-bachelor-of-health-services-and-hospital-administrati/en.html",
+          "size_bytes": 185827,
+          "sha256": "ada5985ad96d353d3125a95d78146bbc71b25c53a29c7e2d04742ec8ff46f5d1",
+          "retrieved_at": "2026-07-25T18:01:57Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 30,
+          "direct_requirement_or_description_row_occurrences": 4,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 118,
+          "prerequisites": false,
+          "published_requisite_row_count": 0,
+          "elective_rules": true,
+          "training": true,
+          "projects": false,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 30,
+          "direct_requirement_or_description_row_occurrences": 4,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 118,
+          "prerequisites": false,
+          "published_requisite_row_count": 0,
+          "elective_rules": true,
+          "training": true,
+          "projects": false,
+          "official_total_credits": 125
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "public-administration",
+      "program_name_ar": "بكالوريوس الإدارة العامة",
+      "program_name_en": "Bachelor of Public Administration",
+      "faculty_id": "EA",
+      "faculty_name_ar": "الاقتصاد والادارة",
+      "faculty_name_en": "economics and administration",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "public-administration",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-public-administration",
+        "https://kau.edu.sa/en/programs/bachelor-of-public-administration"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/public-administration/ar.html",
+          "size_bytes": 199508,
+          "sha256": "c6ffefd7dea7290fc343e4a4c45c08bb55a2aff88e1d5f7cf657ec5c399f758b",
+          "retrieved_at": "2026-07-25T18:01:58Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/public-administration/en.html",
+          "size_bytes": 188025,
+          "sha256": "9340faf872f6d5d4531b9f0cda38b84ab89be310ed40e27e9752ee7c9f492ae2",
+          "retrieved_at": "2026-07-25T18:01:59Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 42,
+          "direct_requirement_or_description_row_occurrences": 6,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 125,
+          "prerequisites": true,
+          "published_requisite_row_count": 18,
+          "elective_rules": true,
+          "training": true,
+          "projects": false,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 42,
+          "direct_requirement_or_description_row_occurrences": 6,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 125,
+          "prerequisites": true,
+          "published_requisite_row_count": 18,
+          "elective_rules": true,
+          "training": true,
+          "projects": false,
+          "official_total_credits": 125
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "accounting",
+      "program_name_ar": "بكالوريوس العلوم في المحاسبة",
+      "program_name_en": "Bachelor of Science in Accounting",
+      "faculty_id": "EA",
+      "faculty_name_ar": "الاقتصاد والادارة",
+      "faculty_name_en": "economics and administration",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "accounting",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-science-in-accounting",
+        "https://kau.edu.sa/en/programs/bachelor-of-science-in-accounting"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/accounting/ar.html",
+          "size_bytes": 195816,
+          "sha256": "2c6c0566ff1be494d8a2b39637dc48ea5e1abec3d7fd9d8cb2709f58b01333b0",
+          "retrieved_at": "2026-07-25T18:02:00Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/accounting/en.html",
+          "size_bytes": 184298,
+          "sha256": "a76b03ff820868b953069973d24ee22b462de912480079faedbfe100ba447e32",
+          "retrieved_at": "2026-07-25T18:02:01Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 43,
+          "direct_requirement_or_description_row_occurrences": 4,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 131,
+          "prerequisites": true,
+          "published_requisite_row_count": 5,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 43,
+          "direct_requirement_or_description_row_occurrences": 4,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 131,
+          "prerequisites": true,
+          "published_requisite_row_count": 5,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": 125
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "business-administration",
+      "program_name_ar": "بكالوريوس العلوم في ادارة الأعمال",
+      "program_name_en": "Bachelor of Science in Business Administration",
+      "faculty_id": "EA",
+      "faculty_name_ar": "الاقتصاد والادارة",
+      "faculty_name_en": "economics and administration",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "business-administration",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-science-in-business-administration",
+        "https://kau.edu.sa/en/programs/bachelor-of-science-in-business-administration"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/business-administration/ar.html",
+          "size_bytes": 200091,
+          "sha256": "1e6d9937d6b8bf96097883a7b14fb4e8c7bb03826d5425dc4d9cd9b861b35904",
+          "retrieved_at": "2026-07-25T18:02:03Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/business-administration/en.html",
+          "size_bytes": 186479,
+          "sha256": "7cf6ae9f54dc99fdcd858795886456e58fdf360b74bff39f4afae0aab0153709",
+          "retrieved_at": "2026-07-25T18:02:04Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 43,
+          "direct_requirement_or_description_row_occurrences": 5,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 131,
+          "prerequisites": true,
+          "published_requisite_row_count": 5,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 43,
+          "direct_requirement_or_description_row_occurrences": 5,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 131,
+          "prerequisites": true,
+          "published_requisite_row_count": 5,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": 125
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "finance",
+      "program_name_ar": "بكالوريوس في العلوم في تخصص المالية",
+      "program_name_en": "Bachelor of Science in Finance",
+      "faculty_id": "EA",
+      "faculty_name_ar": "الاقتصاد والادارة",
+      "faculty_name_en": "economics and administration",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "finance",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-science-in-finance",
+        "https://kau.edu.sa/en/programs/bachelor-of-science-in-finance"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/finance/ar.html",
+          "size_bytes": 197316,
+          "sha256": "a46adac7497a6299c88715cc1e1fe5696b5fc4e9532d809cd6dac6178e514626",
+          "retrieved_at": "2026-07-25T18:02:04Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/finance/en.html",
+          "size_bytes": 185706,
+          "sha256": "5afb15054e1890aa0eff1efafd06652090945d3c303e08c64328ec17573b5ae2",
+          "retrieved_at": "2026-07-25T18:02:05Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 44,
+          "direct_requirement_or_description_row_occurrences": 5,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 122,
+          "prerequisites": true,
+          "published_requisite_row_count": 22,
+          "elective_rules": true,
+          "training": false,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 44,
+          "direct_requirement_or_description_row_occurrences": 5,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 122,
+          "prerequisites": true,
+          "published_requisite_row_count": 22,
+          "elective_rules": true,
+          "training": false,
+          "projects": true,
+          "official_total_credits": 125
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "human-resources",
+      "program_name_ar": "بكالوريوس العلوم في إدارة الموارد البشرية",
+      "program_name_en": "Bachelor of Science in Human Resource Management",
+      "faculty_id": "EA",
+      "faculty_name_ar": "الاقتصاد والادارة",
+      "faculty_name_en": "economics and administration",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "human-resources",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-science-in-human-resource-management",
+        "https://kau.edu.sa/en/programs/bachelor-of-science-in-human-resource-management"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/human-resources/ar.html",
+          "size_bytes": 201034,
+          "sha256": "447405a9fe0745bdd135ab5be2b315d1fe5a2bd589f9c12991f69cf0a4cb1196",
+          "retrieved_at": "2026-07-25T18:02:06Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/human-resources/en.html",
+          "size_bytes": 186657,
+          "sha256": "7219f2f8c91de6126762cf8f8d778f203b9be3d12434c6a7e22cd894154817db",
+          "retrieved_at": "2026-07-25T18:02:07Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 42,
+          "direct_requirement_or_description_row_occurrences": 4,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 122,
+          "prerequisites": true,
+          "published_requisite_row_count": 4,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 42,
+          "direct_requirement_or_description_row_occurrences": 4,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 122,
+          "prerequisites": true,
+          "published_requisite_row_count": 4,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": 125
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "management-information-systems",
+      "program_name_ar": "بكالوريوس نظم المعلومات الادارية",
+      "program_name_en": "Bachelor of Science in Management Information Systems",
+      "faculty_id": "EA",
+      "faculty_name_ar": "الاقتصاد والادارة",
+      "faculty_name_en": "economics and administration",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "management-information-systems",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-science-in-management-information-systems",
+        "https://kau.edu.sa/en/programs/bachelor-of-science-in-management-information-systems"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/management-information-systems/ar.html",
+          "size_bytes": 203155,
+          "sha256": "a20b173e40f57cce397e0cd9272b9c040f5792d822801f52788b92c2c854eb99",
+          "retrieved_at": "2026-07-25T18:02:08Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/management-information-systems/en.html",
+          "size_bytes": 191438,
+          "sha256": "303209e0cf4b65191935e82b81eb29850020f27819b042e23928cdd0fe900202",
+          "retrieved_at": "2026-07-25T18:02:09Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 43,
+          "direct_requirement_or_description_row_occurrences": 4,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 131,
+          "prerequisites": true,
+          "published_requisite_row_count": 4,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 43,
+          "direct_requirement_or_description_row_occurrences": 4,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 131,
+          "prerequisites": true,
+          "published_requisite_row_count": 4,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": 125
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "economics",
+      "program_name_ar": "بكالوريوس الاقتصاد",
+      "program_name_en": "Bachelors of Economics",
+      "faculty_id": "EA",
+      "faculty_name_ar": "الاقتصاد والادارة",
+      "faculty_name_en": "economics and administration",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "economics",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelors-of-economics",
+        "https://kau.edu.sa/en/programs/bachelors-of-economics"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/economics/ar.html",
+          "size_bytes": 198259,
+          "sha256": "7fa068fbab27a6898f88e1a363ab544a40caf05618caabbd00071e75689baeff",
+          "retrieved_at": "2026-07-25T18:02:10Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/economics/en.html",
+          "size_bytes": 184683,
+          "sha256": "142e7d9c31322d78a817e2ed9326b44c9f20e33522b658c8c928c09932e1bf85",
+          "retrieved_at": "2026-07-25T18:02:11Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 37,
+          "direct_requirement_or_description_row_occurrences": 4,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 110,
+          "prerequisites": true,
+          "published_requisite_row_count": 21,
+          "elective_rules": true,
+          "training": true,
+          "projects": false,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 37,
+          "direct_requirement_or_description_row_occurrences": 4,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 110,
+          "prerequisites": true,
+          "published_requisite_row_count": 21,
+          "elective_rules": true,
+          "training": true,
+          "projects": false,
+          "official_total_credits": 125
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "marketing",
+      "program_name_ar": "بكالوريوس التسويق",
+      "program_name_en": "Bachelor’s Degree in Marketing",
+      "faculty_id": "EA",
+      "faculty_name_ar": "الاقتصاد والادارة",
+      "faculty_name_en": "economics and administration",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "marketing",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelors-degree-in-marketing",
+        "https://kau.edu.sa/en/programs/bachelors-degree-in-marketing"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/marketing/ar.html",
+          "size_bytes": 198665,
+          "sha256": "4f4e90b96edfd68799ce4fa7f6da93c37b21c086b344886a05a5242fb34e37d1",
+          "retrieved_at": "2026-07-25T18:02:11Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/marketing/en.html",
+          "size_bytes": 187550,
+          "sha256": "6f480db2e6ff9e490986f452593298bbce916b93442babbf29faf38ed0d72609",
+          "retrieved_at": "2026-07-25T18:02:12Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 43,
+          "direct_requirement_or_description_row_occurrences": 5,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 131,
+          "prerequisites": true,
+          "published_requisite_row_count": 4,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 43,
+          "direct_requirement_or_description_row_occurrences": 5,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 131,
+          "prerequisites": true,
+          "published_requisite_row_count": 4,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": 125
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-political-science",
+      "program_name_ar": "بكالوريوس العلوم السياسية",
+      "program_name_en": "Political Science",
+      "faculty_id": "EA",
+      "faculty_name_ar": "الاقتصاد والادارة",
+      "faculty_name_en": "economics and administration",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/political-science",
+        "https://kau.edu.sa/en/programs/political-science"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-political-science/ar.html",
+          "size_bytes": 200797,
+          "sha256": "29125faf8223fc3678e299778a286b2c70c789427f1b85bbe771af999b4f3e61",
+          "retrieved_at": "2026-07-25T18:02:13Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-political-science/en.html",
+          "size_bytes": 189610,
+          "sha256": "39dd86d91e1b0a9226e6b3df95225755b2dcf0d96ff187c77e922e288b02b2a4",
+          "retrieved_at": "2026-07-25T18:02:14Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 46,
+          "direct_requirement_or_description_row_occurrences": 0,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 130,
+          "prerequisites": true,
+          "published_requisite_row_count": 25,
+          "elective_rules": true,
+          "training": true,
+          "projects": false,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 8,
+          "scheduled_course_row_occurrences": 46,
+          "direct_requirement_or_description_row_occurrences": 0,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 130,
+          "prerequisites": true,
+          "published_requisite_row_count": 25,
+          "elective_rules": true,
+          "training": true,
+          "projects": false,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as OFFICIAL_PLAN_VIEW before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-bachelor-in-french-language-translation",
+      "program_name_ar": "البكالوريوس في اللغة الفرنسية والترجمة",
+      "program_name_en": "Bachelor in French Language & Translation",
+      "faculty_id": "AH",
+      "faculty_name_ar": "الآداب و العلوم الإنسانية",
+      "faculty_name_en": "Arts and Humanities",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-in-french-language-translation",
+        "https://kau.edu.sa/en/programs/bachelor-in-french-language-translation"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-bachelor-in-french-language-translation/ar.html",
+          "size_bytes": 258751,
+          "sha256": "37f864ca0036ccdd237b5fab1819228d3dcbc24ae32e01763de2e8fd6716abe1",
+          "retrieved_at": "2026-07-25T18:01:46Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-bachelor-in-french-language-translation/en.html",
+          "size_bytes": 234831,
+          "sha256": "178936769afddefd1fb9cc8775b1d29b64764c1025468e555fde798fb9de1615",
+          "retrieved_at": "2026-07-25T18:01:47Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 12,
+          "scheduled_course_row_occurrences": 139,
+          "direct_requirement_or_description_row_occurrences": 10,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 396,
+          "prerequisites": true,
+          "published_requisite_row_count": 107,
+          "elective_rules": true,
+          "training": true,
+          "projects": false,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 12,
+          "scheduled_course_row_occurrences": 139,
+          "direct_requirement_or_description_row_occurrences": 10,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 396,
+          "prerequisites": true,
+          "published_requisite_row_count": 107,
+          "elective_rules": true,
+          "training": false,
+          "projects": false,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as OFFICIAL_PLAN_VIEW before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-arts-and-humanities-bachelor-of-arabic-language",
+      "program_name_ar": "البكالوريوس في اللغة العربية وآدابها",
+      "program_name_en": "Bachelor of Arabic Language",
+      "faculty_id": "AH",
+      "faculty_name_ar": "الآداب و العلوم الإنسانية",
+      "faculty_name_en": "Arts and Humanities",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "catalog-arts-and-humanities-bachelor-of-arabic-language",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-arabic-language",
+        "https://kau.edu.sa/en/programs/bachelor-of-arabic-language"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-arts-and-humanities-bachelor-of-arabic-language/ar.html",
+          "size_bytes": 238405,
+          "sha256": "0d0cb140e00c5f4bc8b9ddb0c9a1e5af4f120ea1aac746b9b46ab5968ae9ed11",
+          "retrieved_at": "2026-07-25T18:01:48Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-arts-and-humanities-bachelor-of-arabic-language/en.html",
+          "size_bytes": 224895,
+          "sha256": "3a018cfd1b424e5d12cab331337ea1088cffa994107ac34f6c2f7e6f783a4d0d",
+          "retrieved_at": "2026-07-25T18:01:49Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 12,
+          "scheduled_course_row_occurrences": 98,
+          "direct_requirement_or_description_row_occurrences": 12,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 257,
+          "prerequisites": true,
+          "published_requisite_row_count": 66,
+          "elective_rules": true,
+          "training": true,
+          "projects": false,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 12,
+          "scheduled_course_row_occurrences": 98,
+          "direct_requirement_or_description_row_occurrences": 12,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 257,
+          "prerequisites": true,
+          "published_requisite_row_count": 66,
+          "elective_rules": true,
+          "training": false,
+          "projects": false,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-chinese-language",
+      "program_name_ar": "البكالوريوس في اللغة الصينية",
+      "program_name_en": "Bachelor of Chinese Language",
+      "faculty_id": "AH",
+      "faculty_name_ar": "الآداب و العلوم الإنسانية",
+      "faculty_name_en": "Arts and Humanities",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/chinese-language",
+        "https://kau.edu.sa/en/programs/chinese-language"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-chinese-language/ar.html",
+          "size_bytes": 255188,
+          "sha256": "a84d82741dd60ffc6fe58e69d39721fe06dfdd921d318507966ae6ab4b0890e4",
+          "retrieved_at": "2026-07-25T18:01:50Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-chinese-language/en.html",
+          "size_bytes": 232485,
+          "sha256": "9237ec2fb2e18189656275bfb18f281ade5319e37ced63cbbfb74c9278f9da3f",
+          "retrieved_at": "2026-07-25T18:01:51Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 76,
+          "direct_requirement_or_description_row_occurrences": 53,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 217,
+          "prerequisites": true,
+          "published_requisite_row_count": 98,
+          "elective_rules": true,
+          "training": true,
+          "projects": false,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 76,
+          "direct_requirement_or_description_row_occurrences": 53,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 217,
+          "prerequisites": true,
+          "published_requisite_row_count": 98,
+          "elective_rules": true,
+          "training": false,
+          "projects": false,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as OFFICIAL_PLAN_VIEW before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-counseling-psychology",
+      "program_name_ar": "البكالوريوس في علم النفس الإرشادي",
+      "program_name_en": "Bachelor of Counseling Psychology",
+      "faculty_id": "AH",
+      "faculty_name_ar": "الآداب و العلوم الإنسانية",
+      "faculty_name_en": "Arts and Humanities",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/counseling-psychology",
+        "https://kau.edu.sa/en/programs/counseling-psychology"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-counseling-psychology/ar.html",
+          "size_bytes": 241266,
+          "sha256": "6faea723621c071aabb2172d60754a9a4d387ee40bc91c9a101561f4f0f278ef",
+          "retrieved_at": "2026-07-25T18:01:52Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-counseling-psychology/en.html",
+          "size_bytes": 223242,
+          "sha256": "251d81fed9a998d9751c79a68117b3d42994df4bcdff3af2ed663d22e381f3f0",
+          "retrieved_at": "2026-07-25T18:01:53Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 72,
+          "direct_requirement_or_description_row_occurrences": 52,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 222,
+          "prerequisites": true,
+          "published_requisite_row_count": 51,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 72,
+          "direct_requirement_or_description_row_occurrences": 52,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 222,
+          "prerequisites": true,
+          "published_requisite_row_count": 51,
+          "elective_rules": true,
+          "training": false,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as OFFICIAL_PLAN_VIEW before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-geography-and-geographic-information-systems",
+      "program_name_ar": "البكالوريوس في الجغرافيا ونظم المعلومات الجغرافية",
+      "program_name_en": "Bachelor of Geography and Geographic Information Systems",
+      "faculty_id": "AH",
+      "faculty_name_ar": "الآداب و العلوم الإنسانية",
+      "faculty_name_en": "Arts and Humanities",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "CATALOG_ONLY",
+      "final_coverage_state": "CATALOG_ONLY",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/geography-and-geographic-information-systems",
+        "https://kau.edu.sa/en/programs/geography-and-geographic-information-systems"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-geography-and-geographic-information-systems/ar.html",
+          "size_bytes": 336013,
+          "sha256": "0b50672c18788b941796778ea0f2bc7838ec773780c751651b3a261270947b18",
+          "retrieved_at": "2026-07-25T17:59:00Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-geography-and-geographic-information-systems/en.html",
+          "size_bytes": 302278,
+          "sha256": "789c90802c97d492e172ddb361b1f4999dcf0d28ffa2574213099d7fddb67a82",
+          "retrieved_at": "2026-07-25T17:59:01Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 94,
+          "direct_requirement_or_description_row_occurrences": 109,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 273,
+          "prerequisites": true,
+          "published_requisite_row_count": 44,
+          "elective_rules": false,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 94,
+          "direct_requirement_or_description_row_occurrences": 109,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 273,
+          "prerequisites": true,
+          "published_requisite_row_count": 44,
+          "elective_rules": false,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "C. NEEDS_DETERMINISTIC_DISPLAY_NORMALIZATION",
+      "decision_evidence_or_blocker": "The current bilingual source exposes 94 level-like row occurrences plus 109 direct requirement/description rows, but four visible semester slots are empty and 72 courses are nested under a separate Required Courses level-like section. Exact-signature consolidation yields 92 identities / 266 visible credits, inconsistent with the committed 64-row / 183-credit expectation; unsafe deduplication was not attempted.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-arts-and-humanities-bachelor-of-information-science",
+      "program_name_ar": "البكالوريوس في علم المعلومات",
+      "program_name_en": "Bachelor of Information Science",
+      "faculty_id": "AH",
+      "faculty_name_ar": "الآداب و العلوم الإنسانية",
+      "faculty_name_en": "Arts and Humanities",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "catalog-arts-and-humanities-bachelor-of-information-science",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-information-science",
+        "https://kau.edu.sa/en/programs/bachelor-of-information-science"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-arts-and-humanities-bachelor-of-information-science/ar.html",
+          "size_bytes": 263712,
+          "sha256": "34ac609c119a8417dc6d8c7f4ab4b9e5ef91b4f5d53b23d2e1991d63abc84ba8",
+          "retrieved_at": "2026-07-25T18:01:54Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-arts-and-humanities-bachelor-of-information-science/en.html",
+          "size_bytes": 241546,
+          "sha256": "39e3089cc1b348422ec462cc6399ef266082d4b271600d1f97709263afebbe2f",
+          "retrieved_at": "2026-07-25T18:01:55Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 18,
+          "scheduled_course_row_occurrences": 92,
+          "direct_requirement_or_description_row_occurrences": 10,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 258,
+          "prerequisites": true,
+          "published_requisite_row_count": 16,
+          "elective_rules": false,
+          "training": false,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 18,
+          "scheduled_course_row_occurrences": 92,
+          "direct_requirement_or_description_row_occurrences": 10,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 258,
+          "prerequisites": true,
+          "published_requisite_row_count": 16,
+          "elective_rules": false,
+          "training": false,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-bachelor-of-sharia",
+      "program_name_ar": "البكالوريوس في الشريعة",
+      "program_name_en": "Bachelor of Sharia",
+      "faculty_id": "AH",
+      "faculty_name_ar": "الآداب و العلوم الإنسانية",
+      "faculty_name_en": "Arts and Humanities",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "CATALOG_ONLY",
+      "final_coverage_state": "CATALOG_ONLY",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-sharia",
+        "https://kau.edu.sa/en/programs/bachelor-of-sharia"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-bachelor-of-sharia/ar.html",
+          "size_bytes": 283068,
+          "sha256": "7dd2d61df0f019b99efac03770bce478ad91b681dc7c1d4fe8d03feaac6a20ea",
+          "retrieved_at": "2026-07-25T17:59:02Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-bachelor-of-sharia/en.html",
+          "size_bytes": 269300,
+          "sha256": "f48d9ff1dafb1772fb806dddd174f198ac0525dad9c564ebc3aaedcf3de7fef8",
+          "retrieved_at": "2026-07-25T17:59:02Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 18,
+          "scheduled_course_row_occurrences": 206,
+          "direct_requirement_or_description_row_occurrences": 81,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 371,
+          "prerequisites": true,
+          "published_requisite_row_count": 197,
+          "elective_rules": true,
+          "training": true,
+          "projects": false,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 18,
+          "scheduled_course_row_occurrences": 206,
+          "direct_requirement_or_description_row_occurrences": 81,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 371,
+          "prerequisites": true,
+          "published_requisite_row_count": 197,
+          "elective_rules": true,
+          "training": true,
+          "projects": false,
+          "official_total_credits": 166
+        }
+      },
+      "final_classification": "E. UNRESOLVED_ACADEMIC_RULES",
+      "decision_evidence_or_blocker": "The official narrative states 72 courses / 166 credits, while the structured payload exposes 18 level-like sections, 206 scheduled row occurrences, and 81 direct rows. The named eight-level schedule contains 71 rows / 128 credits and exact-signature consolidation yields 73 identities / 134 credits; elective-choice and zero-credit discrepancies require academic confirmation.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-science-bachelor-of-biochemistry",
+      "program_name_ar": "بكالوريوس في الكيمياء الحيوية",
+      "program_name_en": "Bachelor of Biochemistry",
+      "faculty_id": "SC",
+      "faculty_name_ar": "العلوم",
+      "faculty_name_en": "science",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "catalog-science-bachelor-of-biochemistry",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelors-program-of-biochemistry",
+        "https://kau.edu.sa/en/programs/bachelors-program-of-biochemistry"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-science-bachelor-of-biochemistry/ar.html",
+          "size_bytes": 268624,
+          "sha256": "382429f71a4c871079992ec414d10694a26b8883f3aafc957d890c4fbf6a9935",
+          "retrieved_at": "2026-07-25T18:02:22Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-science-bachelor-of-biochemistry/en.html",
+          "size_bytes": 233491,
+          "sha256": "5e98ce232f39f5c7e0c10d0fc9015e56d63976acacbb1608c511f094e9c35260",
+          "retrieved_at": "2026-07-25T18:02:23Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 71,
+          "direct_requirement_or_description_row_occurrences": 99,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 197,
+          "prerequisites": true,
+          "published_requisite_row_count": 133,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 71,
+          "direct_requirement_or_description_row_occurrences": 99,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 197,
+          "prerequisites": true,
+          "published_requisite_row_count": 133,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-bachelor-of-science-in-computer-science",
+      "program_name_ar": "بكالوريوس العلوم في علوم الحاسبات",
+      "program_name_en": "Bachelor of Science in Computer Science",
+      "faculty_id": "IT",
+      "faculty_name_ar": "الحاسبات وتقنية المعلومات",
+      "faculty_name_en": "computing & information tech.",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-science-in-computer-science",
+        "https://kau.edu.sa/en/programs/bachelor-of-science-in-computer-science"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-bachelor-of-science-in-computer-science/ar.html",
+          "size_bytes": 221982,
+          "sha256": "c57e4554a20f83032020a9941c4c9104487e7c41882842446996c98f48dc9a04",
+          "retrieved_at": "2026-07-25T18:02:15Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-bachelor-of-science-in-computer-science/en.html",
+          "size_bytes": 206797,
+          "sha256": "df9bac57985737763c490f85bf1cce3974599a88055ccc9bbe0b8416cece770a",
+          "retrieved_at": "2026-07-25T18:02:16Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 50,
+          "direct_requirement_or_description_row_occurrences": 61,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 158,
+          "prerequisites": true,
+          "published_requisite_row_count": 77,
+          "elective_rules": true,
+          "training": false,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 50,
+          "direct_requirement_or_description_row_occurrences": 61,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 158,
+          "prerequisites": true,
+          "published_requisite_row_count": 77,
+          "elective_rules": true,
+          "training": false,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as OFFICIAL_PLAN_VIEW before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-bachelor-of-science-in-cybersecurity",
+      "program_name_ar": "بكالوريوس العلوم في الامن السيبراني",
+      "program_name_en": "Bachelor of Science in Cybersecurity",
+      "faculty_id": "IT",
+      "faculty_name_ar": "الحاسبات وتقنية المعلومات",
+      "faculty_name_en": "computing & information tech.",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-science-in-cybersecurity",
+        "https://kau.edu.sa/en/programs/bachelor-of-science-in-cybersecurity"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-bachelor-of-science-in-cybersecurity/ar.html",
+          "size_bytes": 199748,
+          "sha256": "9c51570e1c301bf268620e3527085ab4ff9bb1bf4a836d7e2f8e687368887b96",
+          "retrieved_at": "2026-07-25T18:02:17Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-bachelor-of-science-in-cybersecurity/en.html",
+          "size_bytes": 186719,
+          "sha256": "f301676936fa3c2026e907e95f1b2c51181b155be0c3af08a3bac452a56474cc",
+          "retrieved_at": "2026-07-25T18:02:17Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 42,
+          "direct_requirement_or_description_row_occurrences": 37,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 127,
+          "prerequisites": true,
+          "published_requisite_row_count": 40,
+          "elective_rules": false,
+          "training": false,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 42,
+          "direct_requirement_or_description_row_occurrences": 37,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 127,
+          "prerequisites": true,
+          "published_requisite_row_count": 40,
+          "elective_rules": false,
+          "training": false,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as OFFICIAL_PLAN_VIEW before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-computing-information-tech-bachelor-of-science-in-information-systems",
+      "program_name_ar": "بكالوريوس العلوم في نظم المعلومات",
+      "program_name_en": "Bachelor of Science in Information Systems",
+      "faculty_id": "IT",
+      "faculty_name_ar": "الحاسبات وتقنية المعلومات",
+      "faculty_name_en": "computing & information tech.",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "catalog-computing-information-tech-bachelor-of-science-in-information-systems",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-science-in-information-systems",
+        "https://kau.edu.sa/en/programs/bachelor-of-science-in-information-systems"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-computing-information-tech-bachelor-of-science-in-information-systems/ar.html",
+          "size_bytes": 244175,
+          "sha256": "066d1fe42bbcd2b86ea4a59d80efe297d5d3c46242e0393d105c56c60bf51ca8",
+          "retrieved_at": "2026-07-25T18:02:18Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-computing-information-tech-bachelor-of-science-in-information-systems/en.html",
+          "size_bytes": 221738,
+          "sha256": "a5f49987109ac6b494b71551cfa23657683ed31196e8ca6ada9803af12a84465",
+          "retrieved_at": "2026-07-25T18:02:19Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 45,
+          "direct_requirement_or_description_row_occurrences": 71,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 147,
+          "prerequisites": true,
+          "published_requisite_row_count": 74,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 45,
+          "direct_requirement_or_description_row_occurrences": 71,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 147,
+          "prerequisites": true,
+          "published_requisite_row_count": 74,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-computing-information-tech-bachelor-of-science-in-information-technology",
+      "program_name_ar": "بكالوريوس العلوم في تقنية المعلومات",
+      "program_name_en": "Bachelor of Science in Information Technology",
+      "faculty_id": "IT",
+      "faculty_name_ar": "الحاسبات وتقنية المعلومات",
+      "faculty_name_en": "computing & information tech.",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "catalog-computing-information-tech-bachelor-of-science-in-information-technology",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-science-in-information-technology",
+        "https://kau.edu.sa/en/programs/bachelor-of-science-in-information-technology"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-computing-information-tech-bachelor-of-science-in-information-technology/ar.html",
+          "size_bytes": 240821,
+          "sha256": "45c8e6df654cd92c2dfb3b211bf222aa7a490face99eb81ec4da66c177c8dfa4",
+          "retrieved_at": "2026-07-25T18:02:20Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-computing-information-tech-bachelor-of-science-in-information-technology/en.html",
+          "size_bytes": 219035,
+          "sha256": "081c9b997733e5216c10f5da13c0e1f6327c19a609a6dfe5ce288bbf533c5f80",
+          "retrieved_at": "2026-07-25T18:02:21Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 50,
+          "direct_requirement_or_description_row_occurrences": 68,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 174,
+          "prerequisites": true,
+          "published_requisite_row_count": 77,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 10,
+          "scheduled_course_row_occurrences": 50,
+          "direct_requirement_or_description_row_occurrences": 68,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 174,
+          "prerequisites": true,
+          "published_requisite_row_count": 77,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-chemical-engineering",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة الكيميائية",
+      "program_name_en": "Bachelor of Science in Chemical Engineering",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "catalog-engineering-bachelor-of-science-in-chemical-engineering",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-science-in-chemical-engineering",
+        "https://kau.edu.sa/en/programs/bachelor-of-science-in-chemical-engineering"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-chemical-engineering/ar.html",
+          "size_bytes": 239097,
+          "sha256": "ed815a3604108ac66fb795e5fabab03612d5dd10e7fb16d7286d79c7047fd533",
+          "retrieved_at": "2026-07-25T18:02:23Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-chemical-engineering/en.html",
+          "size_bytes": 218858,
+          "sha256": "a4f0defe4c4b386610d58b67ec1bd475d8896de66220ca91201e02c0880d6fcd",
+          "retrieved_at": "2026-07-25T18:02:24Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 88,
+          "direct_requirement_or_description_row_occurrences": 58,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 259,
+          "prerequisites": true,
+          "published_requisite_row_count": 114,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 88,
+          "direct_requirement_or_description_row_occurrences": 58,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 259,
+          "prerequisites": true,
+          "published_requisite_row_count": 114,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": 155
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-civil-engineering",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة المدنية",
+      "program_name_en": "Bachelor of Science in Civil Engineering",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "CATALOG_ONLY",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/civil-engineering-bachelor-of-science",
+        "https://kau.edu.sa/en/programs/civil-engineering-bachelor-of-science"
+      ],
+      "additional_official_source_urls": [
+        "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-civil-engineering",
+        "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-civil-engineering"
+      ],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "alternate_current_structured_plan",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-civil-engineering/alternate-ar.html",
+          "size_bytes": 247531,
+          "sha256": "7b9f1c2c5a045aa10c77fdb652d7dac222ab1a5e78dd452aec2c23812f59913b",
+          "retrieved_at": "2026-07-25T18:07:15Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-civil-engineering/alternate-en.html",
+          "size_bytes": 225055,
+          "sha256": "a8291f125485354e24892707b92d2a80c8ccf860bb5e6bcc3fec0f6bc1512957",
+          "retrieved_at": "2026-07-25T18:07:16Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 14,
+          "scheduled_course_row_occurrences": 91,
+          "direct_requirement_or_description_row_occurrences": 64,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 273,
+          "prerequisites": true,
+          "published_requisite_row_count": 125,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 14,
+          "scheduled_course_row_occurrences": 91,
+          "direct_requirement_or_description_row_occurrences": 64,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 273,
+          "prerequisites": true,
+          "published_requisite_row_count": 125,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "B. OFFICIAL_PLAN_VIEW_READY",
+      "decision_evidence_or_blocker": "A current bilingual KAU alternate program page provides aligned scheduled levels, course names, numeric credits, raw requisite text, requirement/elective tables, training/project rows, and source-faithful placeholders. Unresolved values remain informational and the program is kept outside planner calculations and progress.",
+      "academic_data_changed": true,
+      "change_type": "read_only_official_plan_view",
+      "official_plan_view_result": {
+        "program_id": "catalog-engineering-bachelor-of-science-in-civil-engineering",
+        "source_level_row_occurrences": 56,
+        "source_unplaced_row_occurrences": 63,
+        "visible_course_count": 66,
+        "visible_credit_sum": 196,
+        "scheduled_section_count": 12,
+        "unplaced_section_count": 1,
+        "normalization_count": 53,
+        "placeholder_count": 2,
+        "unresolved_requisite_row_count": 6,
+        "unresolved_requisite_codes": [
+          "PHY 281"
+        ],
+        "preserved_same_code_conflicts": [],
+        "source": {
+          "url_ar": "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-civil-engineering",
+          "url_en": "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-civil-engineering",
+          "retrieved_at": "2026-07-25T18:07:16Z",
+          "sha256_ar": "7b9f1c2c5a045aa10c77fdb652d7dac222ab1a5e78dd452aec2c23812f59913b",
+          "sha256_en": "a8291f125485354e24892707b92d2a80c8ccf860bb5e6bcc3fec0f6bc1512957"
+        }
+      }
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-electrical-engineering-biomedical",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة الكهربائية (طبية حيوية)",
+      "program_name_en": "Bachelor of Science in Electrical Engineering (Biomedical)",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "CATALOG_ONLY",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/electrical-engineering-biomedical-bachelor-of-science",
+        "https://kau.edu.sa/en/programs/electrical-engineering-biomedical-bachelor-of-science"
+      ],
+      "additional_official_source_urls": [
+        "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-electrical-engineering-biomedical",
+        "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-electrical-engineering-biomedical"
+      ],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "alternate_current_structured_plan",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-electrical-engineering-biomedical/alternate-ar.html",
+          "size_bytes": 282548,
+          "sha256": "67a14ed5bfd01465eb4735fe5bef1c70d308946cab745c1676738ae2cbc5b0e3",
+          "retrieved_at": "2026-07-25T18:07:36Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-electrical-engineering-biomedical/alternate-en.html",
+          "size_bytes": 249745,
+          "sha256": "f4f1f94c1e37747622266896cbc66fdca70a3dff80327cd4f7fd94494d58a5da",
+          "retrieved_at": "2026-07-25T18:07:37Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 88,
+          "direct_requirement_or_description_row_occurrences": 101,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 266,
+          "prerequisites": true,
+          "published_requisite_row_count": 159,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 88,
+          "direct_requirement_or_description_row_occurrences": 101,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 266,
+          "prerequisites": true,
+          "published_requisite_row_count": 159,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "B. OFFICIAL_PLAN_VIEW_READY",
+      "decision_evidence_or_blocker": "A current bilingual KAU alternate program page provides aligned scheduled levels, course names, numeric credits, raw requisite text, requirement/elective tables, training/project rows, and source-faithful placeholders. Unresolved values remain informational and the program is kept outside planner calculations and progress.",
+      "academic_data_changed": true,
+      "change_type": "read_only_official_plan_view",
+      "official_plan_view_result": {
+        "program_id": "catalog-engineering-bachelor-of-science-in-electrical-engineering-biomedical",
+        "source_level_row_occurrences": 52,
+        "source_unplaced_row_occurrences": 64,
+        "visible_course_count": 67,
+        "visible_credit_sum": 200,
+        "scheduled_section_count": 11,
+        "unplaced_section_count": 3,
+        "normalization_count": 49,
+        "placeholder_count": 3,
+        "unresolved_requisite_row_count": 8,
+        "unresolved_requisite_codes": [],
+        "preserved_same_code_conflicts": [
+          "XXXXXX"
+        ],
+        "source": {
+          "url_ar": "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-electrical-engineering-biomedical",
+          "url_en": "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-electrical-engineering-biomedical",
+          "retrieved_at": "2026-07-25T18:07:37Z",
+          "sha256_ar": "67a14ed5bfd01465eb4735fe5bef1c70d308946cab745c1676738ae2cbc5b0e3",
+          "sha256_en": "f4f1f94c1e37747622266896cbc66fdca70a3dff80327cd4f7fd94494d58a5da"
+        }
+      }
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-electrical-engineering-computer",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة الكهربائية (حاسبات)",
+      "program_name_en": "Bachelor of Science in Electrical Engineering (Computer)",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "CATALOG_ONLY",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/electrical-engineering-computer-bachelor-of-science",
+        "https://kau.edu.sa/en/programs/electrical-engineering-computer-bachelor-of-science"
+      ],
+      "additional_official_source_urls": [
+        "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-electrical-engineering-computer",
+        "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-electrical-engineering-computer"
+      ],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "alternate_current_structured_plan",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-electrical-engineering-computer/alternate-ar.html",
+          "size_bytes": 281052,
+          "sha256": "36adf3dc46b71c0d675b8ecbba5c1777ac67b4d8e8fb78e3f2f40fc5c8fa05ec",
+          "retrieved_at": "2026-07-25T18:07:38Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-electrical-engineering-computer/alternate-en.html",
+          "size_bytes": 250145,
+          "sha256": "2fe774c343f74aaa5ffa93f655eb6bc6ead350dcc6cd87124d97864959a402c4",
+          "retrieved_at": "2026-07-25T18:07:38Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 88,
+          "direct_requirement_or_description_row_occurrences": 102,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 265,
+          "prerequisites": true,
+          "published_requisite_row_count": 160,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 88,
+          "direct_requirement_or_description_row_occurrences": 102,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 265,
+          "prerequisites": true,
+          "published_requisite_row_count": 160,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "B. OFFICIAL_PLAN_VIEW_READY",
+      "decision_evidence_or_blocker": "A current bilingual KAU alternate program page provides aligned scheduled levels, course names, numeric credits, raw requisite text, requirement/elective tables, training/project rows, and source-faithful placeholders. Unresolved values remain informational and the program is kept outside planner calculations and progress.",
+      "academic_data_changed": true,
+      "change_type": "read_only_official_plan_view",
+      "official_plan_view_result": {
+        "program_id": "catalog-engineering-bachelor-of-science-in-electrical-engineering-computer",
+        "source_level_row_occurrences": 53,
+        "source_unplaced_row_occurrences": 62,
+        "visible_course_count": 67,
+        "visible_credit_sum": 200,
+        "scheduled_section_count": 11,
+        "unplaced_section_count": 2,
+        "normalization_count": 48,
+        "placeholder_count": 4,
+        "unresolved_requisite_row_count": 7,
+        "unresolved_requisite_codes": [],
+        "preserved_same_code_conflicts": [
+          "XXXXXX"
+        ],
+        "source": {
+          "url_ar": "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-electrical-engineering-computer",
+          "url_en": "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-electrical-engineering-computer",
+          "retrieved_at": "2026-07-25T18:07:38Z",
+          "sha256_ar": "36adf3dc46b71c0d675b8ecbba5c1777ac67b4d8e8fb78e3f2f40fc5c8fa05ec",
+          "sha256_en": "2fe774c343f74aaa5ffa93f655eb6bc6ead350dcc6cd87124d97864959a402c4"
+        }
+      }
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-electrical-engineering-electronics-and-communic",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة الكهربائية (إلكترونيات و إتصالات)",
+      "program_name_en": "Bachelor of Science in Electrical Engineering (Electronics and Communications)",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "CATALOG_ONLY",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/electrical-engineering-electronics-and-communications-bachelor-of-science",
+        "https://kau.edu.sa/en/programs/electrical-engineering-electronics-and-communications-bachelor-of-science"
+      ],
+      "additional_official_source_urls": [
+        "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-electrical-engineering-electronics-and-communications",
+        "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-electrical-engineering-electronics-and-communications"
+      ],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "alternate_current_structured_plan",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-electrical-engineering-electronics-and-communic/alternate-ar.html",
+          "size_bytes": 287244,
+          "sha256": "da5d7ad8f269f409d9439546db9cf478a6adba9a1c9f9385c440c9f0aa19b590",
+          "retrieved_at": "2026-07-25T18:07:39Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-electrical-engineering-electronics-and-communic/alternate-en.html",
+          "size_bytes": 253372,
+          "sha256": "60e7d16b2d156c0645baf3a5ee377ccafed91edf8c5fc43970260d787190966c",
+          "retrieved_at": "2026-07-25T18:07:40Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 87,
+          "direct_requirement_or_description_row_occurrences": 103,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 261,
+          "prerequisites": true,
+          "published_requisite_row_count": 161,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 87,
+          "direct_requirement_or_description_row_occurrences": 103,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 261,
+          "prerequisites": true,
+          "published_requisite_row_count": 161,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "B. OFFICIAL_PLAN_VIEW_READY",
+      "decision_evidence_or_blocker": "A current bilingual KAU alternate program page provides aligned scheduled levels, course names, numeric credits, raw requisite text, requirement/elective tables, training/project rows, and source-faithful placeholders. Unresolved values remain informational and the program is kept outside planner calculations and progress.",
+      "academic_data_changed": true,
+      "change_type": "read_only_official_plan_view",
+      "official_plan_view_result": {
+        "program_id": "catalog-engineering-bachelor-of-science-in-electrical-engineering-electronics-and-communic",
+        "source_level_row_occurrences": 53,
+        "source_unplaced_row_occurrences": 62,
+        "visible_course_count": 63,
+        "visible_credit_sum": 187,
+        "scheduled_section_count": 11,
+        "unplaced_section_count": 2,
+        "normalization_count": 52,
+        "placeholder_count": 3,
+        "unresolved_requisite_row_count": 7,
+        "unresolved_requisite_codes": [],
+        "preserved_same_code_conflicts": [
+          "XXXXXX"
+        ],
+        "source": {
+          "url_ar": "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-electrical-engineering-electronics-and-communications",
+          "url_en": "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-electrical-engineering-electronics-and-communications",
+          "retrieved_at": "2026-07-25T18:07:40Z",
+          "sha256_ar": "da5d7ad8f269f409d9439546db9cf478a6adba9a1c9f9385c440c9f0aa19b590",
+          "sha256_en": "60e7d16b2d156c0645baf3a5ee377ccafed91edf8c5fc43970260d787190966c"
+        }
+      }
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-electrical-engineering-power-and-machines",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة الكهربائية (قوى و آلات)",
+      "program_name_en": "Bachelor of Science in Electrical Engineering (Power and Machines)",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "CATALOG_ONLY",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/electrical-engineering-power-and-machines-bachelor-of-science",
+        "https://kau.edu.sa/en/programs/electrical-engineering-power-and-machines-bachelor-of-science"
+      ],
+      "additional_official_source_urls": [
+        "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-electrical-engineering-power-and-machines",
+        "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-electrical-engineering-power-and-machines"
+      ],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "alternate_current_structured_plan",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-electrical-engineering-power-and-machines/alternate-ar.html",
+          "size_bytes": 276511,
+          "sha256": "aec098259c76af29d6aa6cd4029965e8e3ef9b2f6cd85e3259e80a05b1510bdc",
+          "retrieved_at": "2026-07-25T18:07:41Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-electrical-engineering-power-and-machines/alternate-en.html",
+          "size_bytes": 247660,
+          "sha256": "9d2c8f3998ba03c697a7df4ff2f362e249994886a31dadd3efc77e8a6accf1b1",
+          "retrieved_at": "2026-07-25T18:07:42Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 92,
+          "direct_requirement_or_description_row_occurrences": 103,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 259,
+          "prerequisites": true,
+          "published_requisite_row_count": 166,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 92,
+          "direct_requirement_or_description_row_occurrences": 103,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 259,
+          "prerequisites": true,
+          "published_requisite_row_count": 166,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "B. OFFICIAL_PLAN_VIEW_READY",
+      "decision_evidence_or_blocker": "A current bilingual KAU alternate program page provides aligned scheduled levels, course names, numeric credits, raw requisite text, requirement/elective tables, training/project rows, and source-faithful placeholders. Unresolved values remain informational and the program is kept outside planner calculations and progress.",
+      "academic_data_changed": true,
+      "change_type": "read_only_official_plan_view",
+      "official_plan_view_result": {
+        "program_id": "catalog-engineering-bachelor-of-science-in-electrical-engineering-power-and-machines",
+        "source_level_row_occurrences": 55,
+        "source_unplaced_row_occurrences": 67,
+        "visible_course_count": 68,
+        "visible_credit_sum": 195,
+        "scheduled_section_count": 11,
+        "unplaced_section_count": 3,
+        "normalization_count": 54,
+        "placeholder_count": 1,
+        "unresolved_requisite_row_count": 8,
+        "unresolved_requisite_codes": [
+          "EE 361",
+          "EE 367",
+          "IE 331"
+        ],
+        "preserved_same_code_conflicts": [],
+        "source": {
+          "url_ar": "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-electrical-engineering-power-and-machines",
+          "url_en": "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-electrical-engineering-power-and-machines",
+          "retrieved_at": "2026-07-25T18:07:42Z",
+          "sha256_ar": "aec098259c76af29d6aa6cd4029965e8e3ef9b2f6cd85e3259e80a05b1510bdc",
+          "sha256_en": "9d2c8f3998ba03c697a7df4ff2f362e249994886a31dadd3efc77e8a6accf1b1"
+        }
+      }
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-industrial-engineering",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة الصناعية",
+      "program_name_en": "Bachelor of Science in Industrial Engineering",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "catalog-engineering-bachelor-of-science-in-industrial-engineering",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/industrial-engineering-bachelor-of-science",
+        "https://kau.edu.sa/en/programs/industrial-engineering-bachelor-of-science"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-industrial-engineering/ar.html",
+          "size_bytes": 124631,
+          "sha256": "0f839eb1101fd9c83a75fa67e49ba76671af785b5cbd442f210dd3112403efdb",
+          "retrieved_at": "2026-07-25T18:02:25Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-industrial-engineering/en.html",
+          "size_bytes": 117155,
+          "sha256": "5fc8f1bb942dd352f1a4b33f7213b472ea150c69d01caf6f16d51efae59b3cbe",
+          "retrieved_at": "2026-07-25T18:02:26Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": false,
+          "scheduled_levels_or_semesters": false,
+          "level_or_semester_count": 0,
+          "scheduled_course_row_occurrences": 0,
+          "direct_requirement_or_description_row_occurrences": 0,
+          "courses": false,
+          "credits": false,
+          "all_rows_have_numeric_credit_values": false,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 0,
+          "prerequisites": false,
+          "published_requisite_row_count": 0,
+          "elective_rules": false,
+          "training": false,
+          "projects": false,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": false,
+          "scheduled_levels_or_semesters": false,
+          "level_or_semester_count": 0,
+          "scheduled_course_row_occurrences": 0,
+          "direct_requirement_or_description_row_occurrences": 0,
+          "courses": false,
+          "credits": false,
+          "all_rows_have_numeric_credit_values": false,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 0,
+          "prerequisites": false,
+          "published_requisite_row_count": 0,
+          "elective_rules": false,
+          "training": false,
+          "projects": false,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-mechanical-engineering-aeronautical",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة الميكانيكية (طيران)",
+      "program_name_en": "Bachelor of Science in Mechanical Engineering (Aeronautical)",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "CATALOG_ONLY",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/mechanical-engineering-aeronautical-bachelor-of-science",
+        "https://kau.edu.sa/en/programs/mechanical-engineering-aeronautical-bachelor-of-science"
+      ],
+      "additional_official_source_urls": [
+        "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-mechanical-engineering-aeronautical",
+        "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-mechanical-engineering-aeronautical"
+      ],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "alternate_current_structured_plan",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-mechanical-engineering-aeronautical/alternate-ar.html",
+          "size_bytes": 256647,
+          "sha256": "b74b1c1c09230fdc392cc0a2c3eb3d0aea05a38fe2a752fe949ac9dad1a78489",
+          "retrieved_at": "2026-07-25T18:07:42Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-mechanical-engineering-aeronautical/alternate-en.html",
+          "size_bytes": 228167,
+          "sha256": "7a377a1b8a7a5738b3165bcb768c7f07669132c2d779714fe35ae0a6d7931b5a",
+          "retrieved_at": "2026-07-25T18:07:43Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 93,
+          "direct_requirement_or_description_row_occurrences": 55,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 256,
+          "prerequisites": true,
+          "published_requisite_row_count": 118,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 93,
+          "direct_requirement_or_description_row_occurrences": 55,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 256,
+          "prerequisites": true,
+          "published_requisite_row_count": 118,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "B. OFFICIAL_PLAN_VIEW_READY",
+      "decision_evidence_or_blocker": "A current bilingual KAU alternate program page provides aligned scheduled levels, course names, numeric credits, raw requisite text, requirement/elective tables, training/project rows, and source-faithful placeholders. Unresolved values remain informational and the program is kept outside planner calculations and progress.",
+      "academic_data_changed": true,
+      "change_type": "read_only_official_plan_view",
+      "official_plan_view_result": {
+        "program_id": "catalog-engineering-bachelor-of-science-in-mechanical-engineering-aeronautical",
+        "source_level_row_occurrences": 56,
+        "source_unplaced_row_occurrences": 65,
+        "visible_course_count": 66,
+        "visible_credit_sum": 183,
+        "scheduled_section_count": 11,
+        "unplaced_section_count": 1,
+        "normalization_count": 55,
+        "placeholder_count": 3,
+        "unresolved_requisite_row_count": 5,
+        "unresolved_requisite_codes": [
+          "PHY 281"
+        ],
+        "preserved_same_code_conflicts": [],
+        "source": {
+          "url_ar": "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-mechanical-engineering-aeronautical",
+          "url_en": "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-mechanical-engineering-aeronautical",
+          "retrieved_at": "2026-07-25T18:07:43Z",
+          "sha256_ar": "b74b1c1c09230fdc392cc0a2c3eb3d0aea05a38fe2a752fe949ac9dad1a78489",
+          "sha256_en": "7a377a1b8a7a5738b3165bcb768c7f07669132c2d779714fe35ae0a6d7931b5a"
+        }
+      }
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-mechanical-engineering-production-and-mechanica",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة الميكانيكية (إنتاج وتصميم نظم ميكانيكية)",
+      "program_name_en": "Bachelor of Science in Mechanical Engineering (Production and Mechanical Systems Design)",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "catalog-engineering-bachelor-of-science-in-mechanical-engineering-production-and-mechanica",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/mechanical-engineering-production-and-mechanical-systems-design-bachelor-of-science",
+        "https://kau.edu.sa/en/programs/mechanical-engineering-production-and-mechanical-systems-design-bachelor-of-science"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-mechanical-engineering-production-and-mechanica/ar.html",
+          "size_bytes": 124877,
+          "sha256": "cfc99884424cc836d247d684a7143f5c9ba924c1a466de241749776862bfe832",
+          "retrieved_at": "2026-07-25T18:02:26Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-mechanical-engineering-production-and-mechanica/en.html",
+          "size_bytes": 117401,
+          "sha256": "08630a90071ae4a1d9d3b00f85324b41cd9dcf415013c41392bb4c46e0a46aad",
+          "retrieved_at": "2026-07-25T18:02:27Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": false,
+          "scheduled_levels_or_semesters": false,
+          "level_or_semester_count": 0,
+          "scheduled_course_row_occurrences": 0,
+          "direct_requirement_or_description_row_occurrences": 0,
+          "courses": false,
+          "credits": false,
+          "all_rows_have_numeric_credit_values": false,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 0,
+          "prerequisites": false,
+          "published_requisite_row_count": 0,
+          "elective_rules": false,
+          "training": false,
+          "projects": false,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": false,
+          "scheduled_levels_or_semesters": false,
+          "level_or_semester_count": 0,
+          "scheduled_course_row_occurrences": 0,
+          "direct_requirement_or_description_row_occurrences": 0,
+          "courses": false,
+          "credits": false,
+          "all_rows_have_numeric_credit_values": false,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 0,
+          "prerequisites": false,
+          "published_requisite_row_count": 0,
+          "elective_rules": false,
+          "training": false,
+          "projects": false,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-mechanical-engineering-thermal-engineering-and-",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة الميكانيكية (الهندسة الحرارية وتقنيات تحلية المياه)",
+      "program_name_en": "Bachelor of Science in Mechanical Engineering (Thermal Engineering and Desalination Technology)",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "CATALOG_ONLY",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/mechanical-engineering-thermal-engineering-and-desalination-technology-bachelor-of-science",
+        "https://kau.edu.sa/en/programs/mechanical-engineering-thermal-engineering-and-desalination-technology-bachelor-of-science"
+      ],
+      "additional_official_source_urls": [
+        "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-mechanical-engineering-thermal-engineering-and-desalination-technology",
+        "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-mechanical-engineering-thermal-engineering-and-desalination-technology"
+      ],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "alternate_current_structured_plan",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-mechanical-engineering-thermal-engineering-and-/alternate-ar.html",
+          "size_bytes": 253406,
+          "sha256": "19b73bfb5d14073f5278ac0596836a9833ad4524ca74371ab717a23629e0e013",
+          "retrieved_at": "2026-07-25T18:07:44Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-mechanical-engineering-thermal-engineering-and-/alternate-en.html",
+          "size_bytes": 225489,
+          "sha256": "07f5de1181d207b8a143c3c3f3229b4fa42d25255ebc32608ee3f76045971440",
+          "retrieved_at": "2026-07-25T18:07:44Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 14,
+          "scheduled_course_row_occurrences": 104,
+          "direct_requirement_or_description_row_occurrences": 53,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 296,
+          "prerequisites": true,
+          "published_requisite_row_count": 127,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 14,
+          "scheduled_course_row_occurrences": 104,
+          "direct_requirement_or_description_row_occurrences": 53,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 296,
+          "prerequisites": true,
+          "published_requisite_row_count": 127,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "B. OFFICIAL_PLAN_VIEW_READY",
+      "decision_evidence_or_blocker": "A current bilingual KAU alternate program page provides aligned scheduled levels, course names, numeric credits, raw requisite text, requirement/elective tables, training/project rows, and source-faithful placeholders. Unresolved values remain informational and the program is kept outside planner calculations and progress.",
+      "academic_data_changed": true,
+      "change_type": "read_only_official_plan_view",
+      "official_plan_view_result": {
+        "program_id": "catalog-engineering-bachelor-of-science-in-mechanical-engineering-thermal-engineering-and-",
+        "source_level_row_occurrences": 57,
+        "source_unplaced_row_occurrences": 75,
+        "visible_course_count": 75,
+        "visible_credit_sum": 218,
+        "scheduled_section_count": 12,
+        "unplaced_section_count": 1,
+        "normalization_count": 57,
+        "placeholder_count": 1,
+        "unresolved_requisite_row_count": 9,
+        "unresolved_requisite_codes": [
+          "MENG 204",
+          "MENG 366",
+          "PHY 281"
+        ],
+        "preserved_same_code_conflicts": [],
+        "source": {
+          "url_ar": "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-mechanical-engineering-thermal-engineering-and-desalination-technology",
+          "url_en": "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-mechanical-engineering-thermal-engineering-and-desalination-technology",
+          "retrieved_at": "2026-07-25T18:07:44Z",
+          "sha256_ar": "19b73bfb5d14073f5278ac0596836a9833ad4524ca74371ab717a23629e0e013",
+          "sha256_en": "07f5de1181d207b8a143c3c3f3229b4fa42d25255ebc32608ee3f76045971440"
+        }
+      }
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-mining-engineering",
+      "program_name_ar": "بكالوريوس العلوم في هندسة التعدين",
+      "program_name_en": "Bachelor of Science in Mining Engineering",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "CATALOG_ONLY",
+      "final_coverage_state": "OFFICIAL_PLAN_VIEW",
+      "planner_data_key": null,
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/mining-engineering-bachelor-of-science",
+        "https://kau.edu.sa/en/programs/mining-engineering-bachelor-of-science"
+      ],
+      "additional_official_source_urls": [
+        "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-mining-engineering",
+        "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-mining-engineering"
+      ],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "alternate_current_structured_plan",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-mining-engineering/alternate-ar.html",
+          "size_bytes": 250845,
+          "sha256": "4cdf3b63811cb08e401569be3479c4b0bb44af881912a010299d1f9727743f50",
+          "retrieved_at": "2026-07-25T18:07:45Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-mining-engineering/alternate-en.html",
+          "size_bytes": 228552,
+          "sha256": "a843feb312e8de70d0ac2b2be172c9b964ff07d3313eb7a3f003bfaff82556b7",
+          "retrieved_at": "2026-07-25T18:07:46Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 14,
+          "scheduled_course_row_occurrences": 89,
+          "direct_requirement_or_description_row_occurrences": 56,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 260,
+          "prerequisites": true,
+          "published_requisite_row_count": 113,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 14,
+          "scheduled_course_row_occurrences": 89,
+          "direct_requirement_or_description_row_occurrences": 56,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 260,
+          "prerequisites": true,
+          "published_requisite_row_count": 113,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "B. OFFICIAL_PLAN_VIEW_READY",
+      "decision_evidence_or_blocker": "A current bilingual KAU alternate program page provides aligned scheduled levels, course names, numeric credits, raw requisite text, requirement/elective tables, training/project rows, and source-faithful placeholders. Unresolved values remain informational and the program is kept outside planner calculations and progress.",
+      "academic_data_changed": true,
+      "change_type": "read_only_official_plan_view",
+      "official_plan_view_result": {
+        "program_id": "catalog-engineering-bachelor-of-science-in-mining-engineering",
+        "source_level_row_occurrences": 54,
+        "source_unplaced_row_occurrences": 63,
+        "visible_course_count": 64,
+        "visible_credit_sum": 185,
+        "scheduled_section_count": 12,
+        "unplaced_section_count": 1,
+        "normalization_count": 53,
+        "placeholder_count": 2,
+        "unresolved_requisite_row_count": 4,
+        "unresolved_requisite_codes": [
+          "EMR 201",
+          "PHY 281"
+        ],
+        "preserved_same_code_conflicts": [],
+        "source": {
+          "url_ar": "https://www.kau.edu.sa/ar/programs/bachelor-of-science-in-mining-engineering",
+          "url_en": "https://www.kau.edu.sa/en/programs/bachelor-of-science-in-mining-engineering",
+          "retrieved_at": "2026-07-25T18:07:46Z",
+          "sha256_ar": "4cdf3b63811cb08e401569be3479c4b0bb44af881912a010299d1f9727743f50",
+          "sha256_en": "a843feb312e8de70d0ac2b2be172c9b964ff07d3313eb7a3f003bfaff82556b7"
+        }
+      }
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-nuclear-engineering",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة النووية",
+      "program_name_en": "Bachelor of Science in Nuclear Engineering",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "catalog-engineering-bachelor-of-science-in-nuclear-engineering",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-science-in-nuclear-engineering",
+        "https://kau.edu.sa/en/programs/bachelor-of-science-in-nuclear-engineering"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-nuclear-engineering/ar.html",
+          "size_bytes": 253131,
+          "sha256": "16bcc8cf68f962114ad265ecba60dc490dfaa6bbc3b1e99fe80ee2207fbbc7f5",
+          "retrieved_at": "2026-07-25T18:02:28Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-nuclear-engineering/en.html",
+          "size_bytes": 228263,
+          "sha256": "d1c0890758cdb84c0ca76cc15674ebfccd2d51bc3d6549eff864415ba6d095c6",
+          "retrieved_at": "2026-07-25T18:02:29Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 98,
+          "direct_requirement_or_description_row_occurrences": 61,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 287,
+          "prerequisites": true,
+          "published_requisite_row_count": 129,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 98,
+          "direct_requirement_or_description_row_occurrences": 61,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": true,
+          "scheduled_visible_credit_sum": 287,
+          "prerequisites": true,
+          "published_requisite_row_count": 129,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-nuclear-engineering-medical-physics",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة النووية (الفيزياء الطبية)",
+      "program_name_en": "Bachelor of Science in Nuclear Engineering (Medical Physics)",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "catalog-engineering-bachelor-of-science-in-nuclear-engineering-medical-physics",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-science-in-nuclear-engineering-medical-physics",
+        "https://kau.edu.sa/en/programs/bachelor-of-science-in-nuclear-engineering-medical-physics"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-nuclear-engineering-medical-physics/ar.html",
+          "size_bytes": 257686,
+          "sha256": "88105df0d34982d82913c164ce9dd817c41e82604ef4f101844757a087cc91f0",
+          "retrieved_at": "2026-07-25T18:02:31Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-nuclear-engineering-medical-physics/en.html",
+          "size_bytes": 231673,
+          "sha256": "3d5722db03a36d57057fb894799c307bfa5d1d55e16e86ae5afac6e812a8ac77",
+          "retrieved_at": "2026-07-25T18:02:32Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 98,
+          "direct_requirement_or_description_row_occurrences": 62,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 280,
+          "prerequisites": true,
+          "published_requisite_row_count": 132,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 98,
+          "direct_requirement_or_description_row_occurrences": 62,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 280,
+          "prerequisites": true,
+          "published_requisite_row_count": 132,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    },
+    {
+      "program_id": "catalog-engineering-bachelor-of-science-in-nuclear-engineering-radiation-protection",
+      "program_name_ar": "بكالوريوس العلوم في الهندسة النووية (الوقاية من الإشعاع)",
+      "program_name_en": "Bachelor of Science in Nuclear Engineering (Radiation Protection)",
+      "faculty_id": "EN",
+      "faculty_name_ar": "الهندسة",
+      "faculty_name_en": "ENGINEERING",
+      "degree_level": "bachelor",
+      "previous_coverage_state": "FULL_PLANNER",
+      "final_coverage_state": "FULL_PLANNER",
+      "planner_data_key": "catalog-engineering-bachelor-of-science-in-nuclear-engineering-radiation-protection",
+      "existing_source_urls": [
+        "https://kau.edu.sa/ar/programs/bachelor-of-science-in-nuclear-engineering-radiation-protection",
+        "https://kau.edu.sa/en/programs/bachelor-of-science-in-nuclear-engineering-radiation-protection"
+      ],
+      "additional_official_source_urls": [],
+      "retained_raw_evidence_exists": true,
+      "selected_source_kind": "catalog_program_page",
+      "source_captures": {
+        "ar": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-nuclear-engineering-radiation-protection/ar.html",
+          "size_bytes": 256021,
+          "sha256": "ac33aeeff8092e81dbce43bacb5bbe4fc7a2297842b728215d503a8548b6ef09",
+          "retrieved_at": "2026-07-25T18:02:32Z"
+        },
+        "en": {
+          "path": "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/catalog-engineering-bachelor-of-science-in-nuclear-engineering-radiation-protection/en.html",
+          "size_bytes": 230004,
+          "sha256": "aa163940289a3c266edfbc9a0712859c19739145f0c465d17408ff339056c495",
+          "retrieved_at": "2026-07-25T18:02:34Z"
+        }
+      },
+      "current_official_page_content": {
+        "ar": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 96,
+          "direct_requirement_or_description_row_occurrences": 62,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 273,
+          "prerequisites": true,
+          "published_requisite_row_count": 131,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        },
+        "en": {
+          "embedded_structured_plan": true,
+          "scheduled_levels_or_semesters": true,
+          "level_or_semester_count": 13,
+          "scheduled_course_row_occurrences": 96,
+          "direct_requirement_or_description_row_occurrences": 62,
+          "courses": true,
+          "credits": true,
+          "all_rows_have_numeric_credit_values": true,
+          "all_rows_have_positive_credit_values": false,
+          "scheduled_visible_credit_sum": 273,
+          "prerequisites": true,
+          "published_requisite_row_count": 131,
+          "elective_rules": true,
+          "training": true,
+          "projects": true,
+          "official_total_credits": null
+        }
+      },
+      "final_classification": "F. ALREADY_SUPPORTED",
+      "decision_evidence_or_blocker": "Already represented as FULL_PLANNER before this wave; academic and runtime data were left unchanged.",
+      "academic_data_changed": false,
+      "change_type": "none"
+    }
+  ],
+  "implementation": {
+    "changed_academic_file": "web/data/faculty_catalog.json",
+    "runtime_changes": [],
+    "planner_calculation_changes": false,
+    "progress_or_localStorage_changes": false,
+    "authentication_changes": false,
+    "azure_or_deployment_changes": false,
+    "normalization_rule": "Scheduled level rows take display precedence; only exact bilingual code/name/credit duplicate signatures are removed. Raw placeholders and unresolved requisite text remain visible."
+  },
+  "validation": {
+    "status": "passed",
+    "unit_tests": {
+      "command": "PYTHONPATH=src python3 -m unittest discover -s tests -v",
+      "tests_run": 105,
+      "failures": 0,
+      "errors": 0
+    },
+    "compileall": "passed",
+    "node_checks": [
+      "server.js",
+      "web/app.js",
+      "web/progress-migration.js",
+      "web/credit-display.js",
+      "web/elective-groups.js"
+    ],
+    "git_diff_check": "passed",
+    "json_csv_markdown_validation": {
+      "status": "passed",
+      "repository_json_files": 22,
+      "repository_csv_files": 8,
+      "report_markdown_files": 15,
+      "ignored_capture_manifest_entries": 88
+    },
+    "full_planner_simulations": {
+      "status": "passed",
+      "programs": 72,
+      "course_rows": 2213,
+      "initial_available": 1378,
+      "initial_blocked": 835,
+      "permanently_blocked_after_valid_closure": 237,
+      "null_nan_exception_or_infinite_loop": false,
+      "accounting": {
+        "courses": 43,
+        "initial_available": 38,
+        "initial_blocked": 5
+      },
+      "finance": {
+        "courses": 43,
+        "initial_available": 43,
+        "initial_blocked": 0,
+        "ISLS_201_unchanged": true
+      }
+    },
+    "official_plan_view_read_only_checks": {
+      "status": "passed",
+      "programs": 23,
+      "api_plan_rejections": 23,
+      "api_progress_get_rejections": 23,
+      "api_progress_post_rejections": 23
+    },
+    "visual_review": {
+      "status": "passed",
+      "tool": "Playwright Chromium",
+      "cases": 10,
+      "programs_covered": 8,
+      "languages": [
+        "ar",
+        "en"
+      ],
+      "directions": [
+        "rtl",
+        "ltr"
+      ],
+      "viewports": [
+        "desktop",
+        "mobile"
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "horizontal_overflow_cases": 0,
+      "console_or_page_errors": 0,
+      "progress_keys_created": 0,
+      "artifacts": [
+        "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/visual/civil-ar-desktop-light.png",
+        "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/visual/civil-en-mobile-dark.png",
+        "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/visual/biomedical-en-desktop-light.png",
+        "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/visual/biomedical-ar-mobile-dark.png",
+        "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/visual/computer-ar-desktop-dark.png",
+        "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/visual/electronics-en-mobile-light.png",
+        "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/visual/power-en-desktop-dark.png",
+        "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/visual/aeronautical-ar-mobile-light.png",
+        "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/visual/thermal-ar-desktop-light.png",
+        "data/raw/kau/plan_audit/bachelor_priority_faculties_wave/visual/mining-en-mobile-dark.png"
+      ]
+    },
+    "temporary_processes_stopped": true
+  },
+  "changed_files": [
+    "web/data/faculty_catalog.json",
+    "tests/test_official_plan_view.py",
+    "tests/test_pilot_import.py",
+    "tests/test_priority_faculties_wave.py",
+    "reports/plan_extraction/bachelor_priority_faculties_wave.json",
+    "reports/plan_extraction/bachelor_priority_faculties_wave.csv",
+    "reports/plan_extraction/bachelor_priority_faculties_wave.md"
+  ]
+}

@@ -15,6 +15,16 @@ ROOT = Path(__file__).resolve().parents[1]
 CATALOG = json.loads((ROOT / "web/data/faculty_catalog.json").read_text(encoding="utf-8"))
 REPORT = json.loads((ROOT / "reports/plan_extraction/official_plan_view_bachelor_wave.json").read_text(encoding="utf-8"))
 EXPECTED = {item["program_id"]: (item["visible_course_count"], item["visible_credit_sum"]) for item in REPORT["programs"]}
+PRIORITY_REPORT = json.loads((ROOT / "reports/plan_extraction/bachelor_priority_faculties_wave.json").read_text(encoding="utf-8"))
+PRIORITY_EXPECTED = {
+    item["program_id"]: (
+        item["official_plan_view_result"]["visible_course_count"],
+        item["official_plan_view_result"]["visible_credit_sum"],
+    )
+    for item in PRIORITY_REPORT["programs"]
+    if item["final_classification"] == "B. OFFICIAL_PLAN_VIEW_READY"
+}
+ALL_EXPECTED = {**EXPECTED, **PRIORITY_EXPECTED}
 
 
 class OfficialPlanViewDataTests(unittest.TestCase):
@@ -22,8 +32,8 @@ class OfficialPlanViewDataTests(unittest.TestCase):
         programs = CATALOG["programs"]
         self.assertEqual(len(programs), 223)
         self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 72)
-        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 15)
-        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 136)
+        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 23)
+        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 128)
         planner_ids = {p["id"] for p in json.loads((ROOT / "web/data/additional_programs.json").read_text())["programs"]}
         for program in (p for p in programs if p["coverage_state"] == "OFFICIAL_PLAN_VIEW"):
             self.assertEqual(program["catalog_status"], "catalog-only")
@@ -34,7 +44,8 @@ class OfficialPlanViewDataTests(unittest.TestCase):
     def test_exact_audited_counts_and_schema(self) -> None:
         by_id = {p["id"]: p for p in CATALOG["programs"]}
         self.assertEqual(len(EXPECTED), 15)
-        for program_id, expected in EXPECTED.items():
+        self.assertEqual(len(PRIORITY_EXPECTED), 8)
+        for program_id, expected in ALL_EXPECTED.items():
             with self.subTest(program_id=program_id):
                 view = by_id[program_id]["official_plan_view"]
                 rows = [row for section in view["sections"] for row in section["rows"]]
@@ -142,14 +153,17 @@ class OfficialPlanViewApiTests(unittest.TestCase):
         status, registry = self.request_status("GET", "/api/programs")
         self.assertEqual(status, 200)
         summaries = {p["id"]: p for p in registry["programs"]}
-        for program_id in EXPECTED:
+        for program_id in ALL_EXPECTED:
             self.assertTrue(summaries[program_id]["official_plan_view_available"])
             status, program = self.request_status("GET", f"/api/program?major={program_id}")
             self.assertEqual(status, 200)
             self.assertIn("official_plan_view", program)
 
     def test_non_planner_endpoints_are_guarded(self) -> None:
-        for program_id in list(EXPECTED) + ["catalog-geography-and-geographic-information-systems"]:
+        for program_id in list(ALL_EXPECTED) + [
+            "catalog-geography-and-geographic-information-systems",
+            "catalog-bachelor-of-sharia",
+        ]:
             for method, endpoint in (("POST", "plan"), ("GET", "progress"), ("POST", "progress")):
                 with self.subTest(program_id=program_id, endpoint=endpoint, method=method):
                     status, payload = self.request_status(method, f"/api/{endpoint}?major={program_id}")
