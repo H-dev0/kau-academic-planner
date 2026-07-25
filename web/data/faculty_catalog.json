@@ -16103,9 +16103,11 @@
           "official_course_name": "Computational Analytics",
           "credit_hours": 4,
           "prerequisites": [
-            "CS121 + CS202"
+            "CS 121",
+            "CS 202"
           ],
-          "source_group": "Course Descriptions"
+          "source_group": "Course Descriptions",
+          "raw_requisite_notation": "CS121 + CS202"
         },
         {
           "semester_or_level": "Level not specified",
@@ -16133,9 +16135,11 @@
           "official_course_name": "Application Development",
           "credit_hours": 4,
           "prerequisites": [
-            "CIS221 + CIS241"
+            "CIS 221",
+            "CIS 241"
           ],
-          "source_group": "Course Descriptions"
+          "source_group": "Course Descriptions",
+          "raw_requisite_notation": "CIS221 + CIS241"
         },
         {
           "semester_or_level": "Level not specified",
@@ -16143,9 +16147,11 @@
           "official_course_name": "Principles of Operating Systems",
           "credit_hours": 4,
           "prerequisites": [
-            "CIS211 + CS202"
+            "CIS 211",
+            "CS 202"
           ],
-          "source_group": "Course Descriptions"
+          "source_group": "Course Descriptions",
+          "raw_requisite_notation": "CIS211 + CS202"
         },
         {
           "semester_or_level": "Level not specified",
@@ -16163,9 +16169,11 @@
           "official_course_name": "Data Science",
           "credit_hours": 4,
           "prerequisites": [
-            "CIS221 + CIS241"
+            "CIS 221",
+            "CIS 241"
           ],
-          "source_group": "Course Descriptions"
+          "source_group": "Course Descriptions",
+          "raw_requisite_notation": "CIS221 + CIS241"
         },
         {
           "semester_or_level": "Level not specified",
@@ -16203,9 +16211,11 @@
           "official_course_name": "Intelligent Systems",
           "credit_hours": 4,
           "prerequisites": [
-            "CIS333 + CIS381"
+            "CIS 333",
+            "CIS 381"
           ],
-          "source_group": "Course Descriptions"
+          "source_group": "Course Descriptions",
+          "raw_requisite_notation": "CIS333 + CIS381"
         },
         {
           "semester_or_level": "Level not specified",
@@ -16546,9 +16556,11 @@
           "official_course_name": "Wireless Networks",
           "credit_hours": 3,
           "prerequisites": [
-            "IT 304 + IT 371"
+            "IT 304",
+            "IT 371"
           ],
-          "source_group": "Course Descriptions"
+          "source_group": "Course Descriptions",
+          "raw_requisite_notation": "IT 304 + IT 371"
         },
         {
           "semester_or_level": "Level not specified",
@@ -16612,9 +16624,11 @@
           "official_course_name": "Operating Systems",
           "credit_hours": 3,
           "prerequisites": [
-            "IT 211 + IT 203"
+            "IT 211",
+            "IT 203"
           ],
-          "source_group": "Course Descriptions"
+          "source_group": "Course Descriptions",
+          "raw_requisite_notation": "IT 211 + IT 203"
         },
         {
           "semester_or_level": "Level not specified",
@@ -16706,9 +16720,11 @@
           "official_course_name": "Software Development Processes",
           "credit_hours": 3,
           "prerequisites": [
-            "IT122 + IT 203"
+            "IT 122",
+            "IT 203"
           ],
-          "source_group": "Course Descriptions"
+          "source_group": "Course Descriptions",
+          "raw_requisite_notation": "IT122 + IT 203"
         },
         {
           "semester_or_level": "Level not specified",
@@ -20210,9 +20226,11 @@
           "official_course_name": "Bioinformatic",
           "credit_hours": 3,
           "prerequisites": [
-            "BIOC 231 & BIOC 312"
+            "BIOC 231",
+            "BIOC 312"
           ],
-          "source_group": "Department Requirements"
+          "source_group": "Department Requirements",
+          "raw_requisite_notation": "BIOC 231 & BIOC 312"
         },
         {
           "semester_or_level": "Department Requirements",
@@ -20220,9 +20238,11 @@
           "official_course_name": "Applied Biochemistry",
           "credit_hours": 4,
           "prerequisites": [
-            "BIOC 231 & BIOC 343"
+            "BIOC 231",
+            "BIOC 343"
           ],
-          "source_group": "Department Requirements"
+          "source_group": "Department Requirements",
+          "raw_requisite_notation": "BIOC 231 & BIOC 343"
         },
         {
           "semester_or_level": "Department Requirements",
@@ -21897,9 +21917,11 @@
           "official_course_name": "Municipal Solid Waste Management",
           "credit_hours": 3,
           "prerequisites": [
-            "ENS 305\nENS 207"
+            "ENS305",
+            "ENS207"
           ],
-          "source_group": "Courses Description"
+          "source_group": "Courses Description",
+          "raw_requisite_notation": "ENS 305\nENS 207"
         },
         {
           "semester_or_level": "Level not specified",
@@ -33157,9 +33179,10 @@
           "official_course_name": "Islamic Culture (2)",
           "credit_hours": 2,
           "prerequisites": [
-            "سلم 101 | ISLS 101"
+            "ISLS 101"
           ],
-          "source_group": "University Requirements"
+          "source_group": "University Requirements",
+          "raw_requisite_notation": "سلم 101 | ISLS 101"
         },
         {
           "semester_or_level": "University Requirements",
@@ -33167,9 +33190,10 @@
           "official_course_name": "Islamic Culture (4)",
           "credit_hours": 2,
           "prerequisites": [
-            "301 | ISLS 301"
+            "ISLS 301"
           ],
-          "source_group": "University Requirements"
+          "source_group": "University Requirements",
+          "raw_requisite_notation": "301 | ISLS 301"
         },
         {
           "semester_or_level": "University Requirements",
@@ -33193,9 +33217,10 @@
           "official_course_name": "Islamic Culture (3)",
           "credit_hours": 2,
           "prerequisites": [
-            "سلم 201 | ISLS 201"
+            "ISLS 201"
           ],
-          "source_group": "University Requirements"
+          "source_group": "University Requirements",
+          "raw_requisite_notation": "سلم 201 | ISLS 201"
         },
         {
           "semester_or_level": "University Requirements",
@@ -33580,9 +33605,11 @@
           "official_course_name": "Training in the Specialization",
           "credit_hours": 2,
           "prerequisites": [
-            "EGT 310\nEGT 332"
+            "EGT 310",
+            "EGT 332"
           ],
-          "source_group": "Courses Description"
+          "source_group": "Courses Description",
+          "raw_requisite_notation": "EGT 310\nEGT 332"
         },
         {
           "semester_or_level": "Level not specified",
@@ -33630,9 +33657,11 @@
           "official_course_name": "Geo-Exploration Project",
           "credit_hours": 4,
           "prerequisites": [
-            "EGT 352\nEGT 399"
+            "EGT 352",
+            "EGT 399"
           ],
-          "source_group": "Courses Description"
+          "source_group": "Courses Description",
+          "raw_requisite_notation": "EGT 352\nEGT 399"
         },
         {
           "semester_or_level": "Level not specified",
@@ -34315,9 +34344,12 @@
           "official_course_name": "TRAINING IN THE SPECIALIZATION",
           "credit_hours": 2,
           "prerequisites": [
-            "• EGP321. • EGP331. • EGP341."
+            "EGP 321",
+            "EGP 331",
+            "EGP 341"
           ],
-          "source_group": "Courses Description"
+          "source_group": "Courses Description",
+          "raw_requisite_notation": "• EGP321. • EGP331. • EGP341."
         },
         {
           "semester_or_level": "Level not specified",
@@ -34355,9 +34387,11 @@
           "official_course_name": "STUD. IN GEOPHYS. APPLICATIONS",
           "credit_hours": 2,
           "prerequisites": [
-            "EGP416. EGP422."
+            "EGP 416",
+            "EGP 422"
           ],
-          "source_group": "Courses Description"
+          "source_group": "Courses Description",
+          "raw_requisite_notation": "EGP416. EGP422."
         },
         {
           "semester_or_level": "Level not specified",
@@ -34365,9 +34399,12 @@
           "official_course_name": "SEMINAR",
           "credit_hours": 1,
           "prerequisites": [
-            "• EGP321. • EGP331. • EGP341."
+            "EGP 321",
+            "EGP 331",
+            "EGP 341"
           ],
-          "source_group": "Courses Description"
+          "source_group": "Courses Description",
+          "raw_requisite_notation": "• EGP321. • EGP331. • EGP341."
         },
         {
           "semester_or_level": "Level not specified",
@@ -34375,9 +34412,12 @@
           "official_course_name": "NEAR-SURFACE GEOPHYSICS",
           "credit_hours": 2,
           "prerequisites": [
-            "EGP321. • EGP331. • EGP341."
+            "EGP 321",
+            "EGP 331",
+            "EGP 341"
           ],
-          "source_group": "Courses Description"
+          "source_group": "Courses Description",
+          "raw_requisite_notation": "EGP321. • EGP331. • EGP341."
         },
         {
           "semester_or_level": "Level not specified",
@@ -35163,9 +35203,11 @@
           "official_course_name": "Engineering properties of aggregate",
           "credit_hours": 3,
           "prerequisites": [
-            "EEG311\nEEG321"
+            "EEG 311",
+            "EEG 321"
           ],
-          "source_group": "Program Requirements"
+          "source_group": "Program Requirements",
+          "raw_requisite_notation": "EEG311\nEEG321"
         },
         {
           "semester_or_level": "Program Requirements",
@@ -35173,9 +35215,11 @@
           "official_course_name": "Engineering geology",
           "credit_hours": 3,
           "prerequisites": [
-            "EEG311\nEEG321"
+            "EEG 311",
+            "EEG 321"
           ],
-          "source_group": "Program Requirements"
+          "source_group": "Program Requirements",
+          "raw_requisite_notation": "EEG311\nEEG321"
         },
         {
           "semester_or_level": "Program Requirements",
@@ -35194,9 +35238,11 @@
           "official_course_name": "Drilling and Blasting techniques in engineering geology",
           "credit_hours": 2,
           "prerequisites": [
-            "EEG341\nEEG342"
+            "ُEEG 341",
+            "EEG 342"
           ],
-          "source_group": "Program Requirements"
+          "source_group": "Program Requirements",
+          "raw_requisite_notation": "EEG341\nEEG342"
         },
         {
           "semester_or_level": "Program Requirements",
@@ -35224,9 +35270,11 @@
           "official_course_name": "B. Sc. project",
           "credit_hours": 4,
           "prerequisites": [
-            "EEG399\nEEG408"
+            "ُEEG 399",
+            "EEG 408"
           ],
-          "source_group": "Program Requirements"
+          "source_group": "Program Requirements",
+          "raw_requisite_notation": "EEG399\nEEG408"
         },
         {
           "semester_or_level": "Program Requirements",
@@ -35234,9 +35282,11 @@
           "official_course_name": "Applications of Engineering Geology",
           "credit_hours": 3,
           "prerequisites": [
-            "EEG341\nEEG342"
+            "ُEEG 341",
+            "EEG 342"
           ],
-          "source_group": "Program Requirements"
+          "source_group": "Program Requirements",
+          "raw_requisite_notation": "EEG341\nEEG342"
         },
         {
           "semester_or_level": "Program Requirements",
@@ -35313,9 +35363,11 @@
           "official_course_name": "Site investigation",
           "credit_hours": 3,
           "prerequisites": [
-            "EEG312\nEEG322"
+            "EEG 312",
+            "EEG 322"
           ],
-          "source_group": "Program Requirements"
+          "source_group": "Program Requirements",
+          "raw_requisite_notation": "EEG312\nEEG322"
         }
       ],
       "source_title": "KAU Program Detail",
@@ -35465,9 +35517,10 @@
           "official_course_name": "Introduction to Geospatial Information Systems",
           "credit_hours": 3,
           "prerequisites": [
-            "EMR 110 | STAT 110"
+            "EMR 110"
           ],
-          "source_group": "Faculty Requirements"
+          "source_group": "Faculty Requirements",
+          "raw_requisite_notation": "EMR 110 | STAT 110"
         },
         {
           "semester_or_level": "Faculty Requirements",
@@ -36306,9 +36359,11 @@
           "official_course_name": "Visual Communication in Interior Design",
           "credit_hours": 3,
           "prerequisites": [
-            "ID 102\nID 121"
+            "ID 102",
+            "ID 121"
           ],
-          "source_group": "Courses Description"
+          "source_group": "Courses Description",
+          "raw_requisite_notation": "ID 102\nID 121"
         },
         {
           "semester_or_level": "Level not specified",
@@ -36905,9 +36960,11 @@
           "official_course_name": "Professional Practice and Field Training",
           "credit_hours": 3,
           "prerequisites": [
-            "FS274\nFS300"
+            "FS 274",
+            "FS300"
           ],
-          "source_group": "Courses Description"
+          "source_group": "Courses Description",
+          "raw_requisite_notation": "FS274\nFS300"
         },
         {
           "semester_or_level": "Level not specified",
@@ -36915,9 +36972,16 @@
           "official_course_name": "Summer Training",
           "credit_hours": 6,
           "prerequisites": [
-            "FS 303\nFS 380\nFS 271\nFS 273\nFS 170\nFS 390\nFS 391"
+            "FS 303",
+            "FS380",
+            "FS 271",
+            "FS 273",
+            "FS170",
+            "FS 390",
+            "FS 391"
           ],
-          "source_group": "Courses Description"
+          "source_group": "Courses Description",
+          "raw_requisite_notation": "FS 303\nFS 380\nFS 271\nFS 273\nFS 170\nFS 390\nFS 391"
         },
         {
           "semester_or_level": "Level not specified",
@@ -37092,9 +37156,11 @@
           "official_course_name": "Field Training in Kindergarten",
           "credit_hours": 0,
           "prerequisites": [
-            "ت ط ف م 354\nت ط ف م 355"
+            "ت ط ف م 354",
+            "ت ط ف م 355"
           ],
-          "source_group": "Course Descriptions."
+          "source_group": "Course Descriptions.",
+          "raw_requisite_notation": "ت ط ف م 354\nت ط ف م 355"
         },
         {
           "semester_or_level": "Level not specified",
@@ -37256,9 +37322,11 @@
           "official_course_name": "Field Training in primary grades",
           "credit_hours": 0,
           "prerequisites": [
-            "ت ط ف م 454\nت ط ف م 455"
+            "ت ط ف م 454",
+            "ت ط ف م 455"
           ],
-          "source_group": "Course Descriptions."
+          "source_group": "Course Descriptions.",
+          "raw_requisite_notation": "ت ط ف م 454\nت ط ف م 455"
         },
         {
           "semester_or_level": "Level not specified",
@@ -37276,9 +37344,11 @@
           "official_course_name": "Teaching and Learning in Early Childhood",
           "credit_hours": 3,
           "prerequisites": [
-            "ت ط ف م 112\nت ط ف م 131"
+            "ت ط ف م 112",
+            "ت ط ف م 131"
           ],
-          "source_group": "Course Descriptions."
+          "source_group": "Course Descriptions.",
+          "raw_requisite_notation": "ت ط ف م 112\nت ط ف م 131"
         },
         {
           "semester_or_level": "Level not specified",
@@ -38049,9 +38119,10 @@
           "official_course_name": "Islamic Culture (2)",
           "credit_hours": 2,
           "prerequisites": [
-            "سلم 101 | ISLS 101"
+            "سلم ١٠١ | ISLS 101"
           ],
-          "source_group": "University Requirements"
+          "source_group": "University Requirements",
+          "raw_requisite_notation": "سلم 101 | ISLS 101"
         },
         {
           "semester_or_level": "University Requirements",
@@ -38059,9 +38130,10 @@
           "official_course_name": "Islamic Culture (3)",
           "credit_hours": 2,
           "prerequisites": [
-            "سلم 201 | ISLS 201"
+            "سلم ٢٠١ | ISLS 201"
           ],
-          "source_group": "University Requirements"
+          "source_group": "University Requirements",
+          "raw_requisite_notation": "سلم 201 | ISLS 201"
         },
         {
           "semester_or_level": "University Requirements",
@@ -38069,9 +38141,10 @@
           "official_course_name": "Islamic Culture (4)",
           "credit_hours": 2,
           "prerequisites": [
-            "301 | ISLS 301"
+            "سلم ٣٠١ | ISLS 301"
           ],
-          "source_group": "University Requirements"
+          "source_group": "University Requirements",
+          "raw_requisite_notation": "301 | ISLS 301"
         },
         {
           "semester_or_level": "University Requirements",
@@ -38087,9 +38160,10 @@
           "official_course_name": "Arabic Language 2",
           "credit_hours": 3,
           "prerequisites": [
-            "عرب101 | ARAB 101"
+            "عرب  ١٠١ | ARAB 101"
           ],
-          "source_group": "University Requirements"
+          "source_group": "University Requirements",
+          "raw_requisite_notation": "عرب101 | ARAB 101"
         },
         {
           "semester_or_level": "University Requirements",
@@ -38453,9 +38527,12 @@
           "official_course_name": "Occupational therapy for Musculoskeletal disorders",
           "credit_hours": 4,
           "prerequisites": [
-            "OCTH 221\nOCTH 222\nOCTH 223"
+            "OCTH 221",
+            "OCTH 222",
+            "OCTH 223"
           ],
-          "source_group": "Mandatory Program Requirements"
+          "source_group": "Mandatory Program Requirements",
+          "raw_requisite_notation": "OCTH 221\nOCTH 222\nOCTH 223"
         },
         {
           "semester_or_level": "Mandatory Program Requirements",
@@ -38463,9 +38540,12 @@
           "official_course_name": "Field work for Musculoskeletal disorders",
           "credit_hours": 3,
           "prerequisites": [
-            "OCTH 221\nOCTH 222\nOCTH 223"
+            "OCTH 221",
+            "OCTH 222",
+            "OCTH 223"
           ],
-          "source_group": "Mandatory Program Requirements"
+          "source_group": "Mandatory Program Requirements",
+          "raw_requisite_notation": "OCTH 221\nOCTH 222\nOCTH 223"
         },
         {
           "semester_or_level": "Mandatory Program Requirements",
@@ -38481,9 +38561,11 @@
           "official_course_name": "Occupational therapy for elderly",
           "credit_hours": 4,
           "prerequisites": [
-            "OCTH 221\nOCTH 222"
+            "OCTH 221",
+            "OCTH 222"
           ],
-          "source_group": "Mandatory Program Requirements"
+          "source_group": "Mandatory Program Requirements",
+          "raw_requisite_notation": "OCTH 221\nOCTH 222"
         },
         {
           "semester_or_level": "Mandatory Program Requirements",
@@ -38491,9 +38573,11 @@
           "official_course_name": "Field work for Pediatric",
           "credit_hours": 3,
           "prerequisites": [
-            "OCTH 221 OCTH 222"
+            "OCTH 221",
+            "OCTH 222"
           ],
-          "source_group": "Mandatory Program Requirements"
+          "source_group": "Mandatory Program Requirements",
+          "raw_requisite_notation": "OCTH 221 OCTH 222"
         },
         {
           "semester_or_level": "Mandatory Program Requirements",
@@ -38501,9 +38585,11 @@
           "official_course_name": "Field work for Neuromuscular Disorders",
           "credit_hours": 3,
           "prerequisites": [
-            "OCTH 221 OCTH 222"
+            "OCTH 221",
+            "OCTH 222"
           ],
-          "source_group": "Mandatory Program Requirements"
+          "source_group": "Mandatory Program Requirements",
+          "raw_requisite_notation": "OCTH 221 OCTH 222"
         },
         {
           "semester_or_level": "Mandatory Program Requirements",
@@ -38511,9 +38597,11 @@
           "official_course_name": "Occupational therapy for Neuromuscular Disorders",
           "credit_hours": 4,
           "prerequisites": [
-            "OCTH 221 OCTH 222"
+            "OCTH 221",
+            "OCTH 222"
           ],
-          "source_group": "Mandatory Program Requirements"
+          "source_group": "Mandatory Program Requirements",
+          "raw_requisite_notation": "OCTH 221 OCTH 222"
         },
         {
           "semester_or_level": "Mandatory Program Requirements",
@@ -38531,9 +38619,11 @@
           "official_course_name": "Occupational therapy for Pediatric Disorders",
           "credit_hours": 4,
           "prerequisites": [
-            "OCTH 221 OCTH 222"
+            "OCTH 221",
+            "OCTH 222"
           ],
-          "source_group": "Mandatory Program Requirements"
+          "source_group": "Mandatory Program Requirements",
+          "raw_requisite_notation": "OCTH 221 OCTH 222"
         }
       ],
       "source_title": "KAU Program Detail",
@@ -39461,9 +39551,10 @@
           "official_course_name": "Islamic Culture (2)",
           "credit_hours": 2,
           "prerequisites": [
-            "سلم 101 | ISLS 101"
+            "سلم ١٠١ | ISLS 101"
           ],
-          "source_group": "University Requirements"
+          "source_group": "University Requirements",
+          "raw_requisite_notation": "سلم 101 | ISLS 101"
         },
         {
           "semester_or_level": "University Requirements",
@@ -39471,9 +39562,10 @@
           "official_course_name": "Islamic Culture (3)",
           "credit_hours": 2,
           "prerequisites": [
-            "سلم 201 | ISLS 201"
+            "سلم ٢٠١ | ISLS 201"
           ],
-          "source_group": "University Requirements"
+          "source_group": "University Requirements",
+          "raw_requisite_notation": "سلم 201 | ISLS 201"
         },
         {
           "semester_or_level": "University Requirements",
@@ -39481,9 +39573,10 @@
           "official_course_name": "Islamic Culture (4)",
           "credit_hours": 2,
           "prerequisites": [
-            "301 | ISLS 301"
+            "سلم ٣٠١ | ISLS 301"
           ],
-          "source_group": "University Requirements"
+          "source_group": "University Requirements",
+          "raw_requisite_notation": "301 | ISLS 301"
         },
         {
           "semester_or_level": "University Requirements",
@@ -39499,9 +39592,10 @@
           "official_course_name": "Arabic Language 2",
           "credit_hours": 3,
           "prerequisites": [
-            "عرب101 | ARAB 101"
+            "عرب  ١٠١ | ARAB 101"
           ],
-          "source_group": "University Requirements"
+          "source_group": "University Requirements",
+          "raw_requisite_notation": "عرب101 | ARAB 101"
         },
         {
           "semester_or_level": "University Requirements",
@@ -39628,9 +39722,11 @@
           "official_course_name": "Clinical assessment in Audio",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 224\r\nSLPA 212"
+            "SLPA 224",
+            "SLPA 212"
           ],
-          "source_group": "Audiology Track Requirements"
+          "source_group": "Audiology Track Requirements",
+          "raw_requisite_notation": "SLPA 224\r\nSLPA 212"
         },
         {
           "semester_or_level": "Audiology Track Requirements",
@@ -39638,9 +39734,11 @@
           "official_course_name": "Audio-vestibular disorders",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 211\r\nSLPA 220"
+            "SLPA 211",
+            "SLPA 220"
           ],
-          "source_group": "Audiology Track Requirements"
+          "source_group": "Audiology Track Requirements",
+          "raw_requisite_notation": "SLPA 211\r\nSLPA 220"
         },
         {
           "semester_or_level": "Audiology Track Requirements",
@@ -39648,9 +39746,11 @@
           "official_course_name": "Electrophysiological Assess",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 211\r\nSLPA 220"
+            "SLPA 211",
+            "SLPA 220"
           ],
-          "source_group": "Audiology Track Requirements"
+          "source_group": "Audiology Track Requirements",
+          "raw_requisite_notation": "SLPA 211\r\nSLPA 220"
         },
         {
           "semester_or_level": "Audiology Track Requirements",
@@ -39658,9 +39758,11 @@
           "official_course_name": "Hearing aids",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 361 \r\nSLPA 362"
+            "SLPA 361",
+            "SLPA 362"
           ],
-          "source_group": "Audiology Track Requirements"
+          "source_group": "Audiology Track Requirements",
+          "raw_requisite_notation": "SLPA 361 \r\nSLPA 362"
         },
         {
           "semester_or_level": "Audiology Track Requirements",
@@ -39668,9 +39770,12 @@
           "official_course_name": "Clinical diagnosis in audio",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 361\r\nSLPA 362\r\nSLPA 363"
+            "SLPA 361",
+            "SLPA 362",
+            "SLPA 363"
           ],
-          "source_group": "Audiology Track Requirements"
+          "source_group": "Audiology Track Requirements",
+          "raw_requisite_notation": "SLPA 361\r\nSLPA 362\r\nSLPA 363"
         },
         {
           "semester_or_level": "Audiology Track Requirements",
@@ -39678,9 +39783,11 @@
           "official_course_name": "Pediatric Audiology",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 361\r\nSLPA 362"
+            "SLPA 361",
+            "SLPA 362"
           ],
-          "source_group": "Audiology Track Requirements"
+          "source_group": "Audiology Track Requirements",
+          "raw_requisite_notation": "SLPA 361\r\nSLPA 362"
         },
         {
           "semester_or_level": "Audiology Track Requirements",
@@ -39688,9 +39795,11 @@
           "official_course_name": "Vestibular Assessment",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 364\r\nSLPA 211"
+            "SLPA 364",
+            "SLPA 211"
           ],
-          "source_group": "Audiology Track Requirements"
+          "source_group": "Audiology Track Requirements",
+          "raw_requisite_notation": "SLPA 364\r\nSLPA 211"
         },
         {
           "semester_or_level": "Audiology Track Requirements",
@@ -39698,9 +39807,12 @@
           "official_course_name": "Auditory Vestibular Implants",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 362\r\nSLPA 364\r\nSLPA 365"
+            "SLPA 362",
+            "SLPA 364",
+            "SLPA 365"
           ],
-          "source_group": "Audiology Track Requirements"
+          "source_group": "Audiology Track Requirements",
+          "raw_requisite_notation": "SLPA 362\r\nSLPA 364\r\nSLPA 365"
         },
         {
           "semester_or_level": "Audiology Track Requirements",
@@ -39718,9 +39830,12 @@
           "official_course_name": "Field work in Audiology 1",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA364\r\nSLPA 365\r\nSLPA 213"
+            "SLPA 364",
+            "SLPA 365",
+            "SLPA 213"
           ],
-          "source_group": "Audiology Track Requirements"
+          "source_group": "Audiology Track Requirements",
+          "raw_requisite_notation": "SLPA364\r\nSLPA 365\r\nSLPA 213"
         },
         {
           "semester_or_level": "Audiology Track Requirements",
@@ -39761,8 +39876,10 @@
           "official_course_name": "Traumatic Brain Injuries",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 211\nSLPA 212"
-          ]
+            "SLPA 211",
+            "SLPA 212"
+          ],
+          "raw_requisite_notation": "SLPA 211\nSLPA 212"
         },
         {
           "semester_or_level": "Elective courses for Speech-Language Pathology Track",
@@ -39784,8 +39901,10 @@
           "official_course_name": "Educational  audiology",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 365\nSLPA 362"
-          ]
+            "SLPA 365",
+            "SLPA 362"
+          ],
+          "raw_requisite_notation": "SLPA 365\nSLPA 362"
         },
         {
           "semester_or_level": "Elective courses for Audiology Track",
@@ -39793,8 +39912,10 @@
           "official_course_name": "Industrial audiology",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 365\nSLPA 362"
-          ]
+            "SLPA 365",
+            "SLPA 362"
+          ],
+          "raw_requisite_notation": "SLPA 365\nSLPA 362"
         },
         {
           "semester_or_level": "Compulsory Program Requirements for Both Tracks",
@@ -39818,9 +39939,11 @@
           "official_course_name": "Acoustics",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 220 \r\nSLPA 221"
+            "SLPA 220",
+            "SLPA 221"
           ],
-          "source_group": "Compulsory Program Requirements for Both Tracks"
+          "source_group": "Compulsory Program Requirements for Both Tracks",
+          "raw_requisite_notation": "SLPA 220 \r\nSLPA 221"
         },
         {
           "semester_or_level": "Compulsory Program Requirements for Both Tracks",
@@ -39864,9 +39987,11 @@
           "official_course_name": "Speech, Language & hearing dev",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 220\r\nSLPA 223"
+            "SLPA 220",
+            "SLPA 223"
           ],
-          "source_group": "Compulsory Program Requirements for Both Tracks"
+          "source_group": "Compulsory Program Requirements for Both Tracks",
+          "raw_requisite_notation": "SLPA 220\r\nSLPA 223"
         },
         {
           "semester_or_level": "Compulsory Program Requirements for Both Tracks",
@@ -39874,9 +39999,11 @@
           "official_course_name": "Counseling in Medical Rehab",
           "credit_hours": 2,
           "prerequisites": [
-            "SLPA 212\r\nSLPA 213"
+            "SLPA 212",
+            "SLPA 213"
           ],
-          "source_group": "Compulsory Program Requirements for Both Tracks"
+          "source_group": "Compulsory Program Requirements for Both Tracks",
+          "raw_requisite_notation": "SLPA 212\r\nSLPA 213"
         },
         {
           "semester_or_level": "Compulsory Program Requirements for Both Tracks",
@@ -39914,9 +40041,12 @@
           "official_course_name": "Preschool Language Disorders",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 223\r\nSLPA 222\r\nSLPA 212"
+            "SLPA 223",
+            "SLPA 222",
+            "SLPA 212"
           ],
-          "source_group": "Speech-Language Pathology Track Requirements"
+          "source_group": "Speech-Language Pathology Track Requirements",
+          "raw_requisite_notation": "SLPA 223\r\nSLPA 222\r\nSLPA 212"
         },
         {
           "semester_or_level": "Speech-Language Pathology Track Requirements",
@@ -39924,9 +40054,12 @@
           "official_course_name": "Artic & Phonological Disorders",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 222\r\nSLPA 212\r\nSLPA 221"
+            "SLPA 222",
+            "SLPA 212",
+            "SLPA 221"
           ],
-          "source_group": "Speech-Language Pathology Track Requirements"
+          "source_group": "Speech-Language Pathology Track Requirements",
+          "raw_requisite_notation": "SLPA 222\r\nSLPA 212\r\nSLPA 221"
         },
         {
           "semester_or_level": "Speech-Language Pathology Track Requirements",
@@ -39934,9 +40067,11 @@
           "official_course_name": "Fluency Disorders",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 222\r\nSLPA 212"
+            "SLPA 222",
+            "SLPA 212"
           ],
-          "source_group": "Speech-Language Pathology Track Requirements"
+          "source_group": "Speech-Language Pathology Track Requirements",
+          "raw_requisite_notation": "SLPA 222\r\nSLPA 212"
         },
         {
           "semester_or_level": "Speech-Language Pathology Track Requirements",
@@ -39954,9 +40089,11 @@
           "official_course_name": "Neurogenic Comm Disorders",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 211\r\nSLPA 212"
+            "SLPA 211",
+            "SLPA 212"
           ],
-          "source_group": "Speech-Language Pathology Track Requirements"
+          "source_group": "Speech-Language Pathology Track Requirements",
+          "raw_requisite_notation": "SLPA 211\r\nSLPA 212"
         },
         {
           "semester_or_level": "Speech-Language Pathology Track Requirements",
@@ -39984,9 +40121,12 @@
           "official_course_name": "Voice Disorders",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 224\r\nSLPA 221\r\nSLPA 212"
+            "SLPA 224",
+            "SLPA 221",
+            "SLPA 212"
           ],
-          "source_group": "Speech-Language Pathology Track Requirements"
+          "source_group": "Speech-Language Pathology Track Requirements",
+          "raw_requisite_notation": "SLPA 224\r\nSLPA 221\r\nSLPA 212"
         },
         {
           "semester_or_level": "Speech-Language Pathology Track Requirements",
@@ -40004,9 +40144,12 @@
           "official_course_name": "Field work speech & language 1",
           "credit_hours": 3,
           "prerequisites": [
-            "SLPA 344\r\nSLPA 343\r\nSLPA 213"
+            "SLPA 344",
+            "SLPA 343",
+            "SLPA 213"
           ],
-          "source_group": "Speech-Language Pathology Track Requirements"
+          "source_group": "Speech-Language Pathology Track Requirements",
+          "raw_requisite_notation": "SLPA 344\r\nSLPA 343\r\nSLPA 213"
         },
         {
           "semester_or_level": "Speech-Language Pathology Track Requirements",

@@ -12,6 +12,7 @@ const state = {
   statusFilter: "all",
   statusView: "available",
   collapsedLevels: new Set(),
+  progressMigration: null,
 };
 
 const courseChecklist = document.querySelector("#courseChecklist");
@@ -52,6 +53,8 @@ const plannerWorkspace = document.querySelector("#plannerWorkspace");
 const officialPlanView = document.querySelector("#officialPlanView");
 const toolbarActions = document.querySelector(".toolbarActions");
 const privacyNotice = document.querySelector(".privacyNotice");
+const legacyProgressNotice = document.querySelector("#legacyProgressNotice");
+const legacyProgressCandidates = document.querySelector("#legacyProgressCandidates");
 const plannerOnboarding = document.querySelector("#plannerOnboarding");
 const plannerOverviewContent = document.querySelector("#plannerOverviewContent");
 const plannerSubtitle = document.querySelector("#plannerSubtitle");
@@ -372,9 +375,14 @@ function applyMicrosoftLoginState() {
 }
 
 function normalize(code) {
-  return String(code || "")
-    .toUpperCase()
-    .replace(/[^A-Z0-9]/g, "");
+  const value = String(code || "")
+    .normalize("NFKC")
+    .toUpperCase();
+  return /[A-Z]/.test(value)
+    ? value.replace(/[^A-Z0-9]/g, "")
+    : value
+      .replace(/[٠-٩]/g, (digit) => String("٠١٢٣٤٥٦٧٨٩".indexOf(digit)))
+      .replace(/[^\p{L}\p{N}]/gu, "");
 }
 
 function courseCode(course) {
@@ -491,12 +499,38 @@ function localProgressKey(major = state.major) {
 }
 
 function localProgressPayload() {
-  return {
+  const payload = {
     ...electiveGroups.progressPayload(completedCodes(), state.electiveSelections),
     saved_at: new Date().toISOString(),
     major: state.major,
     faculty: state.faculty,
     completed_codes: completedCodes(),
+  };
+  if (state.progressMigration) {
+    payload[progressMigration.migrationField] = state.progressMigration;
+  }
+  return payload;
+}
+
+function validatePlannerProgressPayload(payload) {
+  const validated = electiveGroups.validateProgressPayload(state.program, payload, true);
+  if (!validated.ok) return validated;
+
+  const known = new Set((state.program.courses || []).map(courseCode));
+  const completed = [];
+  const errors = [];
+  for (const rawCode of payload.completed_codes || []) {
+    const code = normalize(rawCode);
+    if (!known.has(code)) errors.push(`unknown course code: ${rawCode}`);
+    else if (!completed.includes(code)) completed.push(code);
+  }
+  return {
+    ok: errors.length === 0,
+    errors,
+    state: {
+      completed_codes: completed,
+      elective_selections: validated.state.elective_selections,
+    },
   };
 }
 
@@ -513,6 +547,9 @@ async function saveProgress(showMessage = false) {
 function setCompleted(code, checked) {
   if (checked) state.selected.add(code);
   else state.selected.delete(code);
+  if (checked && state.progressMigration) {
+    state.progressMigration = progressMigration.reconfirmCourse(state.progressMigration, code);
+  }
   render();
   saveProgress();
 }
@@ -1653,6 +1690,36 @@ function renderOfficialPlanView() {
   officialPlanView.hidden = false;
 }
 
+function renderLegacyProgressNotice() {
+  if (!legacyProgressNotice || !legacyProgressCandidates) return;
+  const unresolved = (state.progressMigration?.ambiguous_legacy_values || [])
+    .filter((entry) => !entry.resolution);
+  const visible = !isOfficialPlanViewProgram()
+    && state.progressMigration?.notice_pending === true
+    && unresolved.length > 0;
+  legacyProgressNotice.hidden = !visible;
+  legacyProgressCandidates.replaceChildren();
+  if (!visible) return;
+
+  for (const entry of unresolved) {
+    const item = document.createElement("li");
+    const legacyLabel = document.createElement("span");
+    legacyLabel.textContent = `${entry.legacy_value}: `;
+    item.append(legacyLabel);
+    for (const candidate of entry.candidates || []) {
+      const name = candidate.official_course_name
+        ? ` — ${candidate.official_course_name}`
+        : "";
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = `${candidate.course_code}${name}`;
+      button.addEventListener("click", () => setCompleted(candidate.current_identity, true));
+      item.append(button);
+    }
+    legacyProgressCandidates.append(item);
+  }
+}
+
 function render() {
   const plan = buildPlan();
   const total = (state.program.courses || []).length;
@@ -1699,6 +1766,7 @@ function render() {
   if (clearButton) clearButton.hidden = catalogOnly;
   if (toolbarActions) toolbarActions.hidden = officialView;
   if (privacyNotice) privacyNotice.hidden = officialView;
+  renderLegacyProgressNotice();
   renderOfficialPlanView();
 
   if (plannerSubtitle) {
@@ -1850,6 +1918,7 @@ async function chooseMajor(majorId) {
   state.program = majorId ? state.programs.get(state.major) : noSelectionProgram();
   state.selected.clear();
   state.electiveSelections = {};
+  state.progressMigration = null;
   state.search = "";
   state.level = "all";
   state.statusFilter = "all";
@@ -1905,6 +1974,7 @@ resetProgressButton.addEventListener("click", () => {
   localStorage.removeItem(localProgressKey());
   state.selected.clear();
   state.electiveSelections = {};
+  state.progressMigration = null;
   render();
   saveStatus.textContent = textFor("progressReset");
 });
@@ -1923,11 +1993,17 @@ importInput.addEventListener("change", async () => {
       : Array.isArray(payload.completed)
         ? payload.completed
         : [];
-    const candidate = { ...payload, completed_codes: importedCodes };
-    const validated = electiveGroups.validateProgressPayload(state.program, candidate, true);
+    const imported = { ...payload, completed_codes: importedCodes };
+    const candidate = progressMigration.migrateProgress(
+      state.major,
+      state.program.courses || [],
+      imported,
+    ).progress;
+    const validated = validatePlannerProgressPayload(candidate);
     if (!validated.ok) throw new Error(validated.errors.join("; "));
     state.selected = new Set(validated.state.completed_codes);
     state.electiveSelections = validated.state.elective_selections;
+    state.progressMigration = candidate[progressMigration.migrationField] || null;
     await saveProgress(true);
     render();
     saveStatus.textContent = textFor("importSuccess").replace("{count}", state.selected.size);
@@ -1945,16 +2021,28 @@ async function loadProgress() {
     if (!raw) {
       state.selected = new Set();
       state.electiveSelections = {};
+      state.progressMigration = null;
       return;
     }
-    const progress = JSON.parse(raw);
-    const validated = electiveGroups.validateProgressPayload(state.program, progress, true);
+    const savedProgress = JSON.parse(raw);
+    const migrated = progressMigration.migrateProgress(
+      state.major,
+      state.program.courses || [],
+      savedProgress,
+    );
+    const progress = migrated.progress;
+    if (migrated.changed) {
+      localStorage.setItem(localProgressKey(), JSON.stringify(progress));
+    }
+    const validated = validatePlannerProgressPayload(progress);
     if (!validated.ok) throw new Error(validated.errors.join("; "));
     state.selected = new Set(validated.state.completed_codes);
     state.electiveSelections = validated.state.elective_selections;
+    state.progressMigration = progress[progressMigration.migrationField] || null;
   } catch {
     state.selected = new Set();
     state.electiveSelections = {};
+    state.progressMigration = null;
     saveStatus.textContent = textFor("progressReadFailed");
   }
 }

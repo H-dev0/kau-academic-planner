@@ -94,7 +94,14 @@ function writeJson(filePath, data) {
 }
 
 function normalize(code) {
-  return String(code || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  const value = String(code || "")
+    .normalize("NFKC")
+    .toUpperCase();
+  return /[A-Z]/.test(value)
+    ? value.replace(/[^A-Z0-9]/g, "")
+    : value
+      .replace(/[٠-٩]/g, (digit) => String("٠١٢٣٤٥٦٧٨٩".indexOf(digit)))
+      .replace(/[^\p{L}\p{N}]/gu, "");
 }
 
 function programId(program) {

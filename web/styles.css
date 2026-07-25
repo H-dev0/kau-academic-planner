@@ -5825,6 +5825,27 @@ html[lang="en"] [data-footer-lang="ar"] {
   background: var(--color-primary-hover);
 }
 
+.legacyProgressNotice {
+  margin: 0 0 1rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--warning, #b7791f) 45%, transparent);
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--warning, #b7791f) 10%, var(--surface, #fff));
+}
+
+.legacyProgressNotice strong,
+.legacyProgressNotice span {
+  display: block;
+}
+
+.legacyProgressNotice ul {
+  margin-bottom: 0;
+}
+
+.legacyProgressNotice li button {
+  margin: 0.35rem;
+}
+
 .plannerShell .toolbarActions button:disabled {
   opacity: 0.45;
   cursor: not-allowed;

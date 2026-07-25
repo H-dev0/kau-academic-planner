@@ -203,6 +203,23 @@ CURRENT_IMPORT = {
     "catalog-master-of-science-in-hydrology-and-water-resources-management",
 }
 
+PREREQUISITE_NORMALIZATION_REMEDIATION = {
+    "catalog-computing-information-tech-bachelor-of-science-in-information-systems",
+    "catalog-computing-information-tech-bachelor-of-science-in-information-technology",
+    "catalog-earth-sciences-bachelor-general-geology-structural-geology-and-remote-sensing",
+    "catalog-earth-sciences-bachelor-of-general-geology-geo-exploration-techniques",
+    "catalog-earth-sciences-bachelor-of-geophysics",
+    "catalog-earth-sciences-bachelor-of-science-in-engineering-and-environmental-geology",
+    "catalog-earth-sciences-hydrogeology-bsc",
+    "catalog-environmental-sciences-bachelor-of-science-in-environment",
+    "catalog-human-sciences-and-design-bacheior-interior-design-and-furniture",
+    "catalog-human-sciences-and-design-bachelor-of-science-b-sc-in-family-sciences",
+    "catalog-human-sciences-and-design-bachelor-s-department-of-early-childhood-guide",
+    "catalog-med-rehabilitation-sciences-bachelor-s-degree-of-occupational-therapy",
+    "catalog-med-rehabilitation-sciences-bachelor-s-degree-of-speech-language-pathology-and-aud",
+    "catalog-science-bachelor-of-biochemistry",
+}
+
 
 CLEANUP_IMPORTS = {
     "catalog-executive-master-of-science-in-moderation-and-intellectual-security": 17,
@@ -490,7 +507,10 @@ class PilotImportDataTests(unittest.TestCase):
             for program_id in current_by_id
             if legacy_fields(current_by_id[program_id]) != original_by_id[program_id]
         }
-        self.assertEqual(changed, CURRENT_IMPORT)
+        self.assertEqual(
+            changed,
+            CURRENT_IMPORT | PREREQUISITE_NORMALIZATION_REMEDIATION,
+        )
 
     def test_environmental_science_phd_remains_catalog_only(self) -> None:
         program_id = "catalog-phds-degree-in-environmental-science"
