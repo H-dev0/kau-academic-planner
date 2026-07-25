@@ -285,6 +285,9 @@ class PilotImportDataTests(unittest.TestCase):
     def test_catalog_counts_and_selected_statuses(self) -> None:
         self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 72)
         self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 151)
+        self.assertEqual(sum(p.get("coverage_state") == "FULL_PLANNER" for p in self.catalog), 72)
+        self.assertEqual(sum(p.get("coverage_state") == "OFFICIAL_PLAN_VIEW" for p in self.catalog), 15)
+        self.assertEqual(sum(p.get("coverage_state") == "CATALOG_ONLY" for p in self.catalog), 136)
         by_id = {p["id"]: p for p in self.catalog}
         for program_id in PILOTS:
             self.assertTrue(by_id[program_id]["planner_available"])
@@ -477,10 +480,15 @@ class PilotImportDataTests(unittest.TestCase):
         original_by_id = {p["id"]: p for p in original["programs"]}
         current_by_id = {p["id"]: p for p in self.catalog}
         self.assertEqual(set(original_by_id), set(current_by_id))
+        def legacy_fields(program):
+            return {
+                key: value for key, value in program.items()
+                if key not in {"coverage_state", "official_plan_view"}
+            }
         changed = {
             program_id
             for program_id in current_by_id
-            if current_by_id[program_id] != original_by_id[program_id]
+            if legacy_fields(current_by_id[program_id]) != original_by_id[program_id]
         }
         self.assertEqual(changed, CURRENT_IMPORT)
 

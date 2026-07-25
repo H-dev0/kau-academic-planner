@@ -1,0 +1,350 @@
+{
+  "generated_at": "2026-07-25",
+  "mode": "display-only OFFICIAL_PLAN_VIEW bachelor wave",
+  "source_audit": "data/raw/kau/plan_audit/bachelor_recovery_wave_1/state.json",
+  "expected_program_count": 16,
+  "successful_program_count": 15,
+  "skipped_program_count": 1,
+  "programs": [
+    {
+      "program_id": "catalog-bachelor-of-science-in-cybersecurity",
+      "program_name_ar": "بكالوريوس العلوم في الامن السيبراني",
+      "program_name_en": "Bachelor of Science in Cybersecurity",
+      "faculty_id": "IT",
+      "visible_course_count": 42,
+      "visible_credit_sum": 127,
+      "credits_complete": true,
+      "scheduled_section_count": 10,
+      "unplaced_section_count": 0,
+      "normalization_count": 0,
+      "unresolved_requisite_codes": [
+        "CS 121",
+        "CS 351",
+        "IT 203",
+        "IT 211"
+      ],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-science-in-cybersecurity",
+        "url_en": "https://kau.edu.sa/en/programs/bachelor-of-science-in-cybersecurity",
+        "retrieved_at": "2026-07-24T19:52:39Z",
+        "sha256_ar": "9c51570e1c301bf268620e3527085ab4ff9bb1bf4a836d7e2f8e687368887b96",
+        "sha256_en": "c8c21c6ee98292ef68c08f0ed1a25008a4614573de41f32199837760691cbcb2"
+      }
+    },
+    {
+      "program_id": "catalog-bachelor-of-medical-laboratories-science",
+      "program_name_ar": "بكالوريوس علوم المختبرات الطبية",
+      "program_name_en": "Bachelor of Medical Laboratories Science",
+      "faculty_id": "RA",
+      "visible_course_count": 47,
+      "visible_credit_sum": 124,
+      "credits_complete": true,
+      "scheduled_section_count": 8,
+      "unplaced_section_count": 0,
+      "normalization_count": 0,
+      "unresolved_requisite_codes": [
+        "BIO 112",
+        "CHEM 112"
+      ],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-medical-laboratories-science",
+        "url_en": "https://kau.edu.sa/en/programs/bachelor-of-medical-laboratories-science",
+        "retrieved_at": "2026-07-24T19:52:47Z",
+        "sha256_ar": "b92403fd71ac48bd4d5fe09c7a00b23283ecc31ce262d5c47caae5916e772c3d",
+        "sha256_en": "1e9165694b352036cded028d983da30a533b13c81e0a65745ba94ddff211e98e"
+      }
+    },
+    {
+      "program_id": "catalog-political-science",
+      "program_name_ar": "بكالوريوس العلوم السياسية",
+      "program_name_en": "Political Science",
+      "faculty_id": "EA",
+      "visible_course_count": 46,
+      "visible_credit_sum": 130,
+      "credits_complete": true,
+      "scheduled_section_count": 8,
+      "unplaced_section_count": 0,
+      "normalization_count": 0,
+      "unresolved_requisite_codes": [],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/political-science",
+        "url_en": "https://kau.edu.sa/en/programs/political-science",
+        "retrieved_at": "2026-07-24T19:54:29Z",
+        "sha256_ar": "626a4f48c8263d0eb5997c0e84e092d8f99e00c752f96eca3f9955ed76b9a260",
+        "sha256_en": "99d97b3fd7df9e47d77c839457142ee0aedd04a0bea28cfba6e1393734b3a627"
+      }
+    },
+    {
+      "program_id": "catalog-bachelor-of-journalism-and-digital-media-program",
+      "program_name_ar": "برنامج بكالوريوس الصحافة والإعلام الرقمي",
+      "program_name_en": "Bachelor of Journalism and Digital Media Program",
+      "faculty_id": "CM",
+      "visible_course_count": 44,
+      "visible_credit_sum": 132,
+      "credits_complete": true,
+      "scheduled_section_count": 8,
+      "unplaced_section_count": 0,
+      "normalization_count": 0,
+      "unresolved_requisite_codes": [
+        "AVP 202",
+        "JCOM 121",
+        "JCOM 211",
+        "MRKC 213"
+      ],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-journalism-and-digital-media-program",
+        "url_en": "https://kau.edu.sa/en/programs/bachelor-of-journalism-and-digital-media-program",
+        "retrieved_at": "2026-07-24T19:52:55Z",
+        "sha256_ar": "760b0c394a2b82eceb274b3012231b905b1b82f92721cb049b6dd2de72c069d1",
+        "sha256_en": "0b669f19fcc1ecb471adc7a0a4a465b1a0e50389739bcc1c11e8558c05922e5c"
+      }
+    },
+    {
+      "program_id": "catalog-bachelor-of-marketing-communication-program",
+      "program_name_ar": "برنامج بكالوريوس الاتصال التسويقي",
+      "program_name_en": "Bachelor of Marketing Communication Program",
+      "faculty_id": "CM",
+      "visible_course_count": 44,
+      "visible_credit_sum": 125,
+      "credits_complete": true,
+      "scheduled_section_count": 8,
+      "unplaced_section_count": 0,
+      "normalization_count": 0,
+      "unresolved_requisite_codes": [
+        "MRKC 213"
+      ],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-marketing-communication-program",
+        "url_en": "https://kau.edu.sa/en/programs/bachelor-of-marketing-communication-program",
+        "retrieved_at": "2026-07-24T19:53:02Z",
+        "sha256_ar": "18fc3b88956327f2c088a687977de3d397b9005f70904c1225e0494932a9652e",
+        "sha256_en": "098efefc23ec72032c874f2caec7bf906b3b3f953476ebc9540f9b2fd6ce505b"
+      }
+    },
+    {
+      "program_id": "catalog-bachelor-of-public-relations-program",
+      "program_name_ar": "برنامج بكالوريوس العلاقات العامة",
+      "program_name_en": "Bachelor of Public Relations Program",
+      "faculty_id": "CM",
+      "visible_course_count": 44,
+      "visible_credit_sum": 130,
+      "credits_complete": true,
+      "scheduled_section_count": 8,
+      "unplaced_section_count": 0,
+      "normalization_count": 0,
+      "unresolved_requisite_codes": [
+        "JCOM 211",
+        "MRKC 213",
+        "PR 211"
+      ],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-public-relations-program",
+        "url_en": "https://kau.edu.sa/en/programs/bachelor-of-public-relations-program",
+        "retrieved_at": "2026-07-24T19:53:10Z",
+        "sha256_ar": "c831c8143210cf2b1df70121680c0e70c63644a010846dce1c291d9ab8953519",
+        "sha256_en": "dc0a4d27f398747c4f194e6dbaf5fdcf82b4bc0622c70537e358a93ae0288b47"
+      }
+    },
+    {
+      "program_id": "catalog-bachelor-of-visual-and-audio-production-program",
+      "program_name_ar": "برنامج بكالوريوس الإنتاج المرئي والمسموع",
+      "program_name_en": "Bachelor of Visual and Audio Production Program",
+      "faculty_id": "CM",
+      "visible_course_count": 44,
+      "visible_credit_sum": 132,
+      "credits_complete": true,
+      "scheduled_section_count": 8,
+      "unplaced_section_count": 0,
+      "normalization_count": 1,
+      "unresolved_requisite_codes": [
+        "MRKC 213"
+      ],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-visual-and-audio-production-program",
+        "url_en": "https://kau.edu.sa/en/programs/bachelor-of-visual-and-audio-production-program",
+        "retrieved_at": "2026-07-24T19:54:13Z",
+        "sha256_ar": "3ad765a308bddc38b08966cd9e2bdbc786df16399caf634e9592a6b5d9a3b62e",
+        "sha256_en": "90c475e9eceae19b5bfbeee51c28b70d8cd0c3e1b35482819d6e272a025dfd2b"
+      }
+    },
+    {
+      "program_id": "catalog-bachelor-of-science-in-computer-science",
+      "program_name_ar": "بكالوريوس العلوم في علوم الحاسبات",
+      "program_name_en": "Bachelor of Science in Computer Science",
+      "faculty_id": "IT",
+      "visible_course_count": 49,
+      "visible_credit_sum": 156,
+      "credits_complete": true,
+      "scheduled_section_count": 10,
+      "unplaced_section_count": 0,
+      "normalization_count": 1,
+      "unresolved_requisite_codes": [
+        "IT 352"
+      ],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-science-in-computer-science",
+        "url_en": "https://kau.edu.sa/en/programs/bachelor-of-science-in-computer-science",
+        "retrieved_at": "2026-07-24T19:54:20Z",
+        "sha256_ar": "b635f4c6624ff67a62db38ba729c4419880eb9e5bc238d5f583e250e9ecf6940",
+        "sha256_en": "df9bac57985737763c490f85bf1cce3974599a88055ccc9bbe0b8416cece770a"
+      }
+    },
+    {
+      "program_id": "catalog-architecture-and-planning-bachelor-of-landscape-architecture",
+      "program_name_ar": "بكالوريوس عمارة البيئة",
+      "program_name_en": "Bachelor of Landscape Architecture",
+      "faculty_id": "AP",
+      "visible_course_count": 64,
+      "visible_credit_sum": 163,
+      "credits_complete": true,
+      "scheduled_section_count": 10,
+      "unplaced_section_count": 1,
+      "normalization_count": 0,
+      "unresolved_requisite_codes": [
+        "LA 251"
+      ],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-landscape-architecture",
+        "url_en": "https://kau.edu.sa/en/programs/bachelor-of-landscape-architecture",
+        "retrieved_at": "2026-07-24T19:57:06Z",
+        "sha256_ar": "51f0444c3bfbe3024a1dea3f6cc344be1e52f958b57af848be04886ee6a0dd54",
+        "sha256_en": "8197065f710268a5352f4121cf3642068393346242e36cabc053303648f9f292"
+      }
+    },
+    {
+      "program_id": "catalog-bachelor-of-science-in-meteorology",
+      "program_name_ar": "بكالوريوس العلوم في الأرصاد",
+      "program_name_en": "Bachelor of Science in Meteorology",
+      "faculty_id": "FE",
+      "visible_course_count": 75,
+      "visible_credit_sum": 200,
+      "credits_complete": true,
+      "scheduled_section_count": 8,
+      "unplaced_section_count": 1,
+      "normalization_count": 29,
+      "unresolved_requisite_codes": [
+        "STAT 101"
+      ],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-science-in-meteorology",
+        "url_en": "https://kau.edu.sa/en/programs/bachelor-of-science-in-meteorology",
+        "retrieved_at": "2026-07-24T19:57:15Z",
+        "sha256_ar": "3b547f962fe1b96602c07944056cca9e296eba9efb47763b60e186ed4d935626",
+        "sha256_en": "b34a7143ae1720e9f73f988a160b90e2d3d38b2f007f9360f3399a8d0057315e"
+      }
+    },
+    {
+      "program_id": "catalog-bachelor-of-science-in-hydrology-and-water-resources-management",
+      "program_name_ar": "البكالوريوس في علوم وإدارة موارد المياه",
+      "program_name_en": "Bachelor of Science in Hydrology and Water Resources Management",
+      "faculty_id": "FE",
+      "visible_course_count": 57,
+      "visible_credit_sum": 156,
+      "credits_complete": true,
+      "scheduled_section_count": 8,
+      "unplaced_section_count": 1,
+      "normalization_count": 28,
+      "unresolved_requisite_codes": [],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/bachelor-of-science-in-hydrology-and-water-resources-management",
+        "url_en": "https://kau.edu.sa/en/programs/bachelor-of-science-in-hydrology-and-water-resources-management",
+        "retrieved_at": "2026-07-24T19:57:22Z",
+        "sha256_ar": "a7d10d194fbe9308c07ba040ac436e7add78eb31cc3bb45f758cd489a829fd09",
+        "sha256_en": "fbb10697cf2976a1a3e5dedb963585b72b6526afe99aa347800f2cdd1d1afa2f"
+      }
+    },
+    {
+      "program_id": "catalog-counseling-psychology",
+      "program_name_ar": "البكالوريوس في علم النفس الإرشادي",
+      "program_name_en": "Bachelor of Counseling Psychology",
+      "faculty_id": "AH",
+      "visible_course_count": 47,
+      "visible_credit_sum": 141,
+      "credits_complete": true,
+      "scheduled_section_count": 8,
+      "unplaced_section_count": 1,
+      "normalization_count": 25,
+      "unresolved_requisite_codes": [],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/counseling-psychology",
+        "url_en": "https://kau.edu.sa/en/programs/counseling-psychology",
+        "retrieved_at": "2026-07-24T19:58:20Z",
+        "sha256_ar": "6faea723621c071aabb2172d60754a9a4d387ee40bc91c9a101561f4f0f278ef",
+        "sha256_en": "251d81fed9a998d9751c79a68117b3d42994df4bcdff3af2ed663d22e381f3f0"
+      }
+    },
+    {
+      "program_id": "catalog-chinese-language",
+      "program_name_ar": "البكالوريوس في اللغة الصينية",
+      "program_name_en": "Bachelor of Chinese Language",
+      "faculty_id": "AH",
+      "visible_course_count": 48,
+      "visible_credit_sum": 134,
+      "credits_complete": true,
+      "scheduled_section_count": 8,
+      "unplaced_section_count": 1,
+      "normalization_count": 28,
+      "unresolved_requisite_codes": [],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/chinese-language",
+        "url_en": "https://kau.edu.sa/en/programs/chinese-language",
+        "retrieved_at": "2026-07-24T19:58:28Z",
+        "sha256_ar": "5a57753854da5d542a377cac2d4602e2410ebbac6ff7c5d694094e5bca36c4ac",
+        "sha256_en": "f4ff2cb48016857c0a8e5c39bbf55028bfa308e967a66f8cf4dbc0d87e238140"
+      }
+    },
+    {
+      "program_id": "catalog-bachelor-in-french-language-translation",
+      "program_name_ar": "البكالوريوس في اللغة الفرنسية والترجمة",
+      "program_name_en": "Bachelor in French Language & Translation",
+      "faculty_id": "AH",
+      "visible_course_count": 48,
+      "visible_credit_sum": 137,
+      "credits_complete": true,
+      "scheduled_section_count": 8,
+      "unplaced_section_count": 1,
+      "normalization_count": 91,
+      "unresolved_requisite_codes": [],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/bachelor-in-french-language-translation",
+        "url_en": "https://kau.edu.sa/en/programs/bachelor-in-french-language-translation",
+        "retrieved_at": "2026-07-24T19:58:36Z",
+        "sha256_ar": "37f864ca0036ccdd237b5fab1819228d3dcbc24ae32e01763de2e8fd6716abe1",
+        "sha256_en": "178936769afddefd1fb9cc8775b1d29b64764c1025468e555fde798fb9de1615"
+      }
+    },
+    {
+      "program_id": "catalog-human-resource-management",
+      "program_name_ar": "بكالوريوس إدارة الموارد البشرية",
+      "program_name_en": "HUMAN RESOURCE MANAGEMENT",
+      "faculty_id": "RB",
+      "visible_course_count": 64,
+      "visible_credit_sum": 191,
+      "credits_complete": true,
+      "scheduled_section_count": 8,
+      "unplaced_section_count": 1,
+      "normalization_count": 21,
+      "unresolved_requisite_codes": [],
+      "source": {
+        "url_ar": "https://kau.edu.sa/ar/programs/human-resource-management",
+        "url_en": "https://kau.edu.sa/en/programs/human-resource-management",
+        "retrieved_at": "2026-07-24T19:58:44Z",
+        "sha256_ar": "d34f006f2f693f7730d61e111442fbd6724175bac33f6731b83f131a36614320",
+        "sha256_en": "b2f9897ebc11a2a24db8b1baf5acba4242da5b073f5159595a2e8072b5447b50"
+      }
+    }
+  ],
+  "skipped": [
+    {
+      "program_id": "catalog-geography-and-geographic-information-systems",
+      "reason": "Expected 64/183; reproduced 83/240."
+    }
+  ],
+  "coverage_counts": {
+    "total": 223,
+    "FULL_PLANNER": 72,
+    "OFFICIAL_PLAN_VIEW": 15,
+    "CATALOG_ONLY": 136
+  },
+  "planner_data_modified": false
+}

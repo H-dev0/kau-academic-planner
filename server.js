@@ -101,6 +101,28 @@ function programId(program) {
   return program.id || normalize(program.program_name).toLowerCase() || "accounting";
 }
 
+function coverageState(program) {
+  if (program?.coverage_state) return program.coverage_state;
+  return program?.planner_available || program?.catalog_status === "active"
+    ? "FULL_PLANNER"
+    : "CATALOG_ONLY";
+}
+
+function isPlannerProgram(program) {
+  return coverageState(program) === "FULL_PLANNER";
+}
+
+function rejectNonPlanner(res, program) {
+  if (isPlannerProgram(program)) return false;
+  sendJson(res, 409, {
+    error: "interactive planner unavailable",
+    code: "PLANNER_UNAVAILABLE",
+    coverage_state: coverageState(program),
+    program_id: programId(program),
+  });
+  return true;
+}
+
 function requiresCommonFoundation(program) {
   return (
     program?.faculty_id === "EA"
@@ -359,6 +381,14 @@ const server = http.createServer(async (req, res) => {
           total_program_credit_hours: item.total_program_credit_hours,
           course_count: (item.courses || []).length,
           source_title: item.source_title,
+          coverage_state: coverageState(item),
+          official_plan_view_available: Boolean(item.official_plan_view),
+          official_plan_view_course_count: item.official_plan_view?.visible_course_count ?? null,
+          official_plan_view_level_count: item.official_plan_view?.sections?.filter(
+            (section) => section.placement === "scheduled",
+          ).length ?? null,
+          warning_ar: item.official_plan_view?.warning_ar,
+          warning_en: item.official_plan_view?.warning_en,
         })),
       });
       return;
@@ -401,6 +431,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === "GET" && pathname === "/api/progress") {
+      if (rejectNonPlanner(res, program)) return;
       const user = currentUser(req);
       if (!user) {
         sendJson(res, 401, { error: "login required" });
@@ -413,6 +444,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === "POST" && pathname === "/api/progress") {
+      if (rejectNonPlanner(res, program)) return;
       const user = currentUser(req);
       if (!user) {
         sendJson(res, 401, { error: "login required" });
@@ -428,6 +460,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === "POST" && pathname === "/api/plan") {
+      if (rejectNonPlanner(res, program)) return;
       const payload = await readBody(req);
       const result = planCourses(
         program,
