@@ -1,0 +1,412 @@
+{
+  "generated_at": "2026-07-25T10:30:00Z",
+  "mode": "targeted_official_source_recovery_and_safe_import",
+  "branch": "bachelor-priority-recovery-5",
+  "base_commit": "b3b4f4cf9b1427a984ce879aead672411bc2de94",
+  "starting_counts": {
+    "total_programs": 223,
+    "planner_supported": 72,
+    "catalog_only": 151
+  },
+  "scope_program_ids": [
+    "catalog-bachelor-of-science-in-cybersecurity",
+    "catalog-bachelor-of-medical-laboratories-science",
+    "catalog-bachelor-of-journalism-and-digital-media-program",
+    "catalog-bachelor-of-marketing-communication-program",
+    "catalog-bachelor-of-public-relations-program"
+  ],
+  "summary": {
+    "considered": 5,
+    "imported": 0,
+    "skipped": 5,
+    "classification_counts": {
+      "A. IMPORT_READY": 0,
+      "B. SKIPPED_MISSING_SOURCE": 0,
+      "C. SKIPPED_UNRESOLVED_DEPENDENCY": 1,
+      "D. SKIPPED_ELECTIVE_AMBIGUITY": 1,
+      "E. SKIPPED_CODE_OR_IDENTITY_CONFLICT": 3,
+      "F. SKIPPED_REQUIRES_PLANNER_CHANGE": 0,
+      "G. SKIPPED_REQUIRES_ACADEMIC_CONFIRMATION": 0
+    }
+  },
+  "raw_capture_directory": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/",
+  "raw_captures_are_git_ignored": true,
+  "source_search_findings": [
+    "The Arabic and English CIS, Applied Medical Sciences-Rabigh, and Communication and Media faculty pages were retrieved. Their visible and embedded navigation exposed regulations but no curriculum PDF, course-description table, handbook, or elective-option document for the target blockers.",
+    "The official KAU search page for JCOM 211 returned HTTP 200, but JCOM 211 occurred only in the query state and no course result was published.",
+    "Fresh bilingual Computer Science and Information Technology plans supplied authoritative identities and curriculum context for CS 121, CS 351, IT 203, and IT 211.",
+    "A fresh bilingual Rabigh Nursing plan supplied authoritative shared-faculty identities for BIO 112 and CHEM 112 and an independent ARAB 201 comparison.",
+    "A fresh bilingual Visual and Audio Production plan supplied a fourth official media-program comparison, but no missing media prerequisite identity or elective-option table.",
+    "The resolvable legacy official host fcit.kau.edu.sa timed out over both HTTP and HTTPS; no content was captured or used. Other tested faculty-host candidates did not resolve. No unofficial content was used as academic evidence."
+  ],
+  "new_source_captures": [
+    {
+      "key": "cis-faculty",
+      "language": "ar",
+      "url": "https://kau.edu.sa/faculty/ar/cis",
+      "title": "الرئيسية",
+      "retrieved_at": "2026-07-24T20:52:42Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/cis-faculty-ar.html",
+      "size_bytes": 147385,
+      "sha256": "aefafa196edb08cd06ea7bf0900b3b811e557439b8336b3105cb49f4a8a05bad",
+      "blocker_addressed": "CS 121, CS 351, IT 203, IT 211, and faculty requirements"
+    },
+    {
+      "key": "cis-faculty",
+      "language": "en",
+      "url": "https://kau.edu.sa/faculty/en/cis",
+      "title": "Home",
+      "retrieved_at": "2026-07-24T20:52:43Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/cis-faculty-en.html",
+      "size_bytes": 139028,
+      "sha256": "86589030c5d7c5689b7abbec2b50312939e60c54e0fde1c84f9722cc85eb62d2",
+      "blocker_addressed": "CS 121, CS 351, IT 203, IT 211, and faculty requirements"
+    },
+    {
+      "key": "medical-rabigh-faculty",
+      "language": "ar",
+      "url": "https://kau.edu.sa/faculty/ar/applied-medical-sciences-rabigh",
+      "title": "الرئيسية",
+      "retrieved_at": "2026-07-24T20:52:43Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/medical-rabigh-faculty-ar.html",
+      "size_bytes": 125138,
+      "sha256": "b67ffb3a28817ffb6786cc51f57255e0ebac3e2597c8aa7b30780557a99ddc22",
+      "blocker_addressed": "BIO 112, CHEM 112, ARAB 201, MLT 497, and faculty requirements"
+    },
+    {
+      "key": "medical-rabigh-faculty",
+      "language": "en",
+      "url": "https://kau.edu.sa/faculty/en/applied-medical-sciences-rabigh",
+      "title": "Home",
+      "retrieved_at": "2026-07-24T20:52:44Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/medical-rabigh-faculty-en.html",
+      "size_bytes": 117575,
+      "sha256": "c94cdd3daff3631cd6563144ecbde228a37d3afd1787f7329106bed04a775d14",
+      "blocker_addressed": "BIO 112, CHEM 112, ARAB 201, MLT 497, and faculty requirements"
+    },
+    {
+      "key": "media-faculty",
+      "language": "ar",
+      "url": "https://kau.edu.sa/faculty/ar/communication-media",
+      "title": "الرئيسية",
+      "retrieved_at": "2026-07-24T20:52:44Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/media-faculty-ar.html",
+      "size_bytes": 124896,
+      "sha256": "6c2426255b7acda551e3a797b3c7204c42d1875703af50797896b5de28628411",
+      "blocker_addressed": "JCOM, MRKC, PR, AVP, shared requirements, and electives"
+    },
+    {
+      "key": "media-faculty",
+      "language": "en",
+      "url": "https://kau.edu.sa/faculty/en/communication-media",
+      "title": "Home",
+      "retrieved_at": "2026-07-24T20:52:45Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/media-faculty-en.html",
+      "size_bytes": 117938,
+      "sha256": "b1aa6ffd03a6e0aa7cbae1f1b8ba88feb21e748aca152116102b3758121f94b7",
+      "blocker_addressed": "JCOM, MRKC, PR, AVP, shared requirements, and electives"
+    },
+    {
+      "key": "search-jcom-211",
+      "language": "en",
+      "url": "https://kau.edu.sa/en/search?search=JCOM%20211",
+      "title": "Search",
+      "retrieved_at": "2026-07-24T21:03:29Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/search-jcom-211-en.html",
+      "size_bytes": 144752,
+      "sha256": "80dbb2f7d85e6eb2907e69eaf80724f0b80704a9e71f9effed5960920a17c612",
+      "blocker_addressed": "JCOM 211 official-site search; no course result found"
+    },
+    {
+      "key": "computer-science-program",
+      "language": "en",
+      "url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-computer-science",
+      "title": "bachelor-of-science-in-computer-science",
+      "retrieved_at": "2026-07-25T10:16:08Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/computer-science-program-en.html",
+      "size_bytes": 207890,
+      "sha256": "698827f523c7e240327486fe4b45dafa80f51f9222bcc746d79719849f3efa89",
+      "blocker_addressed": "CS 121 and CS 351 identity and Computer Science context"
+    },
+    {
+      "key": "computer-science-program",
+      "language": "ar",
+      "url": "https://kau.edu.sa/ar/programs/bachelor-of-science-in-computer-science",
+      "title": "bachelor-of-science-in-computer-science",
+      "retrieved_at": "2026-07-25T10:16:09Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/computer-science-program-ar.html",
+      "size_bytes": 221982,
+      "sha256": "c57e4554a20f83032020a9941c4c9104487e7c41882842446996c98f48dc9a04",
+      "blocker_addressed": "CS 121 and CS 351 bilingual identity and Computer Science context"
+    },
+    {
+      "key": "information-technology-program",
+      "language": "en",
+      "url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-information-technology",
+      "title": "bachelor-of-science-in-information-technology",
+      "retrieved_at": "2026-07-25T10:16:09Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/information-technology-program-en.html",
+      "size_bytes": 219035,
+      "sha256": "081c9b997733e5216c10f5da13c0e1f6327c19a609a6dfe5ce288bbf533c5f80",
+      "blocker_addressed": "IT 203 and IT 211 identity and Information Technology context"
+    },
+    {
+      "key": "information-technology-program",
+      "language": "ar",
+      "url": "https://kau.edu.sa/ar/programs/bachelor-of-science-in-information-technology",
+      "title": "bachelor-of-science-in-information-technology",
+      "retrieved_at": "2026-07-25T10:16:09Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/information-technology-program-ar.html",
+      "size_bytes": 239406,
+      "sha256": "fed39b3c0146e6062cbf26216316f687ef97491c4104489b495bec2c3f978203",
+      "blocker_addressed": "IT 203 and IT 211 bilingual identity and Information Technology context"
+    },
+    {
+      "key": "rabigh-nursing-program",
+      "language": "en",
+      "url": "https://kau.edu.sa/en/programs/bachelor-of-science-in-nursing",
+      "title": "bachelor-of-science-in-nursing",
+      "retrieved_at": "2026-07-25T10:16:10Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/rabigh-nursing-program-en.html",
+      "size_bytes": 218386,
+      "sha256": "5203257c5a8e6ce02cb051050e901a32fd17ce6e658f154f331a819ffde19b86",
+      "blocker_addressed": "BIO 112, CHEM 112, and Rabigh shared-faculty context"
+    },
+    {
+      "key": "rabigh-nursing-program",
+      "language": "ar",
+      "url": "https://kau.edu.sa/ar/programs/bachelor-of-science-in-nursing",
+      "title": "bachelor-of-science-in-nursing",
+      "retrieved_at": "2026-07-25T10:16:11Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/rabigh-nursing-program-ar.html",
+      "size_bytes": 238575,
+      "sha256": "bb622a064466f7c80c55f9dce534195c49d6bf546f426d9d0a09208dd020664a",
+      "blocker_addressed": "BIO 112, CHEM 112, ARAB 201, and Rabigh shared-faculty context"
+    },
+    {
+      "key": "visual-audio-program",
+      "language": "en",
+      "url": "https://kau.edu.sa/en/programs/bachelor-of-visual-and-audio-production-program",
+      "title": "bachelor-of-visual-and-audio-production-program",
+      "retrieved_at": "2026-07-25T10:16:11Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/visual-audio-program-en.html",
+      "size_bytes": 227805,
+      "sha256": "428806d46b4447375c89541148fcccd42a0edbb3d2c420473415b61918a7556a",
+      "blocker_addressed": "JCOM, MRKC, AVP, shared media requirements, and electives"
+    },
+    {
+      "key": "visual-audio-program",
+      "language": "ar",
+      "url": "https://kau.edu.sa/ar/programs/bachelor-of-visual-and-audio-production-program",
+      "title": "bachelor-of-visual-and-audio-production-program",
+      "retrieved_at": "2026-07-25T10:16:12Z",
+      "capture_path": "data/raw/kau/plan_audit/bachelor_priority_recovery_5/visual-audio-program-ar.html",
+      "size_bytes": 245614,
+      "sha256": "3ad765a308bddc38b08966cd9e2bdbc786df16399caf634e9592a6b5d9a3b62e",
+      "blocker_addressed": "JCOM, MRKC, AVP, shared media requirements, and electives"
+    }
+  ],
+  "programs": [
+    {
+      "program_id": "catalog-bachelor-of-science-in-cybersecurity",
+      "program_name_ar": "بكالوريوس العلوم في الامن السيبراني",
+      "program_name_en": "Bachelor of Science in Cybersecurity",
+      "faculty_id": "IT",
+      "faculty_name_ar": "الحاسبات وتقنية المعلومات",
+      "faculty_name_en": "computing & information tech.",
+      "course_count": 42,
+      "level_count": 10,
+      "calculated_credits": 127,
+      "official_total_credits": null,
+      "prerequisite_reference_count": 29,
+      "resolved_supporting_identities": [
+        {"code": "CS 121", "name_ar": "رياضيات الحوسبة", "name_en": "Mathematics for Computing", "credits": 3, "placement": "Second Level", "prerequisites": ["MATH 110"], "context": "Bachelor of Science in Computer Science and Bachelor of Science in Information Technology"},
+        {"code": "CS 351", "name_ar": "هندسة البرمجيات", "name_en": "Software Engineering", "credits": 3, "placement": "Fifth Level", "prerequisites": ["CS 203"], "context": "Bachelor of Science in Computer Science"},
+        {"code": "IT 203", "name_ar": "لغات البرمجة", "name_en": "Programming Languages", "credits": 4, "placement": "Fourth Level", "prerequisites": ["CS 202"], "context": "Bachelor of Science in Information Technology"},
+        {"code": "IT 211", "name_ar": "تنظيم ومعمارية الحاسوب", "name_en": "Computer Architecture & Organization", "credits": 3, "placement": "Fourth Level", "prerequisites": ["IT 121"], "context": "Bachelor of Science in Information Technology"}
+      ],
+      "unresolved_blockers": [
+        "The Cybersecurity level rows and named requirement groups do not contain CS 121, CS 351, IT 203, or IT 211 even though later Cybersecurity courses reference them.",
+        "The supporting plans establish identities only in their own curriculum contexts; they do not establish that the four rows belong in Cybersecurity, their Cybersecurity placement, or whether their credits are included in the 127 calculated credits.",
+        "Adding the four courses would require academic interpretation and would add 13 credits without an official Cybersecurity requirement table."
+      ],
+      "electives": "Two scheduled generic elective rows and two free-course rows remain as published; no option pool is encoded because no selection table was found.",
+      "training": null,
+      "projects": [
+        {"code": "SEC 498", "name_en": "Senior Project I", "credits": 3, "placement": "Ninth Level"},
+        {"code": "SEC 499", "name_en": "Senior Project II", "credits": 3, "placement": "Tenth Level"}
+      ],
+      "classification": "C. SKIPPED_UNRESOLVED_DEPENDENCY",
+      "planner_schema_compatible_if_complete": true,
+      "imported": false,
+      "safest_action": "Keep catalog-only until an official Cybersecurity curriculum or faculty requirement table places and requires all four referenced courses."
+    },
+    {
+      "program_id": "catalog-bachelor-of-medical-laboratories-science",
+      "program_name_ar": "بكالوريوس علوم المختبرات الطبية",
+      "program_name_en": "Bachelor of Medical Laboratories Science",
+      "faculty_id": "RA",
+      "faculty_name_ar": "العلوم الطبية التطبيقية- رابغ",
+      "faculty_name_en": "Applied Medica.Sciences-rabigh",
+      "course_count": 47,
+      "level_count": 8,
+      "calculated_credits": 124,
+      "official_total_credits": null,
+      "resolved_supporting_identities": [
+        {"code": "BIO 112", "name_ar": "الاحياء العامة", "name_en": "General Biology", "credits": 3, "placement": "Level 1", "prerequisites": [], "context": "Bachelor of Science in Nursing, Applied Medical Sciences-Rabigh"},
+        {"code": "CHEM 112", "name_ar": "الكيمياء العامة", "name_en": "General Chemistry", "credits": 3, "placement": "Level 1", "prerequisites": [], "context": "Bachelor of Science in Nursing, Applied Medical Sciences-Rabigh"},
+        {"code": "ARAB 201", "name_ar": "اللغة العربية 2", "name_en": "Arabic II", "credits": 3, "placement": "Medical Laboratories Level 4", "prerequisites": ["ARAB 101"], "context": "Medical Laboratories scheduled row; Rabigh Nursing independently agrees on identity and prerequisite"}
+      ],
+      "section_reconciliation": "The scheduled ARAB 201 row controls placement. The Medical Laboratories university-requirement wording 'Arabic Language 2' and Arabic typographical variant do not add a second course; code, credits, prerequisite, and academic meaning agree with the scheduled row and Rabigh Nursing comparison.",
+      "unresolved_blockers": [
+        "MLT 497 appears at Level 8 as a 2-credit row titled Electives/مواد اختيارية. No official option codes, bilingual option names, membership table, selection count, or selection-credit rule was found.",
+        "The plural elective title and absence of an option table do not support treating MLT 497 as a verified standalone coded course."
+      ],
+      "training": null,
+      "projects": [
+        {"code": "MLT 493", "name_en": "Student Research Project", "credits": 2, "placement": "Level 7"}
+      ],
+      "classification": "D. SKIPPED_ELECTIVE_AMBIGUITY",
+      "planner_schema_compatible_if_complete": true,
+      "imported": false,
+      "safest_action": "Keep catalog-only until an official MLT elective table establishes whether MLT 497 is a real course or a group and publishes its options and selection rule."
+    },
+    {
+      "program_id": "catalog-bachelor-of-journalism-and-digital-media-program",
+      "program_name_ar": "برنامج بكالوريوس الصحافة والإعلام الرقمي",
+      "program_name_en": "Bachelor of Journalism and Digital Media Program",
+      "faculty_id": "CM",
+      "faculty_name_ar": "الاتصال والإعلام",
+      "faculty_name_en": "communications&media",
+      "course_count": 44,
+      "level_count": 8,
+      "calculated_credits": 132,
+      "official_total_credits": null,
+      "missing_dependencies": [
+        {"code": "AVP 202", "referenced_by": ["JCOM 321"]},
+        {"code": "JCOM 121", "referenced_by": ["JCOM 342"]},
+        {"code": "JCOM 211", "referenced_by": ["JCOM 343"]},
+        {"code": "MRKC 213", "referenced_by": ["JCOM 311"]}
+      ],
+      "elective_and_free_placeholders": [
+        {"raw_code": "xxx", "kind": "elective", "placement": "Level 4", "credits": 3},
+        {"raw_code": "x xx", "kind": "free", "placement": "Level 4", "credits": 3},
+        {"raw_code": "xx x", "kind": "elective", "placement": "Level 6", "credits": 3},
+        {"raw_code": "x.xx", "kind": "free", "placement": "Level 6", "credits": 3}
+      ],
+      "unresolved_blockers": [
+        "No authoritative course row for AVP 202, JCOM 121, JCOM 211, or MRKC 213 was found in the target plan, faculty pages, official KAU search result, or Visual and Audio Production comparison.",
+        "The four placeholders normalize to colliding XXX-like identities and no official option membership or selection rule was found."
+      ],
+      "training": {"code": "JCOM 446", "name_en": "Practical Training", "credits": 6, "placement": "Level 8"},
+      "projects": [{"code": "JCOM 447", "name_en": "Graduation Project", "credits": 4, "placement": "Level 8"}],
+      "classification": "E. SKIPPED_CODE_OR_IDENTITY_CONFLICT",
+      "planner_schema_compatible_if_complete": true,
+      "imported": false,
+      "safest_action": "Keep catalog-only until official media course and elective tables resolve all four dependencies and all four placeholders."
+    },
+    {
+      "program_id": "catalog-bachelor-of-marketing-communication-program",
+      "program_name_ar": "برنامج بكالوريوس الاتصال التسويقي",
+      "program_name_en": "Bachelor of Marketing Communication Program",
+      "faculty_id": "CM",
+      "faculty_name_ar": "الاتصال والإعلام",
+      "faculty_name_en": "communications&media",
+      "course_count": 44,
+      "level_count": 8,
+      "calculated_credits": 125,
+      "official_total_credits": null,
+      "missing_dependencies": [{"code": "MRKC 213", "referenced_by": ["JCOM 311"]}],
+      "elective_and_free_placeholders": [
+        {"raw_code": "xxx", "kind": "elective", "placement": "Level 4", "credits": 3},
+        {"raw_code": "x xx", "kind": "free", "placement": "Level 4", "credits": 3},
+        {"raw_code": "xx x", "kind": "elective", "placement": "Level 6", "credits": 3},
+        {"raw_code": "x.xx", "kind": "free", "placement": "Level 6", "credits": 3}
+      ],
+      "zero_credit_rows": [
+        {"code": "MRKC 421", "name_ar": "الإيسام", "name_en": "E-Marketing", "credits": 0, "placement": "Level 7"},
+        {"code": "MRKC 435", "name_ar": "مشروع التخرج", "name_en": "Graduation Project", "credits": 0, "placement": "Level 8"}
+      ],
+      "unresolved_blockers": [
+        "No authoritative course row for MRKC 213 was found in any compared official media plan.",
+        "The four placeholders normalize to colliding XXX-like identities and no official option membership or selection rule was found.",
+        "The two zero-credit rows are explicit and would be preserved exactly if the remaining blockers were resolved; no credit reinterpretation was made."
+      ],
+      "training": {"code": "MRKC 434", "name_en": "Cooperative Training", "credits": 6, "placement": "Level 8"},
+      "projects": [{"code": "MRKC 435", "name_en": "Graduation Project", "credits": 0, "placement": "Level 8"}],
+      "classification": "E. SKIPPED_CODE_OR_IDENTITY_CONFLICT",
+      "planner_schema_compatible_if_complete": true,
+      "imported": false,
+      "safest_action": "Keep catalog-only until official MRKC course and elective tables resolve the missing prerequisite and four placeholders."
+    },
+    {
+      "program_id": "catalog-bachelor-of-public-relations-program",
+      "program_name_ar": "برنامج بكالوريوس العلاقات العامة",
+      "program_name_en": "Bachelor of Public Relations Program",
+      "faculty_id": "CM",
+      "faculty_name_ar": "الاتصال والإعلام",
+      "faculty_name_en": "communications&media",
+      "course_count": 44,
+      "level_count": 8,
+      "calculated_credits": 130,
+      "official_total_credits": null,
+      "missing_dependencies": [
+        {"code": "JCOM 211", "referenced_by": ["PR 331"]},
+        {"code": "MRKC 213", "referenced_by": ["JCOM 311", "PR 432"]},
+        {"code": "PR 211", "referenced_by": ["PR 322"]}
+      ],
+      "elective_and_free_placeholders": [
+        {"raw_code": "xxx", "kind": "elective", "placement": "Level 4", "credits": 3},
+        {"raw_code": "x xx", "kind": "free", "placement": "Level 4", "credits": 3},
+        {"raw_code": "x x x", "kind": "elective", "placement": "Level 6", "credits": 3},
+        {"raw_code": "x.xx", "kind": "free", "placement": "Level 6", "credits": 3}
+      ],
+      "zero_credit_rows": [{"code": "PR 327", "name_ar": "العلاقات العامة في الأزمات", "name_en": "Public Relations in Crisis Management", "credits": 0, "placement": "Level 6"}],
+      "unresolved_blockers": [
+        "No authoritative course row for JCOM 211, MRKC 213, or PR 211 was found in any compared official media plan.",
+        "The four placeholders normalize to colliding XXX-like identities and no official option membership or selection rule was found.",
+        "PR 327 is explicitly zero-credit and would be preserved exactly if the remaining blockers were resolved."
+      ],
+      "training": {"code": "PR 435", "name_en": "Cooperative Training", "credits": 6, "placement": "Level 8"},
+      "projects": [{"code": "PR 436", "name_en": "Graduation Project", "credits": 5, "placement": "Level 8"}],
+      "classification": "E. SKIPPED_CODE_OR_IDENTITY_CONFLICT",
+      "planner_schema_compatible_if_complete": true,
+      "imported": false,
+      "safest_action": "Keep catalog-only until official JCOM, MRKC, PR, and elective tables resolve all dependencies and placeholders."
+    }
+  ],
+  "media_cross_program_reconciliation": {
+    "program_contexts": [
+      "Bachelor of Journalism and Digital Media Program",
+      "Bachelor of Marketing Communication Program",
+      "Bachelor of Public Relations Program",
+      "Bachelor of Visual and Audio Production Program"
+    ],
+    "confirmed_equivalent_shared_rows": [
+      "ARAB 101", "ARAB 201", "ISLS 101", "ISLS 201", "ISLS 301", "ISLS 401",
+      "AVP 103", "AVP 108", "AVP 212", "AVP 214",
+      "JCOM 105", "JCOM 107", "JCOM 213", "JCOM 311", "JCOM 313",
+      "MRKC 215", "MRKC 312", "MRKC 410", "PR 104", "PR 109", "PR 216", "PR 219"
+    ],
+    "equivalence_basis": "Across all four bilingual official plans, these scheduled rows agree on normalized code, Arabic and English title, credits, and prerequisite notation. JCOM 105 is duplicated in one Visual and Audio supporting section but has the same identity and is not counted twice.",
+    "unresolved_shared_codes": ["AVP 202", "JCOM 121", "JCOM 211", "MRKC 213", "PR 211"],
+    "unresolved_reason": "The codes appear only as requisite references in the scoped plans and have no authoritative course row in any of the four compared media curricula.",
+    "elective_result": "Each scoped media plan publishes four scheduled 3-credit elective/free placeholders, but no plan publishes option codes, bilingual option names, group membership, selection count, or selection-credit rules. Similar placeholder shape is not evidence of shared option membership.",
+    "curriculum_version_result": "The retrieved pages publish no explicit curriculum version or effective date, so matching rows were accepted only where all available academic fields agree; missing-code identities were not transferred between programs."
+  },
+  "imported_program_ids": [],
+  "skipped_program_ids": [
+    "catalog-bachelor-of-science-in-cybersecurity",
+    "catalog-bachelor-of-medical-laboratories-science",
+    "catalog-bachelor-of-journalism-and-digital-media-program",
+    "catalog-bachelor-of-marketing-communication-program",
+    "catalog-bachelor-of-public-relations-program"
+  ],
+  "final_counts": {
+    "total_programs": 223,
+    "planner_supported": 72,
+    "catalog_only": 151
+  },
+  "production_data_modified": false,
+  "planner_or_application_logic_modified": false
+}

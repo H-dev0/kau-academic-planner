@@ -718,5 +718,88 @@ class BachelorRecoveryWave1Tests(unittest.TestCase):
                 self.assertNotIn(item["program_id"], self.planner)
 
 
+BACHELOR_PRIORITY_RECOVERY_5_SCOPE = {
+    "catalog-bachelor-of-science-in-cybersecurity",
+    "catalog-bachelor-of-medical-laboratories-science",
+    "catalog-bachelor-of-journalism-and-digital-media-program",
+    "catalog-bachelor-of-marketing-communication-program",
+    "catalog-bachelor-of-public-relations-program",
+}
+
+
+class BachelorPriorityRecovery5Tests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.report = load("reports/plan_extraction/bachelor_priority_recovery_5.json")
+        cls.catalog = {p["id"]: p for p in load("web/data/faculty_catalog.json")["programs"]}
+        cls.planner = {p["id"]: p for p in load("web/data/additional_programs.json")["programs"]}
+
+    def test_scope_classifications_and_capture_metadata(self) -> None:
+        programs = {item["program_id"]: item for item in self.report["programs"]}
+        self.assertEqual(set(self.report["scope_program_ids"]), BACHELOR_PRIORITY_RECOVERY_5_SCOPE)
+        self.assertEqual(set(programs), BACHELOR_PRIORITY_RECOVERY_5_SCOPE)
+        self.assertEqual(self.report["summary"]["classification_counts"], {
+            "A. IMPORT_READY": 0,
+            "B. SKIPPED_MISSING_SOURCE": 0,
+            "C. SKIPPED_UNRESOLVED_DEPENDENCY": 1,
+            "D. SKIPPED_ELECTIVE_AMBIGUITY": 1,
+            "E. SKIPPED_CODE_OR_IDENTITY_CONFLICT": 3,
+            "F. SKIPPED_REQUIRES_PLANNER_CHANGE": 0,
+            "G. SKIPPED_REQUIRES_ACADEMIC_CONFIRMATION": 0,
+        })
+        self.assertEqual(len(self.report["new_source_captures"]), 15)
+        for capture in self.report["new_source_captures"]:
+            with self.subTest(capture=capture["capture_path"]):
+                self.assertRegex(capture["sha256"], r"^[0-9a-f]{64}$")
+                self.assertGreater(capture["size_bytes"], 0)
+                self.assertIn("kau.edu.sa", capture["url"])
+                self.assertTrue(capture["capture_path"].startswith(
+                    "data/raw/kau/plan_audit/bachelor_priority_recovery_5/"
+                ))
+
+    def test_all_five_remain_catalog_only_and_data_is_unchanged(self) -> None:
+        original_catalog = json.loads(subprocess.check_output(
+            ["git", "show", "b3b4f4c:web/data/faculty_catalog.json"], cwd=ROOT, text=True,
+        ))
+        original_planner = json.loads(subprocess.check_output(
+            ["git", "show", "b3b4f4c:web/data/additional_programs.json"], cwd=ROOT, text=True,
+        ))
+        self.assertEqual(load("web/data/faculty_catalog.json"), original_catalog)
+        self.assertEqual(load("web/data/additional_programs.json"), original_planner)
+        for program_id in BACHELOR_PRIORITY_RECOVERY_5_SCOPE:
+            with self.subTest(program_id=program_id):
+                self.assertNotIn(program_id, self.planner)
+                self.assertFalse(self.catalog[program_id]["planner_available"])
+                self.assertIsNone(self.catalog[program_id]["planner_data_key"])
+                self.assertEqual(self.catalog[program_id]["catalog_status"], "catalog-only")
+
+    def test_recovery_and_media_reconciliation_remain_non_inferential(self) -> None:
+        programs = {item["program_id"]: item for item in self.report["programs"]}
+        cybersecurity = programs["catalog-bachelor-of-science-in-cybersecurity"]
+        self.assertEqual(
+            {course["code"] for course in cybersecurity["resolved_supporting_identities"]},
+            {"CS 121", "CS 351", "IT 203", "IT 211"},
+        )
+        self.assertEqual(cybersecurity["classification"], "C. SKIPPED_UNRESOLVED_DEPENDENCY")
+        medical = programs["catalog-bachelor-of-medical-laboratories-science"]
+        self.assertEqual(
+            {course["code"] for course in medical["resolved_supporting_identities"]},
+            {"BIO 112", "CHEM 112", "ARAB 201"},
+        )
+        self.assertEqual(medical["classification"], "D. SKIPPED_ELECTIVE_AMBIGUITY")
+        self.assertIn("MLT 497", " ".join(medical["unresolved_blockers"]))
+        reconciliation = self.report["media_cross_program_reconciliation"]
+        self.assertEqual(set(reconciliation["unresolved_shared_codes"]), {
+            "AVP 202", "JCOM 121", "JCOM 211", "MRKC 213", "PR 211",
+        })
+        for program_id in BACHELOR_PRIORITY_RECOVERY_5_SCOPE - {
+            "catalog-bachelor-of-science-in-cybersecurity",
+            "catalog-bachelor-of-medical-laboratories-science",
+        }:
+            self.assertEqual(programs[program_id]["classification"], "E. SKIPPED_CODE_OR_IDENTITY_CONFLICT")
+            self.assertEqual(len(programs[program_id]["elective_and_free_placeholders"]), 4)
+            self.assertNotIn(program_id, self.planner)
+
+
 if __name__ == "__main__":
     unittest.main()
