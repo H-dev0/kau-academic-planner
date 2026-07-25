@@ -12,6 +12,7 @@ const state = {
   statusFilter: "all",
   statusView: "available",
   collapsedLevels: new Set(),
+  progressMigration: null,
 };
 
 const courseChecklist = document.querySelector("#courseChecklist");
@@ -49,6 +50,11 @@ const blockedList = document.querySelector("#blockedList");
 const optionalList = document.querySelector("#optionalList");
 const plannerShell = document.querySelector("#planner");
 const plannerWorkspace = document.querySelector("#plannerWorkspace");
+const officialPlanView = document.querySelector("#officialPlanView");
+const toolbarActions = document.querySelector(".toolbarActions");
+const privacyNotice = document.querySelector(".privacyNotice");
+const legacyProgressNotice = document.querySelector("#legacyProgressNotice");
+const legacyProgressCandidates = document.querySelector("#legacyProgressCandidates");
 const plannerOnboarding = document.querySelector("#plannerOnboarding");
 const plannerOverviewContent = document.querySelector("#plannerOverviewContent");
 const plannerSubtitle = document.querySelector("#plannerSubtitle");
@@ -174,6 +180,9 @@ const dynamicText = {
     noPrograms: "لا توجد برامج",
     noProgramsHint: "هذه الكلية موجودة في قائمة الجامعة الرسمية، لكن لا توجد برامج بكالوريوس محملة لها داخل الأداة حاليًا.",
     catalogOnly: "فهرس فقط",
+    fullPlannerCoverage: "المخطط التفاعلي متاح",
+    catalogCoverage: "فهرس البرنامج فقط",
+    officialPlanView: "عرض الخطة الرسمية",
     studyPlanNeeded: "الخطة الدراسية مطلوبة",
     loadedCourses: "مقرر محمل",
     catalogSuffix: "فهرس البرنامج",
@@ -212,6 +221,9 @@ const dynamicText = {
     noPrograms: "No programs found",
     noProgramsHint: "This faculty appears in the official university list, but no bachelor programs are loaded in this tool yet.",
     catalogOnly: "Catalog only",
+    fullPlannerCoverage: "Interactive planner available",
+    catalogCoverage: "Catalog only",
+    officialPlanView: "Official plan view",
     studyPlanNeeded: "study plan needed",
     loadedCourses: "loaded courses",
     catalogSuffix: "catalog only",
@@ -363,9 +375,14 @@ function applyMicrosoftLoginState() {
 }
 
 function normalize(code) {
-  return String(code || "")
-    .toUpperCase()
-    .replace(/[^A-Z0-9]/g, "");
+  const value = String(code || "")
+    .normalize("NFKC")
+    .toUpperCase();
+  return /[A-Z]/.test(value)
+    ? value.replace(/[^A-Z0-9]/g, "")
+    : value
+      .replace(/[٠-٩]/g, (digit) => String("٠١٢٣٤٥٦٧٨٩".indexOf(digit)))
+      .replace(/[^\p{L}\p{N}]/gu, "");
 }
 
 function courseCode(course) {
@@ -482,12 +499,38 @@ function localProgressKey(major = state.major) {
 }
 
 function localProgressPayload() {
-  return {
+  const payload = {
     ...electiveGroups.progressPayload(completedCodes(), state.electiveSelections),
     saved_at: new Date().toISOString(),
     major: state.major,
     faculty: state.faculty,
     completed_codes: completedCodes(),
+  };
+  if (state.progressMigration) {
+    payload[progressMigration.migrationField] = state.progressMigration;
+  }
+  return payload;
+}
+
+function validatePlannerProgressPayload(payload) {
+  const validated = electiveGroups.validateProgressPayload(state.program, payload, true);
+  if (!validated.ok) return validated;
+
+  const known = new Set((state.program.courses || []).map(courseCode));
+  const completed = [];
+  const errors = [];
+  for (const rawCode of payload.completed_codes || []) {
+    const code = normalize(rawCode);
+    if (!known.has(code)) errors.push(`unknown course code: ${rawCode}`);
+    else if (!completed.includes(code)) completed.push(code);
+  }
+  return {
+    ok: errors.length === 0,
+    errors,
+    state: {
+      completed_codes: completed,
+      elective_selections: validated.state.elective_selections,
+    },
   };
 }
 
@@ -504,6 +547,9 @@ async function saveProgress(showMessage = false) {
 function setCompleted(code, checked) {
   if (checked) state.selected.add(code);
   else state.selected.delete(code);
+  if (checked && state.progressMigration) {
+    state.progressMigration = progressMigration.reconfirmCourse(state.progressMigration, code);
+  }
   render();
   saveProgress();
 }
@@ -675,7 +721,9 @@ function setupMajorSelect() {
     const shortName = shortProgramName(localizedProgramName(program));
     const degree = localizedDegreeLevel(program);
     const baseLabel = degree ? shortName + " — " + degree : shortName;
-    const unavailableLabel = currentLanguageSafe() === "en" ? "Plan not added" : "الخطة غير مضافة";
+    const unavailableLabel = isOfficialPlanViewProgram(program)
+      ? textFor("officialPlanView")
+      : textFor("catalogCoverage");
     option.textContent = program.catalog_status === "catalog-only" ? baseLabel + " — " + unavailableLabel : baseLabel;
     majorSelect.append(option);
   }
@@ -689,6 +737,10 @@ function isNoSelection() {
 
 function isCatalogOnly() {
   return state.program && state.program.catalog_status === "catalog-only";
+}
+
+function isOfficialPlanViewProgram(program = state.program) {
+  return program?.coverage_state === "OFFICIAL_PLAN_VIEW" && Boolean(program.official_plan_view);
 }
 
 function isNoPrograms() {
@@ -1505,6 +1557,169 @@ function renderList(target, items, emptyText, kind) {
   target.append(fragment);
 }
 
+function officialPlanText(key) {
+  const en = currentLanguageSafe() === "en";
+  const labels = {
+    coverage: en ? "Official plan view" : "عرض الخطة الرسمية",
+    rows: en ? "displayed courses" : "مقررات معروضة",
+    credits: en ? "visible credits" : "ساعات ظاهرة",
+    creditsNote: en ? "Visible sum; not an official degree total" : "مجموع ظاهر، وليس إجماليًا رسميًا للدرجة",
+    unplaced: en ? "Unplaced requirements" : "متطلبات غير موزعة",
+    prerequisites: en ? "Published requisite text" : "نص المتطلبات المنشور",
+    missingCredits: en ? "Credits not published" : "الساعات غير منشورة",
+    zeroCredits: en ? "Zero-credit course" : "مقرر بلا ساعات",
+    placeholder: en ? "Published placeholder" : "رمز مؤقت منشور",
+    unresolved: en ? "Unresolved reference" : "مرجع متطلب غير محسوم",
+    training: en ? "Training" : "تدريب",
+    project: en ? "Project" : "مشروع",
+    practicum: en ? "Practicum" : "تطبيق عملي",
+    cooperative_training: en ? "Cooperative training" : "تدريب تعاوني",
+    sourceAr: en ? "Official Arabic source" : "المصدر العربي الرسمي",
+    sourceEn: en ? "Official English source" : "المصدر الإنجليزي الرسمي",
+    retrieved: en ? "Retrieved" : "تاريخ الاسترجاع",
+  };
+  return labels[key] || key;
+}
+
+function renderOfficialPlanView() {
+  if (!officialPlanView) return;
+  officialPlanView.replaceChildren();
+  const view = state.program?.official_plan_view;
+  if (!isOfficialPlanViewProgram() || !view) {
+    officialPlanView.hidden = true;
+    return;
+  }
+  const language = currentLanguageSafe();
+  const banner = document.createElement("div");
+  banner.className = "officialPlanBanner";
+  const badge = document.createElement("strong");
+  badge.className = "coverageBadge";
+  badge.textContent = officialPlanText("coverage");
+  const warning = document.createElement("p");
+  warning.textContent = view[`warning_${language}`] || view.warning_en || view.warning_ar;
+  banner.append(badge, warning);
+  if (view[`program_warning_${language}`]) {
+    const detail = document.createElement("p");
+    detail.className = "officialPlanProgramWarning";
+    detail.textContent = view[`program_warning_${language}`];
+    banner.append(detail);
+  }
+
+  const summary = document.createElement("div");
+  summary.className = "officialPlanSummary";
+  const rowSummary = document.createElement("strong");
+  rowSummary.textContent = `${view.visible_course_count} ${officialPlanText("rows")}`;
+  const creditSummary = document.createElement("span");
+  creditSummary.textContent = `${view.visible_credit_sum} ${officialPlanText("credits")} — ${officialPlanText("creditsNote")}`;
+  summary.append(rowSummary, creditSummary);
+
+  const sections = document.createElement("div");
+  sections.className = "officialPlanSections";
+  for (const section of view.sections || []) {
+    const block = document.createElement("section");
+    block.className = `officialPlanSection ${section.placement === "unplaced" ? "unplaced" : "scheduled"}`;
+    const heading = document.createElement("h3");
+    heading.textContent = section.placement === "unplaced"
+      ? `${officialPlanText("unplaced")} — ${section[`title_${language}`] || section.title_en}`
+      : section[`title_${language}`] || section.title_en;
+    block.append(heading);
+    const rows = document.createElement("div");
+    rows.className = "officialPlanRows";
+    for (const course of section.rows || []) {
+      const card = document.createElement("article");
+      card.className = "officialPlanCourse";
+      const identity = document.createElement("div");
+      identity.className = "officialPlanIdentity";
+      const code = document.createElement("strong");
+      code.className = "code";
+      code.textContent = course.display_course_code || course.raw_course_code || "—";
+      const names = document.createElement("div");
+      names.className = "officialPlanNames";
+      const primary = document.createElement("span");
+      primary.textContent = course[`course_name_${language}`] || course.course_name_en || course.course_name_ar || "—";
+      const secondary = document.createElement("small");
+      secondary.textContent = course[`course_name_${language === "en" ? "ar" : "en"}`] || "";
+      names.append(primary, secondary);
+      identity.append(code, names);
+      const credits = document.createElement("span");
+      credits.className = "officialPlanCredits";
+      credits.textContent = course.credits === null ? officialPlanText("missingCredits") : String(course.credits);
+      card.append(identity, credits);
+      const flags = document.createElement("div");
+      flags.className = "officialPlanFlags";
+      for (const flag of ["placeholder", "unresolved", "training", "project", "practicum", "cooperative_training"]) {
+        const dataFlag = flag === "unresolved" ? "unresolved_requisite" : flag;
+        if (!course.flags?.[dataFlag]) continue;
+        const chip = document.createElement("span");
+        chip.textContent = officialPlanText(flag);
+        flags.append(chip);
+      }
+      if (course.flags?.zero_credit) {
+        const chip = document.createElement("span");
+        chip.textContent = officialPlanText("zeroCredits");
+        flags.append(chip);
+      }
+      if (flags.childElementCount) card.append(flags);
+      if (course.raw_prerequisite_corequisite_text) {
+        const requisite = document.createElement("p");
+        requisite.className = "officialPlanRequisite";
+        requisite.textContent = `${officialPlanText("prerequisites")}: ${course.raw_prerequisite_corequisite_text}`;
+        card.append(requisite);
+      }
+      rows.append(card);
+    }
+    block.append(rows);
+    sections.append(block);
+  }
+
+  const provenance = document.createElement("footer");
+  provenance.className = "officialPlanProvenance";
+  for (const [suffix, label] of [["ar", officialPlanText("sourceAr")], ["en", officialPlanText("sourceEn")]]) {
+    if (!view.source?.[`url_${suffix}`]) continue;
+    const link = document.createElement("a");
+    link.href = view.source[`url_${suffix}`];
+    link.target = "_blank";
+    link.rel = "noreferrer";
+    link.textContent = label;
+    provenance.append(link);
+  }
+  const retrieved = document.createElement("span");
+  retrieved.textContent = `${officialPlanText("retrieved")}: ${view.source?.retrieved_at || "—"}`;
+  provenance.append(retrieved);
+  officialPlanView.append(banner, summary, sections, provenance);
+  officialPlanView.hidden = false;
+}
+
+function renderLegacyProgressNotice() {
+  if (!legacyProgressNotice || !legacyProgressCandidates) return;
+  const unresolved = (state.progressMigration?.ambiguous_legacy_values || [])
+    .filter((entry) => !entry.resolution);
+  const visible = !isOfficialPlanViewProgram()
+    && state.progressMigration?.notice_pending === true
+    && unresolved.length > 0;
+  legacyProgressNotice.hidden = !visible;
+  legacyProgressCandidates.replaceChildren();
+  if (!visible) return;
+
+  for (const entry of unresolved) {
+    const item = document.createElement("li");
+    const legacyLabel = document.createElement("span");
+    legacyLabel.textContent = `${entry.legacy_value}: `;
+    item.append(legacyLabel);
+    for (const candidate of entry.candidates || []) {
+      const name = candidate.official_course_name
+        ? ` — ${candidate.official_course_name}`
+        : "";
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = `${candidate.course_code}${name}`;
+      button.addEventListener("click", () => setCompleted(candidate.current_identity, true));
+      item.append(button);
+    }
+    legacyProgressCandidates.append(item);
+  }
+}
+
 function render() {
   const plan = buildPlan();
   const total = (state.program.courses || []).length;
@@ -1515,6 +1730,7 @@ function render() {
   const text = plannerText();
   const totalCreditDisplay = creditDisplay.programCreditDisplay(state.program, currentLanguageSafe());
   const hasProgram = !isNoSelection() && !isNoPrograms();
+  const officialView = isOfficialPlanViewProgram();
 
   const titleName = shortProgramName(localizedProgramName(state.program)) || textFor("chooseMajor");
   if (isNoSelection()) {
@@ -1533,7 +1749,7 @@ function render() {
   if (plannerOnboarding) plannerOnboarding.hidden = hasProgram;
   if (plannerOverviewContent) plannerOverviewContent.hidden = !hasProgram || isCatalogOnly();
   if (plannerWorkspace) {
-    plannerWorkspace.hidden = !hasProgram;
+    plannerWorkspace.hidden = !hasProgram || officialView;
     plannerWorkspace.style.gridTemplateColumns = isCatalogOnly() ? "minmax(0, 1fr)" : "";
   }
   const catalogOnly = isCatalogOnly();
@@ -1548,17 +1764,25 @@ function render() {
   if (filterResultSummary) filterResultSummary.hidden = catalogOnly;
   if (courseCatalogSummary) courseCatalogSummary.hidden = catalogOnly;
   if (clearButton) clearButton.hidden = catalogOnly;
+  if (toolbarActions) toolbarActions.hidden = catalogOnly;
+  if (privacyNotice) privacyNotice.hidden = catalogOnly;
+  renderLegacyProgressNotice();
+  renderOfficialPlanView();
 
   if (plannerSubtitle) {
     plannerSubtitle.textContent = isNoSelection()
       ? text.defaultSubtitle
       : isCatalogOnly()
-        ? text.catalogSubtitle
+        ? officialView
+          ? (state.program.official_plan_view?.[`warning_${currentLanguageSafe()}`] || text.catalogSubtitle)
+          : text.catalogSubtitle
         : text.selectedSubtitle;
   }
   if (plannerHeaderMeta) plannerHeaderMeta.hidden = !hasProgram;
   if (plannerFacultyName) plannerFacultyName.textContent = currentFacultyName() || "--";
-  if (plannerCourseMeta) plannerCourseMeta.textContent = isCatalogOnly() ? (currentLanguageSafe() === "en" ? "Plan not added" : "الخطة غير مضافة") : formatCourseCount(total);
+  if (plannerCourseMeta) plannerCourseMeta.textContent = officialView
+    ? `${state.program.official_plan_view.visible_course_count} ${officialPlanText("rows")}`
+    : isCatalogOnly() ? (currentLanguageSafe() === "en" ? "Plan not added" : "الخطة غير مضافة") : formatCourseCount(total);
   if (plannerCreditMeta) plannerCreditMeta.textContent = isCatalogOnly()
     ? localizedDegreeLevel(state.program)
     : totalCreditDisplay.value === text.unavailable
@@ -1607,8 +1831,10 @@ function render() {
     : isNoPrograms()
       ? textFor("noPrograms")
       : isCatalogOnly()
-      ? textFor("catalogOnly") + " - " + localizedCatalogNote(state.program)
-      : String((state.program.courses || []).length) + " " + textFor("loadedCourses");
+      ? officialView
+        ? textFor("officialPlanView")
+        : textFor("catalogCoverage") + " - " + localizedCatalogNote(state.program)
+      : textFor("fullPlannerCoverage") + " - " + String((state.program.courses || []).length) + " " + textFor("loadedCourses");
 
   if (filterAllCount) filterAllCount.textContent = total;
   if (filterCompletedCount) filterCompletedCount.textContent = plan.completed.length;
@@ -1692,6 +1918,7 @@ async function chooseMajor(majorId) {
   state.program = majorId ? state.programs.get(state.major) : noSelectionProgram();
   state.selected.clear();
   state.electiveSelections = {};
+  state.progressMigration = null;
   state.search = "";
   state.level = "all";
   state.statusFilter = "all";
@@ -1747,6 +1974,7 @@ resetProgressButton.addEventListener("click", () => {
   localStorage.removeItem(localProgressKey());
   state.selected.clear();
   state.electiveSelections = {};
+  state.progressMigration = null;
   render();
   saveStatus.textContent = textFor("progressReset");
 });
@@ -1765,11 +1993,17 @@ importInput.addEventListener("change", async () => {
       : Array.isArray(payload.completed)
         ? payload.completed
         : [];
-    const candidate = { ...payload, completed_codes: importedCodes };
-    const validated = electiveGroups.validateProgressPayload(state.program, candidate, true);
+    const imported = { ...payload, completed_codes: importedCodes };
+    const candidate = progressMigration.migrateProgress(
+      state.major,
+      state.program.courses || [],
+      imported,
+    ).progress;
+    const validated = validatePlannerProgressPayload(candidate);
     if (!validated.ok) throw new Error(validated.errors.join("; "));
     state.selected = new Set(validated.state.completed_codes);
     state.electiveSelections = validated.state.elective_selections;
+    state.progressMigration = candidate[progressMigration.migrationField] || null;
     await saveProgress(true);
     render();
     saveStatus.textContent = textFor("importSuccess").replace("{count}", state.selected.size);
@@ -1787,16 +2021,28 @@ async function loadProgress() {
     if (!raw) {
       state.selected = new Set();
       state.electiveSelections = {};
+      state.progressMigration = null;
       return;
     }
-    const progress = JSON.parse(raw);
-    const validated = electiveGroups.validateProgressPayload(state.program, progress, true);
+    const savedProgress = JSON.parse(raw);
+    const migrated = progressMigration.migrateProgress(
+      state.major,
+      state.program.courses || [],
+      savedProgress,
+    );
+    const progress = migrated.progress;
+    if (migrated.changed) {
+      localStorage.setItem(localProgressKey(), JSON.stringify(progress));
+    }
+    const validated = validatePlannerProgressPayload(progress);
     if (!validated.ok) throw new Error(validated.errors.join("; "));
     state.selected = new Set(validated.state.completed_codes);
     state.electiveSelections = validated.state.elective_selections;
+    state.progressMigration = progress[progressMigration.migrationField] || null;
   } catch {
     state.selected = new Set();
     state.electiveSelections = {};
+    state.progressMigration = null;
     saveStatus.textContent = textFor("progressReadFailed");
   }
 }
@@ -1807,7 +2053,10 @@ async function start() {
     const registry = await api("/api/programs");
     state.faculties = registry.faculties || [];
     for (const summary of registry.programs || []) {
-      if (summary.catalog_status === "catalog-only") {
+      if (summary.official_plan_view_available) {
+        const program = await api(`/api/program?major=${encodeURIComponent(summary.id)}`);
+        state.programs.set(summary.id, { ...summary, ...program, courses: [] });
+      } else if (summary.catalog_status === "catalog-only") {
         state.programs.set(summary.id, { ...summary, courses: [] });
       } else {
         const program = await api(`/api/program?major=${encodeURIComponent(summary.id)}`);

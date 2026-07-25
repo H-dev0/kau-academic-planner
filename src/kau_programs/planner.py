@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 from dataclasses import asdict
 from pathlib import Path
 
@@ -10,7 +9,15 @@ from .schema import Course, ElectiveGroup, Program
 
 
 def normalize_course_code(code: str) -> str:
-    return re.sub(r"[^A-Z0-9]", "", code.upper())
+    value = code.upper()
+    if any("A" <= character <= "Z" for character in value):
+        return "".join(
+            character
+            for character in value
+            if "A" <= character <= "Z" or "0" <= character <= "9"
+        )
+    value = value.translate(str.maketrans("٠١٢٣٤٥٦٧٨٩", "0123456789"))
+    return "".join(character for character in value if character.isalnum())
 
 
 def _course_summary(course: Course) -> dict:

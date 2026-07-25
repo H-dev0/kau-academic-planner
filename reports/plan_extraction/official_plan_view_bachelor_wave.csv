@@ -1,0 +1,16 @@
+program_id,program_name_en,program_name_ar,faculty_id,visible_course_count,visible_credit_sum,credits_complete,scheduled_section_count,unplaced_section_count,normalization_count,unresolved_requisite_codes
+catalog-bachelor-of-science-in-cybersecurity,Bachelor of Science in Cybersecurity,بكالوريوس العلوم في الامن السيبراني,IT,42,127,True,10,0,0,CS 121; CS 351; IT 203; IT 211
+catalog-bachelor-of-medical-laboratories-science,Bachelor of Medical Laboratories Science,بكالوريوس علوم المختبرات الطبية,RA,47,124,True,8,0,0,BIO 112; CHEM 112
+catalog-political-science,Political Science,بكالوريوس العلوم السياسية,EA,46,130,True,8,0,0,
+catalog-bachelor-of-journalism-and-digital-media-program,Bachelor of Journalism and Digital Media Program,برنامج بكالوريوس الصحافة والإعلام الرقمي,CM,44,132,True,8,0,0,AVP 202; JCOM 121; JCOM 211; MRKC 213
+catalog-bachelor-of-marketing-communication-program,Bachelor of Marketing Communication Program,برنامج بكالوريوس الاتصال التسويقي,CM,44,125,True,8,0,0,MRKC 213
+catalog-bachelor-of-public-relations-program,Bachelor of Public Relations Program,برنامج بكالوريوس العلاقات العامة,CM,44,130,True,8,0,0,JCOM 211; MRKC 213; PR 211
+catalog-bachelor-of-visual-and-audio-production-program,Bachelor of Visual and Audio Production Program,برنامج بكالوريوس الإنتاج المرئي والمسموع,CM,44,132,True,8,0,1,MRKC 213
+catalog-bachelor-of-science-in-computer-science,Bachelor of Science in Computer Science,بكالوريوس العلوم في علوم الحاسبات,IT,49,156,True,10,0,1,IT 352
+catalog-architecture-and-planning-bachelor-of-landscape-architecture,Bachelor of Landscape Architecture,بكالوريوس عمارة البيئة,AP,64,163,True,10,1,0,LA 251
+catalog-bachelor-of-science-in-meteorology,Bachelor of Science in Meteorology,بكالوريوس العلوم في الأرصاد,FE,75,200,True,8,1,29,STAT 101
+catalog-bachelor-of-science-in-hydrology-and-water-resources-management,Bachelor of Science in Hydrology and Water Resources Management,البكالوريوس في علوم وإدارة موارد المياه,FE,57,156,True,8,1,28,
+catalog-counseling-psychology,Bachelor of Counseling Psychology,البكالوريوس في علم النفس الإرشادي,AH,47,141,True,8,1,25,
+catalog-chinese-language,Bachelor of Chinese Language,البكالوريوس في اللغة الصينية,AH,48,134,True,8,1,28,
+catalog-bachelor-in-french-language-translation,Bachelor in French Language & Translation,البكالوريوس في اللغة الفرنسية والترجمة,AH,48,137,True,8,1,91,
+catalog-human-resource-management,HUMAN RESOURCE MANAGEMENT,بكالوريوس إدارة الموارد البشرية,RB,64,191,True,8,1,21,

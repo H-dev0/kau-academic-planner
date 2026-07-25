@@ -198,6 +198,12 @@
           </div>
         </section>
 
+        <section id="legacyProgressNotice" class="legacyProgressNotice" role="status" hidden>
+          <strong lang="en">Some previously saved course selections used ambiguous course codes. Your other progress was preserved, but the affected selections must be confirmed again to prevent incorrect prerequisite results.</strong>
+          <span lang="ar" dir="rtl">كانت بعض اختيارات المقررات المحفوظة سابقًا تستخدم رموزًا متشابهة وغير واضحة. تم الاحتفاظ ببقية تقدمك، ولكن يجب تأكيد المقررات المتأثرة مرة أخرى لمنع ظهور نتائج غير صحيحة للمتطلبات.</span>
+          <ul id="legacyProgressCandidates"></ul>
+        </section>
+
         <section id="plannerOverview" class="plannerOverview" aria-label="نظرة عامة على التقدم">
           <div id="plannerOnboarding" class="plannerOnboarding">
             <div>
@@ -258,6 +264,8 @@
             <select id="majorSelect"></select>
           </div>
         </section>
+
+        <section id="officialPlanView" class="officialPlanView" hidden aria-live="polite"></section>
 
         <section id="plannerWorkspace" class="layout plannerWorkspace" hidden>
           <section class="panel courseCatalog" aria-labelledby="courseCatalogTitle">
@@ -398,6 +406,7 @@
       </div>
     </footer>
 
+    <script src="progress-migration.js"></script>
     <script src="elective-groups.js"></script>
     <script src="credit-display.js"></script>
     <script src="app.js"></script>
