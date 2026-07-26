@@ -38,12 +38,14 @@ repo_root="$(git -C "$expected_root" rev-parse --show-toplevel 2>/dev/null)" || 
 
 allowlist=(
   server.js
+  azure-iisnode-entrypoint.js
   package.json
   web.config
   data/validated/kau_accounting.json
   web/index.html
   web/styles.css
   web/app.js
+  web/progress-migration.js
   web/credit-display.js
   web/elective-groups.js
   web/data/kau_accounting.json
@@ -106,7 +108,9 @@ for file in "${allowlist[@]}"; do
 done
 
 node --check "$stage_dir/server.js"
+node --check "$stage_dir/azure-iisnode-entrypoint.js"
 node --check "$stage_dir/web/app.js"
+node --check "$stage_dir/web/progress-migration.js"
 node --check "$stage_dir/web/credit-display.js"
 node --check "$stage_dir/web/elective-groups.js"
 [[ -f "$stage_dir/web.config" ]] || { echo "Staged web.config is missing." >&2; exit 1; }
@@ -129,12 +133,12 @@ if package.get("name") != "kau-course-planner":
     raise SystemExit("unexpected staged package identity")
 catalog = json.loads((stage / "web/data/faculty_catalog.json").read_text(encoding="utf-8"))
 programs = catalog["programs"]
-counts = (
-    len(programs),
-    sum(bool(program.get("planner_available")) for program in programs),
-    sum(program.get("catalog_status") == "catalog-only" for program in programs),
-)
-if counts != (223, 72, 151):
+coverage = {
+    state: sum(program.get("coverage_state") == state for program in programs)
+    for state in ("FULL_PLANNER", "OFFICIAL_PLAN_VIEW", "CATALOG_ONLY")
+}
+counts = (len(programs), coverage["FULL_PLANNER"], coverage["OFFICIAL_PLAN_VIEW"], coverage["CATALOG_ONLY"])
+if counts != (223, 72, 23, 128):
     raise SystemExit(f"unexpected program counts: {counts}")
 PY
 
@@ -147,7 +151,7 @@ PY
 )"
 (
   cd "$stage_dir"
-  PORT="$port" node server.js >"$server_log" 2>&1
+  PORT="$port" node -e "require('./azure-iisnode-entrypoint.js')" >"$server_log" 2>&1
 ) &
 server_pid=$!
 base_url="http://127.0.0.1:$port"
@@ -345,8 +349,9 @@ manifest = {
     },
     "program_counts": {
         "total": len(programs),
-        "planner_supported": sum(bool(program.get("planner_available")) for program in programs),
-        "catalog_only": sum(program.get("catalog_status") == "catalog-only" for program in programs),
+        "full_planner": sum(program.get("coverage_state") == "FULL_PLANNER" for program in programs),
+        "official_plan_view": sum(program.get("coverage_state") == "OFFICIAL_PLAN_VIEW" for program in programs),
+        "catalog_only": sum(program.get("coverage_state") == "CATALOG_ONLY" for program in programs),
     },
     "files": files,
 }
