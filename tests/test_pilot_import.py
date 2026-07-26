@@ -303,8 +303,8 @@ class PilotImportDataTests(unittest.TestCase):
         self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 72)
         self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 151)
         self.assertEqual(sum(p.get("coverage_state") == "FULL_PLANNER" for p in self.catalog), 72)
-        self.assertEqual(sum(p.get("coverage_state") == "OFFICIAL_PLAN_VIEW" for p in self.catalog), 23)
-        self.assertEqual(sum(p.get("coverage_state") == "CATALOG_ONLY" for p in self.catalog), 128)
+        self.assertEqual(sum(p.get("coverage_state") == "OFFICIAL_PLAN_VIEW" for p in self.catalog), 26)
+        self.assertEqual(sum(p.get("coverage_state") == "CATALOG_ONLY" for p in self.catalog), 125)
         by_id = {p["id"]: p for p in self.catalog}
         for program_id in PILOTS:
             self.assertTrue(by_id[program_id]["planner_available"])

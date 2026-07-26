@@ -24,7 +24,16 @@ PRIORITY_EXPECTED = {
     for item in PRIORITY_REPORT["programs"]
     if item["final_classification"] == "B. OFFICIAL_PLAN_VIEW_READY"
 }
-ALL_EXPECTED = {**EXPECTED, **PRIORITY_EXPECTED}
+REMAINING_REPORT = json.loads((ROOT / "reports/plan_extraction/bachelor_remaining_coverage_wave.json").read_text(encoding="utf-8"))
+REMAINING_EXPECTED = {
+    item["program_id"]: (
+        item["official_plan_view_result"]["visible_course_count"],
+        item["official_plan_view_result"]["visible_credit_sum"],
+    )
+    for item in REMAINING_REPORT["programs"]
+    if item["implementation_result"] == "added_read_only_official_plan_view"
+}
+ALL_EXPECTED = {**EXPECTED, **PRIORITY_EXPECTED, **REMAINING_EXPECTED}
 
 
 class OfficialPlanViewDataTests(unittest.TestCase):
@@ -32,8 +41,8 @@ class OfficialPlanViewDataTests(unittest.TestCase):
         programs = CATALOG["programs"]
         self.assertEqual(len(programs), 223)
         self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 72)
-        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 23)
-        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 128)
+        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 26)
+        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 125)
         planner_ids = {p["id"] for p in json.loads((ROOT / "web/data/additional_programs.json").read_text())["programs"]}
         for program in (p for p in programs if p["coverage_state"] == "OFFICIAL_PLAN_VIEW"):
             self.assertEqual(program["catalog_status"], "catalog-only")
@@ -45,6 +54,7 @@ class OfficialPlanViewDataTests(unittest.TestCase):
         by_id = {p["id"]: p for p in CATALOG["programs"]}
         self.assertEqual(len(EXPECTED), 15)
         self.assertEqual(len(PRIORITY_EXPECTED), 8)
+        self.assertEqual(len(REMAINING_EXPECTED), 3)
         for program_id, expected in ALL_EXPECTED.items():
             with self.subTest(program_id=program_id):
                 view = by_id[program_id]["official_plan_view"]
