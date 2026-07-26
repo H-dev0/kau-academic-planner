@@ -17,12 +17,14 @@ The ZIP contains only:
 
 ```text
 server.js
+azure-iisnode-entrypoint.js
 package.json
 web.config
 data/validated/kau_accounting.json
 web/index.html
 web/styles.css
 web/app.js
+web/progress-migration.js
 web/credit-display.js
 web/elective-groups.js
 web/data/kau_accounting.json
@@ -52,9 +54,11 @@ Building the package does **not** deploy it and does not access Azure settings o
 credentials. Any deployment requires separate explicit approval. Easy Auth is an
 App Service configuration external to the ZIP.
 
-`web.config` is retained to preserve the historical Windows IIS/iisnode startup
-path. Before deployment, verify the actual production App Service operating
-system, startup command, filesystem mode, and iisnode availability. The server
-writes progress beneath `data/local`; that behavior may be incompatible with a
-read-only run-from-package filesystem and must be resolved before enabling that
-deployment mode.
+`web.config` routes Windows IIS/iisnode through `azure-iisnode-entrypoint.js`.
+iisnode loads the application through its interceptor, so the bootstrap starts
+the server exported by `server.js` on the assigned named pipe. Direct local
+startup remains `node server.js`. Before deployment, verify the actual production
+App Service operating system, startup command, filesystem mode, and iisnode
+availability. The server writes progress beneath `data/local`; that behavior may
+be incompatible with a read-only run-from-package filesystem and must be resolved
+before enabling that deployment mode.
