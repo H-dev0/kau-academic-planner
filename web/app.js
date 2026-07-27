@@ -953,6 +953,19 @@ function hasArabicText(value) {
 
 function courseNamePresentation(course) {
   const official = String(course?.official_course_name || "").normalize("NFKC").trim();
+  const storedArabic = String(course?.course_name_ar || "").normalize("NFKC").trim();
+  const storedEnglish = String(course?.course_name_en || "").normalize("NFKC").trim();
+  if (storedArabic || storedEnglish) {
+    const english = currentLanguageSafe() === "en";
+    const primary = english ? (storedEnglish || storedArabic || official) : (storedArabic || storedEnglish || official);
+    const secondary = english ? storedArabic : storedEnglish;
+    return {
+      primary,
+      primaryLang: english && storedEnglish ? "en" : !english && storedArabic ? "ar" : hasArabicText(primary) ? "ar" : "en",
+      secondary: secondary && secondary !== primary ? secondary : "",
+      secondaryLang: english ? "ar" : "en",
+    };
+  }
   const hasArabic = hasArabicText(official);
   const cleanedArabic = hasArabic ? official.replace(/^(?:I{1,4})\s+(?=[\u0600-\u06ff])/i, "").trim() : "";
   const englishTranslation = hasArabic ? courseNameEnglish(official) : "";

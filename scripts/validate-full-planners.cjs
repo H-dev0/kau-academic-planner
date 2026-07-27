@@ -39,7 +39,7 @@ function runtimeProgram(catalogProgram) {
 }
 
 const full = catalog.programs.filter((program) => program.coverage_state === "FULL_PLANNER").map(runtimeProgram);
-if (full.length !== 72) throw new Error(`expected 72 FULL_PLANNER programs, found ${full.length}`);
+if (full.length !== 73) throw new Error(`expected 73 FULL_PLANNER programs, found ${full.length}`);
 
 const summary = {
   programs: full.length,
@@ -86,6 +86,12 @@ for (const [programId, expected] of [["accounting", [43, 38, 5]], ["finance", [4
   const plan = planCourses(program, [], {});
   const actual = [program.courses.length, plan.available_courses.length, plan.blocked_courses.length];
   if (JSON.stringify(actual) !== JSON.stringify(expected)) throw new Error(`${programId}: expected ${expected}, got ${actual}`);
+}
+const publicRelations = byId.get("catalog-professional-master-in-public-relations");
+const publicRelationsPlan = planCourses(publicRelations, [], {});
+const publicRelationsActual = [publicRelations.courses.length, publicRelationsPlan.available_courses.length, publicRelationsPlan.blocked_courses.length];
+if (JSON.stringify(publicRelationsActual) !== JSON.stringify([13, 10, 3])) {
+  throw new Error(`professional public relations: expected 13,10,3, got ${publicRelationsActual}`);
 }
 const financeIsls = byId.get("finance").courses.find((course) => course.course_code === "ISLS 201");
 if (!financeIsls || financeIsls.prerequisites.length !== 0) throw new Error("Finance ISLS 201 changed");

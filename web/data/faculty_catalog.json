@@ -6154,13 +6154,13 @@
       "faculty_name": "communications&media",
       "program_code": "MPR",
       "official_source_url": "https://kau.edu.sa/en/programs/professional-master-in-public-relations",
-      "planner_available": false,
-      "planner_data_key": null,
-      "catalog_status": "catalog-only",
-      "catalog_note_ar": "الخطة الرسمية متاحة للعرض فقط.",
-      "catalog_note_en": "Official study plan available in read-only mode.",
-      "coverage_state": "OFFICIAL_PLAN_VIEW",
-      "catalog_note": "Official study plan available in read-only mode.",
+      "planner_available": true,
+      "planner_data_key": "catalog-professional-master-in-public-relations",
+      "catalog_status": "active",
+      "catalog_note_ar": "الخطة الدراسية متاحة في المخطط.",
+      "catalog_note_en": "The detailed study plan is available in the planner.",
+      "coverage_state": "FULL_PLANNER",
+      "catalog_note": "The detailed study plan is available in the planner.",
       "official_plan_view": {
         "schema_version": 2,
         "extraction_method": "browser_rendered_levels_tab",
@@ -6547,7 +6547,8 @@
             ]
           }
         ]
-      }
+      },
+      "total_program_credit_hours": null
     },
     {
       "id": "catalog-academic-masters-program-in-communication-and-media",
