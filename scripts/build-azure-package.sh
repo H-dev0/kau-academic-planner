@@ -138,7 +138,7 @@ coverage = {
     for state in ("FULL_PLANNER", "OFFICIAL_PLAN_VIEW", "CATALOG_ONLY")
 }
 counts = (len(programs), coverage["FULL_PLANNER"], coverage["OFFICIAL_PLAN_VIEW"], coverage["CATALOG_ONLY"])
-if counts != (223, 72, 26, 125):
+if counts != (223, 72, 117, 34):
     raise SystemExit(f"unexpected program counts: {counts}")
 PY
 

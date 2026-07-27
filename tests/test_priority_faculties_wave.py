@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = json.loads((ROOT / "web/data/faculty_catalog.json").read_text(encoding="utf-8"))
 REPORT = json.loads((ROOT / "reports/plan_extraction/bachelor_priority_faculties_wave.json").read_text(encoding="utf-8"))
+LEVELS_REPORT = json.loads((ROOT / "reports/plan_extraction/official_levels_completion.json").read_text(encoding="utf-8"))
 PLANNER_IDS = {
     program["id"]
     for program in json.loads((ROOT / "web/data/additional_programs.json").read_text(encoding="utf-8"))["programs"]
@@ -92,8 +93,9 @@ class PriorityFacultiesWaveTests(unittest.TestCase):
             self.assertTrue(view["source"]["url_ar"].startswith("https://www.kau.edu.sa/ar/programs/"))
             self.assertTrue(view["source"]["url_en"].startswith("https://www.kau.edu.sa/en/programs/"))
 
-    def test_unsafe_candidates_remain_catalog_only(self) -> None:
+    def test_previously_unsafe_candidates_are_now_levels_only_views(self) -> None:
         by_id = {program["id"]: program for program in CATALOG["programs"]}
+        completed = {item["program_id"]: item for item in LEVELS_REPORT["completed_programs"]}
         decisions = {program["program_id"]: program["final_classification"] for program in REPORT["programs"]}
         expected = {
             "catalog-geography-and-geographic-information-systems": "C. NEEDS_DETERMINISTIC_DISPLAY_NORMALIZATION",
@@ -101,10 +103,14 @@ class PriorityFacultiesWaveTests(unittest.TestCase):
         }
         for program_id, classification in expected.items():
             self.assertEqual(decisions[program_id], classification)
-            self.assertEqual(by_id[program_id]["coverage_state"], "CATALOG_ONLY")
+            self.assertEqual(by_id[program_id]["coverage_state"], "OFFICIAL_PLAN_VIEW")
             self.assertFalse(by_id[program_id]["planner_available"])
             self.assertIsNone(by_id[program_id]["planner_data_key"])
-            self.assertNotIn("official_plan_view", by_id[program_id])
+            self.assertIn(program_id, completed)
+            self.assertTrue(all(
+                section["placement"] == "scheduled"
+                for section in by_id[program_id]["official_plan_view"]["sections"]
+            ))
 
 
 if __name__ == "__main__":

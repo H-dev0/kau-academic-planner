@@ -13,27 +13,12 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = json.loads((ROOT / "web/data/faculty_catalog.json").read_text(encoding="utf-8"))
-REPORT = json.loads((ROOT / "reports/plan_extraction/official_plan_view_bachelor_wave.json").read_text(encoding="utf-8"))
-EXPECTED = {item["program_id"]: (item["visible_course_count"], item["visible_credit_sum"]) for item in REPORT["programs"]}
-PRIORITY_REPORT = json.loads((ROOT / "reports/plan_extraction/bachelor_priority_faculties_wave.json").read_text(encoding="utf-8"))
-PRIORITY_EXPECTED = {
-    item["program_id"]: (
-        item["official_plan_view_result"]["visible_course_count"],
-        item["official_plan_view_result"]["visible_credit_sum"],
-    )
-    for item in PRIORITY_REPORT["programs"]
-    if item["final_classification"] == "B. OFFICIAL_PLAN_VIEW_READY"
+REPORT = json.loads((ROOT / "reports/plan_extraction/official_levels_completion.json").read_text(encoding="utf-8"))
+EXPECTED = {item["program_id"]: item for item in REPORT["completed_programs"]}
+OFFICIAL_VIEW_IDS = {
+    program["id"] for program in CATALOG["programs"]
+    if program["coverage_state"] == "OFFICIAL_PLAN_VIEW"
 }
-REMAINING_REPORT = json.loads((ROOT / "reports/plan_extraction/bachelor_remaining_coverage_wave.json").read_text(encoding="utf-8"))
-REMAINING_EXPECTED = {
-    item["program_id"]: (
-        item["official_plan_view_result"]["visible_course_count"],
-        item["official_plan_view_result"]["visible_credit_sum"],
-    )
-    for item in REMAINING_REPORT["programs"]
-    if item["implementation_result"] == "added_read_only_official_plan_view"
-}
-ALL_EXPECTED = {**EXPECTED, **PRIORITY_EXPECTED, **REMAINING_EXPECTED}
 
 
 class OfficialPlanViewDataTests(unittest.TestCase):
@@ -41,8 +26,8 @@ class OfficialPlanViewDataTests(unittest.TestCase):
         programs = CATALOG["programs"]
         self.assertEqual(len(programs), 223)
         self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 72)
-        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 26)
-        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 125)
+        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 117)
+        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 34)
         planner_ids = {p["id"] for p in json.loads((ROOT / "web/data/additional_programs.json").read_text())["programs"]}
         for program in (p for p in programs if p["coverage_state"] == "OFFICIAL_PLAN_VIEW"):
             self.assertEqual(program["catalog_status"], "catalog-only")
@@ -52,17 +37,21 @@ class OfficialPlanViewDataTests(unittest.TestCase):
 
     def test_exact_audited_counts_and_schema(self) -> None:
         by_id = {p["id"]: p for p in CATALOG["programs"]}
-        self.assertEqual(len(EXPECTED), 15)
-        self.assertEqual(len(PRIORITY_EXPECTED), 8)
-        self.assertEqual(len(REMAINING_EXPECTED), 3)
-        for program_id, expected in ALL_EXPECTED.items():
+        self.assertEqual(len(EXPECTED), 109)
+        for program_id, expected in EXPECTED.items():
             with self.subTest(program_id=program_id):
                 view = by_id[program_id]["official_plan_view"]
                 rows = [row for section in view["sections"] for row in section["rows"]]
-                self.assertEqual((len(rows), sum(r["credits"] for r in rows if r["credits"] is not None)), expected)
-                self.assertEqual(view["schema_version"], 1)
+                self.assertEqual(len(view["sections"]), expected["level_count"])
+                self.assertEqual(len(rows), expected["visible_course_count"])
+                self.assertEqual(sum(r["credits"] for r in rows if r["credits"] is not None), expected["visible_credit_sum"])
+                self.assertEqual(sum(r["credits"] is None for r in rows), expected["missing_credit_count"])
+                self.assertEqual(view["source_course_row_count"], expected["source_course_row_count"])
+                self.assertEqual(view["schema_version"], 2)
+                self.assertEqual(view["extraction_method"], "browser_rendered_levels_tab")
                 self.assertTrue(view["source"]["sha256_ar"])
-                self.assertTrue(view["source"]["sha256_en"])
+                if expected["bilingual_identity_match"]:
+                    self.assertTrue(view["source"]["sha256_en"])
                 for row in rows:
                     self.assertIn("raw_course_code", row)
                     self.assertIn("display_course_code", row)
@@ -72,21 +61,27 @@ class OfficialPlanViewDataTests(unittest.TestCase):
                         "practicum", "cooperative_training", "zero_credit", "unplaced_requirement",
                     })
 
-    def test_skip_is_evidence_based_and_not_forced(self) -> None:
-        self.assertEqual(REPORT["skipped"], [{
-            "program_id": "catalog-geography-and-geographic-information-systems",
-            "reason": "Expected 64/183; reproduced 83/240.",
-        }])
-        program = next(p for p in CATALOG["programs"] if p["id"] == REPORT["skipped"][0]["program_id"])
-        self.assertEqual(program["coverage_state"], "CATALOG_ONLY")
-        self.assertNotIn("official_plan_view", program)
+    def test_unresolved_programs_are_not_forced(self) -> None:
+        by_id = {p["id"]: p for p in CATALOG["programs"]}
+        self.assertEqual(len(REPORT["unresolved_programs"]), 42)
+        for item in REPORT["unresolved_programs"]:
+            program = by_id[item["program_id"]]
+            if item["existing_official_view_preserved"]:
+                self.assertEqual(program["coverage_state"], "OFFICIAL_PLAN_VIEW")
+                self.assertIn("official_plan_view", program)
+            else:
+                self.assertEqual(program["coverage_state"], "CATALOG_ONLY")
+                self.assertNotIn("official_plan_view", program)
 
-    def test_placeholders_zero_null_and_unplaced_are_preserved(self) -> None:
-        rows = [row for p in CATALOG["programs"] if p.get("official_plan_view") for s in p["official_plan_view"]["sections"] for row in s["rows"]]
+    def test_placeholders_and_missing_values_are_preserved(self) -> None:
+        completed = {item["program_id"] for item in REPORT["completed_programs"]}
+        rows = [
+            row for p in CATALOG["programs"] if p["id"] in completed
+            for section in p["official_plan_view"]["sections"] for row in section["rows"]
+        ]
         self.assertTrue(any(r["flags"]["placeholder"] for r in rows))
-        self.assertTrue(any(r["credits"] == 0 and r["flags"]["zero_credit"] for r in rows))
-        self.assertEqual(sum(r["credits"] is None for r in rows), 0)
-        self.assertTrue(any(r["flags"]["unplaced_requirement"] and r["official_level_or_semester"] is None for r in rows))
+        self.assertEqual(sum(r["credits"] is None for r in rows), 63)
+        self.assertTrue(all(not r["flags"]["unplaced_requirement"] for r in rows))
 
     def test_bilingual_frontend_and_no_view_progress_access(self) -> None:
         app = (ROOT / "web/app.js").read_text(encoding="utf-8")
@@ -104,23 +99,25 @@ class OfficialPlanViewDataTests(unittest.TestCase):
         self.assertIn("@media (max-width: 760px)", css)
         self.assertIn('[data-theme="dark"]', css)
 
-    def test_removed_rows_are_only_exact_signature_duplicates(self) -> None:
-        audit = json.loads((ROOT / "data/raw/kau/plan_audit/bachelor_recovery_wave_1/state.json").read_text(encoding="utf-8"))["programs"]
+    def test_chinese_language_and_duplicate_traceability(self) -> None:
         by_id = {p["id"]: p for p in CATALOG["programs"]}
-        for program_id in EXPECTED:
-            view = by_id[program_id]["official_plan_view"]
-            source = audit[program_id]["courses"]
-            kept_orders = {row["source_order"] for section in view["sections"] for row in section["rows"]}
-            for removed_order in view["normalization"]["removed_source_orders"]:
-                removed = source[removed_order - 1]
-                signature = (
-                    removed.get("canonical_course_code"), removed.get("course_name_ar"),
-                    removed.get("course_name_en"), removed.get("credit_hours"),
-                )
-                self.assertTrue(any(
-                    (course.get("canonical_course_code"), course.get("course_name_ar"), course.get("course_name_en"), course.get("credit_hours")) == signature
-                    for order, course in enumerate(source, 1) if order in kept_orders
-                ), (program_id, removed_order))
+        view = by_id["catalog-chinese-language"]["official_plan_view"]
+        self.assertEqual(len(view["sections"]), 8)
+        self.assertEqual([len(section["rows"]) for section in view["sections"]], [5, 5, 6, 6, 6, 6, 6, 4])
+        self.assertEqual([sum(row["credits"] for row in section["rows"]) for section in view["sections"]], [11, 12, 17, 17, 18, 17, 18, 12])
+        self.assertEqual(view["visible_course_count"], 44)
+        self.assertEqual(view["source_course_row_count"], 45)
+        self.assertEqual(view["normalization"]["removed_exact_duplicate_count"], 1)
+        self.assertEqual(view["normalization"]["removed_duplicate_mappings"][0]["course_code"], "CLAN 352")
+
+        self.assertEqual(REPORT["summary"]["exact_duplicate_rows_removed"], 3)
+        for item in REPORT["completed_programs"]:
+            view = by_id[item["program_id"]]["official_plan_view"]
+            normalization = view["normalization"]
+            self.assertEqual(
+                normalization["removed_exact_duplicate_count"],
+                len(normalization["removed_duplicate_mappings"]),
+            )
 
 
 class OfficialPlanViewApiTests(unittest.TestCase):
@@ -163,17 +160,14 @@ class OfficialPlanViewApiTests(unittest.TestCase):
         status, registry = self.request_status("GET", "/api/programs")
         self.assertEqual(status, 200)
         summaries = {p["id"]: p for p in registry["programs"]}
-        for program_id in ALL_EXPECTED:
+        for program_id in OFFICIAL_VIEW_IDS:
             self.assertTrue(summaries[program_id]["official_plan_view_available"])
             status, program = self.request_status("GET", f"/api/program?major={program_id}")
             self.assertEqual(status, 200)
             self.assertIn("official_plan_view", program)
 
     def test_non_planner_endpoints_are_guarded(self) -> None:
-        for program_id in list(ALL_EXPECTED) + [
-            "catalog-geography-and-geographic-information-systems",
-            "catalog-bachelor-of-sharia",
-        ]:
+        for program_id in OFFICIAL_VIEW_IDS:
             for method, endpoint in (("POST", "plan"), ("GET", "progress"), ("POST", "progress")):
                 with self.subTest(program_id=program_id, endpoint=endpoint, method=method):
                     status, payload = self.request_status(method, f"/api/{endpoint}?major={program_id}")

@@ -1619,9 +1619,13 @@ function renderOfficialPlanView() {
     const block = document.createElement("section");
     block.className = `officialPlanSection ${section.placement === "unplaced" ? "unplaced" : "scheduled"}`;
     const heading = document.createElement("h3");
+    const localizedSectionTitle = section[`title_${language}`]
+      || section.title_en
+      || section.title_ar
+      || "—";
     heading.textContent = section.placement === "unplaced"
-      ? `${officialPlanText("unplaced")} — ${section[`title_${language}`] || section.title_en}`
-      : section[`title_${language}`] || section.title_en;
+      ? `${officialPlanText("unplaced")} — ${localizedSectionTitle}`
+      : localizedSectionTitle;
     block.append(heading);
     const rows = document.createElement("div");
     rows.className = "officialPlanRows";
@@ -1660,10 +1664,12 @@ function renderOfficialPlanView() {
         flags.append(chip);
       }
       if (flags.childElementCount) card.append(flags);
-      if (course.raw_prerequisite_corequisite_text) {
+      const requisiteText = course[`prerequisite_text_${language}`]
+        || course.raw_prerequisite_corequisite_text;
+      if (requisiteText) {
         const requisite = document.createElement("p");
         requisite.className = "officialPlanRequisite";
-        requisite.textContent = `${officialPlanText("prerequisites")}: ${course.raw_prerequisite_corequisite_text}`;
+        requisite.textContent = `${officialPlanText("prerequisites")}: ${requisiteText}`;
         card.append(requisite);
       }
       rows.append(card);
