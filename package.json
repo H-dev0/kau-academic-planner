@@ -3,9 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "extract:official-levels": "node scripts/extract-official-levels.mjs",
+    "import:official-levels": "node scripts/import-official-levels.mjs",
+    "test:official-levels-extractor": "node --test tests/test_extract_official_levels.mjs",
+    "test:official-levels-ui": "node scripts/validate-official-levels-ui.mjs",
+    "test:full-planners": "node scripts/validate-full-planners.cjs"
   },
   "engines": {
     "node": ">=22"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.0"
   }
 }
