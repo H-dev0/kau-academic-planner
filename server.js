@@ -389,7 +389,7 @@ const server = http.createServer(async (req, res) => {
           course_count: (item.courses || []).length,
           source_title: item.source_title,
           coverage_state: coverageState(item),
-          official_plan_view_available: Boolean(item.official_plan_view),
+          official_plan_view_available: coverageState(item) === "OFFICIAL_PLAN_VIEW" && Boolean(item.official_plan_view),
           official_plan_view_course_count: item.official_plan_view?.visible_course_count ?? null,
           official_plan_view_level_count: item.official_plan_view?.sections?.filter(
             (section) => section.placement === "scheduled",

@@ -203,6 +203,8 @@ CURRENT_IMPORT = {
     "catalog-master-of-science-in-hydrology-and-water-resources-management",
 }
 
+OFFICIAL_VIEW_PROMOTION = {"catalog-professional-master-in-public-relations"}
+
 PREREQUISITE_NORMALIZATION_REMEDIATION = {
     "catalog-computing-information-tech-bachelor-of-science-in-information-systems",
     "catalog-computing-information-tech-bachelor-of-science-in-information-technology",
@@ -300,10 +302,10 @@ class PilotImportDataTests(unittest.TestCase):
         ))
 
     def test_catalog_counts_and_selected_statuses(self) -> None:
-        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 72)
-        self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 151)
-        self.assertEqual(sum(p.get("coverage_state") == "FULL_PLANNER" for p in self.catalog), 72)
-        self.assertEqual(sum(p.get("coverage_state") == "OFFICIAL_PLAN_VIEW" for p in self.catalog), 117)
+        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 73)
+        self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 150)
+        self.assertEqual(sum(p.get("coverage_state") == "FULL_PLANNER" for p in self.catalog), 73)
+        self.assertEqual(sum(p.get("coverage_state") == "OFFICIAL_PLAN_VIEW" for p in self.catalog), 116)
         self.assertEqual(sum(p.get("coverage_state") == "CATALOG_ONLY" for p in self.catalog), 34)
         by_id = {p["id"]: p for p in self.catalog}
         for program_id in PILOTS:
@@ -512,7 +514,7 @@ class PilotImportDataTests(unittest.TestCase):
         }
         self.assertEqual(
             changed,
-            CURRENT_IMPORT | PREREQUISITE_NORMALIZATION_REMEDIATION,
+            CURRENT_IMPORT | PREREQUISITE_NORMALIZATION_REMEDIATION | OFFICIAL_VIEW_PROMOTION,
         )
 
     def test_environmental_science_phd_remains_catalog_only(self) -> None:
@@ -549,7 +551,7 @@ class PilotImportDataTests(unittest.TestCase):
         ))
         original_by_id = {p["id"]: p for p in original["programs"]}
         current_by_id = self.data
-        self.assertEqual(set(current_by_id) - set(original_by_id), CURRENT_IMPORT)
+        self.assertEqual(set(current_by_id) - set(original_by_id), CURRENT_IMPORT | OFFICIAL_VIEW_PROMOTION)
         self.assertEqual(set(original_by_id) - set(current_by_id), set())
         for program_id, original_program in original_by_id.items():
             self.assertEqual(current_by_id[program_id], original_program)
