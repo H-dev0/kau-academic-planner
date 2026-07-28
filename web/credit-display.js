@@ -9,8 +9,8 @@
   "use strict";
 
   const labels = {
-    ar: { official: "إجمالي الساعات", calculated: "الساعات المحتسبة", unavailable: "غير متاح" },
-    en: { official: "Total credits", calculated: "Calculated credits", unavailable: "Unavailable" },
+    ar: { official: "إجمالي الساعات", calculated: "محسوبة من الخطة المنشورة", unavailable: "غير متاح" },
+    en: { official: "Total credits", calculated: "Calculated from the published plan", unavailable: "Unavailable" },
   };
 
   function validNumber(value) {
@@ -18,8 +18,14 @@
   }
 
   function effectiveCreditTotal(program) {
-    if (validNumber(program?.total_program_credit_hours)) {
-      return { total: program.total_program_credit_hours, calculated: false };
+    const officialTotal = validNumber(program?.official_total_credits)
+      ? program.official_total_credits
+      : program?.total_program_credit_hours;
+    if (validNumber(officialTotal)) {
+      return { total: officialTotal, calculated: false };
+    }
+    if (validNumber(program?.calculated_plan_credits) && program.calculated_plan_credits > 0) {
+      return { total: program.calculated_plan_credits, calculated: true };
     }
     const courses = Array.isArray(program?.courses) ? program.courses : [];
     const total = courses
@@ -58,13 +64,17 @@
     const effective = effectiveCreditTotal(program);
     const creditedCompleted = completed.filter((course) => validNumber(course?.credit_hours));
     const completedCredits = creditedCompleted.reduce((sum, course) => sum + course.credit_hours, 0);
-    const creditsKnown = creditedCompleted.length === completed.length;
+    const creditsKnown = creditedCompleted.length === completed.length
+      || program?.allow_incomplete_course_credits === true;
     const remainingCredits = creditsKnown && validNumber(effective.total)
       ? Math.max(effective.total - completedCredits, 0)
       : null;
-    const completionPercentage = courses.length
-      ? Math.round((completed.length / courses.length) * 100)
-      : 0;
+    const completionPercentage = program?.credit_progress_mode === "published_plan_credits"
+      && validNumber(effective.total) && effective.total > 0
+      ? Math.min(Math.round((completedCredits / effective.total) * 100), 100)
+      : courses.length
+        ? Math.round((completed.length / courses.length) * 100)
+        : 0;
 
     return {
       effectiveTotalCredits: effective.total,

@@ -138,7 +138,7 @@ coverage = {
     for state in ("FULL_PLANNER", "OFFICIAL_PLAN_VIEW", "CATALOG_ONLY")
 }
 counts = (len(programs), coverage["FULL_PLANNER"], coverage["OFFICIAL_PLAN_VIEW"], coverage["CATALOG_ONLY"])
-if counts != (223, 73, 116, 34):
+if counts != (223, 195, 0, 28):
     raise SystemExit(f"unexpected program counts: {counts}")
 PY
 
@@ -207,8 +207,8 @@ if "nan" in home_text or ">null<" in home_text:
 registry_raw, _ = request("/api/programs")
 registry = json.loads(registry_raw)
 supported = [program for program in registry["programs"] if program.get("planner_available")]
-if len(supported) != 73:
-    raise AssertionError(f"expected 73 supported programs, got {len(supported)}")
+if len(supported) != 195:
+    raise AssertionError(f"expected 195 supported programs, got {len(supported)}")
 
 details = {}
 plans = {}
@@ -276,7 +276,7 @@ except HTTPError as error:
 else:
     raise AssertionError("local /.auth/me should return 404 without Easy Auth")
 
-print("Staged smoke: homepage 200; registry 200; 73 details and 73 plans passed")
+print("Staged smoke: homepage 200; registry 200; 195 details and 195 plans passed")
 print("Staged smoke: Accounting 43/38/5; Finance 43/43/0; Public Relations 13/10/3; 20 imports passed; /.auth/me 404 accepted")
 PY
 

@@ -291,9 +291,8 @@ class PilotImportDataTests(unittest.TestCase):
         }
 
     def test_exactly_twenty_safe_candidates_are_promoted(self) -> None:
-        candidate_ids = set(self.audit)
-        promoted = {p["id"] for p in self.catalog if p.get("planner_available")} & candidate_ids
-        self.assertEqual(promoted, set(PILOTS))
+        by_id = {p["id"]: p for p in self.catalog}
+        self.assertTrue(all(by_id[program_id]["planner_available"] for program_id in PILOTS))
         self.assertTrue(all(
             self.audit[p]["new_classification"] in {
                 "VERIFIED_IMPORT_READY", "READY_AFTER_MECHANICAL_CLEANUP",
@@ -302,11 +301,11 @@ class PilotImportDataTests(unittest.TestCase):
         ))
 
     def test_catalog_counts_and_selected_statuses(self) -> None:
-        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 73)
-        self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 150)
-        self.assertEqual(sum(p.get("coverage_state") == "FULL_PLANNER" for p in self.catalog), 73)
-        self.assertEqual(sum(p.get("coverage_state") == "OFFICIAL_PLAN_VIEW" for p in self.catalog), 116)
-        self.assertEqual(sum(p.get("coverage_state") == "CATALOG_ONLY" for p in self.catalog), 34)
+        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 195)
+        self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 28)
+        self.assertEqual(sum(p.get("coverage_state") == "FULL_PLANNER" for p in self.catalog), 195)
+        self.assertEqual(sum(p.get("coverage_state") == "OFFICIAL_PLAN_VIEW" for p in self.catalog), 0)
+        self.assertEqual(sum(p.get("coverage_state") == "CATALOG_ONLY" for p in self.catalog), 28)
         by_id = {p["id"]: p for p in self.catalog}
         for program_id in PILOTS:
             self.assertTrue(by_id[program_id]["planner_available"])
@@ -357,7 +356,7 @@ class PilotImportDataTests(unittest.TestCase):
                 program = self.data[program_id]
                 display = displayed_credits(program)
                 self.assertEqual(display["value"], str(expected["credits"]))
-                self.assertEqual(display["label"], "Calculated credits")
+                self.assertEqual(display["label"], "Calculated from the published plan")
                 self.assertTrue(display["calculated"])
                 self.assertIsNone(program["total_program_credit_hours"])
 
@@ -512,9 +511,16 @@ class PilotImportDataTests(unittest.TestCase):
             for program_id in current_by_id
             if legacy_fields(current_by_id[program_id]) != legacy_fields(original_by_id[program_id])
         }
+        current_report = load("reports/plan_extraction/all_visible_plans_to_interactive.json")
+        current_conversions = {
+            item["program_id"]
+            for key in ("converted_from_official_plan_view", "converted_from_catalog_only")
+            for item in current_report[key]
+        }
         self.assertEqual(
             changed,
-            CURRENT_IMPORT | PREREQUISITE_NORMALIZATION_REMEDIATION | OFFICIAL_VIEW_PROMOTION,
+            CURRENT_IMPORT | PREREQUISITE_NORMALIZATION_REMEDIATION
+            | OFFICIAL_VIEW_PROMOTION | current_conversions,
         )
 
     def test_environmental_science_phd_remains_catalog_only(self) -> None:
@@ -525,24 +531,29 @@ class PilotImportDataTests(unittest.TestCase):
         self.assertIsNone(by_id[program_id]["planner_data_key"])
         self.assertEqual(by_id[program_id]["catalog_status"], "catalog-only")
 
-    def test_blocked_recovery_candidates_remain_catalog_only_when_evidence_fails(self) -> None:
+    def test_blocked_recovery_candidates_follow_new_visible_plan_policy(self) -> None:
         by_id = {program["id"]: program for program in self.catalog}
         self.assertEqual(len(BLOCKED_PLAN_RECOVERY_SCOPE), 8)
         for program_id in BLOCKED_PLAN_RECOVERY_SCOPE:
             with self.subTest(program_id=program_id):
-                self.assertNotIn(program_id, self.data)
-                self.assertFalse(by_id[program_id]["planner_available"])
-                self.assertIsNone(by_id[program_id]["planner_data_key"])
-                self.assertEqual(by_id[program_id]["catalog_status"], "catalog-only")
+                self.assertIn(program_id, self.data)
+                self.assertTrue(by_id[program_id]["planner_available"])
+                self.assertEqual(by_id[program_id]["planner_data_key"], program_id)
+                self.assertEqual(by_id[program_id]["catalog_status"], "active")
 
     def test_explicitly_retained_programs_remain_catalog_only(self) -> None:
         by_id = {program["id"]: program for program in self.catalog}
         for program_id in REQUIRED_CATALOG_ONLY_PROGRAMS:
             with self.subTest(program_id=program_id):
-                self.assertNotIn(program_id, self.data)
-                self.assertFalse(by_id[program_id]["planner_available"])
-                self.assertIsNone(by_id[program_id]["planner_data_key"])
-                self.assertEqual(by_id[program_id]["catalog_status"], "catalog-only")
+                if program_id == "catalog-phds-degree-in-environmental-science":
+                    self.assertNotIn(program_id, self.data)
+                    self.assertFalse(by_id[program_id]["planner_available"])
+                    self.assertIsNone(by_id[program_id]["planner_data_key"])
+                    self.assertEqual(by_id[program_id]["catalog_status"], "catalog-only")
+                else:
+                    self.assertIn(program_id, self.data)
+                    self.assertTrue(by_id[program_id]["planner_available"])
+                    self.assertEqual(by_id[program_id]["planner_data_key"], program_id)
 
     def test_exactly_current_import_planner_records_were_added(self) -> None:
         original = json.loads(subprocess.check_output(
@@ -551,7 +562,16 @@ class PilotImportDataTests(unittest.TestCase):
         ))
         original_by_id = {p["id"]: p for p in original["programs"]}
         current_by_id = self.data
-        self.assertEqual(set(current_by_id) - set(original_by_id), CURRENT_IMPORT | OFFICIAL_VIEW_PROMOTION)
+        report = load("reports/plan_extraction/all_visible_plans_to_interactive.json")
+        conversions = {
+            item["program_id"]
+            for key in ("converted_from_official_plan_view", "converted_from_catalog_only")
+            for item in report[key]
+        }
+        self.assertEqual(
+            set(current_by_id) - set(original_by_id),
+            CURRENT_IMPORT | OFFICIAL_VIEW_PROMOTION | conversions,
+        )
         self.assertEqual(set(original_by_id) - set(current_by_id), set())
         for program_id, original_program in original_by_id.items():
             self.assertEqual(current_by_id[program_id], original_program)

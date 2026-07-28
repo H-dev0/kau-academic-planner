@@ -34,7 +34,7 @@ class RemainingBachelorCoverageWaveTests(unittest.TestCase):
         })
         self.assertTrue(REPORT["inventory_complete_before_academic_changes"])
 
-    def test_historical_promotions_are_refreshed_from_levels_only(self) -> None:
+    def test_historical_promotions_are_refreshed_into_interactive_planners(self) -> None:
         by_id = {program["id"]: program for program in CATALOG["programs"]}
         planner_ids = {program["id"] for program in PLANNERS}
         self.assertEqual(set(REPORT["programs_added_as_OFFICIAL_PLAN_VIEW"]), EXPECTED_VIEWS)
@@ -42,11 +42,11 @@ class RemainingBachelorCoverageWaveTests(unittest.TestCase):
             with self.subTest(program_id=program_id):
                 program = by_id[program_id]
                 expected = LEVEL_RESULTS[program_id]
-                self.assertEqual(program["coverage_state"], "OFFICIAL_PLAN_VIEW")
-                self.assertFalse(program["planner_available"])
-                self.assertIsNone(program["planner_data_key"])
-                self.assertEqual(program["catalog_status"], "catalog-only")
-                self.assertNotIn(program_id, planner_ids)
+                self.assertEqual(program["coverage_state"], "FULL_PLANNER")
+                self.assertTrue(program["planner_available"])
+                self.assertEqual(program["planner_data_key"], program_id)
+                self.assertEqual(program["catalog_status"], "active")
+                self.assertIn(program_id, planner_ids)
                 view = program["official_plan_view"]
                 rows = [row for section in view["sections"] for row in section["rows"]]
                 self.assertEqual(len(rows), expected["visible_course_count"])
@@ -107,12 +107,13 @@ class RemainingBachelorCoverageWaveTests(unittest.TestCase):
                 continue
             with self.subTest(program_id=item["program_id"]):
                 program = by_id[item["program_id"]]
-                self.assertFalse(program["planner_available"])
-                self.assertIsNone(program["planner_data_key"])
-                if item["program_id"] in LEVEL_RESULTS:
-                    self.assertEqual(program["coverage_state"], "OFFICIAL_PLAN_VIEW")
+                if program["coverage_state"] == "FULL_PLANNER":
+                    self.assertTrue(program["planner_available"])
+                    self.assertEqual(program["planner_data_key"], item["program_id"])
                     self.assertIn("official_plan_view", program)
                 else:
+                    self.assertFalse(program["planner_available"])
+                    self.assertIsNone(program["planner_data_key"])
                     self.assertEqual(program["coverage_state"], "CATALOG_ONLY")
                     self.assertNotIn("official_plan_view", program)
                 self.assertTrue(item["blocker_or_read_only_limit"])
@@ -126,9 +127,9 @@ class RemainingBachelorCoverageWaveTests(unittest.TestCase):
         original_planners = json.loads(subprocess.check_output(
             ["git", "show", f"{BASE_COMMIT}:web/data/additional_programs.json"], cwd=ROOT, text=True,
         ))
-        self.assertEqual({program["id"]: program for program in PLANNERS}, {
-            program["id"]: program for program in original_planners["programs"]
-        })
+        current_planners = {program["id"]: program for program in PLANNERS}
+        for program in original_planners["programs"]:
+            self.assertEqual(current_planners[program["id"]], program)
         self.assertEqual(current_by_id["accounting"], original_by_id["accounting"])
         self.assertEqual(current_by_id["finance"], original_by_id["finance"])
         full_planners = {

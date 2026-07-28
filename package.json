@@ -7,6 +7,7 @@
     "extract:official-levels": "node scripts/extract-official-levels.mjs",
     "import:official-levels": "node scripts/import-official-levels.mjs",
     "promote:official-views": "node scripts/promote-official-views-to-full-planners.mjs",
+    "convert:visible-plans": "node scripts/convert-visible-plans-to-interactive.mjs",
     "test:official-levels-extractor": "node --test tests/test_extract_official_levels.mjs",
     "test:official-levels-ui": "node scripts/validate-official-levels-ui.mjs",
     "test:promoted-planner-ui": "node scripts/validate-promoted-planner-ui.mjs",

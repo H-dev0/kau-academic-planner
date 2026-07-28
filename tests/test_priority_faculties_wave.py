@@ -47,17 +47,17 @@ class PriorityFacultiesWaveTests(unittest.TestCase):
                 self.assertGreater(evidence["size_bytes"], 0)
                 self.assertEqual(len(evidence["sha256"]), 64)
 
-    def test_new_views_are_exactly_the_eight_safe_engineering_programs(self) -> None:
+    def test_historical_views_are_now_exact_interactive_engineering_programs(self) -> None:
         by_id = {program["id"]: program for program in CATALOG["programs"]}
         reported = set(REPORT["programs_added_as_OFFICIAL_PLAN_VIEW"])
         self.assertEqual(reported, set(EXPECTED_NEW_VIEWS))
         for program_id, expected in EXPECTED_NEW_VIEWS.items():
             with self.subTest(program_id=program_id):
                 program = by_id[program_id]
-                self.assertEqual(program["coverage_state"], "OFFICIAL_PLAN_VIEW")
-                self.assertFalse(program["planner_available"])
-                self.assertIsNone(program["planner_data_key"])
-                self.assertNotIn(program_id, PLANNER_IDS)
+                self.assertEqual(program["coverage_state"], "FULL_PLANNER")
+                self.assertTrue(program["planner_available"])
+                self.assertEqual(program["planner_data_key"], program_id)
+                self.assertIn(program_id, PLANNER_IDS)
                 view = program["official_plan_view"]
                 rows = [row for section in view["sections"] for row in section["rows"]]
                 self.assertEqual((len(rows), sum(row["credits"] for row in rows)), expected)
@@ -93,7 +93,7 @@ class PriorityFacultiesWaveTests(unittest.TestCase):
             self.assertTrue(view["source"]["url_ar"].startswith("https://www.kau.edu.sa/ar/programs/"))
             self.assertTrue(view["source"]["url_en"].startswith("https://www.kau.edu.sa/en/programs/"))
 
-    def test_previously_unsafe_candidates_are_now_levels_only_views(self) -> None:
+    def test_previously_unsafe_candidates_are_now_warning_backed_planners(self) -> None:
         by_id = {program["id"]: program for program in CATALOG["programs"]}
         completed = {item["program_id"]: item for item in LEVELS_REPORT["completed_programs"]}
         decisions = {program["program_id"]: program["final_classification"] for program in REPORT["programs"]}
@@ -103,9 +103,9 @@ class PriorityFacultiesWaveTests(unittest.TestCase):
         }
         for program_id, classification in expected.items():
             self.assertEqual(decisions[program_id], classification)
-            self.assertEqual(by_id[program_id]["coverage_state"], "OFFICIAL_PLAN_VIEW")
-            self.assertFalse(by_id[program_id]["planner_available"])
-            self.assertIsNone(by_id[program_id]["planner_data_key"])
+            self.assertEqual(by_id[program_id]["coverage_state"], "FULL_PLANNER")
+            self.assertTrue(by_id[program_id]["planner_available"])
+            self.assertEqual(by_id[program_id]["planner_data_key"], program_id)
             self.assertIn(program_id, completed)
             self.assertTrue(all(
                 section["placement"] == "scheduled"

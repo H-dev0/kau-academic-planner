@@ -39,7 +39,7 @@ function runtimeProgram(catalogProgram) {
 }
 
 const full = catalog.programs.filter((program) => program.coverage_state === "FULL_PLANNER").map(runtimeProgram);
-if (full.length !== 73) throw new Error(`expected 73 FULL_PLANNER programs, found ${full.length}`);
+if (full.length !== 195) throw new Error(`expected 195 FULL_PLANNER programs, found ${full.length}`);
 
 const summary = {
   programs: full.length,
@@ -47,6 +47,8 @@ const summary = {
   initially_available: 0,
   initially_blocked: 0,
   permanently_blocked: 0,
+  converted_permanently_blocked: 0,
+  legacy_permanently_blocked: 0,
   maximum_iterations: 0,
 };
 
@@ -68,10 +70,16 @@ for (const program of full) {
     iterations += 1;
     const plan = planCourses(program, [...completed], {});
     const newlyAvailable = plan.available_courses
-      .map((course) => course.course_code)
+      .map((course) => course.planner_course_id || course.course_code)
       .filter((code) => !completed.has(code));
     if (!newlyAvailable.length) {
       summary.permanently_blocked += plan.blocked_courses.length;
+      const converted = ["OFFICIAL_PLAN_VIEW", "CATALOG_ONLY"].includes(program.conversion_origin);
+      if (converted) summary.converted_permanently_blocked += plan.blocked_courses.length;
+      else summary.legacy_permanently_blocked += plan.blocked_courses.length;
+      if (plan.blocked_courses.length && converted) {
+        throw new Error(`${program.id}: ${plan.blocked_courses.length} course(s) remain permanently blocked`);
+      }
       break;
     }
     newlyAvailable.forEach((code) => completed.add(code));

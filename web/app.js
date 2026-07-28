@@ -53,6 +53,7 @@ const plannerWorkspace = document.querySelector("#plannerWorkspace");
 const officialPlanView = document.querySelector("#officialPlanView");
 const toolbarActions = document.querySelector(".toolbarActions");
 const privacyNotice = document.querySelector(".privacyNotice");
+const academicDataNotices = document.querySelector("#academicDataNotices");
 const legacyProgressNotice = document.querySelector("#legacyProgressNotice");
 const legacyProgressCandidates = document.querySelector("#legacyProgressCandidates");
 const plannerOnboarding = document.querySelector("#plannerOnboarding");
@@ -386,7 +387,7 @@ function normalize(code) {
 }
 
 function courseCode(course) {
-  return normalize(course.course_code);
+  return normalize(course.planner_course_id || course.course_code);
 }
 
 function withCommonFoundation(program) {
@@ -395,7 +396,8 @@ function withCommonFoundation(program) {
     updated.courses = [];
     return updated;
   }
-  if (updated.faculty_id && updated.faculty_id !== "EA") {
+  if (updated.degree_level !== "Bachelor's degree"
+      || (updated.faculty_id && updated.faculty_id !== "EA")) {
     updated.courses = Array.isArray(updated.courses) ? updated.courses : [];
     return updated;
   }
@@ -1096,6 +1098,21 @@ function creditSummary(completed) {
   );
   const missingCompletedCredits = completed.length - completedWithCredits.length;
 
+  if (state.program.allow_incomplete_course_credits === true) {
+    const english = currentLanguageSafe() === "en";
+    return {
+      completedText: String(metrics.completedCredits || 0),
+      remainingText: Number.isFinite(metrics.remainingCredits)
+        ? String(metrics.remainingCredits)
+        : "--",
+      note: missingCompletedCredits > 0
+        ? (english
+          ? "Known published credits are shown; some selected rows have no published credit value."
+          : "تظهر الساعات المنشورة المعروفة؛ بعض الصفوف المحددة لا تتضمن قيمة ساعات منشورة.")
+        : "",
+    };
+  }
+
   if (missingCompletedCredits > 0 || completed.length === 0) {
     return {
       completedText: completed.length ? "Unknown" : "0",
@@ -1316,6 +1333,20 @@ function renderChecklist(plan = buildPlan()) {
       identityCell.append(codeElement);
       appendCourseNames(identityCell, course);
       if (optionNote) identityCell.insertAdjacentHTML("beforeend", optionNote);
+      for (const warning of course.academic_data_warnings || []) {
+        const notice = document.createElement("span");
+        notice.className = "courseAcademicWarning";
+        notice.textContent = localizedAcademicWarning(warning);
+        identityCell.append(notice);
+      }
+      if (course.prerequisite_text_original && (course.academic_data_warnings || []).length) {
+        const original = document.createElement("span");
+        original.className = "coursePublishedRequisite";
+        original.textContent = currentLanguageSafe() === "en"
+          ? `Published requisite: ${course.prerequisite_text_original}`
+          : `نص المتطلب المنشور: ${course.prerequisite_text_original}`;
+        identityCell.append(original);
+      }
 
       const creditCell = document.createElement("td");
       creditCell.className = "creditColumn";
@@ -1513,6 +1544,45 @@ function courseItem(course, className, reason = "") {
     item.append(reasonText);
   }
   return item;
+}
+
+function localizedAcademicWarning(warning) {
+  if (!warning) return "";
+  if (typeof warning === "string") return warning;
+  return currentLanguageSafe() === "en"
+    ? (warning.message_en || warning.message_ar || warning.code || "")
+    : (warning.message_ar || warning.message_en || warning.code || "");
+}
+
+function renderAcademicDataNotices() {
+  if (!academicDataNotices) return;
+  academicDataNotices.replaceChildren();
+  const program = state.program;
+  const warnings = Array.isArray(program?.academic_data_warnings)
+    ? program.academic_data_warnings
+    : [];
+  const visible = program?.published_official_plan_interactive === true
+    && !isCatalogOnly() && !isNoSelection() && !isNoPrograms();
+  academicDataNotices.hidden = !visible;
+  if (!visible) return;
+
+  const english = currentLanguageSafe() === "en";
+  const source = document.createElement("p");
+  source.className = "academicDataSourceNotice";
+  source.textContent = english
+    ? "This planner was created from the published official plan. Any unpublished academic rules are identified with notices inside the planner."
+    : "تم إنشاء المخطط من الخطة الرسمية المنشورة. بعض القواعد الأكاديمية غير المنشورة موضحة بتنبيهات داخل المخطط.";
+  academicDataNotices.append(source);
+
+  if (warnings.length) {
+    const list = document.createElement("ul");
+    for (const warning of warnings) {
+      const item = document.createElement("li");
+      item.textContent = localizedAcademicWarning(warning);
+      list.append(item);
+    }
+    academicDataNotices.append(list);
+  }
 }
 
 function completedCourseItem(course) {
@@ -1785,6 +1855,7 @@ function render() {
   if (clearButton) clearButton.hidden = catalogOnly;
   if (toolbarActions) toolbarActions.hidden = catalogOnly;
   if (privacyNotice) privacyNotice.hidden = catalogOnly;
+  renderAcademicDataNotices();
   renderLegacyProgressNotice();
   renderOfficialPlanView();
 

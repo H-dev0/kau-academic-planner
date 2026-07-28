@@ -104,6 +104,10 @@ function normalize(code) {
       .replace(/[^\p{L}\p{N}]/gu, "");
 }
 
+function courseIdentity(course) {
+  return normalize(course?.planner_course_id || course?.course_code);
+}
+
 function programId(program) {
   return program.id || normalize(program.program_name).toLowerCase() || "accounting";
 }
@@ -248,7 +252,7 @@ function planCourses(program, completedCodes, electiveSelections = {}) {
   const blocked = [];
 
   for (const course of program.courses || []) {
-    const code = normalize(course.course_code);
+    const code = courseIdentity(course);
     if (selected.has(code)) {
       completed.push(course);
       continue;
@@ -264,7 +268,7 @@ function planCourses(program, completedCodes, electiveSelections = {}) {
     }
   }
 
-  const totalCourses = (program.courses || []).filter((course) => course.course_code).length;
+  const totalCourses = (program.courses || []).filter((course) => courseIdentity(course)).length;
   const result = {
     program_name: program.program_name,
     total_courses: totalCourses,
