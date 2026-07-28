@@ -122,10 +122,10 @@ class CreditDisplayTests(unittest.TestCase):
         english = render(program, "en")
         arabic = render(program, "ar")
         self.assertEqual(english, {
-            "value": "42", "label": "Calculated credits", "calculated": True,
+            "value": "42", "label": "Calculated from the published plan", "calculated": True,
         })
         self.assertEqual(arabic, {
-            "value": "42", "label": "الساعات المحتسبة", "calculated": True,
+            "value": "42", "label": "محسوبة من الخطة المنشورة", "calculated": True,
         })
         self.assertNotIn("null", json.dumps([english, arabic], ensure_ascii=False).lower())
 

@@ -15,9 +15,15 @@ ROOT = Path(__file__).resolve().parents[1]
 CATALOG = json.loads((ROOT / "web/data/faculty_catalog.json").read_text(encoding="utf-8"))
 REPORT = json.loads((ROOT / "reports/plan_extraction/official_levels_completion.json").read_text(encoding="utf-8"))
 EXPECTED = {item["program_id"]: item for item in REPORT["completed_programs"]}
-OFFICIAL_VIEW_IDS = {
+CURRENT_REPORT = json.loads((ROOT / "reports/plan_extraction/all_visible_plans_to_interactive.json").read_text(encoding="utf-8"))
+CONVERTED_IDS = {
+    item["program_id"]
+    for key in ("converted_from_official_plan_view", "converted_from_catalog_only")
+    for item in CURRENT_REPORT[key]
+}
+CATALOG_ONLY_IDS = {
     program["id"] for program in CATALOG["programs"]
-    if program["coverage_state"] == "OFFICIAL_PLAN_VIEW"
+    if program["coverage_state"] == "CATALOG_ONLY"
 }
 
 
@@ -25,15 +31,15 @@ class OfficialPlanViewDataTests(unittest.TestCase):
     def test_coverage_counts_and_status_invariants(self) -> None:
         programs = CATALOG["programs"]
         self.assertEqual(len(programs), 223)
-        self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 73)
-        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 116)
-        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 34)
+        self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 195)
+        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 0)
+        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 28)
         planner_ids = {p["id"] for p in json.loads((ROOT / "web/data/additional_programs.json").read_text())["programs"]}
-        for program in (p for p in programs if p["coverage_state"] == "OFFICIAL_PLAN_VIEW"):
-            self.assertEqual(program["catalog_status"], "catalog-only")
-            self.assertFalse(program["planner_available"])
-            self.assertIsNone(program["planner_data_key"])
-            self.assertNotIn(program["id"], planner_ids)
+        for program in (p for p in programs if p["id"] in CONVERTED_IDS):
+            self.assertEqual(program["catalog_status"], "active")
+            self.assertTrue(program["planner_available"])
+            self.assertEqual(program["planner_data_key"], program["id"])
+            self.assertIn(program["id"], planner_ids)
 
     def test_exact_audited_counts_and_schema(self) -> None:
         by_id = {p["id"]: p for p in CATALOG["programs"]}
@@ -61,13 +67,13 @@ class OfficialPlanViewDataTests(unittest.TestCase):
                         "practicum", "cooperative_training", "zero_credit", "unplaced_requirement",
                     })
 
-    def test_unresolved_programs_are_not_forced(self) -> None:
+    def test_historical_unresolved_inventory_is_superseded_only_by_evidence(self) -> None:
         by_id = {p["id"]: p for p in CATALOG["programs"]}
         self.assertEqual(len(REPORT["unresolved_programs"]), 42)
         for item in REPORT["unresolved_programs"]:
             program = by_id[item["program_id"]]
-            if item["existing_official_view_preserved"]:
-                self.assertEqual(program["coverage_state"], "OFFICIAL_PLAN_VIEW")
+            if program["id"] in CONVERTED_IDS:
+                self.assertEqual(program["coverage_state"], "FULL_PLANNER")
                 self.assertIn("official_plan_view", program)
             else:
                 self.assertEqual(program["coverage_state"], "CATALOG_ONLY")
@@ -160,14 +166,16 @@ class OfficialPlanViewApiTests(unittest.TestCase):
         status, registry = self.request_status("GET", "/api/programs")
         self.assertEqual(status, 200)
         summaries = {p["id"]: p for p in registry["programs"]}
-        for program_id in OFFICIAL_VIEW_IDS:
-            self.assertTrue(summaries[program_id]["official_plan_view_available"])
+        for program_id in CONVERTED_IDS:
+            self.assertTrue(summaries[program_id]["planner_available"])
+            self.assertEqual(summaries[program_id]["coverage_state"], "FULL_PLANNER")
+            self.assertFalse(summaries[program_id]["official_plan_view_available"])
             status, program = self.request_status("GET", f"/api/program?major={program_id}")
             self.assertEqual(status, 200)
-            self.assertIn("official_plan_view", program)
+            self.assertTrue(program["courses"])
 
     def test_non_planner_endpoints_are_guarded(self) -> None:
-        for program_id in OFFICIAL_VIEW_IDS:
+        for program_id in CATALOG_ONLY_IDS:
             for method, endpoint in (("POST", "plan"), ("GET", "progress"), ("POST", "progress")):
                 with self.subTest(program_id=program_id, endpoint=endpoint, method=method):
                     status, payload = self.request_status(method, f"/api/{endpoint}?major={program_id}")

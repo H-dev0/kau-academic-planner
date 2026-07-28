@@ -47,6 +47,50 @@
   font-family: "Noto Sans Arabic", "IBM Plex Sans Arabic", Tahoma, Arial, sans-serif;
 }
 
+.plannerShell .academicDataNotices {
+  margin: 0 24px 18px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--color-gold-strong) 34%, var(--color-border));
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--color-gold-soft) 42%, var(--color-surface));
+  color: var(--color-text);
+}
+
+.plannerShell .academicDataNotices[hidden] { display: none; }
+
+.plannerShell .academicDataSourceNotice {
+  margin: 0;
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+.plannerShell .academicDataNotices ul {
+  margin: 8px 0 0;
+  padding-inline-start: 20px;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.plannerShell .courseAcademicWarning,
+.plannerShell .coursePublishedRequisite {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.plannerShell .courseAcademicWarning {
+  color: var(--color-gold-strong);
+  font-weight: 800;
+}
+
+.plannerShell .coursePublishedRequisite { color: var(--color-muted); }
+
+@media (max-width: 760px) {
+  .plannerShell .academicDataNotices { margin: 0 14px 14px; }
+}
+
 [data-theme="dark"] {
   color-scheme: dark;
   --color-bg: #07130e;

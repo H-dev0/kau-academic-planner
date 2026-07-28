@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-07-28",
+  "policy": "Retain CATALOG_ONLY only when no complete official chronological level plan with course rows and credits can be captured without inference.",
+  "reason_categories": {
+    "official_page_no_usable_levels": {
+      "reason_en": "The official Arabic/English program routes and an exact-title search of official KAU PDF sources produced no complete chronological Levels plan with course rows and credits.",
+      "reason_ar": "لم تُظهر صفحات البرنامج الرسمية بالعربية أو الإنجليزية ولا نتائج البحث بالعنوان المطابق في ملفات جامعة الملك عبدالعزيز خطة مستويات زمنية مكتملة تتضمن صفوف المقررات والساعات."
+    },
+    "department_landing_only": {
+      "reason_en": "The official KAU source is a faculty or department landing page, not a program study plan; Arabic/English page review and exact-title official PDF search found no level-by-level course rows.",
+      "reason_ar": "المصدر الرسمي المتاح صفحة كلية أو قسم وليس خطة برنامج؛ ولم تكشف مراجعة الصفحات العربية والإنجليزية والبحث في ملفات الجامعة بالعنوان المطابق عن صفوف مقررات موزعة حسب المستويات."
+    },
+    "requirements_without_chronological_levels": {
+      "reason_en": "The official page publishes compulsory/elective or track requirement groups, but no chronological level placement; those groups cannot be converted into academic levels without guessing.",
+      "reason_ar": "تنشر الصفحة الرسمية مجموعات متطلبات إجبارية أو اختيارية أو مسارات، لكنها لا تنشر التوزيع الزمني على المستويات؛ ولا يمكن تحويل هذه المجموعات إلى مستويات دون تخمين."
+    },
+    "level_labels_without_complete_rows": {
+      "reason_en": "The current official page exposes a Levels label or level headings, but the captured official evidence does not contain complete course rows and credits for every level; no retrievable official PDF supplied the missing rows.",
+      "reason_ar": "تعرض الصفحة الرسمية الحالية تبويب المستويات أو عناوينها، لكن الأدلة الرسمية المحفوظة لا تتضمن صفوف المقررات والساعات كاملة لكل مستوى، ولم يتوفر ملف رسمي قابل للاسترجاع لاستكمالها."
+    },
+    "archived_pdf_unavailable": {
+      "reason_en": "An indexed official KAU study-plan PDF was identified, but the official file now returns 404; the current official page does not publish a complete replacement level plan, so importing cached search fragments would be unsafe.",
+      "reason_ar": "عُثر على فهرسة لملف خطة رسمي من الجامعة، لكن الملف الرسمي يعيد الآن 404، ولا تنشر الصفحة الحالية بديلاً كاملاً موزعاً على المستويات؛ لذلك لا يمكن استيراد مقتطفات نتائج البحث بأمان."
+    },
+    "achievement_page_not_plan": {
+      "reason_en": "The official link is a student-achievement/faculty page rather than a PharmD study plan; no official Arabic/English Levels plan or retrievable official PDF was found.",
+      "reason_ar": "الرابط الرسمي صفحة إنجاز طلابي أو كلية وليس خطة دكتور صيدلة؛ ولم تُعثر على خطة مستويات رسمية بالعربية أو الإنجليزية أو ملف رسمي قابل للاسترجاع."
+    }
+  },
+  "programs": {
+    "catalog-associate-diploma-in-tourism-guidance": { "category": "official_page_no_usable_levels" },
+    "ed-doctorate-psychological-educational-counseling": { "category": "department_landing_only" },
+    "ed-professional-master-special-education": { "category": "department_landing_only" },
+    "ed-master-educational-guidance-counseling": { "category": "department_landing_only" },
+    "ed-master-special-education": { "category": "department_landing_only" },
+    "catalog-master-of-nursing-science-public-health-nursing-community-health-nursing": { "category": "official_page_no_usable_levels" },
+    "catalog-master-of-nursing-science": { "category": "official_page_no_usable_levels" },
+    "ri-bachelor-computer-science": { "category": "department_landing_only" },
+    "ri-bachelor-information-systems": { "category": "department_landing_only" },
+    "ri-bachelor-information-technology": { "category": "department_landing_only" },
+    "catalog-nautical-science": { "category": "official_page_no_usable_levels" },
+    "ph-master-molecular-drug-discovery-development": { "category": "department_landing_only" },
+    "ph-master-pharmaceutics": { "category": "department_landing_only" },
+    "ph-master-pharmacology-toxicology": { "category": "department_landing_only" },
+    "ph-doctor-of-pharmacy": { "category": "achievement_page_not_plan" },
+    "catalog-doctor-of-philosophy-in-hydrology-and-water-resources-management": { "category": "requirements_without_chronological_levels" },
+    "catalog-phds-degree-in-arid-land-agriculture": { "category": "requirements_without_chronological_levels" },
+    "catalog-phds-degree-in-environmental-science": { "category": "requirements_without_chronological_levels" },
+    "catalog-executive-master-in-environmental-health-and-safety": { "category": "requirements_without_chronological_levels" },
+    "catalog-master-in-arid-land-agriculture": { "category": "requirements_without_chronological_levels" },
+    "catalog-applied-medica-sciences-bachelor-of-medical-laboratory-sciences": {
+      "category": "archived_pdf_unavailable",
+      "sources_checked": [
+        "https://kau.edu.sa/en/programs/medical-laboratory-sciences",
+        "https://fams.kau.edu.sa/Files/142/Files/162438_mlt-study-plan.pdf"
+      ]
+    },
+    "catalog-applied-medica-sciences-bachelor-of-radiologic-sciences": {
+      "category": "level_labels_without_complete_rows",
+      "sources_checked": [
+        "https://kau.edu.sa/en/programs/radiologic-sciences",
+        "https://kau.edu.sa/en/programs/bachelor-of-radiologic-sciences"
+      ]
+    },
+    "catalog-english": { "category": "official_page_no_usable_levels" },
+    "catalog-master-of-landscape-architecture-department": { "category": "level_labels_without_complete_rows" },
+    "catalog-engineering-rabigh-electrical-engineering": { "category": "level_labels_without_complete_rows" },
+    "catalog-engineering-rabigh-industrial-engineering": {
+      "category": "archived_pdf_unavailable",
+      "sources_checked": [
+        "https://kau.edu.sa/en/programs/industrial-engineering",
+        "https://www.kau.edu.sa/Files/829006/Files/162728_ie_cd.pdf"
+      ]
+    },
+    "catalog-engineering-rabigh-mechanical-engineering": { "category": "level_labels_without_complete_rows" },
+    "catalog-department-of-physical-therapy-graduate-program": { "category": "official_page_no_usable_levels" }
+  }
+}

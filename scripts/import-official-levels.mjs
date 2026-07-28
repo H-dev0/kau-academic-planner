@@ -90,7 +90,7 @@ function rowFlags(row, rowAr, rowEn) {
   };
 }
 
-function buildOfficialView(result) {
+function buildOfficialView(result, { preserveExactRows = false } = {}) {
   const ar = result.locales.ar;
   const en = result.locales.en;
   const primaryLocale = ar?.status === "success" ? "ar" : "en";
@@ -109,7 +109,7 @@ function buildOfficialView(result) {
     for (let rowIndex = 0; rowIndex < primaryLevel.rows.length; rowIndex += 1) {
       const row = primaryLevel.rows[rowIndex];
       const signature = exactSignature(row);
-      if (canConsolidateExactDuplicate(row) && seen.has(signature)) {
+      if (!preserveExactRows && canConsolidateExactDuplicate(row) && seen.has(signature)) {
         removed.push({
           level_order: levelIndex + 1,
           level_name: primaryLevel.official_level_name,
@@ -184,7 +184,9 @@ function buildOfficialView(result) {
     program_warning_en: missingCredits ? "Some credit values are not published in the official Levels table." : null,
     program_warning_ar: missingCredits ? "بعض قيم الساعات غير منشورة في جدول المستويات الرسمي." : null,
     normalization: {
-      rule: "Consolidate only exact repeated coded course identities within the same official level; preserve every published placeholder occurrence.",
+      rule: preserveExactRows
+        ? "Preserve every published official course row; represent repeated identities independently in the interactive planner."
+        : "Consolidate only exact repeated coded course identities within the same official level; preserve every published placeholder occurrence.",
       removed_exact_duplicate_count: removed.length,
       removed_source_orders: removed.map((item) => item.removed_source_order),
       removed_duplicate_mappings: removed,
@@ -256,6 +258,12 @@ async function writeJson(filePath, value) {
 }
 
 async function main() {
+  if (process.argv.includes("--help")) {
+    process.stdout.write("Usage: node scripts/import-official-levels.mjs [--dry-run]\n");
+    return;
+  }
+  const unknown = process.argv.slice(2).filter((argument) => argument !== "--dry-run");
+  if (unknown.length) throw new Error(`unknown argument: ${unknown[0]}`);
   const dryRun = process.argv.includes("--dry-run");
   const state = JSON.parse(await fs.readFile(DEFAULT_STATE, "utf8"));
   const catalog = JSON.parse(await fs.readFile(DEFAULT_CATALOG, "utf8"));
@@ -345,7 +353,12 @@ async function main() {
   process.stdout.write(`${JSON.stringify({ dry_run: dryRun, summary: report.summary, coverage_after: after, chinese })}\n`);
 }
 
-main().catch((error) => {
-  process.stderr.write(`${error.stack || error}\n`);
-  process.exitCode = 1;
-});
+const invokedPath = process.argv[1] ? path.resolve(process.argv[1]) : null;
+if (invokedPath === fileURLToPath(import.meta.url)) {
+  main().catch((error) => {
+    process.stderr.write(`${error.stack || error}\n`);
+    process.exitCode = 1;
+  });
+}
+
+export { buildOfficialView, completeLevels, unresolvedReason };

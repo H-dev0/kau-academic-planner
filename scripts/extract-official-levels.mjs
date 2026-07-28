@@ -12,6 +12,7 @@ const DEFAULT_CATALOG = path.join(ROOT, "web/data/faculty_catalog.json");
 const DEFAULT_OUTPUT = path.join(ROOT, "data/raw/kau/official_levels_completion");
 const DEFAULT_STATE = path.join(DEFAULT_OUTPUT, "state.json");
 const LEVELS_TAB = /^(?:Levels|المستويات)$/iu;
+const STUDY_PLAN_TAB = /(?:Study Plan|الخطة الدراسية)$/iu;
 const NOT_FOUND = /(?:page\s+not\s+found|the page you are looking for|الصفحة\s+غير\s+موجودة|عذراً.*الصفحة)/iu;
 
 function clean(value) {
@@ -53,6 +54,8 @@ function parseArgs(argv) {
     refresh: false,
     headless: true,
     screenshotProgram: null,
+    htmlFile: null,
+    htmlLocale: null,
   };
   for (let index = 0; index < argv.length; index += 1) {
     const flag = argv[index];
@@ -65,6 +68,8 @@ function parseArgs(argv) {
     else if (flag === "--delay-ms") options.delayMs = Number(value), index += 1;
     else if (flag === "--timeout-ms") options.timeoutMs = Number(value), index += 1;
     else if (flag === "--screenshot-program") options.screenshotProgram = value, index += 1;
+    else if (flag === "--html-file") options.htmlFile = path.resolve(value), index += 1;
+    else if (flag === "--locale") options.htmlLocale = value, index += 1;
     else if (flag === "--refresh") options.refresh = true;
     else if (flag === "--headed") options.headless = false;
     else if (flag === "--help") options.help = true;
@@ -72,6 +77,8 @@ function parseArgs(argv) {
   }
   if (!Number.isFinite(options.delayMs) || options.delayMs < 0) throw new Error("--delay-ms must be non-negative");
   if (!Number.isFinite(options.timeoutMs) || options.timeoutMs < 1_000) throw new Error("--timeout-ms must be at least 1000");
+  if (options.htmlFile && !["ar", "en"].includes(options.htmlLocale)) throw new Error("--html-file requires --locale ar|en");
+  if (options.htmlFile && options.programIds.size !== 1) throw new Error("--html-file requires exactly one --program-id");
   return options;
 }
 
@@ -85,10 +92,84 @@ Options:
   --delay-ms N               Delay between live pages (default: 600)
   --timeout-ms N             Per-page navigation timeout (default: 60000)
   --screenshot-program ID    Save one expanded-page screenshot as evidence
+  --html-file PATH           Import one saved official page response without launching a browser
+  --locale ar|en             Locale for --html-file
   --output-dir PATH          Raw snapshot directory
   --state PATH               Resumable state JSON path
   --headed                   Show the browser window
 `;
+}
+
+function extractJsonArray(value) {
+  let depth = 0;
+  let quoted = false;
+  let escaped = false;
+  for (let index = 0; index < value.length; index += 1) {
+    const character = value[index];
+    if (quoted) {
+      if (escaped) escaped = false;
+      else if (character === "\\") escaped = true;
+      else if (character === '"') quoted = false;
+      continue;
+    }
+    if (character === '"') quoted = true;
+    else if (character === "[") depth += 1;
+    else if (character === "]") {
+      depth -= 1;
+      if (depth === 0) return JSON.parse(value.slice(0, index + 1));
+    }
+  }
+  return null;
+}
+
+function extractEmbeddedLevelTables(html) {
+  const flightPattern = /self\.__next_f\.push\(\[1,("(?:[^"\\]|\\.)*")\]\)<\/script>/gu;
+  const studyPlans = [];
+  for (const match of html.matchAll(flightPattern)) {
+    let chunk;
+    try {
+      chunk = JSON.parse(match[1]);
+    } catch {
+      continue;
+    }
+    const marker = '"studyPlan":';
+    const markerIndex = chunk.indexOf(marker);
+    if (markerIndex === -1) continue;
+    try {
+      const studyPlan = extractJsonArray(chunk.slice(markerIndex + marker.length));
+      if (Array.isArray(studyPlan)) studyPlans.push(...studyPlan);
+    } catch {
+      // Ignore malformed framework payloads and continue to the rendered DOM fallback.
+    }
+  }
+
+  const levelPlan = studyPlans.find((plan) => (
+    plan?.has_levels === true
+      && /^(?:Levels|المستويات|Study Plan(?: \(levels\))?|الخطة الدراسية)$/iu.test(clean(plan.name))
+      && Array.isArray(plan.levels)
+      && plan.levels.length
+  ));
+  if (!levelPlan) return [];
+
+  let sourceOrder = 0;
+  return levelPlan.levels.map((level, levelIndex) => ({
+    official_level_name: clean(level.name),
+    source_level_order: levelIndex + 1,
+    headers: ["Course Code", "Course", "Credits", "Prerequisites"],
+    rows: (level.courses || []).map((course) => {
+      sourceOrder += 1;
+      const prerequisite = clean(course.prerequisites);
+      return {
+        course_code: clean(course.code),
+        course_name: clean(course.name),
+        credits: Number.isInteger(course.credit_hours) ? course.credit_hours : parseCredits(course.credit_hours),
+        credits_text: clean(course.credit_hours),
+        prerequisite_text: prerequisite && !/^[\-–—]+$/u.test(prerequisite) ? prerequisite : null,
+        source_order: sourceOrder,
+        source_cells: [clean(course.code), clean(course.name), clean(course.credit_hours), prerequisite],
+      };
+    }),
+  }));
 }
 
 async function readJson(filePath, fallback) {
@@ -109,13 +190,13 @@ async function writeJson(filePath, value) {
 
 async function clickLevelsTab(page) {
   const bodyText = clean(await page.locator("body").innerText().catch(() => ""));
-  let found = /(?:^|\n)(?:Levels|المستويات)(?:\n|$)/iu.test(bodyText);
+  let found = /(?:^|\n)(?:Levels|المستويات|Semester\/Level[^\n]*)(?:\n|$)/iu.test(bodyText);
   const buttons = page.locator("button");
   const count = await buttons.count();
   for (let index = 0; index < count; index += 1) {
     const button = buttons.nth(index);
     const label = clean(await button.innerText().catch(() => ""));
-    if (!LEVELS_TAB.test(label)) continue;
+    if (!LEVELS_TAB.test(label) && !STUDY_PLAN_TAB.test(label)) continue;
     found = true;
     if (await button.isVisible().catch(() => false)) {
       await button.scrollIntoViewIfNeeded().catch(() => {});
@@ -231,9 +312,16 @@ async function extractLocale(context, program, locale, options) {
     ).catch(() => {});
     const bodyText = clean(await page.locator("body").innerText());
     const pageNotFound = NOT_FOUND.test(bodyText);
-    const levelsTabFound = pageNotFound ? false : await clickLevelsTab(page);
-    const levels = levelsTabFound ? await expandAndReadLevelTables(page) : [];
+    let levelsTabFound = pageNotFound ? false : await clickLevelsTab(page);
+    let levels = levelsTabFound ? await expandAndReadLevelTables(page) : [];
     const html = await page.content();
+    if (!levels.length && !pageNotFound) {
+      const embeddedLevels = extractEmbeddedLevelTables(html);
+      if (embeddedLevels.length) {
+        levels = embeddedLevels;
+        levelsTabFound = true;
+      }
+    }
     const localeDir = path.join(options.outputDir, program.id);
     await fs.mkdir(localeDir, { recursive: true });
     const htmlPath = path.join(localeDir, `${locale}.html`);
@@ -341,6 +429,49 @@ async function main() {
   state.updated_at = now();
   await writeJson(options.state, state);
 
+  if (options.htmlFile) {
+    const program = programs[0];
+    const locale = options.htmlLocale;
+    const html = await fs.readFile(options.htmlFile, "utf8");
+    const levels = extractEmbeddedLevelTables(html);
+    const localeDir = path.join(options.outputDir, program.id);
+    await fs.mkdir(localeDir, { recursive: true });
+    const htmlPath = path.join(localeDir, `${locale}.html`);
+    await fs.writeFile(htmlPath, html, "utf8");
+    const saved = state.programs[program.id];
+    const result = {
+      program_id: program.id,
+      program_name_ar: program.program_name_ar || program.name_ar || null,
+      program_name_en: program.program_name_en || program.name_en || program.program_name || null,
+      degree_level: program.degree_level,
+      initial_coverage_state: saved?.initial_coverage_state || program.coverage_state,
+      source_urls: { ar: program.source_url_ar || null, en: program.source_url_en || null },
+      locales: saved?.locales || {},
+    };
+    result.locales[locale] = {
+      status: levels.length ? "success" : "no_levels",
+      url: program[`source_url_${locale}`] || null,
+      requested_url: program[`source_url_${locale}`] || null,
+      http_status: 200,
+      retrieved_at: now(),
+      levels_tab_found: Boolean(levels.length),
+      page_not_found: false,
+      document_title: null,
+      html_path: relative(htmlPath),
+      html_sha256: sha256(html),
+      screenshot_path: null,
+      levels,
+      ...summarizeLevels(levels),
+    };
+    Object.assign(result, programSummary(result));
+    result.updated_at = now();
+    state.programs[program.id] = result;
+    state.updated_at = now();
+    await writeJson(options.state, state);
+    process.stdout.write(`${JSON.stringify({ program_id: program.id, locale, status: result.status, levels: result.level_count, rows: result.row_count })}\n`);
+    return;
+  }
+
   const browser = await chromium.launch({ headless: options.headless });
   const context = await browser.newContext({
     viewport: { width: 1440, height: 1200 },
@@ -409,4 +540,4 @@ if (invokedPath === fileURLToPath(import.meta.url)) {
   });
 }
 
-export { clean, parseCredits, summarizeLevels };
+export { clean, extractEmbeddedLevelTables, parseCredits, summarizeLevels };
