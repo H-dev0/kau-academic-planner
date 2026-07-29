@@ -40,9 +40,9 @@ class OfficialViewsToFullPlannerTests(unittest.TestCase):
             "total": 223, "FULL_PLANNER": 73, "OFFICIAL_PLAN_VIEW": 116, "CATALOG_ONLY": 34,
         })
         self.assertEqual(len(programs), 225)
-        self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 130)
-        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 45)
-        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 50)
+        self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 180)
+        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 2)
+        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 43)
 
     def test_only_one_program_is_promoted_and_every_retention_has_exact_blockers(self) -> None:
         promoted = REPORT["promoted_programs"]
@@ -89,7 +89,7 @@ class OfficialViewsToFullPlannerTests(unittest.TestCase):
         self.assertEqual(len(original), 28)
         for program in original:
             self.assertEqual(current_by_id[program["id"]], program)
-        self.assertEqual(len(PLANNERS), 150)
+        self.assertEqual(len(PLANNERS), 181)
 
     def test_previously_retained_views_are_now_interactive(self) -> None:
         by_id = {program["id"]: program for program in CATALOG["programs"]}

@@ -112,9 +112,14 @@ class RemainingBachelorCoverageWaveTests(unittest.TestCase):
                 if item["program_id"] in MANUAL_BY_ID:
                     expected_state = MANUAL_BY_ID[item["program_id"]]["final_coverage_state"]
                     self.assertEqual(program["coverage_state"], expected_state)
-                    self.assertFalse(program["planner_available"])
-                    self.assertIsNone(program["planner_data_key"])
-                    self.assertEqual("official_plan_view" in program, expected_state == "OFFICIAL_PLAN_VIEW")
+                    if expected_state == "FULL_PLANNER":
+                        self.assertTrue(program["planner_available"])
+                        self.assertEqual(program["planner_data_key"], item["program_id"])
+                        self.assertIn("official_plan_view", program)
+                    else:
+                        self.assertFalse(program["planner_available"])
+                        self.assertIsNone(program["planner_data_key"])
+                        self.assertEqual("official_plan_view" in program, expected_state == "OFFICIAL_PLAN_VIEW")
                 elif program["coverage_state"] == "FULL_PLANNER":
                     self.assertTrue(program["planner_available"])
                     self.assertEqual(program["planner_data_key"], item["program_id"])

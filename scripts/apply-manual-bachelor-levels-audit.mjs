@@ -6,6 +6,7 @@ import process from "node:process";
 import { fileURLToPath } from "node:url";
 
 import { buildOfficialView, completeLevels } from "./import-official-levels.mjs";
+import { runProductOwnerReview } from "./review-pr10-coverage.mjs";
 import levelNormalization from "../web/level-normalization.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -26,7 +27,8 @@ const KEEP_FULL_IDS = new Set([
 ]);
 
 const OFFICIAL_VIEW_IDS = new Set([
-  // Level-order corrections whose academic rules are not safe for progress operations.
+  // Conservative intermediate states. The product-owner review below restores
+  // every complete plan using the warning-capable interactive conversion path.
   "catalog-bachelor-of-public-relations-program",
   "catalog-bachelor-in-french-language-translation",
   "catalog-counseling-psychology",
@@ -628,7 +630,7 @@ async function main() {
   process.stdout.write(`${JSON.stringify({ coverage_before: coverageBefore, coverage_after: coverageAfter, total_after: catalog.programs.length, report_programs: auditPrograms.length })}\n`);
 }
 
-main().catch((error) => {
+main().then(runProductOwnerReview).catch((error) => {
   process.stderr.write(`${error.stack || error}\n`);
   process.exitCode = 1;
 });

@@ -8,6 +8,7 @@
     "import:official-levels": "node scripts/import-official-levels.mjs",
     "promote:official-views": "node scripts/promote-official-views-to-full-planners.mjs",
     "convert:visible-plans": "node scripts/convert-visible-plans-to-interactive.mjs",
+    "review:pr10-coverage": "node scripts/review-pr10-coverage.mjs",
     "test:official-levels-extractor": "node --test tests/test_extract_official_levels.mjs",
     "test:level-normalization": "node --test tests/test_level_normalization.mjs",
     "test:official-levels-ui": "node scripts/validate-official-levels-ui.mjs",

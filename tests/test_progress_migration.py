@@ -146,8 +146,8 @@ console.log(JSON.stringify({blockedBefore,blockedAfter,metadata:migration.reconf
             "catalog-human-sciences-and-design-bachelor-of-science-b-sc-in-family-sciences",
             "catalog-human-sciences-and-design-bachelor-s-department-of-early-childhood-guide",
         }
-        self.assertTrue(all(PROGRAMS[program_id]["coverage_state"] == "OFFICIAL_PLAN_VIEW" for program_id in affected))
-        self.assertTrue(all(not PROGRAMS[program_id]["planner_available"] for program_id in affected))
+        self.assertTrue(all(PROGRAMS[program_id]["coverage_state"] == "FULL_PLANNER" for program_id in affected))
+        self.assertTrue(all(PROGRAMS[program_id]["planner_available"] for program_id in affected))
         self.assertTrue(all("official_plan_view" in PROGRAMS[program_id] for program_id in affected))
         self.assertNotIn("accounting", affected)
         self.assertNotIn("finance", affected)

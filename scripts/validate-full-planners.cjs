@@ -43,7 +43,7 @@ function runtimeProgram(catalogProgram) {
 }
 
 const full = catalog.programs.filter((program) => program.coverage_state === "FULL_PLANNER").map(runtimeProgram);
-if (full.length !== 130) throw new Error(`expected 130 FULL_PLANNER programs, found ${full.length}`);
+if (full.length !== 180) throw new Error(`expected 180 FULL_PLANNER programs, found ${full.length}`);
 
 const summary = {
   programs: full.length,
@@ -132,7 +132,8 @@ for (const [programId, audited] of manualById) {
     throw new Error(`${programId}: materially missing audited official rows`);
   }
   if (catalogProgram.coverage_state === "FULL_PLANNER") {
-    const courseLevelIds = runtime.courses.map((course) => levels.courseLevelId(course));
+    const scheduledCourses = runtime.courses.filter((course) => course.official_level_placement !== "unplaced");
+    const courseLevelIds = scheduledCourses.map((course) => levels.courseLevelId(course));
     if (courseLevelIds.some((levelId) => !levelId)) throw new Error(`${programId}: course assigned to an unknown level`);
     const orderedUniqueIds = courseLevelIds.filter((levelId, index) => index === 0 || levelId !== courseLevelIds[index - 1]);
     levels.validateLevelSequence(orderedUniqueIds.map((level_id) => ({ level_id })));

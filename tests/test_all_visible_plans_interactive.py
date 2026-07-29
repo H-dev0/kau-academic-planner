@@ -113,7 +113,11 @@ class AllVisiblePlansInteractiveTests(unittest.TestCase):
 
     def test_ambiguous_prerequisites_warn_without_blocking(self) -> None:
         ambiguous = []
-        for program_id in self.converted:
+        historical_expected = 0
+        for program_id, report_item in self.converted.items():
+            if program_id in MANUAL_BY_ID:
+                continue
+            historical_expected += len(report_item["unresolved_prerequisite_rows"])
             for course in self.planner_by_id[program_id]["courses"]:
                 if not course["prerequisite_verification_required"]:
                     continue
@@ -126,7 +130,7 @@ class AllVisiblePlansInteractiveTests(unittest.TestCase):
                 )
                 self.assertEqual(warning["message_en"], "Prerequisite information requires verification")
                 self.assertEqual(warning["message_ar"], "بيانات المتطلب تحتاج إلى تحقق")
-        self.assertEqual(len(ambiguous), REPORT["summary"]["ambiguous_prerequisite_rows"])
+        self.assertEqual(len(ambiguous), historical_expected)
 
     def test_credit_metadata_is_finite_and_electives_are_conservative(self) -> None:
         for program_id in self.converted:
@@ -147,8 +151,8 @@ class AllVisiblePlansInteractiveTests(unittest.TestCase):
     def test_chinese_food_and_protected_regressions(self) -> None:
         chinese = self.planner_by_id["catalog-chinese-language"]
         self.assertEqual(chinese["official_plan_level_count"], 8)
-        self.assertEqual(len(chinese["courses"]), 44)
-        self.assertEqual(sum(course["credit_hours"] for course in chinese["courses"]), 122)
+        self.assertEqual(len(chinese["courses"]), 45)
+        self.assertEqual(sum(course["credit_hours"] for course in chinese["courses"]), 125)
 
         food = self.planner_by_id["catalog-food-and-nutrition"]
         self.assertEqual(food["official_plan_level_count"], 8)

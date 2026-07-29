@@ -56,9 +56,9 @@ class PriorityFacultiesWaveTests(unittest.TestCase):
         for program_id, expected in EXPECTED_NEW_VIEWS.items():
             with self.subTest(program_id=program_id):
                 program = by_id[program_id]
-                self.assertEqual(program["coverage_state"], "OFFICIAL_PLAN_VIEW")
-                self.assertFalse(program["planner_available"])
-                self.assertIsNone(program["planner_data_key"])
+                self.assertEqual(program["coverage_state"], "FULL_PLANNER")
+                self.assertTrue(program["planner_available"])
+                self.assertEqual(program["planner_data_key"], program_id)
                 self.assertIn(program_id, PLANNER_IDS)
                 view = program["official_plan_view"]
                 rows = [row for section in view["sections"] for row in section["rows"]]
@@ -104,15 +104,21 @@ class PriorityFacultiesWaveTests(unittest.TestCase):
             self.assertEqual(decisions[program_id], classification)
             expected_state = MANUAL_BY_ID[program_id]["final_coverage_state"]
             self.assertEqual(by_id[program_id]["coverage_state"], expected_state)
-            self.assertFalse(by_id[program_id]["planner_available"])
-            self.assertIsNone(by_id[program_id]["planner_data_key"])
             self.assertIn(program_id, completed)
-            if expected_state == "OFFICIAL_PLAN_VIEW":
+            if expected_state == "FULL_PLANNER":
+                self.assertTrue(by_id[program_id]["planner_available"])
+                self.assertEqual(by_id[program_id]["planner_data_key"], program_id)
+                self.assertIn("official_plan_view", by_id[program_id])
+            elif expected_state == "OFFICIAL_PLAN_VIEW":
+                self.assertFalse(by_id[program_id]["planner_available"])
+                self.assertIsNone(by_id[program_id]["planner_data_key"])
                 self.assertTrue(all(
                     section["placement"] == "scheduled"
                     for section in by_id[program_id]["official_plan_view"]["sections"]
                 ))
             else:
+                self.assertFalse(by_id[program_id]["planner_available"])
+                self.assertIsNone(by_id[program_id]["planner_data_key"])
                 self.assertNotIn("official_plan_view", by_id[program_id])
 
 

@@ -559,7 +559,11 @@ async function main() {
   process.stdout.write(`${JSON.stringify({ coverage: coverageAfter, converted: generated.length, rows: generated.reduce((sum, planner) => sum + planner.courses.length, 0), warnings: report.summary, remaining_catalog: remainingCatalog.length })}\n`);
 }
 
-main().catch((error) => {
-  process.stderr.write(`${error.stack || error}\n`);
-  process.exitCode = 1;
-});
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((error) => {
+    process.stderr.write(`${error.stack || error}\n`);
+    process.exitCode = 1;
+  });
+}
+
+export { buildPlanner };

@@ -27,15 +27,25 @@ CATALOG_ONLY_IDS = {
     program["id"] for program in CATALOG["programs"]
     if program["coverage_state"] == "CATALOG_ONLY"
 }
+ARABIC = [
+    None, "المستوى الأول", "المستوى الثاني", "المستوى الثالث", "المستوى الرابع",
+    "المستوى الخامس", "المستوى السادس", "المستوى السابع", "المستوى الثامن",
+    "المستوى التاسع", "المستوى العاشر", "المستوى الحادي عشر", "المستوى الثاني عشر",
+]
+ENGLISH = [
+    None, "Level One", "Level Two", "Level Three", "Level Four", "Level Five",
+    "Level Six", "Level Seven", "Level Eight", "Level Nine", "Level Ten",
+    "Level Eleven", "Level Twelve",
+]
 
 
 class OfficialPlanViewDataTests(unittest.TestCase):
     def test_coverage_counts_and_status_invariants(self) -> None:
         programs = CATALOG["programs"]
         self.assertEqual(len(programs), 225)
-        self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 130)
-        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 45)
-        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 50)
+        self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 180)
+        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 2)
+        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 43)
         planner_ids = {p["id"] for p in json.loads((ROOT / "web/data/additional_programs.json").read_text())["programs"]}
         for program in (p for p in programs if p["id"] in CONVERTED_IDS):
             if program["id"] in MANUAL_BY_ID:
@@ -209,7 +219,8 @@ class OfficialPlanViewApiTests(unittest.TestCase):
     def test_manual_audit_full_view_and_catalog_api_contracts(self) -> None:
         representatives = {
             "catalog-intermediate-diploma-in-cybersecurity": ("FULL_PLANNER", True, False, 200),
-            "catalog-bachelor-of-public-relations-program": ("OFFICIAL_PLAN_VIEW", False, True, 409),
+            "catalog-bachelor-of-public-relations-program": ("FULL_PLANNER", True, False, 200),
+            "catalog-economics-and-administration-bachelor-of-health-services-and-hospital-administrati": ("OFFICIAL_PLAN_VIEW", False, True, 409),
             "catalog-geography-and-geographic-information-systems": ("CATALOG_ONLY", False, False, 409),
         }
         status, registry = self.request_status("GET", "/api/programs")
@@ -226,6 +237,39 @@ class OfficialPlanViewApiTests(unittest.TestCase):
                 self.assertEqual(status, plan_status)
                 if plan_status == 409:
                     self.assertEqual(payload["coverage_state"], state)
+
+    def test_representative_arabic_and_english_api_rendering_fallback(self) -> None:
+        status, public_relations = self.request_status(
+            "GET", "/api/program?major=catalog-bachelor-of-public-relations-program",
+        )
+        self.assertEqual(status, 200)
+        scheduled = [
+            course for course in public_relations["courses"]
+            if course.get("official_level_placement") != "unplaced"
+        ]
+        self.assertEqual(
+            list(dict.fromkeys(course["semester_or_level_ar"] for course in scheduled)),
+            ARABIC[1:9],
+        )
+        self.assertEqual(
+            list(dict.fromkeys(course["semester_or_level_en"] for course in scheduled)),
+            ENGLISH[1:9],
+        )
+
+        status, health = self.request_status(
+            "GET", "/api/program?major=catalog-economics-and-administration-bachelor-of-health-services-and-hospital-administrati",
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(health["coverage_state"], "OFFICIAL_PLAN_VIEW")
+        self.assertEqual(health["official_plan_view"]["visible_course_count"], 34)
+        self.assertEqual(
+            [section["title_en"] for section in health["official_plan_view"]["sections"][:8]],
+            ENGLISH[1:9],
+        )
+        self.assertEqual(
+            [section["title_ar"] for section in health["official_plan_view"]["sections"][:8]],
+            ARABIC[1:9],
+        )
 
 
 if __name__ == "__main__":
