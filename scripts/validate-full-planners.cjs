@@ -4,11 +4,15 @@ const fs = require("fs");
 const path = require("path");
 
 const { planCourses } = require("../server.js");
+const levels = require("../web/level-normalization.js");
 
 const root = path.resolve(__dirname, "..");
 const catalog = JSON.parse(fs.readFileSync(path.join(root, "web/data/faculty_catalog.json"), "utf8"));
 const additional = JSON.parse(fs.readFileSync(path.join(root, "web/data/additional_programs.json"), "utf8"));
 const accounting = JSON.parse(fs.readFileSync(path.join(root, "data/validated/kau_accounting.json"), "utf8"));
+const manualReport = JSON.parse(fs.readFileSync(
+  path.join(root, "reports/manual_audit/manual_bachelor_levels_audit.json"), "utf8",
+));
 accounting.id = "accounting";
 
 const foundationCourses = [
@@ -39,7 +43,7 @@ function runtimeProgram(catalogProgram) {
 }
 
 const full = catalog.programs.filter((program) => program.coverage_state === "FULL_PLANNER").map(runtimeProgram);
-if (full.length !== 195) throw new Error(`expected 195 FULL_PLANNER programs, found ${full.length}`);
+if (full.length !== 180) throw new Error(`expected 180 FULL_PLANNER programs, found ${full.length}`);
 
 const summary = {
   programs: full.length,
@@ -55,6 +59,9 @@ const summary = {
 for (const program of full) {
   if (!program.courses.length) throw new Error(`${program.id}: empty planner dataset`);
   if (program.courses.some((course) => !course.semester_or_level)) throw new Error(`${program.id}: missing level placement`);
+  if (!new Set(program.courses.map((course) => course.semester_or_level)).size) {
+    throw new Error(`${program.id}: FULL_PLANNER has no visible levels`);
+  }
   const initial = planCourses(program, [], {});
   if (initial.validation_errors?.length) throw new Error(`${program.id}: ${initial.validation_errors.join("; ")}`);
   if (initial.available_courses.length + initial.blocked_courses.length !== program.courses.length) {
@@ -86,6 +93,51 @@ for (const program of full) {
   }
   if (iterations > program.courses.length) throw new Error(`${program.id}: planner simulation did not converge`);
   summary.maximum_iterations = Math.max(summary.maximum_iterations, iterations);
+}
+
+const catalogById = new Map(catalog.programs.map((program) => [program.id, program]));
+const manualById = new Map(manualReport.programs.map((program) => [program.resolved_repository_id, program]));
+for (const program of catalog.programs) {
+  if (program.coverage_state === "OFFICIAL_PLAN_VIEW") {
+    if (program.planner_available || program.planner_data_key) throw new Error(`${program.id}: read-only view exposes planner controls`);
+    const scheduled = (program.official_plan_view?.sections || []).filter((section) => section.placement === "scheduled");
+    if (!scheduled.length) throw new Error(`${program.id}: OFFICIAL_PLAN_VIEW has no visible levels`);
+    levels.validateLevelSequence(scheduled);
+    for (const section of scheduled) {
+      if (!section.rows?.length) throw new Error(`${program.id}: empty visible level ${section.level_id}`);
+      if (section.title_ar !== levels.localizedLevelName(section.level_id, "ar")
+          || section.title_en !== levels.localizedLevelName(section.level_id, "en")) {
+        throw new Error(`${program.id}: Arabic and English level identities disagree`);
+      }
+    }
+  }
+  if (program.coverage_state === "CATALOG_ONLY" && (program.planner_available || program.planner_data_key)) {
+    throw new Error(`${program.id}: CATALOG_ONLY exposes planner controls`);
+  }
+}
+
+for (const [programId, audited] of manualById) {
+  const catalogProgram = catalogById.get(programId);
+  if (!catalogProgram) throw new Error(`${programId}: audited program missing from catalog`);
+  if (catalogProgram.coverage_state !== audited.final_coverage_state) {
+    throw new Error(`${programId}: audited coverage state changed`);
+  }
+  const runtime = catalogProgram.coverage_state === "FULL_PLANNER" ? runtimeProgram(catalogProgram) : catalogProgram;
+  const rows = catalogProgram.coverage_state === "FULL_PLANNER"
+    ? runtime.courses
+    : catalogProgram.coverage_state === "OFFICIAL_PLAN_VIEW"
+      ? catalogProgram.official_plan_view.sections.flatMap((section) => section.rows || [])
+      : [];
+  if (rows.length !== audited.repository_row_count_after) {
+    throw new Error(`${programId}: materially missing audited official rows`);
+  }
+  if (catalogProgram.coverage_state === "FULL_PLANNER") {
+    const scheduledCourses = runtime.courses.filter((course) => course.official_level_placement !== "unplaced");
+    const courseLevelIds = scheduledCourses.map((course) => levels.courseLevelId(course));
+    if (courseLevelIds.some((levelId) => !levelId)) throw new Error(`${programId}: course assigned to an unknown level`);
+    const orderedUniqueIds = courseLevelIds.filter((levelId, index) => index === 0 || levelId !== courseLevelIds[index - 1]);
+    levels.validateLevelSequence(orderedUniqueIds.map((level_id) => ({ level_id })));
+  }
 }
 
 const byId = new Map(full.map((program) => [program.id, program]));

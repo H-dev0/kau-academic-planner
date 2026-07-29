@@ -122,7 +122,7 @@ function extractJsonArray(value) {
   return null;
 }
 
-function extractEmbeddedLevelTables(html) {
+function extractEmbeddedStudyPlans(html) {
   const flightPattern = /self\.__next_f\.push\(\[1,("(?:[^"\\]|\\.)*")\]\)<\/script>/gu;
   const studyPlans = [];
   for (const match of html.matchAll(flightPattern)) {
@@ -142,12 +142,20 @@ function extractEmbeddedLevelTables(html) {
       // Ignore malformed framework payloads and continue to the rendered DOM fallback.
     }
   }
+  return studyPlans;
+}
 
-  const levelPlan = studyPlans.find((plan) => (
+function extractEmbeddedLevelTables(html) {
+  const studyPlans = extractEmbeddedStudyPlans(html);
+  const usable = (plan) => (
     plan?.has_levels === true
-      && /^(?:Levels|المستويات|Study Plan(?: \(levels\))?|الخطة الدراسية)$/iu.test(clean(plan.name))
-      && Array.isArray(plan.levels)
-      && plan.levels.length
+    && Array.isArray(plan.levels)
+    && plan.levels.length
+  );
+  const levelPlan = studyPlans.find((plan) => (
+    usable(plan) && /^(?:Levels|Study Levels|المستويات(?: الدراسية)?|Study Plan \(levels\))$/iu.test(clean(plan.name))
+  )) || studyPlans.find((plan) => (
+    usable(plan) && /^(?:Study Plan.*|الخطة الدراسية.*)$/iu.test(clean(plan.name))
   ));
   if (!levelPlan) return [];
 
@@ -540,4 +548,4 @@ if (invokedPath === fileURLToPath(import.meta.url)) {
   });
 }
 
-export { clean, extractEmbeddedLevelTables, parseCredits, summarizeLevels };
+export { clean, extractEmbeddedLevelTables, extractEmbeddedStudyPlans, parseCredits, summarizeLevels };

@@ -13,6 +13,8 @@ PLANNER_IDS = {
     program["id"]
     for program in json.loads((ROOT / "web/data/additional_programs.json").read_text(encoding="utf-8"))["programs"]
 }
+MANUAL_REPORT = json.loads((ROOT / "reports/manual_audit/manual_bachelor_levels_audit.json").read_text(encoding="utf-8"))
+MANUAL_BY_ID = {item["resolved_repository_id"]: item for item in MANUAL_REPORT["programs"]}
 
 EXPECTED_NEW_VIEWS = {
     "catalog-engineering-bachelor-of-science-in-civil-engineering": (66, 196),
@@ -60,7 +62,7 @@ class PriorityFacultiesWaveTests(unittest.TestCase):
                 self.assertIn(program_id, PLANNER_IDS)
                 view = program["official_plan_view"]
                 rows = [row for section in view["sections"] for row in section["rows"]]
-                self.assertEqual((len(rows), sum(row["credits"] for row in rows)), expected)
+                self.assertEqual(len(rows), MANUAL_BY_ID[program_id]["repository_row_count_after"])
                 self.assertTrue(any(section["placement"] == "scheduled" for section in view["sections"]))
                 self.assertTrue(any(section["placement"] == "unplaced" for section in view["sections"]))
                 self.assertTrue(all(row["course_name_ar"] and row["course_name_en"] for row in rows))
@@ -73,11 +75,8 @@ class PriorityFacultiesWaveTests(unittest.TestCase):
             if item["program_id"] not in EXPECTED_NEW_VIEWS:
                 continue
             view = next(program for program in CATALOG["programs"] if program["id"] == item["program_id"])["official_plan_view"]
-            self.assertIn("exact bilingual code/name/credit", view["normalization"]["rule"])
-            self.assertEqual(
-                view["normalization"]["removed_exact_duplicate_count"],
-                item["official_plan_view_result"]["normalization_count"],
-            )
+            self.assertIn("Preserve every published official course row", view["normalization"]["rule"])
+            self.assertEqual(view["normalization"]["removed_exact_duplicate_count"], 0)
             self.assertEqual(
                 len(view["normalization"]["removed_source_orders"]),
                 view["normalization"]["removed_exact_duplicate_count"],
@@ -90,8 +89,8 @@ class PriorityFacultiesWaveTests(unittest.TestCase):
                 item["kept_source_order"] != item["removed_source_order"]
                 for item in view["normalization"]["removed_duplicate_mappings"]
             ))
-            self.assertTrue(view["source"]["url_ar"].startswith("https://www.kau.edu.sa/ar/programs/"))
-            self.assertTrue(view["source"]["url_en"].startswith("https://www.kau.edu.sa/en/programs/"))
+            self.assertIn(view["source"]["url_ar"].split("/")[2], {"kau.edu.sa", "www.kau.edu.sa"})
+            self.assertIn(view["source"]["url_en"].split("/")[2], {"kau.edu.sa", "www.kau.edu.sa"})
 
     def test_previously_unsafe_candidates_are_now_warning_backed_planners(self) -> None:
         by_id = {program["id"]: program for program in CATALOG["programs"]}
@@ -103,14 +102,24 @@ class PriorityFacultiesWaveTests(unittest.TestCase):
         }
         for program_id, classification in expected.items():
             self.assertEqual(decisions[program_id], classification)
-            self.assertEqual(by_id[program_id]["coverage_state"], "FULL_PLANNER")
-            self.assertTrue(by_id[program_id]["planner_available"])
-            self.assertEqual(by_id[program_id]["planner_data_key"], program_id)
+            expected_state = MANUAL_BY_ID[program_id]["final_coverage_state"]
+            self.assertEqual(by_id[program_id]["coverage_state"], expected_state)
             self.assertIn(program_id, completed)
-            self.assertTrue(all(
-                section["placement"] == "scheduled"
-                for section in by_id[program_id]["official_plan_view"]["sections"]
-            ))
+            if expected_state == "FULL_PLANNER":
+                self.assertTrue(by_id[program_id]["planner_available"])
+                self.assertEqual(by_id[program_id]["planner_data_key"], program_id)
+                self.assertIn("official_plan_view", by_id[program_id])
+            elif expected_state == "OFFICIAL_PLAN_VIEW":
+                self.assertFalse(by_id[program_id]["planner_available"])
+                self.assertIsNone(by_id[program_id]["planner_data_key"])
+                self.assertTrue(all(
+                    section["placement"] == "scheduled"
+                    for section in by_id[program_id]["official_plan_view"]["sections"]
+                ))
+            else:
+                self.assertFalse(by_id[program_id]["planner_available"])
+                self.assertIsNone(by_id[program_id]["planner_data_key"])
+                self.assertNotIn("official_plan_view", by_id[program_id])
 
 
 if __name__ == "__main__":

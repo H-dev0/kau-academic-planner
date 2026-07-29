@@ -280,6 +280,10 @@ def normalize(code: str) -> str:
     return re.sub(r"[^A-Z0-9]", "", code.upper())
 
 
+MANUAL_REPORT = load("reports/manual_audit/manual_bachelor_levels_audit.json")
+MANUAL_BY_ID = {item["resolved_repository_id"]: item for item in MANUAL_REPORT["programs"]}
+
+
 class PilotImportDataTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -301,11 +305,11 @@ class PilotImportDataTests(unittest.TestCase):
         ))
 
     def test_catalog_counts_and_selected_statuses(self) -> None:
-        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 195)
-        self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 28)
-        self.assertEqual(sum(p.get("coverage_state") == "FULL_PLANNER" for p in self.catalog), 195)
-        self.assertEqual(sum(p.get("coverage_state") == "OFFICIAL_PLAN_VIEW" for p in self.catalog), 0)
-        self.assertEqual(sum(p.get("coverage_state") == "CATALOG_ONLY" for p in self.catalog), 28)
+        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 180)
+        self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 45)
+        self.assertEqual(sum(p.get("coverage_state") == "FULL_PLANNER" for p in self.catalog), 180)
+        self.assertEqual(sum(p.get("coverage_state") == "OFFICIAL_PLAN_VIEW" for p in self.catalog), 2)
+        self.assertEqual(sum(p.get("coverage_state") == "CATALOG_ONLY" for p in self.catalog), 43)
         by_id = {p["id"]: p for p in self.catalog}
         for program_id in PILOTS:
             self.assertTrue(by_id[program_id]["planner_available"])
@@ -497,7 +501,11 @@ class PilotImportDataTests(unittest.TestCase):
         ))
         original_by_id = {p["id"]: p for p in original["programs"]}
         current_by_id = {p["id"]: p for p in self.catalog}
-        self.assertEqual(set(original_by_id), set(current_by_id))
+        self.assertEqual(set(original_by_id) - set(current_by_id), set())
+        self.assertEqual(
+            set(current_by_id) - set(original_by_id),
+            {"catalog-bachelor-of-history", "catalog-bachelor-of-social-science-social-work"},
+        )
         def legacy_fields(program):
             return {
                 key: value for key, value in program.items()
@@ -508,7 +516,8 @@ class PilotImportDataTests(unittest.TestCase):
             }
         changed = {
             program_id
-            for program_id in current_by_id
+            for program_id in set(current_by_id) & set(original_by_id)
+            if program_id not in MANUAL_BY_ID
             if legacy_fields(current_by_id[program_id]) != legacy_fields(original_by_id[program_id])
         }
         current_report = load("reports/plan_extraction/all_visible_plans_to_interactive.json")
@@ -519,8 +528,10 @@ class PilotImportDataTests(unittest.TestCase):
         }
         self.assertEqual(
             changed,
-            CURRENT_IMPORT | PREREQUISITE_NORMALIZATION_REMEDIATION
-            | OFFICIAL_VIEW_PROMOTION | current_conversions,
+            (
+                CURRENT_IMPORT | PREREQUISITE_NORMALIZATION_REMEDIATION
+                | OFFICIAL_VIEW_PROMOTION | current_conversions
+            ) - set(MANUAL_BY_ID),
         )
 
     def test_environmental_science_phd_remains_catalog_only(self) -> None:
@@ -537,9 +548,21 @@ class PilotImportDataTests(unittest.TestCase):
         for program_id in BLOCKED_PLAN_RECOVERY_SCOPE:
             with self.subTest(program_id=program_id):
                 self.assertIn(program_id, self.data)
-                self.assertTrue(by_id[program_id]["planner_available"])
-                self.assertEqual(by_id[program_id]["planner_data_key"], program_id)
-                self.assertEqual(by_id[program_id]["catalog_status"], "active")
+                if program_id in MANUAL_BY_ID:
+                    expected_state = MANUAL_BY_ID[program_id]["final_coverage_state"]
+                    self.assertEqual(
+                        by_id[program_id]["coverage_state"],
+                        expected_state,
+                    )
+                    self.assertEqual(by_id[program_id]["planner_available"], expected_state == "FULL_PLANNER")
+                    self.assertEqual(
+                        by_id[program_id]["planner_data_key"],
+                        program_id if expected_state == "FULL_PLANNER" else None,
+                    )
+                else:
+                    self.assertTrue(by_id[program_id]["planner_available"])
+                    self.assertEqual(by_id[program_id]["planner_data_key"], program_id)
+                    self.assertEqual(by_id[program_id]["catalog_status"], "active")
 
     def test_explicitly_retained_programs_remain_catalog_only(self) -> None:
         by_id = {program["id"]: program for program in self.catalog}
@@ -568,13 +591,15 @@ class PilotImportDataTests(unittest.TestCase):
             for key in ("converted_from_official_plan_view", "converted_from_catalog_only")
             for item in report[key]
         }
+        restored = set(MANUAL_REPORT["programs_restored_to_full_planner"])
         self.assertEqual(
             set(current_by_id) - set(original_by_id),
-            CURRENT_IMPORT | OFFICIAL_VIEW_PROMOTION | conversions,
+            (CURRENT_IMPORT | OFFICIAL_VIEW_PROMOTION | conversions | restored) - set(original_by_id),
         )
         self.assertEqual(set(original_by_id) - set(current_by_id), set())
         for program_id, original_program in original_by_id.items():
-            self.assertEqual(current_by_id[program_id], original_program)
+            if program_id not in restored:
+                self.assertEqual(current_by_id[program_id], original_program)
 
 
 class PilotImportApiTests(unittest.TestCase):
