@@ -14,6 +14,8 @@ CATALOG = json.loads((ROOT / "web/data/faculty_catalog.json").read_text(encoding
 REPORT = json.loads((ROOT / "reports/plan_extraction/bachelor_remaining_coverage_wave.json").read_text(encoding="utf-8"))
 LEVELS_REPORT = json.loads((ROOT / "reports/plan_extraction/official_levels_completion.json").read_text(encoding="utf-8"))
 PLANNERS = json.loads((ROOT / "web/data/additional_programs.json").read_text(encoding="utf-8"))["programs"]
+MANUAL_REPORT = json.loads((ROOT / "reports/manual_audit/manual_bachelor_levels_audit.json").read_text(encoding="utf-8"))
+MANUAL_BY_ID = {item["resolved_repository_id"]: item for item in MANUAL_REPORT["programs"]}
 
 EXPECTED_VIEWS = set(REPORT["programs_added_as_OFFICIAL_PLAN_VIEW"])
 LEVEL_RESULTS = {item["program_id"]: item for item in LEVELS_REPORT["completed_programs"]}
@@ -107,7 +109,13 @@ class RemainingBachelorCoverageWaveTests(unittest.TestCase):
                 continue
             with self.subTest(program_id=item["program_id"]):
                 program = by_id[item["program_id"]]
-                if program["coverage_state"] == "FULL_PLANNER":
+                if item["program_id"] in MANUAL_BY_ID:
+                    expected_state = MANUAL_BY_ID[item["program_id"]]["final_coverage_state"]
+                    self.assertEqual(program["coverage_state"], expected_state)
+                    self.assertFalse(program["planner_available"])
+                    self.assertIsNone(program["planner_data_key"])
+                    self.assertEqual("official_plan_view" in program, expected_state == "OFFICIAL_PLAN_VIEW")
+                elif program["coverage_state"] == "FULL_PLANNER":
                     self.assertTrue(program["planner_available"])
                     self.assertEqual(program["planner_data_key"], item["program_id"])
                     self.assertIn("official_plan_view", program)
@@ -137,7 +145,10 @@ class RemainingBachelorCoverageWaveTests(unittest.TestCase):
             if program.get("coverage_state") == "FULL_PLANNER"
         }
         self.assertEqual(len(full_planners), 72)
-        self.assertTrue(all(current_by_id[program_id] == original_by_id[program_id] for program_id in full_planners))
+        self.assertTrue(all(
+            current_by_id[program_id] == original_by_id[program_id]
+            for program_id in full_planners - set(MANUAL_BY_ID)
+        ))
 
 
 if __name__ == "__main__":

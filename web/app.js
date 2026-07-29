@@ -587,8 +587,11 @@ function serializablePlan() {
 }
 
 function levelNumber(course) {
-  const match = String(course.semester_or_level || "").match(/\d+/);
-  return match ? Number(match[0]) : 99;
+  try {
+    return window.KAULevels?.courseLevelId(course) || Number.MAX_SAFE_INTEGER;
+  } catch {
+    return Number.MAX_SAFE_INTEGER;
+  }
 }
 
 function sortByLevelThenCode(courses) {
@@ -613,7 +616,7 @@ function setupLevelFilter() {
   for (const level of levels) {
     const option = document.createElement("option");
     option.value = level;
-    option.textContent = level;
+    option.textContent = displayLevelLabel(level);
     levelFilter.append(option);
   }
 }
@@ -929,24 +932,10 @@ function formatCourseCount(count) {
 }
 
 function displayLevelLabel(level) {
-  const value = String(level || "").trim();
-  const match = value.match(/^level\s*(\d+)$/i);
-  if (!match) return value;
-  const number = Number(match[1]);
-  if (currentLanguageSafe() === "en") return `Level ${number}`;
-  const arabicLevels = {
-    1: "المستوى الأول",
-    2: "المستوى الثاني",
-    3: "المستوى الثالث",
-    4: "المستوى الرابع",
-    5: "المستوى الخامس",
-    6: "المستوى السادس",
-    7: "المستوى السابع",
-    8: "المستوى الثامن",
-    9: "المستوى التاسع",
-    10: "المستوى العاشر",
-  };
-  return arabicLevels[number] || `المستوى ${number}`;
+  const number = window.KAULevels?.parseLevelId(level);
+  return number
+    ? window.KAULevels.localizedLevelName(number, currentLanguageSafe())
+    : String(level || "").trim();
 }
 
 function hasArabicText(value) {
@@ -2172,7 +2161,15 @@ async function start() {
       const additionalResponse = await fetch("data/additional_programs.json");
       const additional = await additionalResponse.json();
       for (const program of additional.programs || []) {
-        state.programs.set(program.id, withCommonFoundation({ faculty_id: "EA", faculty_name: program.college_name || "economics and administration", catalog_status: "active", ...program }));
+        const catalogProgram = state.programs.get(program.id);
+        if (catalogProgram && catalogProgram.coverage_state !== "FULL_PLANNER") continue;
+        state.programs.set(program.id, withCommonFoundation({
+          faculty_id: "EA",
+          faculty_name: program.college_name || "economics and administration",
+          catalog_status: "active",
+          ...catalogProgram,
+          ...program,
+        }));
       }
     } catch {
       // Static fallback can still run with Accounting only.

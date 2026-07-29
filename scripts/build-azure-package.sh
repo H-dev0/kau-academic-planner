@@ -45,6 +45,7 @@ allowlist=(
   web/index.html
   web/styles.css
   web/app.js
+  web/level-normalization.js
   web/progress-migration.js
   web/credit-display.js
   web/elective-groups.js
@@ -110,6 +111,7 @@ done
 node --check "$stage_dir/server.js"
 node --check "$stage_dir/azure-iisnode-entrypoint.js"
 node --check "$stage_dir/web/app.js"
+node --check "$stage_dir/web/level-normalization.js"
 node --check "$stage_dir/web/progress-migration.js"
 node --check "$stage_dir/web/credit-display.js"
 node --check "$stage_dir/web/elective-groups.js"
@@ -138,7 +140,7 @@ coverage = {
     for state in ("FULL_PLANNER", "OFFICIAL_PLAN_VIEW", "CATALOG_ONLY")
 }
 counts = (len(programs), coverage["FULL_PLANNER"], coverage["OFFICIAL_PLAN_VIEW"], coverage["CATALOG_ONLY"])
-if counts != (223, 195, 0, 28):
+if counts != (225, 130, 45, 50):
     raise SystemExit(f"unexpected program counts: {counts}")
 PY
 
@@ -207,8 +209,23 @@ if "nan" in home_text or ">null<" in home_text:
 registry_raw, _ = request("/api/programs")
 registry = json.loads(registry_raw)
 supported = [program for program in registry["programs"] if program.get("planner_available")]
-if len(supported) != 195:
-    raise AssertionError(f"expected 195 supported programs, got {len(supported)}")
+if len(supported) != 130:
+    raise AssertionError(f"expected 130 supported programs, got {len(supported)}")
+
+states = {program["id"]: program for program in registry["programs"]}
+for program_id, expected in {
+    "catalog-intermediate-diploma-in-cybersecurity": ("FULL_PLANNER", True, False),
+    "catalog-bachelor-of-public-relations-program": ("OFFICIAL_PLAN_VIEW", False, True),
+    "catalog-geography-and-geographic-information-systems": ("CATALOG_ONLY", False, False),
+}.items():
+    summary = states[program_id]
+    actual = (
+        summary["coverage_state"],
+        summary["planner_available"],
+        summary["official_plan_view_available"],
+    )
+    if actual != expected:
+        raise AssertionError(f"{program_id} expected {expected}, got {actual}")
 
 details = {}
 plans = {}
@@ -276,7 +293,7 @@ except HTTPError as error:
 else:
     raise AssertionError("local /.auth/me should return 404 without Easy Auth")
 
-print("Staged smoke: homepage 200; registry 200; 195 details and 195 plans passed")
+print("Staged smoke: homepage 200; registry 200; 130 details and 130 plans passed")
 print("Staged smoke: Accounting 43/38/5; Finance 43/43/0; Public Relations 13/10/3; 20 imports passed; /.auth/me 404 accepted")
 PY
 

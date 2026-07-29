@@ -24,6 +24,7 @@ data/validated/kau_accounting.json
 web/index.html
 web/styles.css
 web/app.js
+web/level-normalization.js
 web/progress-migration.js
 web/credit-display.js
 web/elective-groups.js
@@ -39,8 +40,9 @@ and existing archives. No dependency is introduced and `package-lock.json` is no
 included.
 
 The staged package is checked with Node syntax validation, JSON parsing, an exact
-file allowlist, expected program counts, and local HTTP/API smoke tests covering
-all supported programs, Accounting, Finance, the 20 imported programs, and the
+file allowlist, expected program counts and coverage states, and local HTTP/API
+smoke tests covering all supported programs, representative read-only and
+catalog-only programs, Accounting, Finance, the 20 imported programs, and the
 elective-group browser module. Local `/.auth/me` returning 404 is expected when
 Azure Easy Auth is absent.
 

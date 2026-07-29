@@ -4,6 +4,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
+import levelNormalization from "../web/level-normalization.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DEFAULT_STATE = path.join(ROOT, "data/raw/kau/official_levels_completion/state.json");
@@ -42,19 +43,101 @@ function exactSignature(row) {
   ]);
 }
 
-function alignedLocales(result) {
-  const ar = result.locales?.ar;
-  const en = result.locales?.en;
-  if (ar?.status !== "success" || en?.status !== "success") return false;
-  if (ar.levels.length !== en.levels.length) return false;
-  return ar.levels.every((level, levelIndex) => {
-    const counterpart = en.levels[levelIndex];
-    return level.rows.length === counterpart.rows.length
-      && level.rows.every((row, rowIndex) => (
-        normalizedCode(row.course_code) === normalizedCode(counterpart.rows[rowIndex].course_code)
-        && row.credits === counterpart.rows[rowIndex].credits
-      ));
+function levelRowSignature(level) {
+  return JSON.stringify((level?.rows || []).map((row) => [normalizedCode(row.course_code), row.credits]));
+}
+
+function isUnplacedSectionLabel(value) {
+  return /(?:training|practical|internship|elective|requirement|required|تدريب|عملي|اختياري|متطلب|اجباري|إجباري)/iu.test(clean(value));
+}
+
+function normalizedLevelPairs(result) {
+  const entries = {};
+  for (const locale of ["ar", "en"]) {
+    const source = result.locales?.[locale];
+    if (source?.status !== "success") {
+      entries[locale] = [];
+      continue;
+    }
+    entries[locale] = source.levels.map((level) => ({
+      level,
+      locale,
+      levelId: levelNormalization.parseLevelId(level.official_level_name),
+      signature: levelRowSignature(level),
+      unplaced: false,
+    }));
+    const knownIds = entries[locale].map((entry) => entry.levelId).filter(Boolean);
+    if (new Set(knownIds).size !== knownIds.length) throw new Error(`${result.program_id}: duplicate ${locale} level ID`);
+  }
+
+  for (const locale of ["ar", "en"]) {
+    const other = locale === "ar" ? "en" : "ar";
+    for (const entry of entries[locale].filter((item) => !item.levelId)) {
+      const matches = entries[other].filter((candidate) => candidate.levelId && candidate.signature === entry.signature);
+      if (matches.length === 1) entry.levelId = matches[0].levelId;
+    }
+    for (const entry of entries[locale].filter((item) => !item.levelId)) {
+      entry.unplaced = isUnplacedSectionLabel(entry.level.official_level_name);
+    }
+  }
+  for (const locale of ["ar", "en"]) {
+    if (entries[locale].some((entry) => !entry.levelId && !entry.unplaced)) {
+      const labels = entries[locale].filter((entry) => !entry.levelId && !entry.unplaced).map((entry) => entry.level.official_level_name);
+      throw new Error(`${result.program_id}: unknown ${locale} level label(s): ${labels.join(", ")}`);
+    }
+    const ids = entries[locale].map((entry) => entry.levelId).filter(Boolean);
+    if (new Set(ids).size !== ids.length) throw new Error(`${result.program_id}: duplicate ${locale} normalized level ID`);
+  }
+
+  const arById = new Map(entries.ar.filter((entry) => entry.levelId).map((entry) => [entry.levelId, entry.level]));
+  const enById = new Map(entries.en.filter((entry) => entry.levelId).map((entry) => [entry.levelId, entry.level]));
+  const ids = [...new Set([...arById.keys(), ...enById.keys()])].sort((left, right) => left - right);
+  if (arById.size && enById.size && (arById.size !== enById.size || ids.some((id) => !arById.has(id) || !enById.has(id)))) {
+    throw new Error(`${result.program_id}: Arabic/English level identities disagree`);
+  }
+  const pairs = ids.map((levelId) => {
+    const ar = arById.get(levelId) || null;
+    const en = enById.get(levelId) || null;
+    if (ar && en) {
+      if (ar.rows.length !== en.rows.length) throw new Error(`${result.program_id}: row count differs at level ${levelId}`);
+      for (let rowIndex = 0; rowIndex < ar.rows.length; rowIndex += 1) {
+        if (normalizedCode(ar.rows[rowIndex].course_code) !== normalizedCode(en.rows[rowIndex].course_code)
+            || ar.rows[rowIndex].credits !== en.rows[rowIndex].credits) {
+          throw new Error(`${result.program_id}: bilingual course identity differs at level ${levelId}, row ${rowIndex + 1}`);
+        }
+      }
+    }
+    return { levelId, ar, en };
   });
+  const primaryLocale = entries.ar.length ? "ar" : "en";
+  const secondaryLocale = primaryLocale === "ar" ? "en" : "ar";
+  const remaining = new Set(entries[secondaryLocale].filter((entry) => entry.unplaced));
+  const unplaced = [];
+  for (const entry of entries[primaryLocale].filter((item) => item.unplaced)) {
+    const matches = [...remaining].filter((candidate) => candidate.signature === entry.signature);
+    const counterpart = matches.length === 1 ? matches[0] : null;
+    if (counterpart) remaining.delete(counterpart);
+    unplaced.push({
+      levelId: null,
+      ar: primaryLocale === "ar" ? entry.level : counterpart?.level || null,
+      en: primaryLocale === "en" ? entry.level : counterpart?.level || null,
+    });
+  }
+  for (const entry of remaining) {
+    unplaced.push({ levelId: null, ar: secondaryLocale === "ar" ? entry.level : null, en: secondaryLocale === "en" ? entry.level : null });
+  }
+  pairs.unplaced = unplaced;
+  return pairs;
+}
+
+function alignedLocales(result) {
+  if (result.locales?.ar?.status !== "success" || result.locales?.en?.status !== "success") return false;
+  try {
+    const pairs = normalizedLevelPairs(result);
+    return pairs.every((pair) => pair.ar && pair.en);
+  } catch {
+    return false;
+  }
 }
 
 function completeLevels(result) {
@@ -64,11 +147,17 @@ function completeLevels(result) {
       ? result.locales.en
       : null;
   if (!primary?.levels?.length) return false;
-  return primary.levels.every((level) => (
+  if (!primary.levels.every((level) => (
     clean(level.official_level_name)
     && level.rows.length
     && level.rows.every((row) => clean(row.course_code) && clean(row.course_name))
-  ));
+  ))) return false;
+  try {
+    normalizedLevelPairs(result);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function rowFlags(row, rowAr, rowEn) {
@@ -96,14 +185,21 @@ function buildOfficialView(result, { preserveExactRows = false } = {}) {
   const primaryLocale = ar?.status === "success" ? "ar" : "en";
   const primary = result.locales[primaryLocale];
   const bilingualAligned = alignedLocales(result);
+  const levelPairs = normalizedLevelPairs(result);
   const removed = [];
   const sections = [];
   let visibleOrder = 0;
 
-  for (let levelIndex = 0; levelIndex < primary.levels.length; levelIndex += 1) {
-    const primaryLevel = primary.levels[levelIndex];
-    const arLevel = primaryLocale === "ar" ? primaryLevel : bilingualAligned ? ar.levels[levelIndex] : null;
-    const enLevel = primaryLocale === "en" ? primaryLevel : bilingualAligned ? en.levels[levelIndex] : null;
+  function appendSection(pair, placement) {
+    const { levelId, ar: arLevel, en: enLevel } = pair;
+    const primaryLevel = primaryLocale === "ar" ? arLevel : enLevel;
+    if (!primaryLevel) return;
+    const sectionAligned = Boolean(arLevel && enLevel
+      && arLevel.rows.length === enLevel.rows.length
+      && arLevel.rows.every((row, rowIndex) => (
+        normalizedCode(row.course_code) === normalizedCode(enLevel.rows[rowIndex].course_code)
+        && row.credits === enLevel.rows[rowIndex].credits
+      )));
     const seen = new Map();
     const rows = [];
     for (let rowIndex = 0; rowIndex < primaryLevel.rows.length; rowIndex += 1) {
@@ -111,7 +207,7 @@ function buildOfficialView(result, { preserveExactRows = false } = {}) {
       const signature = exactSignature(row);
       if (!preserveExactRows && canConsolidateExactDuplicate(row) && seen.has(signature)) {
         removed.push({
-          level_order: levelIndex + 1,
+          level_order: levelId,
           level_name: primaryLevel.official_level_name,
           course_code: row.course_code,
           kept_source_order: seen.get(signature),
@@ -121,8 +217,8 @@ function buildOfficialView(result, { preserveExactRows = false } = {}) {
       }
       seen.set(signature, row.source_order);
       visibleOrder += 1;
-      const rowAr = primaryLocale === "ar" ? row : bilingualAligned ? arLevel.rows[rowIndex] : null;
-      const rowEn = primaryLocale === "en" ? row : bilingualAligned ? enLevel.rows[rowIndex] : null;
+      const rowAr = primaryLocale === "ar" ? row : sectionAligned ? arLevel.rows[rowIndex] : null;
+      const rowEn = primaryLocale === "en" ? row : sectionAligned ? enLevel.rows[rowIndex] : null;
       rows.push({
         raw_course_code: row.course_code,
         display_course_code: row.course_code,
@@ -130,7 +226,7 @@ function buildOfficialView(result, { preserveExactRows = false } = {}) {
         course_name_en: rowEn?.course_name || null,
         credits: row.credits,
         original_source_section: primaryLevel.official_level_name,
-        official_level_or_semester: primaryLevel.official_level_name,
+        official_level_or_semester: levelId ? levelNormalization.internalLevelKey(levelId) : null,
         raw_prerequisite_corequisite_text: rowAr?.prerequisite_text || rowEn?.prerequisite_text || null,
         prerequisite_text_ar: rowAr?.prerequisite_text || null,
         prerequisite_text_en: rowEn?.prerequisite_text || null,
@@ -140,15 +236,22 @@ function buildOfficialView(result, { preserveExactRows = false } = {}) {
       });
     }
     sections.push({
-      id: `scheduled-level-${levelIndex + 1}`,
-      title_ar: arLevel?.official_level_name || null,
-      title_en: enLevel?.official_level_name || null,
+      id: levelId ? `scheduled-level-${levelId}` : `unplaced-${sections.filter((section) => section.placement === "unplaced").length + 1}`,
+      level_id: levelId,
+      title_ar: levelId ? levelNormalization.localizedLevelName(levelId, "ar") : arLevel?.official_level_name || null,
+      title_en: levelId ? levelNormalization.localizedLevelName(levelId, "en") : enLevel?.official_level_name || null,
+      source_label_ar: arLevel?.official_level_name || null,
+      source_label_en: enLevel?.official_level_name || null,
       source_section: primaryLevel.official_level_name,
-      source_level_order: levelIndex + 1,
-      placement: "scheduled",
+      source_level_order_ar: arLevel?.source_level_order || null,
+      source_level_order_en: enLevel?.source_level_order || null,
+      placement,
       rows,
     });
   }
+
+  for (const pair of levelPairs) appendSection(pair, "scheduled");
+  for (const pair of levelPairs.unplaced || []) appendSection(pair, "unplaced");
 
   const rows = sections.flatMap((section) => section.rows);
   const missingCredits = rows.filter((row) => row.credits === null).length;
@@ -161,18 +264,20 @@ function buildOfficialView(result, { preserveExactRows = false } = {}) {
 
   return {
     schema_version: 2,
-    extraction_method: "browser_rendered_levels_tab",
+    extraction_method: "official_levels_tab",
     source: {
       url_ar: ar?.requested_url || result.source_urls.ar,
       url_en: en?.requested_url || result.source_urls.en,
-      final_url_ar: ar?.url || null,
-      final_url_en: en?.url || null,
+      final_url_ar: ar?.final_url || ar?.url || null,
+      final_url_en: en?.final_url || en?.url || null,
       retrieved_at: primary.retrieved_at,
       sha256_ar: ar?.html_sha256 || null,
       sha256_en: en?.html_sha256 || null,
     },
     warning_ar: WARNING_AR,
     warning_en: WARNING_EN,
+    official_level_count: levelPairs.length,
+    source_section_count: primary.levels.length,
     visible_course_count: rows.length,
     source_course_row_count: primary.levels.reduce((sum, level) => sum + level.rows.length, 0),
     visible_credit_sum: rows.reduce((sum, row) => sum + (row.credits ?? 0), 0),
@@ -361,4 +466,4 @@ if (invokedPath === fileURLToPath(import.meta.url)) {
   });
 }
 
-export { buildOfficialView, completeLevels, unresolvedReason };
+export { buildOfficialView, completeLevels, normalizedLevelPairs, unresolvedReason };

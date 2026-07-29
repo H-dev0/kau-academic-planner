@@ -19,6 +19,8 @@ CATALOG = json.loads((ROOT / "web/data/faculty_catalog.json").read_text(encoding
 PLANNERS = json.loads((ROOT / "web/data/additional_programs.json").read_text(encoding="utf-8"))["programs"]
 REPORT = json.loads((ROOT / "reports/plan_extraction/official_views_to_full_planners.json").read_text(encoding="utf-8"))
 CURRENT_REPORT = json.loads((ROOT / "reports/plan_extraction/all_visible_plans_to_interactive.json").read_text(encoding="utf-8"))
+MANUAL_REPORT = json.loads((ROOT / "reports/manual_audit/manual_bachelor_levels_audit.json").read_text(encoding="utf-8"))
+MANUAL_BY_ID = {item["resolved_repository_id"]: item for item in MANUAL_REPORT["programs"]}
 
 
 def normalize(code: str | None) -> str:
@@ -37,10 +39,10 @@ class OfficialViewsToFullPlannerTests(unittest.TestCase):
         self.assertEqual(REPORT["coverage_after"], {
             "total": 223, "FULL_PLANNER": 73, "OFFICIAL_PLAN_VIEW": 116, "CATALOG_ONLY": 34,
         })
-        self.assertEqual(len(programs), 223)
-        self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 195)
-        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 0)
-        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 28)
+        self.assertEqual(len(programs), 225)
+        self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 130)
+        self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 45)
+        self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 50)
 
     def test_only_one_program_is_promoted_and_every_retention_has_exact_blockers(self) -> None:
         promoted = REPORT["promoted_programs"]
@@ -96,10 +98,13 @@ class OfficialViewsToFullPlannerTests(unittest.TestCase):
         self.assertEqual(retained_ids, converted_ids)
         for program_id in retained_ids:
             program = by_id[program_id]
-            self.assertTrue(program["planner_available"])
-            self.assertEqual(program["planner_data_key"], program_id)
-            self.assertEqual(program["catalog_status"], "active")
-            self.assertIn("official_plan_view", program)
+            if program_id in MANUAL_BY_ID:
+                self.assertEqual(program["coverage_state"], MANUAL_BY_ID[program_id]["final_coverage_state"])
+            else:
+                self.assertTrue(program["planner_available"])
+                self.assertEqual(program["planner_data_key"], program_id)
+                self.assertEqual(program["catalog_status"], "active")
+                self.assertIn("official_plan_view", program)
 
     def test_remaining_bachelor_catalog_only_inventory_is_exact_and_unchanged(self) -> None:
         expected_ids = {
@@ -120,7 +125,12 @@ class OfficialViewsToFullPlannerTests(unittest.TestCase):
             if program["coverage_state"] == "CATALOG_ONLY" and program["degree_level"] == "bachelor"
         }
         self.assertEqual(report_ids, expected_ids | {"catalog-food-and-nutrition"})
-        self.assertEqual(set(current), expected_ids)
+        expected_current = (expected_ids - set(MANUAL_BY_ID)) | {
+            program_id for program_id, item in MANUAL_BY_ID.items()
+            if item["final_coverage_state"] == "CATALOG_ONLY"
+            and next(program for program in CATALOG["programs"] if program["id"] == program_id)["degree_level"] == "bachelor"
+        }
+        self.assertEqual(set(current), expected_current)
         retained_report_ids = {
             item["program_id"] for item in CURRENT_REPORT["remaining_catalog_only"]
             if next(program for program in CATALOG["programs"] if program["id"] == item["program_id"])["degree_level"] == "bachelor"

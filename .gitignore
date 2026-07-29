@@ -53,5 +53,9 @@ azure_secret.txt
 data/raw/kau/catalog/
 data/raw/kau/plan_audit/
 data/raw/kau/official_levels_completion/
+data/raw/kau/manual_bachelor_levels_audit/**/*.html
+data/raw/kau/manual_bachelor_levels_audit/*.html
+data/raw/kau/manual_bachelor_levels_audit/**/*.png
+data/raw/kau/manual_bachelor_levels_audit/state.json
 data/backups/catalog/
 reports/catalog/catalog_candidate.json

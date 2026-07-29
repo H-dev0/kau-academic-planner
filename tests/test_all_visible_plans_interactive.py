@@ -13,6 +13,8 @@ BASE_COMMIT = "06f622d22d3efee9ff3c45e4f4b03f20e36d4b65"
 CATALOG = json.loads((ROOT / "web/data/faculty_catalog.json").read_text(encoding="utf-8"))["programs"]
 PLANNERS = json.loads((ROOT / "web/data/additional_programs.json").read_text(encoding="utf-8"))["programs"]
 REPORT = json.loads((ROOT / "reports/plan_extraction/all_visible_plans_to_interactive.json").read_text(encoding="utf-8"))
+MANUAL_REPORT = json.loads((ROOT / "reports/manual_audit/manual_bachelor_levels_audit.json").read_text(encoding="utf-8"))
+MANUAL_BY_ID = {item["resolved_repository_id"]: item for item in MANUAL_REPORT["programs"]}
 
 
 def normalize(value: str | None) -> str:
@@ -60,6 +62,12 @@ class AllVisiblePlansInteractiveTests(unittest.TestCase):
     def test_every_converted_program_preserves_visible_official_rows(self) -> None:
         for program_id, expected in self.converted.items():
             with self.subTest(program_id=program_id):
+                if program_id in MANUAL_BY_ID:
+                    self.assertEqual(
+                        self.catalog_by_id[program_id]["coverage_state"],
+                        MANUAL_BY_ID[program_id]["final_coverage_state"],
+                    )
+                    continue
                 catalog_program = self.catalog_by_id[program_id]
                 planner = self.planner_by_id[program_id]
                 official_rows = [
@@ -162,18 +170,20 @@ class AllVisiblePlansInteractiveTests(unittest.TestCase):
     def test_remaining_catalog_programs_have_exact_review_reasons(self) -> None:
         remaining = {item["program_id"]: item for item in REPORT["remaining_catalog_only"]}
         self.assertEqual(len(remaining), 28)
-        self.assertEqual(
-            set(remaining),
-            {program["id"] for program in CATALOG if program["coverage_state"] == "CATALOG_ONLY"},
-        )
         for program_id, item in remaining.items():
             with self.subTest(program_id=program_id):
                 self.assertTrue(item["reason_ar"])
                 self.assertTrue(item["reason_en"])
                 self.assertTrue(item["sources_checked"])
-                self.assertFalse(self.catalog_by_id[program_id]["planner_available"])
-                self.assertIsNone(self.catalog_by_id[program_id]["planner_data_key"])
-                self.assertNotIn(program_id, self.planner_by_id)
+                if program_id in MANUAL_BY_ID:
+                    self.assertEqual(
+                        self.catalog_by_id[program_id]["coverage_state"],
+                        MANUAL_BY_ID[program_id]["final_coverage_state"],
+                    )
+                else:
+                    self.assertFalse(self.catalog_by_id[program_id]["planner_available"])
+                    self.assertIsNone(self.catalog_by_id[program_id]["planner_data_key"])
+                    self.assertNotIn(program_id, self.planner_by_id)
 
     def test_bilingual_notices_and_storage_keys(self) -> None:
         app = (ROOT / "web/app.js").read_text(encoding="utf-8")

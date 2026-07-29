@@ -4,6 +4,7 @@ const http = require("http");
 const path = require("path");
 const url = require("url");
 const electiveGroups = require("./web/elective-groups.js");
+const levels = require("./web/level-normalization.js");
 
 const root = __dirname;
 const webDir = path.join(root, "web");
@@ -194,7 +195,7 @@ function loadCatalog() {
   const catalog = readJson(facultyCatalogPath, { faculties: [], programs: [] });
   const activePrograms = loadPrograms();
   const catalogPrograms = (catalog.programs || []).map((program) => {
-    const active = activePrograms[program.id];
+    const active = coverageState(program) === "FULL_PLANNER" ? activePrograms[program.id] : null;
     if (active) {
       return {
         ...program,
@@ -233,8 +234,11 @@ function selectedProgram(req) {
 }
 
 function levelNumber(course) {
-  const match = String(course.semester_or_level || "").match(/\d+/);
-  return match ? Number(match[0]) : 99;
+  try {
+    return levels.courseLevelId(course) || Number.MAX_SAFE_INTEGER;
+  } catch {
+    return Number.MAX_SAFE_INTEGER;
+  }
 }
 
 function sortByLevelThenCode(courses) {
