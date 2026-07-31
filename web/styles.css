@@ -7477,3 +7477,156 @@ html[lang="en"] [data-footer-lang="ar"] {
     padding-inline: 10px;
   }
 }
+
+
+/* Student feedback call-to-action */
+[data-feedback-lang="en"] {
+  display: none;
+}
+
+body[data-lang="en"] [data-feedback-lang="ar"] {
+  display: none;
+}
+
+body[data-lang="en"] [data-feedback-lang="en"] {
+  display: inline;
+}
+
+.feedbackSection {
+  width: min(var(--container-width), calc(100% - (var(--container-padding) * 2)));
+  margin: 0 auto 48px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-5);
+  border: 1px solid var(--color-divider);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 12% 12%, color-mix(in srgb, var(--color-gold-strong) 12%, transparent), transparent 34%),
+    var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(24px, 4vw, 38px);
+}
+
+.feedbackIcon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 18px;
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.feedbackIcon svg {
+  width: 29px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.feedbackCopy {
+  min-width: 0;
+}
+
+.feedbackCopy .eyebrow {
+  margin: 0 0 3px;
+  color: var(--color-gold-strong);
+}
+
+.feedbackCopy h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 1.35;
+}
+
+.feedbackCopy > p:last-child {
+  max-width: 720px;
+  margin: 7px 0 0;
+  color: var(--color-text-muted);
+}
+
+.feedbackButton {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border-radius: 13px;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0 20px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--color-primary) 22%, transparent);
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.feedbackButton:hover {
+  transform: translateY(-2px);
+  background: var(--color-primary-strong);
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--color-primary) 28%, transparent);
+}
+
+.feedbackButton:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-gold-strong) 55%, transparent);
+  outline-offset: 3px;
+}
+
+.feedbackButton svg {
+  width: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+html[dir="ltr"] .feedbackButton svg {
+  transform: scaleX(-1);
+}
+
+[data-theme="dark"] .feedbackSection {
+  background:
+    radial-gradient(circle at 12% 12%, color-mix(in srgb, var(--color-gold-strong) 10%, transparent), transparent 34%),
+    var(--color-surface);
+}
+
+@media (max-width: 900px) {
+  .feedbackSection {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .feedbackButton {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .feedbackSection {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-bottom: 32px;
+    border-radius: 18px;
+    padding: 22px;
+  }
+
+  .feedbackIcon {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+  }
+
+  .feedbackButton {
+    min-height: 52px;
+    padding: 8px 14px;
+    white-space: normal;
+    text-align: center;
+  }
+}
