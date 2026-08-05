@@ -1,6 +1,8 @@
 const state = {
   program: null,
   programs: new Map(),
+  programDetailRequests: new Map(),
+  hydratedPrograms: new Set(),
   faculties: [],
   user: null,
   selected: new Set(),
@@ -1992,9 +1994,51 @@ facultySelect.addEventListener("change", async () => {
   await chooseMajor("");
 });
 
+async function loadProgramDetails(majorId) {
+  const summary = state.programs.get(majorId);
+  if (!summary || summary.catalog_status === "catalog-only" || state.hydratedPrograms.has(majorId)) {
+    return summary;
+  }
+  if (state.programDetailRequests.has(majorId)) {
+    return state.programDetailRequests.get(majorId);
+  }
+
+  const request = api(`/api/program?major=${encodeURIComponent(majorId)}`)
+    .then((program) => {
+      const hydrated = summary.official_plan_view_available
+        ? { ...summary, ...program, courses: [] }
+        : withCommonFoundation({ ...summary, ...program });
+      state.programs.set(majorId, hydrated);
+      state.hydratedPrograms.add(majorId);
+      return hydrated;
+    })
+    .finally(() => {
+      state.programDetailRequests.delete(majorId);
+    });
+  state.programDetailRequests.set(majorId, request);
+  return request;
+}
+
 async function chooseMajor(majorId) {
+  const requestedMajor = majorId;
   state.major = majorId;
-  state.program = majorId ? state.programs.get(state.major) : noSelectionProgram();
+  let program = majorId ? state.programs.get(majorId) : noSelectionProgram();
+  if (majorId && program) {
+    try {
+      program = await loadProgramDetails(majorId);
+    } catch {
+      if (state.major !== requestedMajor) return;
+      state.major = "";
+      majorSelect.value = "";
+      state.program = noSelectionProgram();
+      saveStatus.textContent = textFor("backendUnavailable");
+      setupLevelFilter();
+      render();
+      return;
+    }
+    if (state.major !== requestedMajor) return;
+  }
+  state.program = program || noSelectionProgram();
   state.selected.clear();
   state.electiveSelections = {};
   state.progressMigration = null;
@@ -2128,25 +2172,26 @@ async function loadProgress() {
 
 async function start() {
   loadTheme();
+  state.program = noSelectionProgram();
+  setupFacultySelect();
+  setupMajorSelect();
+  setupLevelFilter();
+  render();
+
   try {
     const registry = await api("/api/programs");
     state.faculties = registry.faculties || [];
     for (const summary of registry.programs || []) {
-      if (summary.official_plan_view_available) {
-        const program = await api(`/api/program?major=${encodeURIComponent(summary.id)}`);
-        state.programs.set(summary.id, { ...summary, ...program, courses: [] });
-      } else if (summary.catalog_status === "catalog-only") {
-        state.programs.set(summary.id, { ...summary, courses: [] });
-      } else {
-        const program = await api(`/api/program?major=${encodeURIComponent(summary.id)}`);
-        state.programs.set(program.id || summary.id, withCommonFoundation({ ...summary, ...program }));
-      }
+      state.programs.set(summary.id, { ...summary, courses: [] });
     }
+    setupFacultySelect();
+    setupMajorSelect();
   } catch {
     const response = await fetch("data/kau_accounting.json");
     const accounting = await response.json();
     accounting.id = "accounting";
     state.programs.set("accounting", withCommonFoundation({ faculty_id: "EA", faculty_name: accounting.college_name || "economics and administration", catalog_status: "active", ...accounting }));
+    state.hydratedPrograms.add("accounting");
     try {
       const catalogResponse = await fetch("data/faculty_catalog.json");
       const catalog = await catalogResponse.json();
@@ -2170,6 +2215,7 @@ async function start() {
           ...catalogProgram,
           ...program,
         }));
+        state.hydratedPrograms.add(program.id);
       }
     } catch {
       // Static fallback can still run with Accounting only.
@@ -2266,7 +2312,6 @@ function setUiText(selector, value) {
 }
 function refreshSelectLanguageText() {
   if (!facultySelect || !majorSelect) return;
-  if (!state.faculties.length && !state.programs.size) return;
   setupFacultySelect();
   setupMajorSelect();
 }
