@@ -25,12 +25,12 @@ ENGLISH = [
 class ManualBachelorLevelsAuditTests(unittest.TestCase):
     def test_coverage_and_report_are_exact(self) -> None:
         programs = CATALOG["programs"]
-        self.assertEqual(len(programs), 225)
+        self.assertEqual(len(programs), 227)
         self.assertEqual(REPORT["coverage_before"], {
             "FULL_PLANNER": 195, "OFFICIAL_PLAN_VIEW": 0, "CATALOG_ONLY": 28,
         })
         self.assertEqual(REPORT["coverage_after"], {
-            "FULL_PLANNER": 180, "OFFICIAL_PLAN_VIEW": 2, "CATALOG_ONLY": 43,
+            "FULL_PLANNER": 182, "OFFICIAL_PLAN_VIEW": 2, "CATALOG_ONLY": 43,
         })
         self.assertEqual(REPORT["coverage_at_pr_review_start"], {
             "FULL_PLANNER": 130, "OFFICIAL_PLAN_VIEW": 45, "CATALOG_ONLY": 50,

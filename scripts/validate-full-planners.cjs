@@ -43,7 +43,7 @@ function runtimeProgram(catalogProgram) {
 }
 
 const full = catalog.programs.filter((program) => program.coverage_state === "FULL_PLANNER").map(runtimeProgram);
-if (full.length !== 180) throw new Error(`expected 180 FULL_PLANNER programs, found ${full.length}`);
+if (full.length !== 182) throw new Error(`expected 182 FULL_PLANNER programs, found ${full.length}`);
 
 const summary = {
   programs: full.length,
