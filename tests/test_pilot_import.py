@@ -305,9 +305,9 @@ class PilotImportDataTests(unittest.TestCase):
         ))
 
     def test_catalog_counts_and_selected_statuses(self) -> None:
-        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 180)
+        self.assertEqual(sum(bool(p.get("planner_available")) for p in self.catalog), 182)
         self.assertEqual(sum(p.get("catalog_status") == "catalog-only" for p in self.catalog), 45)
-        self.assertEqual(sum(p.get("coverage_state") == "FULL_PLANNER" for p in self.catalog), 180)
+        self.assertEqual(sum(p.get("coverage_state") == "FULL_PLANNER" for p in self.catalog), 182)
         self.assertEqual(sum(p.get("coverage_state") == "OFFICIAL_PLAN_VIEW" for p in self.catalog), 2)
         self.assertEqual(sum(p.get("coverage_state") == "CATALOG_ONLY" for p in self.catalog), 43)
         by_id = {p["id"]: p for p in self.catalog}

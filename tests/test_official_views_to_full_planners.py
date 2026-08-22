@@ -39,8 +39,8 @@ class OfficialViewsToFullPlannerTests(unittest.TestCase):
         self.assertEqual(REPORT["coverage_after"], {
             "total": 223, "FULL_PLANNER": 73, "OFFICIAL_PLAN_VIEW": 116, "CATALOG_ONLY": 34,
         })
-        self.assertEqual(len(programs), 225)
-        self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 180)
+        self.assertEqual(len(programs), 227)
+        self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 182)
         self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 2)
         self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 43)
 

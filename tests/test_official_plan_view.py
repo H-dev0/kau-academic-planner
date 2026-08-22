@@ -42,8 +42,8 @@ ENGLISH = [
 class OfficialPlanViewDataTests(unittest.TestCase):
     def test_coverage_counts_and_status_invariants(self) -> None:
         programs = CATALOG["programs"]
-        self.assertEqual(len(programs), 225)
-        self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 180)
+        self.assertEqual(len(programs), 227)
+        self.assertEqual(sum(p["coverage_state"] == "FULL_PLANNER" for p in programs), 182)
         self.assertEqual(sum(p["coverage_state"] == "OFFICIAL_PLAN_VIEW" for p in programs), 2)
         self.assertEqual(sum(p["coverage_state"] == "CATALOG_ONLY" for p in programs), 43)
         planner_ids = {p["id"] for p in json.loads((ROOT / "web/data/additional_programs.json").read_text())["programs"]}
